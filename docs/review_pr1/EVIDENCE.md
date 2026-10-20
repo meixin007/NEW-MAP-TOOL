@@ -1,5 +1,7 @@
 # 可下载复验证据
 
+以下附件固定对应源码5fe9f928961c521e9f4c4279e2c3bec47e6f3920及当时的候选1画面。用户此后已否定候选1素材和组合；后续候选2的独立记录在 [review_visual2](../review_visual2/REVISION.md)。该历史附件、索引与性能数据保持原样，不认证后来新增的疏墨模式。
+
 [下载独立证据附件（ZIP，约23.0MiB）](https://github.com/meixin007/NEW-MAP-TOOL/raw/4704ed00555ebe8123c95dbf9cd38ceed7cc480d/NEW-MAP-TOOL_PR1_evidence_20261020_r2.zip)
 
 [外部附件索引](https://github.com/meixin007/NEW-MAP-TOOL/blob/4704ed00555ebe8123c95dbf9cd38ceed7cc480d/INDEX.json)。证据位于单独分支codex/pr1-review-evidence-20261020，插件PR分支不放ZIP、缓存或工具二进制。该分支不是稳定版发布。
@@ -32,4 +34,4 @@
 
 原生复跑命令见 [tests/README.md](../../tests/README.md)。文件索引与轨迹使用相对路径；原始执行命令保留当时的临时绝对路径作为事实记录，这些临时目录不作为下载附件的使用前提。没有打包用户参考原图、API配置、开发插件、编辑器缓存或软件。
 
-当前画面认可仍为pending_user。原始自动回放、PNG与技术检查不能代替用户接受。源码变更与附件上传均不等于合并PR或稳定版发布。
+该附件中的候选1画面已被用户否定；候选2仍等待用户裁定。原始自动回放、PNG与技术检查不能代替用户接受。源码变更与附件上传均不等于合并PR或稳定版发布。

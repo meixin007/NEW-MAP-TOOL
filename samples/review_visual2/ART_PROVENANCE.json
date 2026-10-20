@@ -1,0 +1,140 @@
+{
+  "document_type": "shanhe.art_revision_provenance",
+  "revision": "candidate2",
+  "date": "2026-10-20",
+  "tool": "built-in image_gen",
+  "authorization": "User explicitly allowed gatehouse, wall and corner tower generation; latest user rejected both candidate1 assets and assembly.",
+  "previous_candidate": {
+    "sample": "samples/fortification_candidate1.shwork.json",
+    "input_hash": "bdeaaca46fe9c13181d57285452f7554c433da4c0ee79fa8b33da75e1c5c1d52",
+    "status": "user_rejected_assets_and_assembly",
+    "user_verdict": "素材和组合都需要调整"
+  },
+  "status": "pending_user_visual_review",
+  "references": [
+    "04_54_19.png",
+    "23_56_27.png",
+    "7e08d9f48d841c58d50e3d4b6c2b0268489423088.jpg"
+  ],
+  "prompts": {
+    "gate": "Use case: historical-scene.\nAsset type: one isolated small Chinese gatehouse sprite for a hand-drawn oblique map.\nCreate a replacement gatehouse for the user's atlas, based on the three reference images just viewed (the handmade sequential castle drawing and its Chinese town adaptations). Capture their economical irregular ink shapes and flat faded colors. This is a tiny map symbol, not a detailed architectural illustration.\nSubject: a squat ochre rammed-earth gate plinth with ONE simple dark arch passage; above it a small timber pavilion with ONE charcoal grey Chinese hip roof, muted brown posts. The gate has broad attachment cheeks on either side below parapet level for connecting city walls. No attached city walls.\nCamera: high oblique orthographic bird's-eye view, from the south and slightly east, see front and RIGHT side and roof. World x axis across facade slopes DOWN toward the right at 8 degrees. All facade ground and parapet lines follow this SAME 8 degree slope. Depth lines go UP and RIGHT at 67 degrees. Vertical edges stay vertical. No perspective convergence. Do NOT draw a horizontal facade baseline.\nStyle: small handmade medieval map illustration, mildly wavering dark brown-black pen contour, 2 or 3 flat muted sand and charcoal color values, tiny sparse broken hatching only. Very simple geometric volumes. At intended display size 180 px wide, every feature should remain legible. About 12 loose roof strokes total, only 6 scattered masonry marks total on the entire plinth. Plain walls mostly empty flat ochre. No individually drawn tiles or brick grid. Roof silhouette gently curved with modest upturned corners.\nComposition: ONLY this one gate, generous transparent margin all sides, no terrain slab, no road, no plants, no cast shadow outside the object, no text. Actual transparent background.\nAvoid: photorealism, 3D render, realistic stone, paper grain, mottled texture, gradients, dense engraving, polished vector perfection, ornamental detail, foreground ground patch, surrounding town.",
+    "gate_projection_edit": "Edit target image 1, the isolated gatehouse. Keep the simple Chinese gate design, one arch and one roof pavilion, flat faded tan and grey color palette. Correct these specific defects:\n1. Make the front face nearly horizontal in oblique projection: facade baseline and front roof eave slope only 8 degrees down to the right, about 1 pixel downward per 7 horizontal pixels. The current slope is too steep. Make receding right-side depth edges much STEEPER, upwards right at 67 degrees, about 2.4 pixels upward per pixel right. Vertical edges remain vertical. This must match a high bird's-eye atlas view from the user's Chinese town map.\n2. Remove ALL exterior glow, haze, cast shadow and tinted backdrop. Outside the ink silhouette every pixel must be fully transparent. Inside the arch passage show transparent opening, with only a slim dark interior side wall.\n3. Make contours thinner, slightly irregular hand-inked, and keep the ochre wall mostly flat with just a few broken ink marks. Less stone texture. The drawing must remain a simple small map symbol.\nNo surrounding ground. No extra objects. Generous fully transparent margin.",
+    "wall_front": "Use case: historical-scene. Asset type: ONE isolated modular FRONT city-wall segment sprite, transparent background.\nMake a companion to the simple ochre Chinese gatehouse just generated. This is a small hand-inked atlas symbol at 220px display width, matching the user's handmade map references.\nA long LOW ochre rammed-earth curtain wall, about 5 times wider than its exposed front face height. Six low irregular crenellations, a narrow empty pale walkway visible behind them, mostly blank sandy ochre facade. Only 5 short scattered broken masonry ink dashes on the whole facade. Left and right ends squared off flush for joining, no towers and no prominent end caps.\nVery important projection: front baseline and top of wall slope only 8 degrees downward to the right (1 down for 7 across). Parallel lines with no convergence, vertical edges vertical. Ground depth edges retreat UP/RIGHT steeply. View high from above front and slightly right. This is the front orientation of a Chinese city wall seen from far above.\nFine mildly uneven brown-black pen contour, broad flat faded tan fill, side faces muted umber, subtle uneven pale wash. No tiny bricks, no repeated stone grid, no realistic rough stone, no 3D render, no gradients, no photorealistic texture. Spare economical handmade geometry. Lower contrast than a cartoon sticker, ink line delicate at small map scale.\nONLY one simple wall segment, fully transparent outside the outline, no exterior glow or shadow, no ground patch, no paper rectangle, no plants, no text. Leave transparent margin.",
+    "wall_side": "Use case: historical-scene. Asset type: ONE isolated SIDE orientation city-wall segment sprite, transparent background.\nMake the receding companion of the ochre Chinese wall segment just generated: same low wall height, tan flat fill, sparse fine brown-black hand pen, very few masonry dashes, simple low crenellations and narrow pale walkway. This is a different painted orientation, not a rotated front facade.\nComposition: long wall recedes from BOTTOM LEFT to TOP RIGHT, steep angle 67 degrees upwards right. In screen coordinates, for every 100 pixels to the right it goes 240 pixels UP. Its screen height is roughly twice its screen width. The near end is lower left, far end upper right. See its long RIGHT exterior wall face, a narrow walkway and crenellations along the top. Vertical height edges must remain VERTICAL in screen space, not perpendicular to the wall. Both ends squared flush for joining. No towers.\nHigh oblique orthographic camera, x cross-section edges 8 degrees down-right, depth axis up-right67deg, no perspective convergence. Intended display about 60 px wide and 170px tall; keep geometry simple and economical.\nMatch the user's old handmade atlas: modest wavering ink lines, broad flat faded ochre front color, muted umber side values, 5 scattered short pen marks, no detailed stones. Approximately 7 crenellations. No tiny bricks, no photorealistic texture, no gradients, no 3D render, no ground slab, no plants, no text.\nONLY one wall, generous fully transparent margins, no outside shadow or glow or backdrop.",
+    "corner_tower": "Use case: historical-scene. Asset type: ONE small Chinese corner watchtower sprite for the same handmade atlas as the gatehouse and ochre walls above. True transparent background.\nSubject: squat square tapered ochre rammed-earth tower base, small simple timber lookout above, one charcoal-grey hip roof with modest upturned corners. Broad empty ochre face with ONE tiny dark slit and 4 scattered short broken pen marks. Simple brown posts. No attached walls, no ornaments.\nProportions: tower base width comparable to wall height, roofed total height about twice a curtain wall's height; a compact map icon at 65px final width. Dark fine mildly irregular ink contour, broad flat faded tan fill, 2 flat grey roof values, approximately 10 spare roof strokes. Limited hand wash only. Match the user handmade geometric atlas reference, economical shapes and low detail; no individually drawn tiles or blocks.\nHigh oblique orthographic bird's-eye camera from south slightly east. See front, right side and roof. Front face baseline slopes DOWN toward the right at about 8 degrees (1 down for 7 across), all matching front eaves parallel. Receding right-side ground edges go UP RIGHT at about60 degrees; vertical edges are vertical. No perspective convergence.\nONLY isolated watchtower, generous transparent margin, no ground platform, no vegetation, no outside glow, no cast shadow or tinted backdrop, no text.\nAvoid detailed brickwork, photographic stone, engraving, gradients, 3D render, European castle, polished vector icon."
+  },
+  "records": [
+    {
+      "asset_ref": "review_gate@candidate2",
+      "source_file": "exec-f349311f-70d5-41bb-831d-404f79bf2187.png",
+      "sha256": "064b040a26304f19a7f2288228ebe75f00f491dbc5d208aee1b00c23e19a8e06",
+      "texture_size_px": [
+        1536,
+        1024
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "original_bytes_preserved": true,
+      "region_px": [
+        300,
+        155,
+        935,
+        710
+      ],
+      "anchor_px": [
+        410,
+        628
+      ],
+      "nominal_size_units": [
+        168.29999999999998,
+        127.8
+      ]
+    },
+    {
+      "asset_ref": "review_wall_front@candidate2",
+      "source_file": "exec-ace103e2-9807-4f5f-b733-c224a03eaddc.png",
+      "sha256": "e68acbd94fb8f3e55334bb8d22ca70135e00f9aafd638801470a8685f12d89f9",
+      "texture_size_px": [
+        1838,
+        856
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true,
+      "region_px": [
+        45,
+        180,
+        1760,
+        550
+      ],
+      "anchor_px": [
+        879,
+        435
+      ],
+      "nominal_size_units": [
+        228.8,
+        71.5
+      ]
+    },
+    {
+      "asset_ref": "review_wall_side@candidate2",
+      "source_file": "exec-2161c0ae-d0f7-4a4e-9f4f-8ca1e537e956.png",
+      "sha256": "c977b4fce5cfd2ca24a44598af899608b492297bea0187d9d2d4eee62bd61474",
+      "texture_size_px": [
+        971,
+        1619
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true,
+      "region_px": [
+        130,
+        55,
+        770,
+        1515
+      ],
+      "anchor_px": [
+        68,
+        1495
+      ],
+      "nominal_size_units": [
+        92.39999999999999,
+        181.79999999999998
+      ]
+    },
+    {
+      "asset_ref": "review_corner_tower@candidate2",
+      "source_file": "exec-c13db527-dc60-4cbe-8b6d-06d63d7a0e3c.png",
+      "sha256": "c56d75348785948f172c5b8f2f880b53423ad6fa1abbc77acc14c54024e61e93",
+      "texture_size_px": [
+        1339,
+        1175
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true,
+      "region_px": [
+        335,
+        180,
+        665,
+        840
+      ],
+      "anchor_px": [
+        273,
+        775
+      ],
+      "nominal_size_units": [
+        76.47500000000001,
+        96.60000000000001
+      ]
+    }
+  ]
+}

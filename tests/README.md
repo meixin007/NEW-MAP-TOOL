@@ -62,3 +62,7 @@ python -X utf8 tests/run.py --script tests/review_pr1/test_pending_receipt_count
 正常“保存项目／另存为／保存恢复副本”和定时自动恢复走后台；调用同步 `save_file()`、显式宿主退出保存和强制析构仍等待文件安全落盘。脚本与外部调用者如采用新 `start_io_job()`，须通过 `poll_io_job()` 收到 `saved`，不能把 `queued` 当成已保存。新编辑发生在保存期间时仅记录捕获状态的hash，当前项目保持未保存。
 
 原生UI辅助器使用实际鼠标命中与滚轮选中多选列表；不再将方向键光标移动等同于选择。原失败记录保留。正式矩阵、画面人工认可与自动化回放分开记录，见 `docs/review_pr1/`。
+
+## 城防候选2
+
+`--suite visual2` 检查可选疏墨模式合同、六组固定镜头、新候选正常控件保存重开和独立像素重组。后台保存须等到持久化完成再打开其他项目。素材来源及用户否定候选1的事实见 `docs/review_visual2/REVISION.md`。新增模式默认关闭，原三个样板不替换。

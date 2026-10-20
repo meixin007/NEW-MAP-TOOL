@@ -1,5 +1,7 @@
 # 城防候选与画面裁定
 
+更新：用户已明确裁定下述候选1“素材和组合都需要调整”，因此候选1素材与组合均记为未通过。候选2已单独重做，变更、提示词、来源与验证见 [候选2记录](../review_visual2/REVISION.md)。下文保留候选1的历史观察；不把该历史状态当成当前认可。
+
 本轮复用candidate1四件城防素材，不重新出图，不改写原三个样板。空地、建设、缺口、地形独显、近景使用固定镜头，收录在证据附件 visual/；打开 visual/index.html 可逐图审阅。
 
 候选项目：samples/fortification_candidate1.shwork.json。输入hash：bdeaaca46fe9c13181d57285452f7554c433da4c0ee79fa8b33da75e1c5c1d52。四件PNG仍为相同字节，来源hash见 samples/review_c7e0/ART_PROVENANCE.json。

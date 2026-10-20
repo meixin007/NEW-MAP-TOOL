@@ -34,6 +34,8 @@ static func prune_groups(p: Dictionary) -> void:
 	p.prefab_instances=p.prefab_instances.filter(func(g):return not g.entity_ids.is_empty() or not g.recipe_ids.is_empty())
 
 static func validate_style(style: Dictionary) -> String:
+	# Optional presentation only. Absence preserves the original drawing path.
+	if style.has("ink_mode") and (not style.ink_mode is String or style.ink_mode not in ["classic","sparse"]):return "疏墨表现模式无效。"
 	if style.get("grid_kind","square") not in ["square","hex"] or not A.numeric(style.get("grid_size",32)) or float(style.get("grid_size",32))<8 or float(style.get("grid_size",32))>512:return "网格类型或尺寸无效。"
 	for field in ["grid_visible","grid_snap","edge_snap"]:
 		if style.has(field) and not style[field] is bool:return "网格显示／吸附开关须为布尔值。"

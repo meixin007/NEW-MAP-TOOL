@@ -1,0 +1,405 @@
+{
+  "document_type": "shanhe.asset_pack",
+  "schema_version": 1,
+  "assets": [
+    {
+      "asset_id": "review_gate",
+      "asset_version": "candidate2",
+      "style_id": "reference_oblique_sparse_pending",
+      "texture_ref": "assets/064b040a26304f19a7f2288228ebe75f00f491dbc5d208aee1b00c23e19a8e06.png",
+      "texture_sha256": "064b040a26304f19a7f2288228ebe75f00f491dbc5d208aee1b00c23e19a8e06",
+      "texture_size_px": [
+        1536,
+        1024
+      ],
+      "region_px": [
+        300,
+        155,
+        935,
+        710
+      ],
+      "anchor_px": [
+        410,
+        628
+      ],
+      "nominal_size_units": [
+        168.29999999999998,
+        127.8
+      ],
+      "ground_footprint": [
+        [
+          -65,
+          -38
+        ],
+        [
+          70,
+          -38
+        ],
+        [
+          76,
+          8
+        ],
+        [
+          -65,
+          8
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          935,
+          0
+        ],
+        [
+          935,
+          710
+        ],
+        [
+          0,
+          710
+        ]
+      ],
+      "sockets": [
+        {
+          "socket_id": "road",
+          "position_px": [
+            410,
+            628
+          ],
+          "role": "road",
+          "direction_deg": 120.84
+        },
+        {
+          "socket_id": "wall_left",
+          "position_px": [
+            83,
+            571
+          ],
+          "role": "wall",
+          "direction_deg": 188
+        },
+        {
+          "socket_id": "wall_right",
+          "position_px": [
+            818,
+            688
+          ],
+          "role": "wall",
+          "direction_deg": 8
+        }
+      ],
+      "orientation_variants": {
+        "0": "review_gate"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, user authorized; candidate2 raw PNG copied unchanged. Region/scale/anchor metadata only. User visual approval pending.",
+      "label": "关楼 · 候选2",
+      "tags": [
+        "review_visual2",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "gate",
+      "passage_width_units": 27
+    },
+    {
+      "asset_id": "review_wall_front",
+      "asset_version": "candidate2",
+      "style_id": "reference_oblique_sparse_pending",
+      "texture_ref": "assets/e68acbd94fb8f3e55334bb8d22ca70135e00f9aafd638801470a8685f12d89f9.png",
+      "texture_sha256": "e68acbd94fb8f3e55334bb8d22ca70135e00f9aafd638801470a8685f12d89f9",
+      "texture_size_px": [
+        1838,
+        856
+      ],
+      "region_px": [
+        45,
+        180,
+        1760,
+        550
+      ],
+      "anchor_px": [
+        879,
+        435
+      ],
+      "nominal_size_units": [
+        228.8,
+        71.5
+      ],
+      "ground_footprint": [
+        [
+          -114,
+          -6
+        ],
+        [
+          110,
+          -6
+        ],
+        [
+          110,
+          6
+        ],
+        [
+          -114,
+          6
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          1760,
+          0
+        ],
+        [
+          1760,
+          550
+        ],
+        [
+          0,
+          550
+        ]
+      ],
+      "sockets": [
+        {
+          "socket_id": "left",
+          "position_px": [
+            15,
+            335
+          ],
+          "role": "wall",
+          "direction_deg": 186.65
+        },
+        {
+          "socket_id": "right",
+          "position_px": [
+            1705,
+            532
+          ],
+          "role": "wall",
+          "direction_deg": 6.65
+        }
+      ],
+      "orientation_variants": {
+        "0": "review_wall_front"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, user authorized; candidate2 raw PNG copied unchanged. Region/scale/anchor metadata only. User visual approval pending.",
+      "label": "正面墙段 · 候选2",
+      "tags": [
+        "review_visual2",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "wall"
+    },
+    {
+      "asset_id": "review_wall_side",
+      "asset_version": "candidate2",
+      "style_id": "reference_oblique_sparse_pending",
+      "texture_ref": "assets/c977b4fce5cfd2ca24a44598af899608b492297bea0187d9d2d4eee62bd61474.png",
+      "texture_sha256": "c977b4fce5cfd2ca24a44598af899608b492297bea0187d9d2d4eee62bd61474",
+      "texture_size_px": [
+        971,
+        1619
+      ],
+      "region_px": [
+        130,
+        55,
+        770,
+        1515
+      ],
+      "anchor_px": [
+        68,
+        1495
+      ],
+      "nominal_size_units": [
+        92.39999999999999,
+        181.79999999999998
+      ],
+      "ground_footprint": [
+        [
+          -5,
+          -190
+        ],
+        [
+          5,
+          -190
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          -5,
+          0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          770,
+          0
+        ],
+        [
+          770,
+          1515
+        ],
+        [
+          0,
+          1515
+        ]
+      ],
+      "sockets": [
+        {
+          "socket_id": "near",
+          "position_px": [
+            68,
+            1495
+          ],
+          "role": "wall",
+          "direction_deg": 120.84
+        },
+        {
+          "socket_id": "far",
+          "position_px": [
+            752,
+            360
+          ],
+          "role": "wall",
+          "direction_deg": 300.84
+        }
+      ],
+      "orientation_variants": {
+        "0": "review_wall_side"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, user authorized; candidate2 raw PNG copied unchanged. Region/scale/anchor metadata only. User visual approval pending.",
+      "label": "侧面墙段 · 候选2",
+      "tags": [
+        "review_visual2",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "wall"
+    },
+    {
+      "asset_id": "review_corner_tower",
+      "asset_version": "candidate2",
+      "style_id": "reference_oblique_sparse_pending",
+      "texture_ref": "assets/c56d75348785948f172c5b8f2f880b53423ad6fa1abbc77acc14c54024e61e93.png",
+      "texture_sha256": "c56d75348785948f172c5b8f2f880b53423ad6fa1abbc77acc14c54024e61e93",
+      "texture_size_px": [
+        1339,
+        1175
+      ],
+      "region_px": [
+        335,
+        180,
+        665,
+        840
+      ],
+      "anchor_px": [
+        273,
+        775
+      ],
+      "nominal_size_units": [
+        76.47500000000001,
+        96.60000000000001
+      ],
+      "ground_footprint": [
+        [
+          -27,
+          -26
+        ],
+        [
+          28,
+          -26
+        ],
+        [
+          28,
+          6
+        ],
+        [
+          -27,
+          6
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          665,
+          0
+        ],
+        [
+          665,
+          840
+        ],
+        [
+          0,
+          840
+        ]
+      ],
+      "sockets": [
+        {
+          "socket_id": "left",
+          "position_px": [
+            65,
+            735
+          ],
+          "role": "wall",
+          "direction_deg": 188
+        },
+        {
+          "socket_id": "right",
+          "position_px": [
+            477,
+            814
+          ],
+          "role": "wall",
+          "direction_deg": 8
+        },
+        {
+          "socket_id": "rear",
+          "position_px": [
+            611,
+            686
+          ],
+          "role": "wall",
+          "direction_deg": 300.84
+        }
+      ],
+      "orientation_variants": {
+        "0": "review_corner_tower"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, user authorized; candidate2 raw PNG copied unchanged. Region/scale/anchor metadata only. User visual approval pending.",
+      "label": "角楼 · 候选2",
+      "tags": [
+        "review_visual2",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "tower"
+    }
+  ]
+}

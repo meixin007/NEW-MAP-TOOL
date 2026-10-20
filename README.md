@@ -12,6 +12,8 @@ PR #1 复审后续：统一保存拖动与后台修改意图，恢复后重新�
 
 [本次修复与限制](docs/review_pr1/FIX_REPORT.md) · [逐项裁定](docs/review_pr1/ACCEPTANCE.md) · [可下载证据与画面](docs/review_pr1/EVIDENCE.md)
 
+用户已否定关口候选1的素材与组合。候选2重做四件城防素材，重新校准墙门塔接合，并加入可选疏墨道路与坡面；等待新一轮视觉裁定。[候选2变更](docs/review_visual2/REVISION.md) · [候选2画面与证据](docs/review_visual2/EVIDENCE.md)。
+
 ## 打开
 
 1. 用 Godot 4.6.1 导入仓库根目录的 `project.godot`。
@@ -23,9 +25,10 @@ PR #1 复审后续：统一保存拖动与后台修改意图，恢复后重新�
 | 山口关隘 | [samples/w67_mountain_pass.shwork.json](samples/w67_mountain_pass.shwork.json) |
 | 河岸小城 | [samples/w67_riverside_city.shwork.json](samples/w67_riverside_city.shwork.json) |
 | 坡地村落 | [samples/w67_hillside_village.shwork.json](samples/w67_hillside_village.shwork.json) |
-| 独立关口美术候选1 | [samples/fortification_candidate1.shwork.json](samples/fortification_candidate1.shwork.json) |
+| 独立关口美术候选1（用户已否定，保留对照） | [samples/fortification_candidate1.shwork.json](samples/fortification_candidate1.shwork.json) |
+| 独立关口美术候选2（待审核） | [samples/fortification_candidate2.shwork.json](samples/fortification_candidate2.shwork.json) |
 
-保留相邻的 `samples/assets/`。原三个 JSON 和原 18 张 PNG 保持基线字节不变，新增四张关楼、两方向墙段、角楼 PNG 供独立组合使用。来源与提示词见 [美术版本记录](samples/review_c7e0/ART_PROVENANCE.json)。
+保留相邻的 `samples/assets/`。原三个 JSON 和原 18 张 PNG 保持基线字节不变；两轮城防各有四张独立PNG。[候选1美术记录](samples/review_c7e0/ART_PROVENANCE.json) 与 [候选2来源、提示词和用户意见](samples/review_visual2/ART_PROVENANCE.json) 分开保存。
 
 ## 安装插件
 

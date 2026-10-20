@@ -240,5 +240,38 @@
       ],
       "timeout": 110
     }
+  ],
+  "visual2": [
+    {
+      "script": "tests/review_visual2/test_ink_contract.gd",
+      "args": [
+        "{artifacts}"
+      ]
+    },
+    {
+      "script": "tests/review_visual2/render_candidate.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 60
+    },
+    {
+      "script": "tests/review_visual2/test_candidate_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/review_visual2/test_export_pixels.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/fortification_candidate2.shwork.json"
+      ],
+      "timeout": 180
+    }
   ]
 }

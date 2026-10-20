@@ -210,8 +210,11 @@ func paint_world(drawer: CanvasItem) -> void:
 			if e.outline:
 				var ink:=polygon.duplicate();ink.append(ink[0]);drawer.draw_polyline(ink,Color("504734"),0.9,true)
 		elif e.entity.kind == "ribbon":
-			var tint:=Color("b7a57d") if e.entity.style=="dirt" else (Color("9eaaa2") if e.entity.style=="stone" else Color("97c0bf"))
-			for polygon in e.polygons: drawer.draw_colored_polygon(polygon,tint)
+			if p.style_profile.get("ink_mode","classic")=="sparse" and e.entity.style=="dirt":
+				preload("../ink_presentation.gd").road(e,drawer)
+			else:
+				var tint:=Color("b7a57d") if e.entity.style=="dirt" else (Color("9eaaa2") if e.entity.style=="stone" else Color("97c0bf"))
+				for polygon in e.polygons: drawer.draw_colored_polygon(polygon,tint)
 		elif e.entity.kind == "asset":
 			var texture := texture_for(e.descriptor)
 			if texture != null:
@@ -614,6 +617,8 @@ func finish_path() -> void:
 	path_points.clear();selected_recipe_id=id;selected_point_id=points[0].point_id;mode="path_edit";recipe_selected.emit(id,selected_point_id);queue_redraw()
 
 func _draw_terrain(entry: Dictionary,drawer: CanvasItem) -> void:
+	if _view_project.style_profile.get("ink_mode","classic")=="sparse":
+		preload("../ink_presentation.gd").terrain(entry,drawer);return
 	var ink:=Color("574e38")
 	for mesh in entry.parts:
 		var polygon: PackedVector2Array=mesh.polygon

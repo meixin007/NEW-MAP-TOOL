@@ -1,5 +1,7 @@
 # PR #1 复审修复记录
 
+版本说明：本记录、RESULTS.json、SOURCE_CODE_MANIFEST.json及SOURCE_MANIFEST.json保留5fe9f92修复与测试时的历史绑定。后续用户要求同时调整城防素材与组合，新候选及其独立源码/测试记录见 [review_visual2](../review_visual2/REVISION.md)，不把下列旧性能记录当作新表现模式的复跑结果。
+
 复审基线为24c55c11b332895287ee12caddde704ffabaaadb。本轮处理恢复缺口、长帧、远程证据及画面/矩阵裁定。原三个样板和原18张PNG保持字节不变。原游戏目录不参与修改，PR仍保留草稿候选定位。
 
 ## 恢复意图
