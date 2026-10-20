@@ -7,7 +7,7 @@ const Ribbon = preload("../art_ribbon.gd")
 const SurfaceProject = preload("surface_projection.gd")
 const Canonical = preload("canonical.gd")
 const VERSION := "path.sha256-utf8-distance-milli.v1"
-const GEOMETRY_VERSION := "grid1024.v1"
+const GEOMETRY_VERSION := "grid1024.socket-spaces.v2" # Identity VERSION remains stable.
 const MAX_CANDIDATES := 2000
 
 static func digest(value: Variant) -> String:
@@ -85,7 +85,7 @@ static func _role_for_point(recipe: Dictionary, point_id: String) -> Dictionary:
 	return {}
 static func _connection(project: Dictionary, e: Dictionary, angle: float) -> Dictionary:
 	for socket in EntityGeometry.sockets(project,e):
-		if socket.role=="wall" and absf(wrapf(float(socket.direction_deg)-angle,-180.0,180.0))<3: return socket
+		if socket.role=="wall" and absf(wrapf(float(socket.direction_projected)-angle,-180.0,180.0))<3: return socket
 	return {}
 static func _segment(recipe: Dictionary, project: Dictionary, index: int) -> Dictionary:
 	var segment: Dictionary=recipe.segments[index]
@@ -151,14 +151,15 @@ static func _segment(recipe: Dictionary, project: Dictionary, index: int) -> Dic
 		var count:=mini(128,int(length/float(side.spacing)))
 		var normal:=Vector2(-direction.y,direction.x)
 		for sign_value in ([1.0,-1.0] if side.side=="both" else [1.0 if side.side=="left" else -1.0]):
-			var desired:=fposmod(rad_to_deg((-normal*float(sign_value)).angle())-90.0,360.0)
-			var allowed:=Asset.orientation(project.asset_refs[side.asset_ref],desired)
-			if not allowed.ok: diagnostics.append(diagnostic(recipe,segment.segment_id,"missing_front_variant",allowed.error));continue
 			for i in range(count):
 				var token: String=recipe.recipe_id+":"+segment.segment_id+":"+str(int(recipe.seed))+":"+str(i)
 				var jitter: float=float(token.sha256_text().substr(0,8).hex_to_int()%10001)/10000.0-0.5
 				var distance: float=(i+0.5)*float(side.spacing)+jitter*float(side.spacing)*0.1
 				var xy:=start+direction*distance+normal*float(sign_value)*float(side.offset)
+				var facing:=SurfaceProject.projected_direction(project,-normal*float(sign_value),recipe.surface_id,xy)
+				var desired:=fposmod(rad_to_deg(facing.angle())-90.0,360.0)
+				var allowed:=Asset.orientation(project.asset_refs[side.asset_ref],desired)
+				if not allowed.ok:diagnostics.append(diagnostic(recipe,segment.segment_id,"missing_front_variant",allowed.error));continue
 				var building:=asset_entity(recipe,"roadside/"+segment.segment_id+"/"+str(int(sign_value))+"/cell_"+str(i),segment.segment_id,xy,side.asset_ref,desired,"roadside")
 				for socket in EntityGeometry.sockets(project,building):
 					if socket.role in ["road","entrance"]:
@@ -191,7 +192,7 @@ static func build(recipe: Dictionary, project: Dictionary, previous: Dictionary)
 			for variant in a.orientation_variants.values():
 				var key: String=variant if variant.contains("@") else variant+"@"+a.asset_version
 				if project.asset_refs.has(key): asset_inputs[key]=project.asset_refs[key]
-		var signature:=digest([VERSION,GEOMETRY_VERSION,params,points,segment,asset_inputs,project.style_profile.ground_matrix])
+		var signature:=digest([VERSION,GEOMETRY_VERSION,params,points,segment,asset_inputs,project.style_profile.ground_matrix,project.style_profile.height_axis,project.surfaces])
 		var result: Dictionary
 		if previous.has(segment.segment_id) and previous[segment.segment_id].get("hash")==signature:
 			result=previous[segment.segment_id].duplicate(true);reused+=1

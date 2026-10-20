@@ -13,6 +13,8 @@ var _stage: String=""
 var _created: Array=[]
 var _viewport: SubViewport
 var _canvas
+var _codec: Thread
+var _image_job
 var _frozen
 static func error(message: String) -> Dictionary:return {"ok":false,"error":message}
 static func digest(bytes: PackedByteArray) -> String:
@@ -57,7 +59,9 @@ static func default_bounds(p: Dictionary) -> Rect2:
 	var bounds:=Plan.bounds(points)
 	for e in Plan.build(p):bounds=bounds.merge(e.paint_bounds)
 	return Rect2(bounds.position.floor()-Vector2.ONE*8,(bounds.end.ceil()-bounds.position.floor())+Vector2.ONE*16)
-func cancel() -> void:cancelled=true
+func cancel() -> void:
+	cancelled=true
+	if _image_job!=null:_image_job.cancel()
 func template_thumbnail(source,template: Dictionary) -> Image:
 	var project: Dictionary=Session.Model.blank();project.legacy_document.canvas_size=[32768,32768];project.style_profile=source.snapshot().style_profile.duplicate(true)
 	project.materialized_snapshot=Session.Model.materialize(project)
@@ -85,8 +89,10 @@ func _cleanup() -> void:
 		if path.begins_with(_stage+"/"):DirAccess.remove_absolute(path)
 	if not _stage.is_empty():DirAccess.remove_absolute(_stage)
 	_created.clear();busy=false
+	_frozen=null;_canvas=null
 func _exit_tree() -> void:
-	cancelled=true
+	cancel()
+	if _codec!=null:_codec.wait_to_finish();_codec=null
 	if busy:_cleanup()
 func _write(relative: String,bytes: PackedByteArray) -> String:
 	if cancelled:return "导出已取消，原交付保留。"
@@ -99,13 +105,16 @@ func _write(relative: String,bytes: PackedByteArray) -> String:
 	if result!=OK or FileAccess.get_file_as_bytes(target)!=bytes:return "导出文件写入核验失败："+relative
 	return ""
 func _json(relative: String,value: Dictionary) -> String:return _write(relative,JSON.stringify(value,"\t",false,true).to_utf8_buffer())
-func _image(rect: Rect2,scale: float,indices: Array=[],selected: Array=[],ground_only: bool=false,paper: bool=false,overlays: bool=false) -> Image:
+func _image(rect: Rect2,scale: float,indices: Array=[],selected: Array=[],ground_only: bool=false,paper: bool=false,overlays: bool=false,correct_alpha: bool=true) -> Image:
 	_canvas.pan=-rect.position*scale;_canvas.zoom=scale;_canvas.export_indices=indices;_canvas.export_selected=selected;_canvas.export_ground_only=ground_only;_canvas.draw_paper=paper
 	_canvas.export_overlay=overlays
 	_viewport.size=Vector2i(roundi(rect.size.x*scale),roundi(rect.size.y*scale));_canvas.size=Vector2(_viewport.size);_canvas.queue_redraw();_viewport.render_target_update_mode=SubViewport.UPDATE_ONCE
-	await RenderingServer.frame_post_draw
 	await get_tree().process_frame
-	return straight_alpha(_viewport.get_texture().get_image())
+	# An occluded/minimized editor can suppress ordinary window draws. Explicitly
+	# drive this UPDATE_ONCE offscreen capture instead of waiting indefinitely.
+	RenderingServer.force_draw(false)
+	var raw:=_viewport.get_texture().get_image()
+	return straight_alpha(raw) if correct_alpha else raw
 func export_project(session,destination: String,options: Dictionary) -> Dictionary:
 	for key in options:
 		if key not in ["bounds","scale","tile_size","selected_ids","transparent_ground","layers","include_grid","include_legend"]:return error("未知导出选项。")
@@ -126,6 +135,10 @@ func export_project(session,destination: String,options: Dictionary) -> Dictiona
 	if not Session.Model.numeric(tile) or float(tile)!=floorf(float(tile)) or tile<64 or tile>2048 or pixels.x>8192 or pixels.y>8192:return error("单图限8192像素，分页限64—2048像素。")
 	var selected: Variant=options.get("selected_ids",[])
 	if not selected is Array or not selected.all(func(id):return id is String):return error("导出选择列表无效。")
+	var entries:=Plan.build(project)
+	var estimate:=estimate_output(pixels,entries.size(),options)
+	if not estimate.ok:return error(estimate.error)
+	progress.emit("预计 %d 张 PNG，工作像素 %.1f百万，原始输出上界 %.1fMiB，图像峰值估算 %.1fMiB"%[estimate.images,estimate.work_pixels/1000000.0,estimate.raw_output_bytes/1048576.0,estimate.estimated_image_peak_bytes/1048576.0],0,estimate.images)
 	var frozen=Session.new();var adopted: Dictionary=frozen.replace_project(project)
 	if not adopted.ok or frozen.read_only:return error("项目快照不可编辑或派生结果不一致。")
 	for a in project.asset_refs.values():
@@ -149,7 +162,7 @@ func export_project(session,destination: String,options: Dictionary) -> Dictiona
 	var jobs: Array=[{"path":"composite.png","bounds":bounds,"paper":true,"indices":[],"selected":[],"ground":false,"overlays":true}]
 	if options.get("transparent_ground",true):jobs.append({"path":"ground.png","bounds":bounds,"paper":false,"indices":[],"selected":[],"ground":true})
 	if not selected.is_empty():jobs.append({"path":"selection.png","bounds":bounds,"paper":false,"indices":[],"selected":selected,"ground":false})
-	var entries:=Plan.build(project);var stack: Array=[];var layers: Array=[];var tiles: Array=[]
+	var stack: Array=[];var layers: Array=[];var tiles: Array=[]
 	for i in range(entries.size()):stack.append({"index":i,"entity_id":entries[i].entity_id,"kind":entries[i].entity.kind,"part_order":entries[i].get("part_order",0),"entry":serial(entries[i])})
 	if options.get("layers",true):
 		layers.append({"path":"background.png","indices":[],"kind":"background","origin":[bounds.position.x,bounds.position.y],"size":[pixels.x,pixels.y]});jobs.append({"path":"background.png","bounds":bounds,"paper":true,"indices":[-1],"selected":[],"ground":false})
@@ -158,12 +171,12 @@ func export_project(session,destination: String,options: Dictionary) -> Dictiona
 			layers.append({"path":name,"indices":indices,"origin":[bounds.position.x,bounds.position.y],"size":[pixels.x,pixels.y]});jobs.append({"path":name,"bounds":bounds,"paper":false,"indices":indices,"selected":[],"ground":false})
 		if options.get("include_grid",false) or options.get("include_legend",false):
 			layers.append({"path":"overlays.png","indices":[],"kind":"overlays","origin":[bounds.position.x,bounds.position.y],"size":[pixels.x,pixels.y]});jobs.append({"path":"overlays.png","bounds":bounds,"paper":false,"indices":[-1],"selected":[],"ground":false,"overlays":true})
-	# Eight physical pixels of gutter for the current nonblurred 2D renderer; no universal mip claim.
-	var gutter:=8
+	# Core-only pages cropped from one full image; no stored gutter or mip claim.
+	var gutter:=0
 	for y in range(0,pixels.y,int(tile)):
 		for x in range(0,pixels.x,int(tile)):
 			var size:=Vector2i(mini(int(tile),pixels.x-x),mini(int(tile),pixels.y-y));var tile_rect:=Rect2(bounds.position+Vector2(x-gutter,y-gutter)/float(scale),Vector2(size+Vector2i.ONE*gutter*2)/float(scale));var name: String="tile_%04d.png"%tiles.size()
-			tiles.append({"path":name,"pixel_origin":[x,y],"pixel_size":[size.x,size.y],"gutter":gutter,"sampling":"crop of same frozen full image within S1 8192 limit"});jobs.append({"path":name,"bounds":tile_rect,"paper":true,"indices":[],"selected":[],"ground":false,"crop":Rect2i(Vector2i(gutter,gutter),size),"overlays":true})
+			tiles.append({"path":name,"pixel_origin":[x,y],"pixel_size":[size.x,size.y],"gutter":gutter,"stored_size":[size.x,size.y],"core_rect":[0,0,size.x,size.y],"sampling":"crop of same frozen full image within S1 8192 limit"});jobs.append({"path":name,"bounds":tile_rect,"paper":true,"indices":[],"selected":[],"ground":false,"crop":Rect2i(Vector2i(gutter,gutter),size),"overlays":true})
 	var files: Dictionary={}
 	var composite: Image
 	for i in range(jobs.size()):
@@ -172,18 +185,21 @@ func export_project(session,destination: String,options: Dictionary) -> Dictiona
 		if job.has("crop"):
 			var page: Dictionary=tiles.filter(func(t):return t.path==job.path)[0]
 			image=composite.get_region(Rect2i(Vector2i(page.pixel_origin[0],page.pixel_origin[1]),Vector2i(page.pixel_size[0],page.pixel_size[1])))
-		else:image=await _image(job.bounds,float(scale),job.indices,job.selected,job.ground,job.paper,job.get("overlays",false))
-		if job.path=="composite.png":composite=image
-		var issue:=_write(job.path,image.save_png_to_buffer())
+		else:image=await _image(job.bounds,float(scale),job.indices,job.selected,job.ground,job.paper,job.get("overlays",false),false)
+		var encoded: Dictionary=await _encode(image,not job.has("crop"),i,jobs.size())
+		if not encoded.ok:_cleanup();return error("导出已取消或图像编码失败；原交付保留。")
+		if job.path=="composite.png":composite=encoded.image
+		var issue:=_write(job.path,encoded.png)
 		if not issue.is_empty():_cleanup();return error(issue)
 		files[job.path]=FileAccess.get_sha256(_stage.path_join(job.path))
 	files["project.shwork.json"]=FileAccess.get_sha256(_stage.path_join("project.shwork.json"))
 	for a in project.asset_refs.values():files[a.texture_ref]=a.texture_sha256
-	var manifest: Dictionary={"document_type":"shanhe.workshop_export","schema_version":1,"project_ref":"project.shwork.json","frozen_input_hash":Session.Model.input_hash(project),"generator_version":project.materialized_snapshot.generator_version,"bounds":[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y],"scale":scale,"pixel_size":[pixels.x,pixels.y],"environment":"static S1; no weather or game time binding","render_stack":stack,"layers":layers,"tiles":tiles,"files":files,"options":serial(options),"logical_bindings":"presentation only; no navigation or GameState changes"}
+	var manifest: Dictionary={"document_type":"shanhe.workshop_export","schema_version":1,"project_ref":"project.shwork.json","frozen_input_hash":Session.Model.input_hash(project),"generator_version":project.materialized_snapshot.generator_version,"bounds":[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y],"scale":scale,"pixel_size":[pixels.x,pixels.y],"environment":"static S1; no weather or game time binding","render_stack":stack,"layers":layers,"tiles":tiles,"files":files,"options":serial(options),"estimate":estimate,"logical_bindings":"presentation only; no navigation or GameState changes"}
 	var issue:=_json("manifest.json",manifest)
 	if cancelled or not issue.is_empty():_cleanup();return error("导出取消或清单写入失败；原交付保留。")
 	if DirAccess.dir_exists_absolute(target) or DirAccess.rename_absolute(_stage,target)!=OK:_cleanup();return error("不能原子采用新目录；原交付保留。")
 	_created.clear();_stage="";busy=false;_viewport.queue_free();progress.emit("导出完成",jobs.size(),jobs.size())
+	_frozen=null;_canvas=null
 	return {"ok":true,"path":target,"manifest":manifest}
 static func validate_bundle(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):return error("导出清单不存在。")
@@ -193,7 +209,8 @@ static func validate_bundle(path: String) -> Dictionary:
 	var m: Dictionary=json.data
 	if m.get("document_type")!="shanhe.workshop_export" or m.get("schema_version")!=1 or not m.get("files") is Dictionary or not m.get("render_stack") is Array or not m.get("tiles") is Array or not m.get("project_ref") is String:return error("未知导出协议。")
 	if not m.get("bounds") is Array or m.bounds.size()!=4 or not m.bounds.all(func(n):return Session.Model.numeric(n)) or m.bounds[2]<=0 or m.bounds[3]<=0 or not Session.Model.numeric(m.get("scale")) or m.scale<=0 or m.scale>4 or not m.get("pixel_size") is Array or m.pixel_size.size()!=2 or not m.pixel_size.all(func(n):return Session.Model.numeric(n) and n>0 and n<=8192 and n==floorf(n)) or not m.get("layers") is Array:return error("导出几何范围无效。")
-	if not equivalent([m.bounds[2]*m.scale,m.bounds[3]*m.scale],m.pixel_size):return error("导出像素范围不一致。")
+	# Rect2/Vector2 use float32; fractional scales can round by ~1e-4 pixels.
+	if absf(m.bounds[2]*m.scale-m.pixel_size[0])>0.01 or absf(m.bounds[3]*m.scale-m.pixel_size[1])>0.01:return error("导出像素范围不一致。")
 	for layer in m.layers:
 		if not layer is Dictionary or not layer.get("path") is String or not m.files.has(layer.path):return error("导出层引用无效。")
 	for page in m.tiles:
@@ -201,6 +218,16 @@ static func validate_bundle(path: String) -> Dictionary:
 	if not Session.Model.safe_relative(m.project_ref) or not m.files.has(m.project_ref):return error("导出项目路径无效。")
 	for relative in m.files:
 		if not relative is String or not Session.Model.safe_relative(relative) or not m.files[relative] is String or not FileAccess.file_exists(path.get_base_dir().path_join(relative)) or FileAccess.get_sha256(path.get_base_dir().path_join(relative))!=m.files[relative]:return error("导出文件缺失、路径非法或 hash 不符："+str(relative))
+	var page_rects: Array[Rect2i]=[];var page_area:=0
+	for page in m.tiles:
+		if not valid_page(page,Vector2i(m.pixel_size[0],m.pixel_size[1])):return error("分页核心尺寸、边框或范围不一致。")
+		var rect:=Rect2i(page.pixel_origin[0],page.pixel_origin[1],page.pixel_size[0],page.pixel_size[1])
+		for previous in page_rects:
+			if rect.intersects(previous):return error("分页核心范围重叠。")
+		page_rects.append(rect);page_area+=rect.size.x*rect.size.y
+		var image:=Image.load_from_file(path.get_base_dir().path_join(page.path))
+		if image==null or image.get_size()!=Vector2i(page.pixel_size[0],page.pixel_size[1]):return error("分页PNG实际尺寸与清单不一致。")
+	if page_area!=int(m.pixel_size[0])*int(m.pixel_size[1]):return error("分页未覆盖完整合成范围。")
 	var session=Session.new();var opened: Dictionary=session.load_file(path.get_base_dir().path_join(m.project_ref))
 	if not opened.ok or session.read_only or Session.Model.input_hash(session.snapshot())!=m.get("frozen_input_hash"):return error("导出项目依赖或输入版本不一致。")
 	var expected: Array=Plan.build(session.snapshot())
@@ -209,3 +236,37 @@ static func validate_bundle(path: String) -> Dictionary:
 		if not m.render_stack[i] is Dictionary or m.render_stack[i].get("index")!=i or m.render_stack[i].get("entity_id")!=expected[i].entity_id:return error("导出层序或实体身份不符。")
 		if not equivalent(serial(expected[i]),m.render_stack[i].get("entry",{})):return error("导出绘制片与冻结项目不一致。")
 	return {"ok":true,"manifest":m,"session":session}
+
+static func valid_page(page: Dictionary,pixels: Vector2i) -> bool:
+	if page.get("gutter",-1)!=0:return false
+	for field in ["pixel_origin","pixel_size","stored_size"]:
+		if not page.get(field) is Array or page[field].size()!=2 or not page[field].all(func(n):return Session.Model.numeric(n) and n==floorf(n)):return false
+	if page.pixel_origin[0]<0 or page.pixel_origin[1]<0 or page.pixel_size[0]<1 or page.pixel_size[1]<1 or page.pixel_origin[0]+page.pixel_size[0]>pixels.x or page.pixel_origin[1]+page.pixel_size[1]>pixels.y:return false
+	return equivalent(page.stored_size,page.pixel_size) and equivalent(page.get("core_rect"),[0,0,page.pixel_size[0],page.pixel_size[1]])
+
+## Conservative preflight before any destination/temp directory is created.
+## Raw PNG workload and image buffers are estimates, not a process RSS guarantee.
+static func estimate_output(pixels: Vector2i,entry_count: int,options: Dictionary) -> Dictionary:
+	var full:=1+int(options.get("transparent_ground",true))+int(not options.get("selected_ids",[]).is_empty())
+	if options.get("layers",true):full+=1+ceili(entry_count/64.0)+int(options.get("include_grid",false) or options.get("include_legend",false))
+	var tile: int=int(options.get("tile_size",2048))
+	if tile<64 or tile>2048 or pixels.x<1 or pixels.y<1 or pixels.x>8192 or pixels.y>8192:return error("导出尺寸或分页超出安全范围。")
+	var area: int=pixels.x*pixels.y
+	var pages: int=ceili(pixels.x/float(tile))*ceili(pixels.y/float(tile))
+	var work: int=area*(full+1)
+	var peak: int=area*4*8
+	var result: Dictionary={"ok":true,"images":full+pages,"full_frame_images":full,"tiles":pages,"work_pixels":work,"raw_output_bytes":work*4,"estimated_image_peak_bytes":peak,"work_pixel_limit":268435456,"image_peak_estimate_limit":536870912,"storage_contract":"full composite plus core-only crops; estimates exclude assets, engine and GPU overhead"}
+	if work>result.work_pixel_limit or peak>result.image_peak_estimate_limit:return error("导出估算超出安全预算（工作像素256Mi / 图像缓冲估算512MiB）；请缩小范围／比例，或关闭连续层序片。")
+	return result
+func _encode(image: Image,unpremultiply: bool,current: int,total: int) -> Dictionary:
+	_image_job=preload("export_image_job.gd").new();_codec=Thread.new()
+	if _codec.start(_image_job.encode.bind(image,unpremultiply))!=OK:_codec=null;_image_job=null;return {"ok":false}
+	var last_rows: int=-1
+	while _codec.is_alive():
+		if cancelled:_image_job.cancel()
+		var state: Dictionary=_image_job.state()
+		if state.rows_done!=last_rows:
+			last_rows=state.rows_done;progress.emit("图像处理 %d/%d 行"%[last_rows,image.get_height()],current,total)
+		await get_tree().process_frame
+	var result: Dictionary=_codec.wait_to_finish();_codec=null;_image_job=null
+	return result

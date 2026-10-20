@@ -15,6 +15,12 @@ const District=preload("district_generator.gd")
 const Compound=preload("compound_model.gd")
 const GENERATOR_VERSION := "workshop_s1.w2.2"
 static func generator_version(p: Dictionary) -> String:
+	var version:=_base_generator_version(p)
+	# Only projects whose generated placements use the corrected socket contract
+	# need explicit old-snapshot rebuild. Ordinary saved samples keep their version.
+	if p.recipes.any(func(r):return r.get("kind")=="path" and (not r.get("roadside",{}).is_empty() or (r.get("path_type")=="wall" and Terrain.surface(p,r.surface_id).get("kind")=="ramp"))):return version+".socket-spaces2"
+	return version
+static func _base_generator_version(p: Dictionary) -> String:
 	if not p.prefab_instances.is_empty() or p.style_profile.has("grid_kind") or p.manual_entities.any(func(e):return e.has("hidden")) or p.manual_overrides.fixed.values().any(func(e):return e.has("hidden")):return "workshop_s1.w6.1"
 	if p.manual_entities.any(func(e):return e.get("kind")=="compound") or p.manual_overrides.fixed.values().any(func(e):return e.get("kind")=="compound") or p.recipes.any(func(r):return r.get("kind")=="district"):return "workshop_s1.w5.1"
 	if Terrain.enabled(p):return "workshop_s1.w4.1"

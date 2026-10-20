@@ -1,0 +1,78 @@
+{
+  "tool": "built-in image_gen",
+  "authorization": "2026-10-19 user explicitly permitted gatehouse, wall segments, corner tower",
+  "prompts": {
+    "gate": "Use case: historical-scene. Asset type: a SINGLE transparent-background 2D Godot map sprite, not a scene or atlas. Primary request: one small Tang-era Chinese gatehouse in the hand-drawn medieval atlas/map style of the reference images shown: fine slightly uneven dark umber ink contours, simple geometric shapes, restrained flat watercolor ochre/tan masonry, muted charcoal-grey tiled hip-and-gable roof, sparse tiny ink hatching. Fixed high oblique bird's-eye view with visible roof and front facade, orthographic projection; no lens perspective. The gatehouse has a compact rectangular sandstone plinth with one large open arch right in its center, a modest wooden red-brown roofed pavilion on top, no side walls attached, no side towers. Front base edge exactly horizontal in the image; sides recede upward-right with short visible depth. Centered sprite entirely in frame with wide transparent margin; open arch is true transparent hole, all outside is transparent. No ground patch, no cast shadow, no landscape, no trees, no people, no text, no labels, no frame. Architectural detail must remain sparse and readable at 100 px map scale; do not render realistic stone textures, glossy shading, painterly fuzz, 3D render, pixel art or modern cartoon. Top-left soft daylight. The sprite must look like a small isolated fragment lifted directly from a hand-inked parchment fortress map. Output one gatehouse only.",
+    "gate_clean": "Edit this single map gatehouse sprite. Keep architecture, viewpoint, size, position, warm tan masonry, muted red timber and grey roof. Remove ALL brown fuzzy halo, glows, smoke, background haze and cast shadows outside the building. Outside the crisp ink silhouette must be exactly transparent. The open arch doorway and gaps behind open pavilion must also be transparent (keep masonry arch interior sidewall). Simplify fine tiny brick and tile details slightly to resemble simple hand-inked watercolor map art at small scale. No other objects. Output fully isolated sprite with transparent background and transparent holes, no floor/ground.",
+    "gate_flat": "A single tiny sprite illustration of a Chinese fortress gatehouse, drawn as SIMPLE FLAT PEN-AND-WATERCOLOR MAP ICON. Transparent background. Hard clean dark ink outline, sparse geometry, no shading gradients. One tan trapezoid stone base, one central arch cut out as a transparent hole, one modest low charcoal grey Chinese pavilion roof above red-brown posts. High oblique bird's eye orthographic view, front baseline horizontal, depth recedes upward-right. The object occupies central 70% of canvas. Absolutely NO halo, NO glow, NO fog, NO vignette, NO drop shadow, NO ground, NO ambient occlusion outside object, NO soft edges beyond ink outlines. Outside object silhouette and inside open arch: alpha zero. Colors limited to tan, grey, rust brown and black. Medieval hand-drawn atlas aesthetic with intentionally sparse marks, only a few stone joins and roof strokes, not individual bricks or every tile. No text, people, trees, floor or scenery. Entire silhouette inside frame.",
+    "wall_front": "Single transparent-background Godot 2D map sprite, not a scene, no atlas. Hand-drawn medieval Chinese map style, high oblique orthographic bird's-eye view: uneven dark umber pen outlines, sparse geometric ink marks, flat muted tan/ochre watercolor, charcoal-grey roofs if any. Very simple shapes readable at small map size, matching hand-inked parchment fortress illustrations. All outside transparent, no white background, no glow, no shadow, no ground, no landscape, no text, no people. Entire object in frame with margin. One straight short Tang-era fortress wall segment only. Warm tan stone vertical facade, simple dark battlements and a thin ochre wall walk behind. Long bottom baseline exactly horizontal, left to right, shallow depth receding upward-right. Both ends clean vertical cuts to join other segments. No gate, no towers. Sparse 3 or 4 little masonry hatch marks, no fine individual brickwork. Length about twice height. Front-facing segment.",
+    "wall_side": "Single transparent-background Godot 2D map sprite, not a scene, no atlas. Hand-drawn medieval Chinese map style, high oblique orthographic bird's-eye view: uneven dark umber pen outlines, sparse geometric ink marks, flat muted tan/ochre watercolor, charcoal-grey roofs if any. Very simple shapes readable at small map size, matching hand-inked parchment fortress illustrations. All outside transparent, no white background, no glow, no shadow, no ground, no landscape, no text, no people. Entire object in frame with margin. One straight short Tang-era fortress wall segment only. Warm tan stone facade, simple dark battlements and a narrow ochre wall walk. Long base goes from lower-left to upper-right, rise about twice horizontal run (screen axis vector -0.30,0.72 in down-positive coordinates, so from upper-left to lower-right or reversed). A steep diagonal side wall corresponding to the receding left side of an oblique Chinese walled town map. Both ends clean cuts, no gate, no towers. Sparse masonry marks, no fine brickwork.",
+    "wall_side_correct": "Change viewpoint of this ONE wall map sprite to the steep receding side-wall direction. Retain its hand-inked warm ochre masonry, sparse geometric battlements and no towers or gate. The long BASE line must run from image pixel approximately (390,1100) at bottom-left to (740,260) at top-right: a rise of 840 pixels for only 350 pixels of rightward run, angle -67.38 degrees from screen right. Both long bottom and top edges parallel to this steep diagonal, not the original shallow diagonal! Physical wall facade vertical screen-down; wall is only about 170 pixels high vertically, length along the steep diagonal about 900 pixels. Make an isolated clean unshadowed sprite with exactly transparent background and no halo/no ground/no text, plenty margin. View corresponds to ground axis (-0.30,0.72) in the 2D map projection. Do not rotate a flat image; redraw the upright wall in this view.",
+    "corner_tower": "Single transparent-background Godot 2D map sprite, not a scene, no atlas. Hand-drawn medieval Chinese map style, high oblique orthographic bird's-eye view: uneven dark umber pen outlines, sparse geometric ink marks, flat muted tan/ochre watercolor, charcoal-grey roofs if any. Very simple shapes readable at small map size, matching hand-inked parchment fortress illustrations. All outside transparent, no white background, no glow, no shadow, no ground, no landscape, no text, no people. Entire object in frame with margin. One small Tang-era square corner watchtower only. Simple tapered tan sandstone base, charcoal-grey tiled Chinese pavilion roof with gently raised eaves and muted brown timber supports. High oblique bird's-eye view showing front and short right side, front base edge horizontal, depth receding upward-right. Compact simple geometric forms, sparse ink hatching, no attached walls, no gates."
+  },
+  "status": "pending_user_visual_review",
+  "records": [
+    {
+      "asset_ref": "review_gate@candidate1",
+      "source_file": "exec-9b2c7cd5-8baf-4ff6-94cc-67b157c6ee0d.png",
+      "sha256": "4bd928bacf05c7cff2526d358f8c779cc8a05e76fdbad9530e06928231c9a79a",
+      "size": [
+        1402,
+        1122
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true
+    },
+    {
+      "asset_ref": "review_wall_front@candidate1",
+      "source_file": "exec-8802d05d-969c-45ad-9d03-79fbf71c1c91.png",
+      "sha256": "7dd1e96d57ba51fdf8511d75d4153ef7bc602785fedbabb619a8095d215a7b34",
+      "size": [
+        1774,
+        887
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true
+    },
+    {
+      "asset_ref": "review_wall_side@candidate1",
+      "source_file": "exec-b257e7d9-875c-46aa-afed-2f85e448a053.png",
+      "sha256": "54bd7eefda63877aa9fd046db6fcc2ea486f0c4fb84c9c32eec398852037e7b6",
+      "size": [
+        1099,
+        1431
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true
+    },
+    {
+      "asset_ref": "review_corner_tower@candidate1",
+      "source_file": "exec-57e3f532-debe-4f6a-b624-20caf1f60106.png",
+      "sha256": "3a8a17652df1fef7997fff34abed79c1e1ee5506594d1d1a30bb451624039019",
+      "size": [
+        1303,
+        1207
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "original_bytes_preserved": true
+    }
+  ],
+  "rejected_candidates": [
+    "exec-fb5bc137-a1fc-4543-af6a-e2de779c2f34.png",
+    "exec-e9502ccb-231b-4fcb-8640-3736c98a2c30.png"
+  ],
+  "rejection_reason": "unwanted translucent halo; replaced with flat generation",
+  "transformations": "None; region/anchor/footprint are editable asset metadata"
+}

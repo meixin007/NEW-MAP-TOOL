@@ -184,9 +184,8 @@ func preview_plan(plan: Dictionary) -> void:
 	_pending_id=selected_id;preview({"op":"update_entity","entity_id":selected_id,"patch":{"room_plan":plan}})
 func preview(command: Dictionary) -> void:
 	if host.session.has_preview() or host.session.job_in_progress():host.status.text="先应用或取消现有候选。";return
-	host.session.begin_preview();var result: Dictionary=host.session.preview(command)
-	if not result.ok:host.session.cancel_preview();host.report(result)
-	else:dirty=false;_wall_dirty=false;host.status.text="房间预览完成，等待明确应用。"
+	var result: Dictionary=host.queue_candidate(command,"room")
+	if result.ok:dirty=false;_wall_dirty=false
 	host.canvas._last_revision=-1;host.canvas.queue_redraw()
 func apply_preview() -> void:
 	var result: Dictionary=host.session.commit_preview();host.report(result)

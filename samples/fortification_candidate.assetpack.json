@@ -1,0 +1,340 @@
+{
+  "document_type": "shanhe.asset_pack",
+  "schema_version": 1,
+  "assets": [
+    {
+      "asset_id": "review_gate",
+      "asset_version": "candidate1",
+      "style_id": "reference_oblique_review_pending",
+      "texture_ref": "assets/4bd928bacf05c7cff2526d358f8c779cc8a05e76fdbad9530e06928231c9a79a.png",
+      "texture_sha256": "4bd928bacf05c7cff2526d358f8c779cc8a05e76fdbad9530e06928231c9a79a",
+      "texture_size_px": [
+        1402,
+        1122
+      ],
+      "region_px": [
+        0,
+        0,
+        1402,
+        1122
+      ],
+      "anchor_px": [
+        650,
+        980
+      ],
+      "nominal_size_units": [
+        250,
+        200.07132667617688
+      ],
+      "ground_footprint": [
+        [
+          -110,
+          -12
+        ],
+        [
+          110,
+          -12
+        ],
+        [
+          110,
+          12
+        ],
+        [
+          -110,
+          12
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          1402,
+          0
+        ],
+        [
+          1402,
+          1122
+        ],
+        [
+          0,
+          1122
+        ]
+      ],
+      "sockets": [
+        {
+          "socket_id": "road",
+          "position_px": [
+            650,
+            980
+          ],
+          "role": "road",
+          "direction_deg": 112.619864948
+        }
+      ],
+      "orientation_variants": {
+        "0": "review_gate"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, explicitly authorized 2026-10-19; raw PNG copied unchanged; candidate1 awaiting user visual review.",
+      "label": "关楼 · 候选1",
+      "tags": [
+        "review_c7e0",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "gate",
+      "passage_width_units": 40
+    },
+    {
+      "asset_id": "review_wall_front",
+      "asset_version": "candidate1",
+      "style_id": "reference_oblique_review_pending",
+      "texture_ref": "assets/7dd1e96d57ba51fdf8511d75d4153ef7bc602785fedbabb619a8095d215a7b34.png",
+      "texture_sha256": "7dd1e96d57ba51fdf8511d75d4153ef7bc602785fedbabb619a8095d215a7b34",
+      "texture_size_px": [
+        1774,
+        887
+      ],
+      "region_px": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "anchor_px": [
+        880,
+        661
+      ],
+      "nominal_size_units": [
+        310,
+        155.0
+      ],
+      "ground_footprint": [
+        [
+          -145,
+          -8
+        ],
+        [
+          145,
+          -8
+        ],
+        [
+          145,
+          8
+        ],
+        [
+          -145,
+          8
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          1774,
+          0
+        ],
+        [
+          1774,
+          887
+        ],
+        [
+          0,
+          887
+        ]
+      ],
+      "sockets": [
+        {
+          "socket_id": "left",
+          "position_px": [
+            60,
+            661
+          ],
+          "role": "wall",
+          "direction_deg": 180
+        },
+        {
+          "socket_id": "right",
+          "position_px": [
+            1708,
+            661
+          ],
+          "role": "wall",
+          "direction_deg": 0
+        }
+      ],
+      "orientation_variants": {
+        "0": "review_wall_front"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, explicitly authorized 2026-10-19; raw PNG copied unchanged; candidate1 awaiting user visual review.",
+      "label": "正面墙段 · 候选1",
+      "tags": [
+        "review_c7e0",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "wall"
+    },
+    {
+      "asset_id": "review_wall_side",
+      "asset_version": "candidate1",
+      "style_id": "reference_oblique_review_pending",
+      "texture_ref": "assets/54bd7eefda63877aa9fd046db6fcc2ea486f0c4fb84c9c32eec398852037e7b6.png",
+      "texture_sha256": "54bd7eefda63877aa9fd046db6fcc2ea486f0c4fb84c9c32eec398852037e7b6",
+      "texture_size_px": [
+        1099,
+        1431
+      ],
+      "region_px": [
+        0,
+        0,
+        1099,
+        1431
+      ],
+      "anchor_px": [
+        285,
+        1405
+      ],
+      "nominal_size_units": [
+        180,
+        234.37670609645133
+      ],
+      "ground_footprint": [
+        [
+          -8,
+          -220
+        ],
+        [
+          8,
+          -220
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          -8,
+          0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          1099,
+          0
+        ],
+        [
+          1099,
+          1431
+        ],
+        [
+          0,
+          1431
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "review_wall_side"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, explicitly authorized 2026-10-19; raw PNG copied unchanged; candidate1 awaiting user visual review.",
+      "label": "侧面墙段 · 候选1",
+      "tags": [
+        "review_c7e0",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "wall"
+    },
+    {
+      "asset_id": "review_corner_tower",
+      "asset_version": "candidate1",
+      "style_id": "reference_oblique_review_pending",
+      "texture_ref": "assets/3a8a17652df1fef7997fff34abed79c1e1ee5506594d1d1a30bb451624039019.png",
+      "texture_sha256": "3a8a17652df1fef7997fff34abed79c1e1ee5506594d1d1a30bb451624039019",
+      "texture_size_px": [
+        1303,
+        1207
+      ],
+      "region_px": [
+        0,
+        0,
+        1303,
+        1207
+      ],
+      "anchor_px": [
+        790,
+        1100
+      ],
+      "nominal_size_units": [
+        140,
+        129.68534151957022
+      ],
+      "ground_footprint": [
+        [
+          -40,
+          -24
+        ],
+        [
+          40,
+          -24
+        ],
+        [
+          40,
+          24
+        ],
+        [
+          -40,
+          24
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0,
+          0
+        ],
+        [
+          1303,
+          0
+        ],
+        [
+          1303,
+          1207
+        ],
+        [
+          0,
+          1207
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "review_corner_tower"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "Built-in image_gen, explicitly authorized 2026-10-19; raw PNG copied unchanged; candidate1 awaiting user visual review.",
+      "label": "角楼 · 候选1",
+      "tags": [
+        "review_c7e0",
+        "candidate",
+        "pending_visual_review"
+      ],
+      "category": "tower"
+    }
+  ]
+}

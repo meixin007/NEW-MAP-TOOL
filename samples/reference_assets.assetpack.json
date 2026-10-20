@@ -1,0 +1,621 @@
+{
+  "document_type": "shanhe.asset_pack",
+  "schema_version": 1,
+  "assets": [
+    {
+      "asset_id": "w5_gray_tile",
+      "asset_version": "v1",
+      "style_id": "w5_ink_watercolor_surfaces",
+      "texture_ref": "assets/9885914c69ac5257b867fcf3c3e181bf089ed6f5e2921aebd1bd8f3241aafa48.png",
+      "texture_sha256": "9885914c69ac5257b867fcf3c3e181bf089ed6f5e2921aebd1bd8f3241aafa48",
+      "texture_size_px": [
+        1448.0,
+        1086.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1448.0,
+        1086.0
+      ],
+      "anchor_px": [
+        724.0,
+        543.0
+      ],
+      "nominal_size_units": [
+        128.0,
+        96.0
+      ],
+      "ground_footprint": [
+        [
+          -64.0,
+          -64.0
+        ],
+        [
+          64.0,
+          -64.0
+        ],
+        [
+          64.0,
+          64.0
+        ],
+        [
+          -64.0,
+          64.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1448.0,
+          0.0
+        ],
+        [
+          1448.0,
+          1086.0
+        ],
+        [
+          0.0,
+          1086.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "w5_gray_tile"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户授权W5内置imagegen；参考图1灰瓦风格；原PNG未改像素或alpha。二维平铺表面材质，用于独立屋顶几何；新素材待审。",
+      "label": "W5 手绘灰瓦材质",
+      "tags": [
+        "W5",
+        "屋顶材质",
+        "surface_material",
+        "待审"
+      ],
+      "category": "ground"
+    },
+    {
+      "asset_id": "tree_unit_a_v3",
+      "asset_version": "v3",
+      "style_id": "irregular_tree_units_ref3_v3",
+      "texture_ref": "assets/163c1658ff4af33a919cea57f6caa70247b69034980d1b5199a81377d377a327.png",
+      "texture_sha256": "163c1658ff4af33a919cea57f6caa70247b69034980d1b5199a81377d377a327",
+      "texture_size_px": [
+        1448.0,
+        1086.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1448.0,
+        1086.0
+      ],
+      "anchor_px": [
+        754.0,
+        820.0
+      ],
+      "nominal_size_units": [
+        86.8289241622575,
+        65.12169312169311
+      ],
+      "ground_footprint": [
+        [
+          -4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1448.0,
+          0.0
+        ],
+        [
+          1448.0,
+          1086.0
+        ],
+        [
+          0.0,
+          1086.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "tree_unit_a_v3"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户明确允许内置imagegen制作W3素材；按最新反馈制作独立不规则简化树形，部分树干可见，由工具组合树林；原始PNG不改像素，视觉待审。",
+      "label": "不规则树形 A · 短树干",
+      "tags": [
+        "W3",
+        "独立树形",
+        "不规则",
+        "待审"
+      ],
+      "category": "tree"
+    },
+    {
+      "asset_id": "tree_unit_b_v3",
+      "asset_version": "v3",
+      "style_id": "irregular_tree_units_ref3_v3",
+      "texture_ref": "assets/22954953d8bc67ac7a56e3b95afa51df2b76b8637e1aa59e956f94f41ad53205.png",
+      "texture_sha256": "22954953d8bc67ac7a56e3b95afa51df2b76b8637e1aa59e956f94f41ad53205",
+      "texture_size_px": [
+        1448.0,
+        1086.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1448.0,
+        1086.0
+      ],
+      "anchor_px": [
+        653.0,
+        819.0
+      ],
+      "nominal_size_units": [
+        68.95238095238095,
+        51.71428571428571
+      ],
+      "ground_footprint": [
+        [
+          -4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1448.0,
+          0.0
+        ],
+        [
+          1448.0,
+          1086.0
+        ],
+        [
+          0.0,
+          1086.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "tree_unit_b_v3"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户明确允许内置imagegen制作W3素材；按最新反馈制作独立不规则简化树形，部分树干可见，由工具组合树林；原始PNG不改像素，视觉待审。",
+      "label": "不规则树形 B · 矮宽",
+      "tags": [
+        "W3",
+        "独立树形",
+        "不规则",
+        "待审"
+      ],
+      "category": "tree"
+    },
+    {
+      "asset_id": "w3_ink_field",
+      "asset_version": "v1",
+      "style_id": "ink_oblique_ref3_w3",
+      "texture_ref": "assets/2cdae24ef9e66674d8f1d53207f007b308a471cf96f816910b4c4fa5b0bd8394.png",
+      "texture_sha256": "2cdae24ef9e66674d8f1d53207f007b308a471cf96f816910b4c4fa5b0bd8394",
+      "texture_size_px": [
+        1536.0,
+        1024.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1536.0,
+        1024.0
+      ],
+      "anchor_px": [
+        768.0,
+        512.0
+      ],
+      "nominal_size_units": [
+        180.0,
+        120.0
+      ],
+      "ground_footprint": [
+        [
+          -76.0,
+          13.0
+        ],
+        [
+          -24.0,
+          -36.0
+        ],
+        [
+          77.0,
+          -7.0
+        ],
+        [
+          40.0,
+          47.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1536.0,
+          0.0
+        ],
+        [
+          1536.0,
+          1024.0
+        ],
+        [
+          0.0,
+          1024.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "w3_ink_field"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户2026-10-18明确授权内置imagegen；第三张手工原画为画风参考；新生成素材候选，尚未获用户视觉接受。",
+      "label": "参考作物田块",
+      "tags": [
+        "W3",
+        "参考候选",
+        "固定斜俯视"
+      ],
+      "category": "ground"
+    },
+    {
+      "asset_id": "tree_unit_c_v4",
+      "asset_version": "v4",
+      "style_id": "irregular_tree_units_ref3_v3",
+      "texture_ref": "assets/16ff81449161b46d33dc3ec7fbd3957832132834f59041bc67d4b76af1935cec.png",
+      "texture_sha256": "16ff81449161b46d33dc3ec7fbd3957832132834f59041bc67d4b76af1935cec",
+      "texture_size_px": [
+        1448.0,
+        1086.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1448.0,
+        1086.0
+      ],
+      "anchor_px": [
+        751.0,
+        897.0
+      ],
+      "nominal_size_units": [
+        80.22160664819944,
+        60.16620498614958
+      ],
+      "ground_footprint": [
+        [
+          -4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1448.0,
+          0.0
+        ],
+        [
+          1448.0,
+          1086.0
+        ],
+        [
+          0.0,
+          1086.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "tree_unit_c_v4"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+      "label": "树形 C · 瘦高",
+      "tags": [
+        "W3",
+        "独立树形",
+        "新增变体",
+        "待审"
+      ],
+      "category": "tree"
+    },
+    {
+      "asset_id": "tree_unit_d_v4",
+      "asset_version": "v4",
+      "style_id": "irregular_tree_units_ref3_v3",
+      "texture_ref": "assets/45a9b54a30104587a061a030f96b9ca0bca619a96fa8c84e6451e71af73bcb1a.png",
+      "texture_sha256": "45a9b54a30104587a061a030f96b9ca0bca619a96fa8c84e6451e71af73bcb1a",
+      "texture_size_px": [
+        1448.0,
+        1086.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1448.0,
+        1086.0
+      ],
+      "anchor_px": [
+        860.0,
+        750.0
+      ],
+      "nominal_size_units": [
+        67.16507503410641,
+        50.3738062755798
+      ],
+      "ground_footprint": [
+        [
+          -4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1448.0,
+          0.0
+        ],
+        [
+          1448.0,
+          1086.0
+        ],
+        [
+          0.0,
+          1086.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "tree_unit_d_v4"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+      "label": "树形 D · 偏冠",
+      "tags": [
+        "W3",
+        "独立树形",
+        "新增变体",
+        "待审"
+      ],
+      "category": "tree"
+    },
+    {
+      "asset_id": "tree_unit_e_v4",
+      "asset_version": "v4",
+      "style_id": "irregular_tree_units_ref3_v3",
+      "texture_ref": "assets/e3391d95177e6d13df12d7cb8962a10e0f17a6fcb813944e7c077f7652196632.png",
+      "texture_sha256": "e3391d95177e6d13df12d7cb8962a10e0f17a6fcb813944e7c077f7652196632",
+      "texture_size_px": [
+        1448.0,
+        1086.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1448.0,
+        1086.0
+      ],
+      "anchor_px": [
+        779.0,
+        795.0
+      ],
+      "nominal_size_units": [
+        71.33004926108374,
+        53.4975369458128
+      ],
+      "ground_footprint": [
+        [
+          -4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1448.0,
+          0.0
+        ],
+        [
+          1448.0,
+          1086.0
+        ],
+        [
+          0.0,
+          1086.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "tree_unit_e_v4"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+      "label": "树形 E · 露叉枝",
+      "tags": [
+        "W3",
+        "独立树形",
+        "新增变体",
+        "待审"
+      ],
+      "category": "tree"
+    },
+    {
+      "asset_id": "tree_unit_f_v4",
+      "asset_version": "v4",
+      "style_id": "irregular_tree_units_ref3_v3",
+      "texture_ref": "assets/c0506fab22166135c4d1231b18a0931f39fc49b7fd29230085d31b7317530948.png",
+      "texture_sha256": "c0506fab22166135c4d1231b18a0931f39fc49b7fd29230085d31b7317530948",
+      "texture_size_px": [
+        1484.0,
+        1060.0
+      ],
+      "region_px": [
+        0.0,
+        0.0,
+        1484.0,
+        1060.0
+      ],
+      "anchor_px": [
+        969.0,
+        821.0
+      ],
+      "nominal_size_units": [
+        60.57142857142857,
+        43.265306122448976
+      ],
+      "ground_footprint": [
+        [
+          -4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          -3.0
+        ],
+        [
+          4.0,
+          2.0
+        ],
+        [
+          -4.0,
+          2.0
+        ]
+      ],
+      "paint_envelope": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1484.0,
+          0.0
+        ],
+        [
+          1484.0,
+          1060.0
+        ],
+        [
+          0.0,
+          1060.0
+        ]
+      ],
+      "sockets": [],
+      "orientation_variants": {
+        "0": "tree_unit_f_v4"
+      },
+      "shadow_mode": "none",
+      "render_parts": [],
+      "state_variants": {},
+      "source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+      "label": "树形 F · 低矮",
+      "tags": [
+        "W3",
+        "独立树形",
+        "新增变体",
+        "待审"
+      ],
+      "category": "tree"
+    }
+  ]
+}

@@ -123,13 +123,11 @@ func begin_path(type: String) -> void:
 		host.canvas.path_wall_ref=str(wall_asset.get_selected_metadata()) if wall_asset.selected>=0 else ""
 		host.status.text="逐点画"+{"road":"道路","wall":"城墙","river":"河流"}[type]+"，Enter 完成；右键 / Esc 取消。")
 func apply_recipe() -> void:
-	var result: Dictionary=host.session.dispatch({"op":"update_recipe","recipe_id":host.canvas.selected_recipe_id,"patch":{"name":title_field.text,"seed":int(seed.value),"style":style.get_item_text(style.selected)}})
-	if result.ok: dirty=false;refresh()
-	host.report(result)
+	var result: Dictionary=host.queue_candidate({"op":"update_recipe","recipe_id":host.canvas.selected_recipe_id,"patch":{"name":title_field.text,"seed":int(seed.value),"style":style.get_item_text(style.selected)}},"path_recipe",true)
+	if result.ok:dirty=false
 func apply_point() -> void:
-	var result: Dictionary=host.session.dispatch({"op":"update_path_point","recipe_id":host.canvas.selected_recipe_id,"point_id":host.canvas.selected_point_id,"patch":{"ground_xy":[x.value,y.value],"width":width.value}})
-	if result.ok: point_dirty=false;refresh()
-	host.report(result)
+	var result: Dictionary=host.queue_candidate({"op":"update_path_point","recipe_id":host.canvas.selected_recipe_id,"point_id":host.canvas.selected_point_id,"patch":{"ground_xy":[x.value,y.value],"width":width.value}},"path_point",true)
+	if result.ok:point_dirty=false
 func add_role() -> void:
 	if role_asset.selected<0: host.status.text="缺少关门／角楼方向资产。";return
 	var recipe: Dictionary=host.canvas.paths_recipe()
@@ -137,11 +135,11 @@ func add_role() -> void:
 	var point:=Paths.point_by_id(recipe,host.canvas.selected_point_id)
 	if point.is_empty(): host.status.text="请选择控制点。";return
 	var role: Dictionary={"role_id":Model.new_id("role"),"point_id":point.point_id,"ground_xy":point.ground_xy.duplicate(),"asset_ref":role_asset.get_selected_metadata(),"orientation":role_angle.value}
-	host.report(host.session.dispatch({"op":"add_path_role","recipe_id":recipe.recipe_id,"role":role}))
+	host.queue_candidate({"op":"add_path_role","recipe_id":recipe.recipe_id,"role":role},"path_recipe",true)
 func apply_roadside() -> void:
 	if roadside_asset.selected<0: host.status.text="缺少院落／仓储资产。";return
 	var side: Dictionary={"asset_ref":roadside_asset.get_selected_metadata(),"side":["right","left","both"][roadside_side.selected],"spacing":spacing.value,"offset":offset.value}
-	host.report(host.session.dispatch({"op":"update_recipe","recipe_id":host.canvas.selected_recipe_id,"patch":{"roadside":side}}))
+	host.queue_candidate({"op":"update_recipe","recipe_id":host.canvas.selected_recipe_id,"patch":{"roadside":side}},"path_recipe",true)
 func remove_recipe() -> void:
 	var dialog:=Dialog.new();dialog.title="删除路径配方";dialog.dialog_text="将删除此配方管理的生成结果；手工脱离对象保留。有固定对象时拒绝删除。整个操作可一次撤销。";host.add_child(dialog)
 	dialog.confirmed.connect(func(): host.report(host.session.dispatch({"op":"remove_recipe","recipe_id":host.canvas.selected_recipe_id,"confirmed":true}));dialog.queue_free())

@@ -1,0 +1,144 @@
+{
+  "unit": [
+    {
+      "script": "tests/review_c7e0/test_review_contracts.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_session.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_assets.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_paths.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_path_failures.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plots.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_failures.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_weights.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_jobs.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_recovery.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain_failures.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain_lifecycle.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_compounds.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_districts.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_district_protection.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_templates.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_template_dependencies.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_editor_contract.gd"
+    }
+  ],
+  "ui": [
+    {
+      "script": "tests/workshop_s1/test_integrated_ui.gd",
+      "graphical": true
+    },
+    {
+      "script": "tests/review_c7e0/test_samples_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/review_c7e0/test_heavy_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{editing_fixture}"
+      ],
+      "timeout": 90
+    }
+  ],
+  "pixels": [
+    {
+      "script": "tests/workshop_s1/test_export_pixels.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/w67_riverside_city.shwork.json"
+      ],
+      "timeout": 180
+    }
+  ],
+  "profile": [
+    {
+      "script": "tests/review_c7e0/test_edit_profile.gd",
+      "graphical": true,
+      "args": [
+        "{core_fixture}"
+      ],
+      "timeout": 240
+    }
+  ],
+  "soak": [
+    {
+      "script": "tests/review_c7e0/test_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "300"
+      ],
+      "timeout": 390
+    }
+  ],
+  "background": [
+    {
+      "script": "tests/review_c7e0/test_export_background.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 30
+    }
+  ],
+  "art": [
+    {
+      "script": "tests/review_c7e0/render_art_review.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 60
+    }
+  ],
+  "editor": [
+    {
+      "script": "<editor-import>",
+      "kind": "editor",
+      "timeout": 60
+    }
+  ]
+}

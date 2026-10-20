@@ -6,11 +6,13 @@ signal history_trimmed(message: String)
 const Model = preload("project_model.gd")
 const Bridge = preload("legacy_bridge.gd")
 const Commands = preload("project_commands.gd")
-const HISTORY_LIMIT := 50
-const HISTORY_BYTES := 256 * 1024 * 1024
+const HISTORY_LIMIT := 20
+const HISTORY_BYTES := 64 * 1024 * 1024 # Estimated serialized bytes, not RSS.
 var _project: Dictionary = Model.blank()
 var undo_stack: Array[Dictionary] = []
 var redo_stack: Array[Dictionary] = []
+var _undo_meta: Array[Dictionary]=[]
+var _redo_meta: Array[Dictionary]=[]
 var _draft: Dictionary = {}
 var _saved_signature := ""
 var current_path := ""
@@ -24,12 +26,80 @@ var dependency_issues: Array[String] = []
 var _signature_revision: int=-1
 var _author_signature: String=""
 var _history_sizes: Dictionary={}
+var _state_serial:=0
+var _state_id:=0
+var _current_json_bytes:=0
 var _worker: Thread
 var _job_token:=0
 var _worker_token: int=-1
 var _job_revision: int=-1
 var _job_started_ms:=0
 var _job_command: Dictionary={}
+var last_timing: Dictionary={}
+var job_purpose: String="preview"
+var _prepared_plan: Array=[]
+var _prepared_signature: String=""
+var _prepared_json_bytes:=0
+
+static func _plan_key(project: Dictionary) -> String:
+	return project.materialized_snapshot.input_hash+"|"+project.materialized_snapshot.generator_version
+
+func prepared_render_plan(project: Dictionary) -> Dictionary:
+	return {"ok":true,"entries":_prepared_plan} if _plan_key(project)==_prepared_signature else {"ok":false}
+
+func start_edit_job(command: Dictionary) -> Dictionary:
+	var result:=start_preview_job(command)
+	if result.ok:job_purpose="edit"
+	return result
+func _worker_candidate(source: Dictionary,command: Dictionary,known_source_bytes: int=0) -> Dictionary:
+	var result:=_candidate(source,command)
+	if result.ok:
+		freeze(result.project)
+		result.previous_json_bytes=known_source_bytes if known_source_bytes>0 else JSON.stringify(source).to_utf8_buffer().size()
+		result.current_json_bytes=JSON.stringify(result.project).to_utf8_buffer().size()
+		var began:=Time.get_ticks_usec()
+		result.render_plan=Model.Plan.build(result.project);freeze(result.render_plan)
+		result.timing.render_plan_ms=(Time.get_ticks_usec()-began)/1000.0
+	return result
+
+static func freeze(value: Variant) -> void:
+	if value is Dictionary or value is Array:
+		if value.is_read_only():return
+		for child in (value.values() if value is Dictionary else value):freeze(child)
+		value.make_read_only()
+
+## UI/geometry readers cannot mutate authority. Explicit snapshot() remains an
+## owned mutable deep copy for command construction, file I/O and integrations.
+func view() -> Dictionary:
+	freeze(_project)
+	return _project
+func preview_view() -> Dictionary:
+	if _draft.is_empty():return view()
+	freeze(_draft)
+	return _draft
+func clear_history() -> void:
+	undo_stack.clear();redo_stack.clear();_undo_meta.clear();_redo_meta.clear();_history_sizes.clear()
+func history_stats() -> Dictionary:
+	var total:=0
+	for meta in _undo_meta+_redo_meta:total+=int(meta.json_bytes)
+	return {"undo":undo_stack.size(),"redo":redo_stack.size(),"estimated_json_bytes":total,"estimate_limit":HISTORY_BYTES,"count_limit":HISTORY_LIMIT}
+func _history_meta() -> Dictionary:
+	if _current_json_bytes<=0:_current_json_bytes=JSON.stringify(_project).to_utf8_buffer().size()
+	return {"read_only":read_only,"signature":authority_signature(),"state_id":_state_id,"json_bytes":_current_json_bytes}
+func _trim_history() -> void:
+	var live: Dictionary={};var total:=0;var trimmed:=false
+	for meta in _undo_meta+_redo_meta:
+		_history_sizes[meta.state_id]=meta.json_bytes
+		total+=int(meta.json_bytes)
+	while undo_stack.size()+redo_stack.size()>HISTORY_LIMIT or (total>HISTORY_BYTES and undo_stack.size()+redo_stack.size()>1):
+		var removed_meta: Dictionary
+		if not undo_stack.is_empty():undo_stack.pop_front();removed_meta=_undo_meta.pop_front()
+		else:redo_stack.pop_front();removed_meta=_redo_meta.pop_front()
+		total-=int(removed_meta.json_bytes);trimmed=true
+	for meta in _undo_meta+_redo_meta:live[meta.state_id]=true
+	for key in _history_sizes.keys():
+		if not live.has(key):_history_sizes.erase(key)
+	if trimmed:history_trimmed.emit("撤销及重做合计超过20次或估算JSON 64MiB，已裁剪最早记录；此估算不是实际内存上限。")
 
 func job_in_progress() -> bool:
 	return _worker!=null and _worker_token==_job_token
@@ -39,9 +109,10 @@ func start_preview_job(command: Dictionary) -> Dictionary:
 		if _worker.is_alive():return _error("上一项计算正在收尾；可先继续编辑，稍后再预览。")
 		_worker.wait_to_finish();_worker=null
 	_job_token+=1;_worker_token=_job_token;_job_revision=revision;_job_started_ms=Time.get_ticks_msec();_job_command=command.duplicate(true)
-	var source:=snapshot();var frozen:=command.duplicate(true)
+	job_purpose="preview"
+	var source:=view();var frozen:=command.duplicate(true)
 	_worker=Thread.new()
-	var err:=_worker.start(_candidate.bind(source,frozen))
+	var err:=_worker.start(_worker_candidate.bind(source,frozen,_current_json_bytes))
 	if err!=OK:_worker=null;return _error("无法启动区域预览："+error_string(err))
 	return {"ok":true,"token":_job_token}
 func poll_preview_job() -> Dictionary:
@@ -52,7 +123,13 @@ func poll_preview_job() -> Dictionary:
 	var result: Dictionary=value
 	if _worker_token!=_job_token or revision!=_job_revision or has_preview() or read_only:return {"status":"discarded","message":"过期／已取消的候选已丢弃。"}
 	if not result.ok:return {"status":"failed","error":result.error}
-	_draft=result.project;view_revision+=1
+	_prepared_plan=result.render_plan;_prepared_signature=_plan_key(result.project);_prepared_json_bytes=result.current_json_bytes
+	_current_json_bytes=result.previous_json_bytes
+	if job_purpose=="edit":
+		last_timing=result.get("timing",{})
+		var committed:=_commit(result.project,false,result.project.materialized_snapshot.input_hash)
+		return {"status":"committed" if committed.ok else "failed","error":committed.get("error",""),"elapsed_ms":Time.get_ticks_msec()-_job_started_ms}
+	last_timing=result.get("timing",{});_draft=result.project;view_revision+=1
 	return {"status":"ready","stage":"2/2 候选完成，待明确应用","candidate_count":_draft.materialized_snapshot.get("stats",{}).get("candidate_count",0),"elapsed_ms":Time.get_ticks_msec()-_job_started_ms}
 func cancel_preview_job() -> void:
 	_job_token+=1
@@ -80,7 +157,13 @@ func _error(message: String) -> Dictionary:
 	return {"ok":false,"error":message}
 
 func _candidate(source: Dictionary, command: Dictionary) -> Dictionary:
-	var next := source.duplicate(true)
+	var clock_start:=Time.get_ticks_usec()
+	var metadata: bool=command.get("op") in ["rename","set_paper_color","set_editor_options"]
+	var next := source.duplicate(not metadata)
+	if metadata:
+		next.style_profile=source.style_profile.duplicate(true)
+		next.materialized_snapshot=source.materialized_snapshot.duplicate(false)
+	var copied:=Time.get_ticks_usec()
 	match command.get("op", ""):
 		"add_manual": next.manual_entities.append(command.get("entity",{}).duplicate(true))
 		"update_manual", "delete_manual":
@@ -120,17 +203,23 @@ func _candidate(source: Dictionary, command: Dictionary) -> Dictionary:
 		"add_surface_prototype":
 			next.surfaces.append(command.get("surface",{}).duplicate(true))
 		"add_asset_version":
+			if not command.get("adopt_entity_ids",[]) is Array or not command.get("adopt_entity_ids",[]).all(func(id):return id is String):return _error("采用目标必须为对象ID列表。")
 			var a: Dictionary = command.get("descriptor",{}).duplicate(true)
 			var issue := Model.Asset.validate(a)
 			if not issue.is_empty(): return _error(issue)
 			var key := Model.Asset.key(a)
 			if next.asset_refs.has(key): return _error("资产版本已存在，未覆盖。")
-			next.asset_refs[key]=a
+			# Validate the entire batch before changing either versions or entities.
 			for id in command.get("adopt_entity_ids",[]):
 				var found := false
 				for e in next.manual_entities:
-					if e.entity_id==id and e.kind=="asset": e.asset_ref=key;found=true
+					if e.entity_id!=id or e.kind!="asset":continue
+					if e.get("locked",false):return _error("所选对象已锁定，请先解锁再采用资产版本。")
+					found=true
 				if not found: return _error("所选对象不可直接更新资产；请先脱离生成器。")
+			next.asset_refs[key]=a
+			for e in next.manual_entities:
+				if e.entity_id in command.get("adopt_entity_ids",[]):e.asset_ref=key
 		"update_surface_prototype":
 			var found := false
 			for surface in next.surfaces:
@@ -155,43 +244,44 @@ func _candidate(source: Dictionary, command: Dictionary) -> Dictionary:
 		var style_issue: String=preload("editor_contract.gd").validate_style(next.style_profile)
 		if not style_issue.is_empty():return _error(style_issue)
 		next.materialized_snapshot.input_hash=Model.input_hash(next);next.materialized_snapshot.generator_version=Model.generator_version(next)
-		return {"ok":true,"project":next}
+		return {"ok":true,"project":next,"timing":{"copy_ms":(copied-clock_start)/1000.0,"total_ms":(Time.get_ticks_usec()-clock_start)/1000.0}}
 	preload("editor_contract.gd").prune_groups(next)
 	var issue := Model.validate(next)
 	if not issue.is_empty(): return _error(issue)
 	issue=Commands.check_protection_delta(source,next,command)
 	if not issue.is_empty(): return _error(issue)
+	var validated:=Time.get_ticks_usec()
 	next.materialized_snapshot = Model.materialize(next)
+	var generated:=Time.get_ticks_usec()
 	if next.materialized_snapshot.get("ok",true)==false: return _error(str(next.materialized_snapshot.error))
 	issue=Model.validate(next)
 	if not issue.is_empty(): return _error(issue)
-	return {"ok":true,"project":next}
+	return {"ok":true,"project":next,"timing":{"copy_ms":(copied-clock_start)/1000.0,"validate_before_ms":(validated-copied)/1000.0,"generate_ms":(generated-validated)/1000.0,"validate_after_ms":(Time.get_ticks_usec()-generated)/1000.0,"total_ms":(Time.get_ticks_usec()-clock_start)/1000.0}}
 
 func dispatch(command: Dictionary) -> Dictionary:
 	if read_only: return _error("此项目处于只读状态。")
 	if has_preview(): return _error("请先提交或取消画布预览。")
 	var candidate := _candidate(_project,command)
 	if not candidate.ok: return candidate
+	last_timing=candidate.get("timing",{})
 	return _commit(candidate.project,false,candidate.project.materialized_snapshot.input_hash)
 
 func _commit(next: Dictionary, force_cache: bool=false,verified_signature: String="") -> Dictionary:
 	var next_signature: String=verified_signature if not verified_signature.is_empty() else Model.input_hash(next)
 	if not force_cache and next_signature == authority_signature(): return {"ok":true,"changed":false}
 	cancel_preview_job()
-	undo_stack.append(snapshot())
-	redo_stack.clear()
-	var total := 0
-	for old in undo_stack:
-		var key: String=old.materialized_snapshot.input_hash
-		if not _history_sizes.has(key):_history_sizes[key]=JSON.stringify(old).to_utf8_buffer().size()
-		total+=int(_history_sizes[key])
-	var trimmed := false
-	while undo_stack.size() > HISTORY_LIMIT or (total > HISTORY_BYTES and undo_stack.size() > 1):
-		var removed: Dictionary=undo_stack.pop_front()
-		total-=int(_history_sizes.get(removed.materialized_snapshot.input_hash,0))
-		trimmed = true
-	if trimmed: history_trimmed.emit("撤销历史超过 50 次或 256MiB，已裁剪最早记录；项目保存不受影响。")
-	_project = next.duplicate(true)
+	undo_stack.append(view())
+	_undo_meta.append(_history_meta())
+	redo_stack.clear();_redo_meta.clear()
+	_trim_history()
+	# Candidates are private owned dictionaries, frozen before publishing. History
+	# can retain that immutable state without two additional recursive copies.
+	_project = next
+	freeze(_project)
+	_state_serial+=1;_state_id=_state_serial
+	_current_json_bytes=_prepared_json_bytes if _prepared_signature==_plan_key(next) else JSON.stringify(next).to_utf8_buffer().size()
+	if _prepared_signature!=_plan_key(next):_prepared_plan=[];_prepared_signature="";_prepared_json_bytes=0
+	read_only=false
 	revision += 1
 	_author_signature=next_signature;_signature_revision=revision
 	changed.emit()
@@ -211,14 +301,14 @@ func preview(command: Dictionary) -> Dictionary:
 func cancel_preview() -> void:
 	view_revision+=1
 	cancel_preview_job()
-	_draft.clear()
+	_draft={}
 
 func commit_preview() -> Dictionary:
 	view_revision+=1
 	if read_only or _draft.is_empty(): return _error("没有可提交预览。")
 	var next := _draft
 	_draft = {}
-	return _commit(next)
+	return _commit(next,false,next.materialized_snapshot.input_hash if next.is_read_only() else "")
 
 func restore_preview(candidate: Dictionary) -> Dictionary:
 	view_revision+=1
@@ -235,24 +325,36 @@ func restore_preview(candidate: Dictionary) -> Dictionary:
 
 func undo() -> bool:
 	if has_preview() or undo_stack.is_empty(): return false
-	redo_stack.append(snapshot())
+	redo_stack.append(view())
+	_redo_meta.append(_history_meta())
 	_project = undo_stack.pop_back()
-	_sync_read_only()
 	revision += 1
+	_restore_history_signature(_undo_meta.pop_back())
+	_trim_history()
 	changed.emit()
 	return true
 
 func redo() -> bool:
 	if has_preview() or redo_stack.is_empty(): return false
-	undo_stack.append(snapshot())
+	undo_stack.append(view())
+	_undo_meta.append(_history_meta())
 	_project = redo_stack.pop_back()
-	_sync_read_only()
 	revision += 1
+	_restore_history_signature(_redo_meta.pop_back())
+	_trim_history()
 	changed.emit()
 	return true
 
+func _restore_history_signature(meta: Dictionary) -> void:
+	# A rebuild can retain an old-version read-only snapshot. Preserve its exact
+	# status/signature alongside immutable history rather than blessing the cache.
+	_author_signature=meta.signature;_signature_revision=revision
+	_current_json_bytes=meta.json_bytes;_state_id=meta.state_id
+	read_only=meta.read_only or not dependency_issues.is_empty()
+
 func replace_project(next: Dictionary) -> Dictionary:
 	cancel_preview_job()
+	_prepared_plan=[];_prepared_signature=""
 	var issue := Model.validate(next)
 	if not issue.is_empty(): return _error(issue)
 	if next.materialized_snapshot.get("input_hash","")==Model.input_hash(next) and next.materialized_snapshot.get("generator_version","")==Model.generator_version(next):
@@ -265,9 +367,9 @@ func replace_project(next: Dictionary) -> Dictionary:
 		next=next.duplicate(true)
 		next.materialized_snapshot.recipe_cache=expected.recipe_cache
 	_project = next.duplicate(true)
-	undo_stack.clear();_history_sizes.clear()
-	redo_stack.clear()
-	_draft.clear()
+	_state_serial+=1;_state_id=_state_serial;_current_json_bytes=0
+	clear_history()
+	_draft={}
 	dependency_issues.clear()
 	_sync_read_only()
 	revision += 1
@@ -275,7 +377,8 @@ func replace_project(next: Dictionary) -> Dictionary:
 	return {"ok":true,"read_only":read_only}
 
 func _sync_read_only() -> void:
-	read_only=not dependency_issues.is_empty() or _project.materialized_snapshot.get("input_hash","")!=Model.input_hash(_project) or _project.materialized_snapshot.get("generator_version","")!=Model.generator_version(_project)
+	_author_signature=Model.input_hash(_project);_signature_revision=revision+1
+	read_only=not dependency_issues.is_empty() or _project.materialized_snapshot.get("input_hash","")!=_author_signature or _project.materialized_snapshot.get("generator_version","")!=Model.generator_version(_project)
 
 func rebuild_derived() -> Dictionary:
 	if has_preview(): return _error("请先取消或应用预览。")
@@ -290,7 +393,6 @@ func rebuild_derived() -> Dictionary:
 	if next.materialized_snapshot.get("ok",true)==false: return _error(str(next.materialized_snapshot.error))
 	issue=Model.validate(next)
 	if not issue.is_empty(): return _error(issue)
-	read_only=false
 	var result:=_commit(next,true)
 	if result.ok: _saved_signature=""
 	return result
@@ -542,6 +644,7 @@ static func _validate_recovery_draft(draft: Dictionary, project: Dictionary) -> 
 		for key in ["category","shadow","width"]:
 			if not Model.numeric(metadata.get(key)): return "恢复资产属性数字无效。"
 		if not metadata.get("crop") is Array or metadata.crop.size()!=4: return "恢复裁切草稿无效。"
+		if metadata.has("crop_mode") and (not Model.numeric(metadata.crop_mode) or float(metadata.crop_mode)<0 or float(metadata.crop_mode)>1 or float(metadata.crop_mode)!=floorf(float(metadata.crop_mode))):return "恢复裁切比例模式无效。"
 		for v in metadata.crop:
 			if not Model.numeric(v): return "恢复裁切草稿数字无效。"
 	return ""

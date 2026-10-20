@@ -1,0 +1,1024 @@
+{
+  "base_commit": "c7e0a4b94c3904921442b6746d737364d7024556",
+  "local_source_commit": "3cfddc6",
+  "files": [
+    {
+      "path": ".gitignore",
+      "base_sha256": "12f57021191be2096ff15deecabaca6dd4899a03df8ee97cf517b04475ed5035",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "README.md",
+      "base_sha256": "2fff6390882e0280f340f448b9827f0934ff6f9109ee25d17d3289c4f4143a82",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "addons/strategic_map_editor/art/tongguan_v1/catalog.json",
+      "base_sha256": "c202347436c66bdd4e7d851fbcc331ca689d280f70c61125ef57769422ee0278",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art/tongguan_v1/manifest.json",
+      "base_sha256": "fc57911105cb641c5e6d438e4858800a426fcc8b107b8741c1de7455fb775993",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_catalog.gd",
+      "base_sha256": "cad78166dceef4718cceefc0ac5218a6f937a8f347a3ca42247b4e653d30b5d2",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_catalog.gd.uid",
+      "base_sha256": "417adcf1c3a0fa5efd702933989d0dc74ddf40dfbb34b98fcce48e95b75d4835",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_image_loader.gd",
+      "base_sha256": "04ee2a9e20aae85c847fd98745a7918a7897d7a31ad4559d1a5ed5b43290f6f4",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_image_loader.gd.uid",
+      "base_sha256": "cc5c66a976792ced953cc6d0e28a92d6004774f7276aa5e79cea0833c77ea70f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_importer.gd",
+      "base_sha256": "e1f69217749f96ea618112be80a81d667b689709dd778d6855b9e4cb86c519a4",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_importer.gd.uid",
+      "base_sha256": "7ec71924bbcf5d19089a2f7d6e870883be6ef973735294e0897f4dad34fc6727",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_library.gd",
+      "base_sha256": "c8c4105b19210f993a059d1fa741846eeb9ed729228f2de4a9bb6c5ebb9a2003",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_library.gd.uid",
+      "base_sha256": "0ceed837fa5a20013de86df1cc75ec9b6652d3eff291790ba7d747077d5f8934",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_ribbon.gd",
+      "base_sha256": "2bbe5035578e91ec6297e86cd40d85cc6bfa2491f7a9c17959af50d957bd048e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_ribbon.gd.uid",
+      "base_sha256": "1b4fd8e3566d28f5d760e19ba598e1538edcbac1e4a10e8a1d95595711bce31c",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_samples.json",
+      "base_sha256": "fef3d3c9f180ecccfab676db073616faebc50a93c7a5d3969da426e9d66164af",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_spatial.gd",
+      "base_sha256": "c46becde077350796111f643a963d684f65577951200a954bf799e06df8518d3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_spatial.gd.uid",
+      "base_sha256": "27f0edb01d6a839c2bc2e76d37f1dc0b7218d365f2f43b2a2a0d564ade70b481",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_thumbnail_grid.gd",
+      "base_sha256": "03796548ff0518da16f7ea3cf8f7e7e0e08f4007257c48f219336130a3af2a10",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_thumbnail_grid.gd.uid",
+      "base_sha256": "e3fd0e25d04524ad6ba3d8aa4a9061dbf8726679fdafbb78a7b4f2e16d754f1e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_visual_audit.gd",
+      "base_sha256": "6b6fbfb4408b09676fd7e735c22bca0d6e78297c1cea1260efb0a25f11723a20",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/art_visual_audit.gd.uid",
+      "base_sha256": "937931af99740f12036364b4fae553d3188a848ec679e0e54a197917889eaee9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/asset_browser.gd",
+      "base_sha256": "1783edcc205d84d864b12363911206ca1b05391f1bdd13bfdecaf1e5ba39d513",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/asset_browser.gd.uid",
+      "base_sha256": "431d6006ff64d62f1a91bb3007ff70953611da9ac53ed69ab198aa3f69ceeccd",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/audit_review_panel.gd",
+      "base_sha256": "008a4069e8aeb411fe1d17025bcf35be90d7a0bd00d4e948ef4e9fe9bf38b3d9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/audit_review_panel.gd.uid",
+      "base_sha256": "7ce50887cef9e27b50272b585c6b43868c23a446a1d9115a4005709b05201d4d",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/authoring_session.gd",
+      "base_sha256": "29c6842e4dc91e5d8c551be280dd8bec1df1d02414c4c8c99d678b7e35f0b9ca",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/authoring_session.gd.uid",
+      "base_sha256": "8348c9c183b68e4dd61ef48bbd25117b02e1d11fcf51c0774ee43ecf2e559da7",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/dialog_shell.gd",
+      "base_sha256": "fa8f70d50798a8d9f0a0215688d65e88c489b5409e900127c6eb09e3d8a698ca",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/dialog_shell.gd.uid",
+      "base_sha256": "8d925fba798f388b1123dac566f4e97d3cfde3aa399763d88766ce09df409568",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/document.gd",
+      "base_sha256": "f1655b24e6018736687dfefa4e06f3aa4cb9e4c37db298a5c4ec362a0698bdb8",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/document.gd.uid",
+      "base_sha256": "dec589159296485151f398b9a5177594c4bbfff848730345f86bdf707493c191",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/earth_path.gd",
+      "base_sha256": "d9ebb56bf8918bc541be2f525103ed8c8dfb5e48483a4eea7e6b719ad49ffdaa",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/earth_path.gd.uid",
+      "base_sha256": "d5a9be1a79e730745d9505f2d41e9f064ec6065e76b9c08261d3aadc16e6aec0",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/game_map_cache_worker.gd",
+      "base_sha256": "710e8d8603437295fc3dbe566efdc275f9e4210caf68ec4d8a86af5bd126ea9f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/game_map_cache_worker.gd.uid",
+      "base_sha256": "5c9c0a5710fc7bc6194989c42762fe6379f64d7f2f1b50d34c8eafbe257beec9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/game_map_publisher.gd",
+      "base_sha256": "8e932f8c0cdb57c86bec6682943d3f452512204cac8097556fd7a2b1b6d35a1f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/game_map_publisher.gd.uid",
+      "base_sha256": "ae7ebaeefbba33f6834cab8d4a0ae5526c1b130411fdf470908d636e4ee0461e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/game_preview_adapter.gd",
+      "base_sha256": "a54666e1e22154746044d5dd1d2666e8e7c968ca06438c9f078c797fb47f3fc8",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/game_preview_adapter.gd.uid",
+      "base_sha256": "be73756b4748a8b614470bdde2d4329fa2b32213536a87c875607383903f7409",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/geometry_ops.gd",
+      "base_sha256": "8301b517d1bcdf00ad8880784df482f5a4dfa41fc6f3476076706b39ed034511",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/geometry_ops.gd.uid",
+      "base_sha256": "710fc99b080f36f913efe56089da332ec15bc2215127657d24dcfdd4afd55b49",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/interaction_overlay.gd",
+      "base_sha256": "6d9936f9a08e648aab589606dcae76e2179af77e499a6270da87da96f8861486",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/interaction_overlay.gd.uid",
+      "base_sha256": "0082d93215e7bb465b355f391710197311c9c1a3ebac0d34cad4971ed632de89",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/map_audit.gd",
+      "base_sha256": "a1e60c92d017252a189a201f1519f0f4837658a64369a3a5dfb3695b47081a45",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/map_audit.gd.uid",
+      "base_sha256": "2ac70817a8b723837a30e609ff1241161ddbf08e9e764e3a44e74b1898acbc6b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/map_canvas.gd",
+      "base_sha256": "61c9cb56fd6246a4022d4ae407889ebfd7c80f0fa889c86854e81cb504dfa47d",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/map_canvas.gd.uid",
+      "base_sha256": "e000e6f7d37a06fd3d93b8fafcacb26ebf2a048fe8c37fc19a81415968cb133d",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/map_exporter.gd",
+      "base_sha256": "387ca925e0d7774fdbd647be518ac7f1f85ca48a83d56f65079a082ea238a136",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/map_exporter.gd.uid",
+      "base_sha256": "02c78b4e98e11c08f39261385bb02f54be5ad8ae19d22475d985da25ca6b06a3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/minimap.gd",
+      "base_sha256": "93dac4fee4ad4f3e264bf8cde14dcb6dff3de93601b283fbfc6502e010385edb",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/minimap.gd.uid",
+      "base_sha256": "c3fe18f9603b62be98f9f7796f4e42abae9e6fee23fd0f12ed6d4b89f0de8a94",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/natural_water.gd",
+      "base_sha256": "1441bd8309f46d750d409988ced536cc1584a8fab5ed604006b8f4624061c171",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/natural_water.gd.uid",
+      "base_sha256": "76379796ef8b6a923f24713347525202c6ba5e8339c7c1505288299ae9ff5db8",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/plugin.cfg",
+      "base_sha256": "606b1bec4494d3fefa5bf24ad7a7a0fa4c47607fcce019ab8685853339e96295",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/plugin.gd",
+      "base_sha256": "835136f7f97c5808497cc2ff18b9ad88d0e82d91482cb1f972c94209db5eac31",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/plugin.gd.uid",
+      "base_sha256": "d12e17bf716e76b7188da811b91fc6ee203155f2d4c0d97565f1b1ad622a9bbe",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/polygon_boolean.gd",
+      "base_sha256": "257dd77f4bf9ff8ceafa6bbf9edf12a0621e5b32108d619f73ebda3709f311b7",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/polygon_boolean.gd.uid",
+      "base_sha256": "2e90839360d339173f3fda5dae316234d64e767cb9c0970146dc5f2acb05ef0f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/polygon_math.gd",
+      "base_sha256": "c37955df059468cbe6bb5d6f4d64f5b85f39c8236b32dea601f48eba22b55e56",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/polygon_math.gd.uid",
+      "base_sha256": "e37b48419794e5a64806e9a81fae40632ed15a12568fcadd7dd62270016fa2ba",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/polygon_query.gd",
+      "base_sha256": "347314c8c8180ffb709d16627a8989d0c1f38431ca273a13328752e763610b5e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/polygon_query.gd.uid",
+      "base_sha256": "4650e86613907bfe74ba93bd2fd0c335c9658607974edf2caaf2a833de3f28c6",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/production_contract.gd",
+      "base_sha256": "40f8af513f31a3950a3786f535edf14c9c41b2eada8615dc6311998a08c75772",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/production_contract.gd.uid",
+      "base_sha256": "0634af1384cf0f14745bb07e4938b495fd311878992caff97b804afb4ba058f3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/production_panel.gd",
+      "base_sha256": "52d11477aba367d6bfc82cc8dee84d5747e83b8f1eb118493e0788b1e2ba99e1",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/production_panel.gd.uid",
+      "base_sha256": "44520b13b22650a6aa0e2ef0d814ca0e3dbdcf6232a3023f6f0df5e3a5f45a6b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/production_samples.gd",
+      "base_sha256": "697dd262494623f60a15a5c200f2dcca4346d2f5628d0546254f65deb5742830",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/production_samples.gd.uid",
+      "base_sha256": "46ac08d77b40b8f23dfada10398530403afd31a8b15af6ca5afd6f06310ce45e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/recovery_store.gd",
+      "base_sha256": "5dc3c07a42945ab8ea2babdaa31338d4ce570f6f90bc0feb6ff6e6ba8add623c",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/recovery_store.gd.uid",
+      "base_sha256": "b522c9f38adcebab8b88d661345594e80dec90d88aad286221cc67636570da59",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/reference_registration.gd",
+      "base_sha256": "b2485ec3071c284c2425381e31904c8760e3aa155edf6697a594c6ce28d8907f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/reference_registration.gd.uid",
+      "base_sha256": "d40aad68d0faf77d6f1681ed732c19e98e289d86a33d5abb9513747165177432",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/regional_preview.gdshader",
+      "base_sha256": "01d778133923a59b40bdf53f6460e84499a932893f28a8358d5498e95d0a2667",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/regional_preview.gdshader.uid",
+      "base_sha256": "832181c44c7e4ea49077d9691d77bd53161f1817dc498051c1fc077e8012e460",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/route_preview.gd",
+      "base_sha256": "68b9d4b12dc800597a8d11297eff38a0980e2c6ae3386c10f13048c796d10d0c",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/route_preview.gd.uid",
+      "base_sha256": "ffe27b11a909f100caf1e4c57bb4be88d3bed3e992ad4675b5d4fc48d8f151f7",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/runtime_geometry_cache.gd",
+      "base_sha256": "5c06e4efe0385b59df764282e16c87f8c87779aa8407fed4ce4ff43bacc716f6",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/runtime_geometry_cache.gd.uid",
+      "base_sha256": "e663e48d2a5c4c328a66eda443e89cc743443f589d40ca325aef0d951aaf608c",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/runtime_label_policy.gd",
+      "base_sha256": "1eac83007cff02e5aaa8f0fe19a2ecb05f7d300abe131fa46c860095306c041b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/runtime_label_policy.gd.uid",
+      "base_sha256": "c4836ef4ce9753be0d92a8abd3b218f5d78ea32f25c91d21d19473368f5a52a6",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/sample_geography_review.gd",
+      "base_sha256": "3ae966e3a80f6f15f8c0d95f865587f243f93255f27d7625bea8237bad4cf8a3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/sample_geography_review.gd.uid",
+      "base_sha256": "e43e3168952195b781b20f77b6b59df15403e95224340a11d4b39e116f11d2e8",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/selection_overlay.gd",
+      "base_sha256": "68ce59d1120669e792f25ce14c285ae8e2de5248779f810c285fee7f341ce28c",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/selection_overlay.gd.uid",
+      "base_sha256": "da0a9500ea1bf53353def5c090cdba3a430c8509d48fb9205c5824bb314889d5",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/settings_panel.gd",
+      "base_sha256": "be8dad902016f51da75b1e3b9d72295a2dbf5de32b46e893c8386878bb8604a3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/settings_panel.gd.uid",
+      "base_sha256": "8653205e5d2756855e697b3a551e78d0a559950f6cd0095c47734730d0c92925",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/shared_boundaries.gd",
+      "base_sha256": "b2e3aad61d17614f9a6d769877c8760f86f37129294a9d8145d43f8b281ad333",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/shared_boundaries.gd.uid",
+      "base_sha256": "2cb28e0c792f268426b40cf1637bd5c27e41e057dad0d3053c3eb90efe28e2b1",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/spatial_index.gd",
+      "base_sha256": "bf25d8ee1bd477f9712483bf1f0b14f7c8223f226e1ace1f462a4062ddf85cd0",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/spatial_index.gd.uid",
+      "base_sha256": "52274e7e7f1e58eefcddf215f9d8d68223fcdeb1c36979f0d216df45f345e2b3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/water_brush.gd",
+      "base_sha256": "d0e483eb2e20b9e17e61a85f30ad0f5541e0b098073695f79e5d61fa514729ce",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/water_brush.gd.uid",
+      "base_sha256": "abcb6f7e311dad48d14dd2f720d03ae334bb4ac89eee0e33ba0b46ea4ae95491",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/water_brush_input.gd",
+      "base_sha256": "ad5b7e5bff8a51a6545bd6c4cf169559219b31dce11c48a39502fe5a33179682",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/water_brush_input.gd.uid",
+      "base_sha256": "e15318e9109e9893b9ca18b198992ff1e1089adec28bdf80b49dcc25a112c025",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/water_join.gd",
+      "base_sha256": "5d61c30db5a23d55fe4d0fb0ddb24aee3e35eb92c5aa5810931533b2f1516a74",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/water_join.gd.uid",
+      "base_sha256": "aab6158ae6204fc1fc08d81930d81d5c479a2ebd8ed32c20df2b8d9989e3e1a7",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workbench.gd",
+      "base_sha256": "548c4f63b67ea784c3b7507b8adf0a1bd4ff5ce013e2fd6aa0b5bfdfcb9efa0f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workbench.gd.uid",
+      "base_sha256": "dfe5527496c4ec1861d42ff78d8f44e1121160fa841071fa1fa3ce5187bc5f25",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_map_preferences.gd",
+      "base_sha256": "0b311dcc1508a88bd6fb9c3c924799d294a0ddc93b3149efb9ea7e4b40a3b6a3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_map_preferences.gd.uid",
+      "base_sha256": "efc8c9137b742084449c3fa5f087d637fca7c79bc4179a9317152061493761a8",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_place_layer.gd",
+      "base_sha256": "00443c74dce4e2f8c66c675ab3ac3cd961510501388254202adee895c1dbb812",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_place_layer.gd.uid",
+      "base_sha256": "b442b91eeb6a0e8c513a733eb1abca63d4f9e6efd8620869ae928a5b73260e04",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/asset_descriptor.gd",
+      "base_sha256": "2ee06382b9daf9df5f0420361cd04fa170b07d1f87f02cee27fc9dd34001d14b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/asset_descriptor.gd.uid",
+      "base_sha256": "04dcbc5aef242c56db8f281528edc928b4e930f0f8b58cfebbc1fa335f5cd975",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/asset_importer.gd",
+      "base_sha256": "6c8e61e232cee7ec36fa3c6bf27745ecf47e78bb90c88589f3c948f7d73d9343",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/asset_importer.gd.uid",
+      "base_sha256": "ba681608cfe2f9d64280fc080773782df0f655fc8c79e2207467893766499143",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/brush_sampler.gd",
+      "base_sha256": "b455b87c5388cf14f411d1e7507f13b886601401d1623fe89b1b7c4720fbdd4f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/brush_sampler.gd.uid",
+      "base_sha256": "7880b7210dd7ec81c68a29dfc8834efad642c5f73f987684bbf729d614e52a58",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/canonical.gd",
+      "base_sha256": "91ae43248a8667c9032db2108f4e7e3b6c89b5a4b5b9d2ea392ff0d3d1d55f78",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/canonical.gd.uid",
+      "base_sha256": "df29415c0ff9a9b2c7053df4c635b860d011a59f4ad523b6e5e38ef30f671398",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/compound_model.gd",
+      "base_sha256": "20469626db2fb0dcebf2923736da6b4feb15dcbd9f574a1a1f2cce4fddf091fb",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/compound_render.gd",
+      "base_sha256": "bdcd8b5d8d246eca88c8367949f6b55dbd61f93f2bd10eb4651048e44318d8ad",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/district_generator.gd",
+      "base_sha256": "2c403eea38186fecff081cf54f3e57dc9884ab39d28f13e00daa980958bb78e2",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/editor_contract.gd",
+      "base_sha256": "30c3b76649a43ddcd9a7e6d7994b5b80a3bc327d0a07f3e5d39964514acf11cd",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/editor_draft.gd",
+      "base_sha256": "c2f978c0f1118937c8bd45dbd25eda0ccae8310ce940fe3b522f910f38c6b2fe",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/entity_geometry.gd",
+      "base_sha256": "2092674d2736f65a304838035cbb11085ac63e4e64e9bd60f4bfc861e963c9fe",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/entity_geometry.gd.uid",
+      "base_sha256": "7c5a5450a380472c19ec9dbe030d48ff48158baec5843b4726c637bd0a54db4e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/export_adapter.gd",
+      "base_sha256": "a473c1a5342bf403c549aec1a8f535f0c2f9ae312261e64c09f135628229d232",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/group_transform.gd",
+      "base_sha256": "e53427142995df26120ae416e41ea893a789607853a09d2a48b337d4d4c5165c",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/legacy_bridge.gd",
+      "base_sha256": "134b4e7d8e2cee18372889a39103c405686d73b35939587028f7888a0b68f561",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/legacy_bridge.gd.uid",
+      "base_sha256": "57cecc877fd747e3d42b3fe521670d97a82b6a580016342055add90c0c36f633",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/override_resolver.gd",
+      "base_sha256": "566c89b6274bfb7f53348b88e9dc1791433baea693e1f5dbb85d618f0609c6c9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/override_resolver.gd.uid",
+      "base_sha256": "0b0512cd26009d699ca291de8f85ab6a5a62064df9e935cc70088a16a751456f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/path_generator.gd",
+      "base_sha256": "3f98945eeaa4237156b7d363ae8ed6697f9a6b73e80b9d56dacbbb93847e8e30",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/path_generator.gd.uid",
+      "base_sha256": "e91ef23ceb6c8f5758632a64a9190e61a6fbe50b51954f81149806e559ce19e9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/plot_generator.gd",
+      "base_sha256": "a1a3f89c973d6e46270f73e21d4a26b061be27f92c7670e2638d5a440047826f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/plot_generator.gd.uid",
+      "base_sha256": "33f1232a7facb1c94e9007c5c5ff23658dc0f33b1f92166fe89375513895b34a",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/plot_geometry.gd",
+      "base_sha256": "fdf609e8649455136fcd25679090822a716c7ad7598e0007bad11b2255bf93d3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/plot_geometry.gd.uid",
+      "base_sha256": "78a60b68281e94a1242b70298d06bce37bbcdd41ce1c29494be6a7aa71583727",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/plot_spatial.gd",
+      "base_sha256": "92193e9c8ed7ab6a93287da1af70ae8e76aaece88279159aa99abdda0bb6cd7b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/plot_spatial.gd.uid",
+      "base_sha256": "c6c5f2b88a3cc618f8c14ce23601e421fc9b8da17462333027d79276740101fe",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/project_commands.gd",
+      "base_sha256": "71c2daef0e2edca3fcfced64eeed43532be75ce2e22283858c8126b43e505a06",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/project_commands.gd.uid",
+      "base_sha256": "f4489705bd216363a4efc63debb0c45884d26a428fb0d8bc4b825353ade31907",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/project_model.gd",
+      "base_sha256": "9f941cef85da1bca6d302b1e3ac488c266e42300473e223d30970822ce6e5605",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/project_model.gd.uid",
+      "base_sha256": "f9ddf3e044bc21435352743ffbfa3c67cad6b41b6b8f17009449a7d7899645bf",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/readonly_preview.tscn",
+      "base_sha256": "724877f936e93187d9ff1e0b5bf5f3bcfaec7521690a671fc64ef9514083e4d0",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/recipe_scheduler.gd",
+      "base_sha256": "d162c566bf76a509fb4a18a9b248eab7557d6bedbfeaa06a2b3adabfd79ec63f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/recipe_scheduler.gd.uid",
+      "base_sha256": "71914e8bb74b659efe0195fce90efc03158e6ba75018df180b3a54485bcdcdd1",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/render_plan.gd",
+      "base_sha256": "64e7b6212d58f88c31ead41bb5c4a8adb0830ff4b6ce44a78c8832cfbf7aab4b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/render_plan.gd.uid",
+      "base_sha256": "22389c44bfa94776829ae1ca38dcf9ac8148b8a1416937759924b3484d21b24d",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/sample_assets.gd",
+      "base_sha256": "e0f5a398b06009d5ea5f8f2625d6386d2f00c709ff090628e8553f82d04a5e43",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/sample_assets.gd.uid",
+      "base_sha256": "f89f61eaff37269a77738f377f35b5f431dd4cb4200220c233d14f5973429df5",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/session_transaction.gd",
+      "base_sha256": "ed6bec5b5b24fe608d1c95cf16bb769a2921f76d3ecf8e805e325f818c295a7f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/session_transaction.gd.uid",
+      "base_sha256": "f67b3f6de4095eb8caf5b741559549718ea7774fc3dee6b22672321f16075ffa",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/snap_resolver.gd",
+      "base_sha256": "a993c8420ee02d3b3403b001d0e7d9c98625663a4a89ca57bebde430a5915967",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/support_query.gd",
+      "base_sha256": "c6e03decf7d2328aa0c3220984c20613581e75ccc4ce4542e6bccfa9c5b8879f",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/support_query.gd.uid",
+      "base_sha256": "976f9316287471f97e8e424fe3c0facabc6c3bf947c93af561e4eff5052a0bdb",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/surface_projection.gd",
+      "base_sha256": "8380de789e800c252b1d72af39cb3f33a5d51a2ae7c7b7ae542c92c4e2f0ac8b",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/surface_projection.gd.uid",
+      "base_sha256": "a6fe8471a897a4c8d7ec8a8df9a95555123caedfbc26453ebf00088362b96f69",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/template_library.gd",
+      "base_sha256": "cd73f80355a5e4d6bd91cf76abfa4d11ffb1b5c2631ef7f3e917c27189c4d265",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/terrain_geometry.gd",
+      "base_sha256": "7138882a7c5470cac7268cd3f2c5072f4bcc579a1a690f2286b42da60d2ee885",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/terrain_geometry.gd.uid",
+      "base_sha256": "83766fd670e600a6086bab275084ca0580c4891d3ef10ef4d271ada82fc2ca42",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/terrain_render.gd",
+      "base_sha256": "39792f65e6c44cb16f6d773b01201313f19eda5af1c99ba1dc3301b8985c7d1e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/terrain_render.gd.uid",
+      "base_sha256": "adac05d3d04e921d2fddf352135f7afdfe86fc0bf0e04b193a6825aad1d5d71a",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/asset_editor.gd",
+      "base_sha256": "b9365338a1bb371120d8baa7a22c69dccefeaa28a28eecd1d38bbd1f5f2b8eb0",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/asset_editor.gd.uid",
+      "base_sha256": "3ba5209486f5f7078c56c5f703b6a0d0508f9f006a8fd20b9c7944e3da81f293",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/asset_preview.gd",
+      "base_sha256": "298c48564f536f8212eae417ae698153ff5bf7c9cc86242c3fd997e494dd3d64",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/asset_preview.gd.uid",
+      "base_sha256": "b194d35c9a7cb043a7f37cc3a2425fee508f0f845f57603f62fcca42b49a8550",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/district_panel.gd",
+      "base_sha256": "475f6ba9e032dad0ae3243f3ee5afceb7466d3579f35595c04e6ebca55032394",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/editor_overlays.gd",
+      "base_sha256": "d67392f17391950aae4901784baba138102619e7da842e6113e8231ec8ef1712",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/export_panel.gd",
+      "base_sha256": "27fd0aa54c1483f342635d62ad69d4304e9f8a3214c4dfa5d3b9595d62da2387",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/library_panel.gd",
+      "base_sha256": "28c470f3a28a2fba70296583809a398a627cfdcfa9570811f2d891e745ca2d62",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/path_panel.gd",
+      "base_sha256": "59c104dbe83434d8edef13e68a601512dd7304e9976ef551c3e0eb80266b1757",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/path_panel.gd.uid",
+      "base_sha256": "e0fc0029828c5a7beb0543f5494b3d8d22830adc0a66da8c23e5a543c12105e2",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/plot_panel.gd",
+      "base_sha256": "d2c6667f8283f9232cc2f9c28b62317132af9a45ca541382c9d73036967d6857",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/plot_panel.gd.uid",
+      "base_sha256": "e56071e24441b8f95f02494403768a81fd55685100bafcd2681470d05a64cbb6",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/preview_entry.gd",
+      "base_sha256": "ce5ac7061140d43f3a742d420bd4de7eb2ae639b6f4fad76954499ba98160503",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/project_canvas.gd",
+      "base_sha256": "3d02f47174aa61f217e16b261af46e6279adb4d76328bf7545913734c265364a",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/project_canvas.gd.uid",
+      "base_sha256": "dfde343004705c4b634749f6e5476f99ed5f1d9b57f2a8d42bf7c454e75d418e",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/project_editor.gd",
+      "base_sha256": "0b07562d568efb97131692ec6b39c5fbc7b031088343be61b70392fc5aff9536",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/project_editor.gd.uid",
+      "base_sha256": "f18453e25fa3aa86c187805f464ca8931e2799d6b0ef516328e5d9abe4da7624",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/readonly_preview.gd",
+      "base_sha256": "ff0a7b18c79d8af8c29f795e5201ed408b62afc86d6d0da22b0c87e36e12de81",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/room_panel.gd",
+      "base_sha256": "fdd2613e9812505066ce44d6c890affe85f7da6cdf3d8c2feab3c6206122ba84",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/terrain_panel.gd",
+      "base_sha256": "b259edd8e577c33c7a41dca0cd8bd6360199347a9b1f568e94f7ace5df5f0ef5",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/terrain_panel.gd.uid",
+      "base_sha256": "cc8b43dd28f0dea53985cb9e9ef4333c8d979e90b27043ca957c37635ba34f80",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/ui/world_painter.gd",
+      "base_sha256": "28a3abd525abf3cac825baac85dee86dc211b8d989a474f2379ab1b8bb855e75",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workshop_s1/w5_draft.gd",
+      "base_sha256": "ff100300cdecf40cfd64e1e57fec14e87894f9a5901eeed961aed2d1d675b6d9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workspace_panel.gd",
+      "base_sha256": "5470edcdfb5b42f439523f0024cf64df36f106db94bef6bc8cf5172a1c372b6a",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "addons/strategic_map_editor/workspace_panel.gd.uid",
+      "base_sha256": "10a8193b63a6738d4d8539d92b39c0e26d9072f9983c95a5dc461e438866bad9",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "examples/blank.map.json",
+      "base_sha256": "3651d2e3e655688458beaa96f1c73f092e5a86b2f42fc29737cbcb25ec0604c3",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "main.tscn",
+      "base_sha256": "07500dbeb5f38547df56a56142ace8049a0a961faf464476045d24ab7114ddc0",
+      "matches_local_source_bytes": true
+    },
+    {
+      "path": "project.godot",
+      "base_sha256": "028e200af4db014fc4caeab2661eea7afed9c78d481c48908d34392265da98aa",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/163c1658ff4af33a919cea57f6caa70247b69034980d1b5199a81377d377a327.png",
+      "base_sha256": "163c1658ff4af33a919cea57f6caa70247b69034980d1b5199a81377d377a327",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/16ff81449161b46d33dc3ec7fbd3957832132834f59041bc67d4b76af1935cec.png",
+      "base_sha256": "16ff81449161b46d33dc3ec7fbd3957832132834f59041bc67d4b76af1935cec",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/22954953d8bc67ac7a56e3b95afa51df2b76b8637e1aa59e956f94f41ad53205.png",
+      "base_sha256": "22954953d8bc67ac7a56e3b95afa51df2b76b8637e1aa59e956f94f41ad53205",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/2cdae24ef9e66674d8f1d53207f007b308a471cf96f816910b4c4fa5b0bd8394.png",
+      "base_sha256": "2cdae24ef9e66674d8f1d53207f007b308a471cf96f816910b4c4fa5b0bd8394",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/45a9b54a30104587a061a030f96b9ca0bca619a96fa8c84e6451e71af73bcb1a.png",
+      "base_sha256": "45a9b54a30104587a061a030f96b9ca0bca619a96fa8c84e6451e71af73bcb1a",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/48306e7c73191b987d92d0783b89b8c2e3fb048da7bfc3af162d5c7d5034ee3c.png",
+      "base_sha256": "48306e7c73191b987d92d0783b89b8c2e3fb048da7bfc3af162d5c7d5034ee3c",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/4dd7a72029714dc3d62b29ca90cc1fcfb75c2eabce77b806f8e8f9573a4757ce.png",
+      "base_sha256": "4dd7a72029714dc3d62b29ca90cc1fcfb75c2eabce77b806f8e8f9573a4757ce",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/6bf04e4155837a78b2aeeb149b8e8eb745b035ea2939ac4522459a39b32ec251.png",
+      "base_sha256": "6bf04e4155837a78b2aeeb149b8e8eb745b035ea2939ac4522459a39b32ec251",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/76961e6c8030e53fe1ec6d43be9ef684a2380b8a781e075379539bab86a80224.png",
+      "base_sha256": "76961e6c8030e53fe1ec6d43be9ef684a2380b8a781e075379539bab86a80224",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/90ee530c8bf6b55047bbcf5eaa333bf292ddac190fe93af00b0a88fd031347b2.png",
+      "base_sha256": "90ee530c8bf6b55047bbcf5eaa333bf292ddac190fe93af00b0a88fd031347b2",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/9885914c69ac5257b867fcf3c3e181bf089ed6f5e2921aebd1bd8f3241aafa48.png",
+      "base_sha256": "9885914c69ac5257b867fcf3c3e181bf089ed6f5e2921aebd1bd8f3241aafa48",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/ac4c188d4df77c0c5ce1bcb95a9aaeaacd0780384fee6612313e5768b18d1d87.png",
+      "base_sha256": "ac4c188d4df77c0c5ce1bcb95a9aaeaacd0780384fee6612313e5768b18d1d87",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/c0506fab22166135c4d1231b18a0931f39fc49b7fd29230085d31b7317530948.png",
+      "base_sha256": "c0506fab22166135c4d1231b18a0931f39fc49b7fd29230085d31b7317530948",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/cdf008303802c1b36ee18ecb8b2cfcc79a0c5838d7c1437e8e139ec5dd536a32.png",
+      "base_sha256": "cdf008303802c1b36ee18ecb8b2cfcc79a0c5838d7c1437e8e139ec5dd536a32",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/e3391d95177e6d13df12d7cb8962a10e0f17a6fcb813944e7c077f7652196632.png",
+      "base_sha256": "e3391d95177e6d13df12d7cb8962a10e0f17a6fcb813944e7c077f7652196632",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/e6b3b7d58cc5b6ade26a5b12cb126e7edc8467fa7a630b8b80b4c1a479008b88.png",
+      "base_sha256": "e6b3b7d58cc5b6ade26a5b12cb126e7edc8467fa7a630b8b80b4c1a479008b88",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/eaf32e9775d14091a83317310d4217ca18d28fe2bef33696282f0ff8fcda8328.png",
+      "base_sha256": "eaf32e9775d14091a83317310d4217ca18d28fe2bef33696282f0ff8fcda8328",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/assets/ebb5f559d077c4fffe37fb804bc30adb008d8d162fd70ec1b39827a11bebcc3c.png",
+      "base_sha256": "ebb5f559d077c4fffe37fb804bc30adb008d8d162fd70ec1b39827a11bebcc3c",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/w67_hillside_village.shwork.json",
+      "base_sha256": "12287940ad8e3a43145a758a86cf10342111a7deea32c1d1a62633d59b2b3788",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/w67_mountain_pass.shwork.json",
+      "base_sha256": "d1237932eed5ab71663bcfb466b39bad7a99796af945089758876be152cc0d73",
+      "matches_local_source_bytes": false
+    },
+    {
+      "path": "samples/w67_riverside_city.shwork.json",
+      "base_sha256": "e9115c75398763efe0d90daa48cc261e6345925526b1e1cb70220a0fe93d75d5",
+      "matches_local_source_bytes": false
+    }
+  ],
+  "core_fixture_sha256": "800de2fbaaf2319b60137059ff49a7d95b8a1885b5ab25f7dc10f3cfc28e77e8",
+  "core_fixture_input_hash": "4cb36ac4befeb8066358391710aa181be9574be5ec06c1631ac05de907f10534",
+  "original_matrix_sha256": "b98dbaff3192e9a59e31c494e59dfcb150ab1eb0dd15c3ffb0450cccc23e6649"
+}

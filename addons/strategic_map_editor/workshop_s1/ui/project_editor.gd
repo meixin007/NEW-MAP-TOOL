@@ -46,6 +46,8 @@ var export_panel
 var selection_ids: Array=[]
 var _refresh_snapshot: Dictionary={}
 var _object_rows: Array=[]
+var last_refresh_ms:=0.0
+var _queued_owner: String=""
 var _preview_owner: String="plot"
 var auto_surface: CheckBox
 var socket_picker: OptionButton
@@ -163,9 +165,8 @@ func _ready() -> void:
 		if not _refreshing and not selected_id.is_empty():_property_dirty=true)
 	auto_surface=CheckBox.new();auto_surface.text="点放自动选面（歧义时选择）";auto_surface.button_pressed=true;auto_surface.toggled.connect(func(v):canvas.automatic_surface=v);sidebar.add_child(auto_surface)
 	button(sidebar,"应用对象属性",func():
-		var result: Dictionary = session.dispatch({"op":"update_entity","entity_id":selected_id,"patch":object_patch()})
-		if result.ok: _property_dirty=false;refresh()
-		report(result))
+		var result: Dictionary = queue_candidate({"op":"update_entity","entity_id":selected_id,"patch":object_patch()},"object",true)
+		if result.ok:_property_dirty=false)
 	button(sidebar,"取消未应用属性",func(): _property_dirty=false;_title_dirty=false;refresh())
 	button(sidebar,"固定生成子对象",func(): report(session.dispatch({"op":"fix_entity","entity_id":selected_id})))
 	button(sidebar,"脱离生成器（保留身份）",func(): report(session.dispatch({"op":"detach_entity","entity_id":selected_id})))
@@ -208,6 +209,7 @@ func _ready() -> void:
 	status.text = "开发构建；灰盒不代表画风通过。中键平移，滚轮缩放，Esc 取消拖动。"
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	root.add_child(status)
+	button(root,"查看全部诊断",show_diagnostics)
 	file_dialog = FileDialog.new()
 	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	file_dialog.filters = PackedStringArray(["*.shwork.json ; 山河工坊项目"])
@@ -243,12 +245,35 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(_delta: float) -> void:
+	if canvas.edit_pending:return # Canvas owns its release transaction polling.
+	if _preview_owner in ["terrain","room","direct_edit"]:
+		var result: Dictionary=session.poll_preview_job()
+		match result.status:
+			"working":status.text="正在验证和准备绘制 · %dms · 可取消"%result.elapsed_ms
+			"ready":canvas._last_revision=-1;canvas.queue_redraw();status.text="预览就绪；请明确应用或取消。"
+			"committed":status.text="修改已验证并提交；可撤销。";_preview_owner="plot"
+			"failed":
+				match _queued_owner:
+					"object":_property_dirty=true
+					"path_point":path_panel.point_dirty=true
+					"path_recipe":path_panel.dirty=true
+					"terrain":terrain_panel.dirty=true
+					"room":room_panel.dirty=true
+				status.text=str(result.error);_preview_owner="plot"
+			"discarded":status.text=result.message;_preview_owner="plot"
+		return
 	if _preview_owner=="district" and is_instance_valid(district_panel):district_panel.poll()
 	elif is_instance_valid(plot_panel):plot_panel.poll()
 func _exit_tree() -> void:
 	session.shutdown_jobs()
 func _session_changed() -> void:
 	if not _defer_refresh:refresh();report({"ok":true})
+
+func queue_candidate(command: Dictionary,owner: String,apply_on_ready: bool=false) -> Dictionary:
+	var result: Dictionary=session.start_edit_job(command) if apply_on_ready else session.start_preview_job(command)
+	if result.ok:_queued_owner=owner;_preview_owner="direct_edit" if apply_on_ready else owner;status.text="正在验证候选；可按Esc取消。"
+	else:report(result)
+	return result
 
 func reset_context() -> void:
 	selected_id="";selection_ids=[];canvas.cancel();canvas.mode="select";canvas.active_surface_id="ground";canvas.selected_id="";canvas.selected_recipe_id="";canvas.selected_point_id="";canvas.selected_terrain_id="";canvas.selected_plot_id=""
@@ -262,21 +287,29 @@ func _finish_fit() -> void:
 
 func refresh() -> void:
 	if not is_instance_valid(object_list): return
-	var p: Dictionary = session.snapshot()
+	var began:=Time.get_ticks_usec()
+	var p: Dictionary = session.view()
 	_refresh_snapshot=p
 	_refreshing = true
 	path_label.text = ("● 未保存 · " if session.is_dirty() else "已保存 · ") + (session.current_path if not session.current_path.is_empty() else "新项目") + (" · 版本不匹配，只读旧快照" if session.read_only else "")
 	if not _title_dirty: title_field.text = p.title
 	if _object_rows!=p.materialized_snapshot.entities:
-		object_list.clear()
-		for e in p.materialized_snapshot.entities:
+		var reuse: bool=_object_rows.size()==p.materialized_snapshot.entities.size()
+		if reuse:
+			for i in range(_object_rows.size()):
+				if _object_rows[i].entity_id!=p.materialized_snapshot.entities[i].entity_id:reuse=false;break
+		if not reuse:object_list.clear()
+		for i in range(p.materialized_snapshot.entities.size()):
+			var e: Dictionary=p.materialized_snapshot.entities[i]
+			if reuse and e==_object_rows[i]:continue
 			var object_label: String=str(e.get("label",e.entity_id))
 			if e.kind=="asset" and p.asset_refs.has(e.asset_ref): object_label=p.asset_refs[e.asset_ref].label+" · "+str(e.get("role","手工"))
-			object_list.add_item(("[固定] " if e.get("management")=="fixed" else ("[自动] " if e.get("management")=="generated" else ""))+object_label)
-			object_list.set_item_metadata(object_list.item_count-1,e.entity_id)
-			if e.get("hidden",false):object_list.set_item_text(object_list.item_count-1,"[隐藏] "+object_list.get_item_text(object_list.item_count-1))
-			if e.get("locked",false):object_list.set_item_text(object_list.item_count-1,"[锁定] "+object_list.get_item_text(object_list.item_count-1))
-			if e.entity_id in selection_ids:object_list.select(object_list.item_count-1,false)
+			object_label=("[固定] " if e.get("management")=="fixed" else ("[自动] " if e.get("management")=="generated" else ""))+object_label
+			if e.get("hidden",false):object_label="[隐藏] "+object_label
+			if e.get("locked",false):object_label="[锁定] "+object_label
+			if reuse:object_list.set_item_text(i,object_label)
+			else:object_list.add_item(object_label);object_list.set_item_metadata(i,e.entity_id)
+			if e.entity_id in selection_ids:object_list.select(i,false)
 		_object_rows=p.materialized_snapshot.entities
 	for i in range(object_list.item_count):
 		if object_list.get_item_metadata(i) in selection_ids:object_list.select(i,false)
@@ -297,6 +330,7 @@ func refresh() -> void:
 	if is_instance_valid(district_panel):district_panel.refresh()
 	if is_instance_valid(library_panel):library_panel.refresh()
 	_refreshing = false
+	last_refresh_ms=(Time.get_ticks_usec()-began)/1000.0
 
 func select_entity(id: String) -> void:
 	if canvas.has_pending_input() and id!=selected_id:
@@ -313,7 +347,7 @@ func select_entity(id: String) -> void:
 	var was_refreshing := _refreshing
 	_refreshing = true
 	socket_picker.clear()
-	for e in session.snapshot().materialized_snapshot.entities:
+	for e in session.view().materialized_snapshot.entities:
 		if e.entity_id == id and not _property_dirty:
 			name_field.text = str(e.get("label",""))
 			x_field.value = e.ground_xy[0]
@@ -322,7 +356,7 @@ func select_entity(id: String) -> void:
 			orientation_field.value = float(e.get("orientation",0.0))
 			for i in range(surface_picker.item_count):
 				if surface_picker.get_item_metadata(i)==e.surface_id: surface_picker.select(i)
-			for socket in EntityGeometry.sockets(session.snapshot(),e):
+			for socket in EntityGeometry.sockets(session.view(),e):
 				socket_picker.add_item("接点 · "+socket.socket_id);socket_picker.set_item_metadata(socket_picker.item_count-1,socket.socket_id)
 			if e.kind=="compound" and is_instance_valid(room_panel):room_panel.show_entity(id)
 			if e.kind=="ribbon" and canvas.mode!="socket_snap":
@@ -336,10 +370,17 @@ func report(result: Dictionary) -> void:
 	if result.ok:
 		if not session.dependency_issues.is_empty(): status.text="只读缺资源："+"；".join(session.dependency_issues)
 		else:
-			var materialized: Dictionary=session.snapshot().materialized_snapshot
+			var materialized: Dictionary=session.view().materialized_snapshot
 			var diagnostics: Array=materialized.get("diagnostics",[])
 			if not diagnostics.is_empty(): status.text="诊断 %d 项："%diagnostics.size()+"；".join(diagnostics.slice(0,3).map(func(d):return str(d.message)))
 			elif materialized.get("stats",{}).get("candidate_count",0)>0: status.text="候选 %d；本次重建 %d 段，复用 %d 段。"%[materialized.stats.candidate_count,materialized.stats.rebuilt_segments,materialized.stats.reused_segments]
+
+func show_diagnostics() -> void:
+	var dialog:=Dialog.new();dialog.title="当前项目诊断";dialog.ok_button_text="关闭";add_child(dialog)
+	var text:=TextEdit.new();text.editable=false;text.custom_minimum_size=Vector2(720,360);dialog.content.add_child(text)
+	for issue in session.view().materialized_snapshot.get("diagnostics",[]):text.text+=str(issue.get("code",""))+" · "+str(issue.get("message",""))+"\n"
+	if text.text.is_empty():text.text="当前派生结果没有诊断。"
+	dialog.confirmed.connect(dialog.queue_free);dialog.canceled.connect(dialog.queue_free);dialog.popup_centered(Vector2i(780,460))
 
 func choose_file(action: String) -> void:
 	if canvas.has_pending_input(): status.text="请先完成或取消画布输入；恢复副本可以保留。";return
@@ -405,7 +446,7 @@ func save_recovery() -> Dictionary:
 
 func capture_draft() -> Dictionary:
 	var metadata=active_asset_editor()
-	var result: Dictionary={"tool":canvas.mode,"selection":selected_id,"preview":session.preview_snapshot() if session.has_preview() else {},"pan":[canvas.pan.x,canvas.pan.y],"zoom":canvas.zoom,"fields":{"title":title_field.text,"name":name_field.text,"x":x_field.value,"y":y_field.value,"scale":scale_field.value,"orientation":orientation_field.value,"surface_id":surface_picker.get_selected_metadata(),"asset_ref":canvas.active_asset_ref},"title_dirty":_title_dirty,"property_dirty":_property_dirty,"path_draft":{"points":canvas.path_points.duplicate(true),"type":canvas.path_type,"width":canvas.path_width,"style":canvas.path_style,"seed":canvas.path_seed,"wall_asset_ref":canvas.path_wall_ref,"recipe_id":canvas.selected_recipe_id,"point_id":canvas.selected_point_id},"path_fields":path_panel.capture_draft(),"asset_editor":metadata.capture_draft() if metadata!=null else {}}
+	var result: Dictionary={"tool":canvas.mode,"selection":selected_id,"preview":session.preview_view() if session.has_preview() else {},"pan":[canvas.pan.x,canvas.pan.y],"zoom":canvas.zoom,"fields":{"title":title_field.text,"name":name_field.text,"x":x_field.value,"y":y_field.value,"scale":scale_field.value,"orientation":orientation_field.value,"surface_id":surface_picker.get_selected_metadata(),"asset_ref":canvas.active_asset_ref},"title_dirty":_title_dirty,"property_dirty":_property_dirty,"path_draft":{"points":canvas.path_points.duplicate(true),"type":canvas.path_type,"width":canvas.path_width,"style":canvas.path_style,"seed":canvas.path_seed,"wall_asset_ref":canvas.path_wall_ref,"recipe_id":canvas.selected_recipe_id,"point_id":canvas.selected_point_id},"path_fields":path_panel.capture_draft(),"asset_editor":metadata.capture_draft() if metadata!=null else {}}
 	result.plot_draft={"points":canvas.plot_points.duplicate(true),"shape":canvas.plot_shape,"recipe_id":canvas.selected_plot_id,"brush_points":canvas.brush_points.duplicate(true),"brush_template":canvas.brush_template.duplicate(true)}
 	result.plot_fields=plot_panel.capture_draft()
 	result.terrain_draft={"points":canvas.terrain_points.duplicate(true),"parent":canvas.terrain_parent,"from":canvas.terrain_from,"to":canvas.terrain_to,"selected_id":canvas.selected_terrain_id,"automatic_surface":canvas.automatic_surface}
@@ -462,19 +503,19 @@ func restore_recovery() -> void:
 
 func object_patch() -> Dictionary:
 	var patch := {"label":name_field.text,"ground_xy":[x_field.value,y_field.value],"surface_id":str(surface_picker.get_selected_metadata())}
-	for e in session.snapshot().materialized_snapshot.entities:
+	for e in session.view().materialized_snapshot.entities:
 		if e.entity_id==selected_id and e.kind in ["asset","compound"]: patch.merge({"scale":scale_field.value,"orientation":orientation_field.value})
 	return patch
 
 func snapshot_for_ui() -> Dictionary:
-	return _refresh_snapshot if _refreshing and not _refresh_snapshot.is_empty() else session.snapshot()
+	return _refresh_snapshot if _refreshing and not _refresh_snapshot.is_empty() else session.view()
 
 func selected_entity_ids() -> Array:
-	var valid: Array=session.snapshot().materialized_snapshot.entities.map(func(e):return e.entity_id)
+	var valid: Array=session.view().materialized_snapshot.entities.map(func(e):return e.entity_id)
 	return selection_ids.filter(func(id):return id in valid)
 func select_group(id: String) -> void:
 	if canvas.has_pending_input() or has_pending_fields():status.text="先应用或取消未提交输入。";return
-	for group in session.snapshot().prefab_instances:
+	for group in session.view().prefab_instances:
 		if group.instance_id==id:
 			selection_ids=group.entity_ids.duplicate();selected_id=str(selection_ids[0]) if not selection_ids.is_empty() else "";refresh();return
 
@@ -482,7 +523,7 @@ func _build_asset_tab(tabs: TabContainer) -> void:
 	var scroll:=ScrollContainer.new();scroll.name="资产";tabs.add_child(scroll)
 	var shelf:=VBoxContainer.new();shelf.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(shelf)
 	asset_query=LineEdit.new();asset_query.placeholder_text="搜索名称 / 标签 / ID";asset_query.text_changed.connect(func(_text): refresh_assets());shelf.add_child(asset_query)
-	asset_list=ItemList.new();asset_list.custom_minimum_size.y=270;shelf.add_child(asset_list)
+	asset_list=ItemList.new();asset_list.custom_minimum_size.y=270;asset_list.fixed_icon_size=Vector2i(64,64);shelf.add_child(asset_list)
 	asset_list.item_activated.connect(func(_i): place_asset())
 	button(shelf,"放置所选资产",place_asset)
 	button(shelf,"编辑所选资产描述",edit_asset)
@@ -492,25 +533,27 @@ func _build_asset_tab(tabs: TabContainer) -> void:
 		batch_files.popup_centered_ratio(0.75))
 	button(shelf,"导入 W3 参考画风素材包",func():choose_file("asset_pack"))
 	button(shelf,"应用参考纸色（当前项目）",func():report(session.dispatch({"op":"set_paper_color","color":"eadbb5"})))
-	button(shelf,"载入 10 件自有灰盒小样",func():
+	var debug_toggle:=CheckButton.new();debug_toggle.text="开发诊断 / 原型";shelf.add_child(debug_toggle)
+	var debug:=VBoxContainer.new();debug.visible=false;shelf.add_child(debug);debug_toggle.toggled.connect(func(value):debug.visible=value)
+	button(debug,"载入 10 件自有灰盒小样",func():
 		var result:=Samples.install(session,"user://workshop_s1/prototype_assets_"+Model.new_id("batch"))
 		report(result)
 		if result.ok: status.text="已导入 10 件自有灰盒，均非正式画风。请选择资产，在画布逐件放置。")
-	button(shelf,"新增简单高面（W1 原型）",func(): report(session.dispatch({"op":"add_surface_prototype","surface":{"surface_id":"prototype_top","height":60.0,"outline":[[350,250],[1100,250],[1100,780],[350,780]]}})))
-	surface_height=SpinBox.new();surface_height.max_value=250;surface_height.value=60;surface_height.prefix="原型高度 ";shelf.add_child(surface_height)
-	button(shelf,"应用高面原型高度",func(): report(session.dispatch({"op":"update_surface_prototype","surface_id":"prototype_top","patch":{"height":surface_height.value}})))
-	var hint:=Label.new();hint.text="对象页选择 ground / prototype_top，放置时显式附着。\n本原型不包含 W4 台地、崖壁或坡道工具。";hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;shelf.add_child(hint)
+	button(debug,"新增简单高面（W1 原型）",func(): report(session.dispatch({"op":"add_surface_prototype","surface":{"surface_id":"prototype_top","height":60.0,"outline":[[350,250],[1100,250],[1100,780],[350,780]]}})))
+	surface_height=SpinBox.new();surface_height.max_value=250;surface_height.value=60;surface_height.prefix="原型高度 ";debug.add_child(surface_height)
+	button(debug,"应用高面原型高度",func(): report(session.dispatch({"op":"update_surface_prototype","surface_id":"prototype_top","patch":{"height":surface_height.value}})))
+	var hint:=Label.new();hint.text="对象页选择 ground / prototype_top，放置时显式附着。\n台地、崖壁、坡道请使用台地页正式工具。";hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;debug.add_child(hint)
 
 func refresh_assets() -> void:
 	if not is_instance_valid(asset_list): return
 	var chosen: Variant=asset_list.get_item_metadata(asset_list.get_selected_items()[0]) if not asset_list.get_selected_items().is_empty() else ""
 	asset_list.clear()
-	var p: Dictionary=session.snapshot()
+	var p: Dictionary=session.view()
 	var query:=asset_query.text.strip_edges().to_lower()
 	for key in p.asset_refs:
 		var a: Dictionary=p.asset_refs[key]
 		if not query.is_empty() and not (a.label+" "+key+" "+" ".join(a.tags)).to_lower().contains(query): continue
-		asset_list.add_item(a.label+" · "+a.asset_version)
+		asset_list.add_item(a.label+" · "+a.asset_version,canvas.texture_for(a))
 		asset_list.set_item_metadata(asset_list.item_count-1,key)
 		if key==chosen: asset_list.select(asset_list.item_count-1)
 
@@ -518,8 +561,8 @@ func place_asset() -> void:
 	if asset_list.get_selected_items().is_empty(): status.text="请先在资产库选择一件。";return
 	if _property_dirty: status.text="请先应用或取消对象属性。";return
 	request_canvas_mode("asset",func():
-		canvas.active_asset_ref=str(asset_list.get_item_metadata(asset_list.get_selected_items()[0]));canvas.active_orientation=float(session.snapshot().asset_refs[canvas.active_asset_ref].get("default_orientation",0.0))
-		status.text="正在点放："+session.snapshot().asset_refs[canvas.active_asset_ref].label+"；支持面 "+canvas.active_surface_id+"。右键 / Esc 取消。")
+		canvas.active_asset_ref=str(asset_list.get_item_metadata(asset_list.get_selected_items()[0]));canvas.active_orientation=float(session.view().asset_refs[canvas.active_asset_ref].get("default_orientation",0.0))
+		status.text="正在点放："+session.view().asset_refs[canvas.active_asset_ref].label+"；支持面 "+canvas.active_surface_id+"。右键 / Esc 取消。")
 
 func edit_asset() -> void:
 	if asset_list.get_selected_items().is_empty(): status.text="请先在资产库选择一件。";return
