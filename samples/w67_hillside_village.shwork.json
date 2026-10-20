@@ -1,0 +1,8230 @@
+{
+	"document_type": "shanhe.workshop_project",
+	"schema_version": 1,
+	"project_id": "project_2df1782a8b2173acd8a0e23a",
+	"title": "游戏设计 · 坡地村落",
+	"legacy_document": {
+		"schema_version": 4,
+		"document_type": "strategic_map_authoring",
+		"title": "未命名舆图",
+		"canvas_size": [
+			1600,
+			960
+		],
+		"reference": {
+			"path": "",
+			"position": [
+				0,
+				0
+			],
+			"size": [
+				1600,
+				960
+			],
+			"rotation": 0.0,
+			"opacity": 0.35,
+			"visible": true,
+			"locked": true,
+			"above_art": true
+		},
+		"reference_tiles": [],
+		"layers": [
+			{
+				"id": "terrain",
+				"visible": true,
+				"locked": false
+			},
+			{
+				"id": "water",
+				"visible": true,
+				"locked": false
+			},
+			{
+				"id": "passages",
+				"visible": true,
+				"locked": false
+			},
+			{
+				"id": "boundaries",
+				"visible": true,
+				"locked": false
+			},
+			{
+				"id": "prefectures",
+				"visible": true,
+				"locked": false
+			},
+			{
+				"id": "sites",
+				"visible": true,
+				"locked": false
+			},
+			{
+				"id": "notes",
+				"visible": true,
+				"locked": false
+			}
+		],
+		"features": [],
+		"production": {
+			"coordinate_frame": "authoring_units",
+			"source_note": "",
+			"regions": [],
+			"checks": [],
+			"calibrations": {
+
+			},
+			"receipts": {
+
+			},
+			"audit_reviews": {
+
+			}
+		},
+		"presentation": {
+			"bundle": {
+
+			},
+			"instances": []
+		}
+	},
+	"recipes": [
+		{
+			"plot_type": "forest",
+			"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+			"seed": 42,
+			"density": 0.9,
+			"spacing": [
+				32.0,
+				28.0
+			],
+			"scale_range": [
+				0.7999999999999999,
+				1.0
+			],
+			"asset_weights": [
+				{
+					"asset_ref": "tree_unit_a_v3@v3",
+					"weight": 1.0
+				},
+				{
+					"asset_ref": "tree_unit_b_v3@v3",
+					"weight": 0.41000000000000003
+				},
+				{
+					"asset_ref": "tree_unit_c_v4@v4",
+					"weight": 1.0
+				},
+				{
+					"asset_ref": "tree_unit_d_v4@v4",
+					"weight": 1.0
+				},
+				{
+					"asset_ref": "tree_unit_e_v4@v4",
+					"weight": 1.0
+				},
+				{
+					"asset_ref": "tree_unit_f_v4@v4",
+					"weight": 1.0
+				}
+			],
+			"cluster_strength": 0.35,
+			"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+			"kind": "plot",
+			"name": "林地",
+			"shape": "rectangle",
+			"outer": [
+				[
+					220.0,
+					200.0
+				],
+				[
+					620.0,
+					200.0
+				],
+				[
+					620.0,
+					600.0
+				],
+				[
+					220.0,
+					600.0
+				]
+			],
+			"holes": [],
+			"locked": false
+		},
+		{
+			"recipe_id": "path_3fddc0883868f76e2f79467a",
+			"kind": "path",
+			"path_type": "road",
+			"name": "道路",
+			"control_points": [
+				{
+					"point_id": "point_c818a138dd07b141c072c41b",
+					"ground_xy": [
+						900.0,
+						80.0
+					],
+					"width": 24.0
+				},
+				{
+					"point_id": "point_ff0cfbd1047c6826a36330f3",
+					"ground_xy": [
+						900.0,
+						900.0
+					],
+					"width": 24.0
+				}
+			],
+			"segments": [
+				{
+					"segment_id": "segment_e68a427f88e3bbdc65d2448e",
+					"from": "point_c818a138dd07b141c072c41b",
+					"to": "point_ff0cfbd1047c6826a36330f3"
+				}
+			],
+			"seed": 42,
+			"surface_id": "ground",
+			"style": "dirt",
+			"roles": [],
+			"wall_asset_ref": "asset_650e0d4e7014cf76129cf632@v1",
+			"roadside": {
+
+			},
+			"source_feature_id": ""
+		},
+		{
+			"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+			"kind": "district",
+			"name": "街区",
+			"layout": "along_road",
+			"outer": [
+				[
+					720.0,
+					150.0
+				],
+				[
+					1480.0,
+					150.0
+				],
+				[
+					1480.0,
+					850.0
+				],
+				[
+					720.0,
+					850.0
+				]
+			],
+			"holes": [],
+			"surface_id": "ground",
+			"seed": 42.0,
+			"density": 0.8,
+			"vacancy": 0.2,
+			"future_fraction": 0.1,
+			"cell_size": [
+				240.0,
+				220.0
+			],
+			"courtyard_size": [
+				180.0,
+				160.0
+			],
+			"street_width": 14.0,
+			"safety_margin": 8.0,
+			"main_road_ids": [
+				"path_3fddc0883868f76e2f79467a"
+			],
+			"lot_roles": {
+
+			},
+			"function": "residential",
+			"roof_material": "w5_gray_tile@v1",
+			"locked": false
+		},
+		{
+			"plot_type": "farmland",
+			"surface_id": "ground",
+			"seed": 42,
+			"density": 1.0,
+			"spacing": [
+				140.0,
+				100.0
+			],
+			"scale_range": [
+				0.55,
+				0.7
+			],
+			"asset_weights": [
+				{
+					"asset_ref": "w3_ink_field@v1",
+					"weight": 1.0
+				}
+			],
+			"cluster_strength": 0.35,
+			"recipe_id": "plot_82902efc2860e3e51c0ec23f",
+			"kind": "plot",
+			"name": "农田",
+			"shape": "rectangle",
+			"outer": [
+				[
+					80.0,
+					690.0
+				],
+				[
+					410.0,
+					690.0
+				],
+				[
+					410.0,
+					860.0
+				],
+				[
+					80.0,
+					860.0
+				]
+			],
+			"holes": [],
+			"locked": false
+		}
+	],
+	"manual_overrides": {
+		"fixed": {
+
+		},
+		"tombstones": {
+
+		},
+		"detached": {
+
+		}
+	},
+	"manual_entities": [
+		{
+			"entity_id": "compound_3330fc6afd777951fc4691b5",
+			"kind": "compound",
+			"label": "院落",
+			"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+			"ground_xy": [
+				395.0,
+				440.0
+			],
+			"local_height": 0.0,
+			"scale": 1.0,
+			"orientation": 0.0,
+			"management": "manual",
+			"room_plan": {
+				"kind": "courtyard",
+				"function": "residential",
+				"outer": [
+					[
+						-95.0,
+						-180.0
+					],
+					[
+						95.0,
+						-180.0
+					],
+					[
+						95.0,
+						0.0
+					],
+					[
+						-95.0,
+						0.0
+					]
+				],
+				"holes": [
+					[
+						[
+							-55.0,
+							-136.0
+						],
+						[
+							55.0,
+							-136.0
+						],
+						[
+							55.0,
+							-30.0
+						],
+						[
+							-55.0,
+							-30.0
+						]
+					]
+				],
+				"walls": [
+					{
+						"edge_id": "edge_0",
+						"edge_index": 0,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					},
+					{
+						"edge_id": "edge_1",
+						"edge_index": 1,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					},
+					{
+						"edge_id": "edge_2",
+						"edge_index": 2,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": [
+							{
+								"opening_id": "entrance",
+								"at": 0.5,
+								"width": 24.0,
+								"height": 12.0
+							}
+						]
+					},
+					{
+						"edge_id": "edge_3",
+						"edge_index": 3,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					}
+				],
+				"rooms": [
+					{
+						"room_id": "rear",
+						"rect": [
+							-89.0,
+							-174.0,
+							178.0,
+							36.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 2,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					},
+					{
+						"room_id": "west",
+						"rect": [
+							-89.0,
+							-134.0,
+							22.0,
+							116.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 1,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					},
+					{
+						"room_id": "east",
+						"rect": [
+							67.0,
+							-134.0,
+							22.0,
+							116.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 3,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					}
+				],
+				"roof_visible": true,
+				"floor_color": "d9c79c",
+				"wall_color": "d1be97",
+				"roof_color": "6e7066",
+				"roof_material": "w5_gray_tile@v1",
+				"wall_material": ""
+			}
+		},
+		{
+			"entity_id": "compound_cf5c1f7d420ff50a5c85a7ec",
+			"kind": "compound",
+			"label": "院落",
+			"surface_id": "ground",
+			"ground_xy": [
+				1135.0,
+				480.0
+			],
+			"local_height": 0.0,
+			"scale": 1.0,
+			"orientation": 0.0,
+			"management": "manual",
+			"room_plan": {
+				"kind": "courtyard",
+				"function": "residential",
+				"outer": [
+					[
+						-95.0,
+						-180.0
+					],
+					[
+						95.0,
+						-180.0
+					],
+					[
+						95.0,
+						0.0
+					],
+					[
+						-95.0,
+						0.0
+					]
+				],
+				"holes": [
+					[
+						[
+							-55.0,
+							-136.0
+						],
+						[
+							55.0,
+							-136.0
+						],
+						[
+							55.0,
+							-30.0
+						],
+						[
+							-55.0,
+							-30.0
+						]
+					]
+				],
+				"walls": [
+					{
+						"edge_id": "edge_0",
+						"edge_index": 0,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					},
+					{
+						"edge_id": "edge_1",
+						"edge_index": 1,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					},
+					{
+						"edge_id": "edge_2",
+						"edge_index": 2,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": [
+							{
+								"opening_id": "entrance",
+								"at": 0.5,
+								"width": 24.0,
+								"height": 12.0
+							}
+						]
+					},
+					{
+						"edge_id": "edge_3",
+						"edge_index": 3,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					}
+				],
+				"rooms": [
+					{
+						"room_id": "rear",
+						"rect": [
+							-89.0,
+							-174.0,
+							178.0,
+							36.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 2,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					},
+					{
+						"room_id": "west",
+						"rect": [
+							-89.0,
+							-134.0,
+							22.0,
+							116.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 1,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					},
+					{
+						"room_id": "east",
+						"rect": [
+							67.0,
+							-134.0,
+							22.0,
+							116.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 3,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					}
+				],
+				"roof_visible": true,
+				"floor_color": "d9c79c",
+				"wall_color": "d1be97",
+				"roof_color": "6e7066",
+				"roof_material": "w5_gray_tile@v1",
+				"wall_material": ""
+			}
+		},
+		{
+			"entity_id": "manual_62299acff2ca5f6d333d63c8",
+			"kind": "compound",
+			"label": "院落",
+			"surface_id": "ground",
+			"ground_xy": [
+				1320.0,
+				720.0001220703125
+			],
+			"local_height": 0.0,
+			"scale": 1.0,
+			"orientation": 0.0,
+			"management": "manual",
+			"room_plan": {
+				"kind": "courtyard",
+				"function": "residential",
+				"outer": [
+					[
+						-95.0,
+						-180.0
+					],
+					[
+						95.0,
+						-180.0
+					],
+					[
+						95.0,
+						0.0
+					],
+					[
+						-95.0,
+						0.0
+					]
+				],
+				"holes": [
+					[
+						[
+							-55.0,
+							-136.0
+						],
+						[
+							55.0,
+							-136.0
+						],
+						[
+							55.0,
+							-30.0
+						],
+						[
+							-55.0,
+							-30.0
+						]
+					]
+				],
+				"walls": [
+					{
+						"edge_id": "edge_0",
+						"edge_index": 0,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					},
+					{
+						"edge_id": "edge_1",
+						"edge_index": 1,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					},
+					{
+						"edge_id": "edge_2",
+						"edge_index": 2,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": [
+							{
+								"opening_id": "entrance",
+								"at": 0.5,
+								"width": 24.0,
+								"height": 12.0
+							}
+						]
+					},
+					{
+						"edge_id": "edge_3",
+						"edge_index": 3,
+						"height": 12.0,
+						"style": "plaster",
+						"openings": []
+					}
+				],
+				"rooms": [
+					{
+						"room_id": "rear",
+						"rect": [
+							-89.0,
+							-174.0,
+							178.0,
+							36.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 2,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					},
+					{
+						"room_id": "west",
+						"rect": [
+							-89.0,
+							-134.0,
+							22.0,
+							116.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 1,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					},
+					{
+						"room_id": "east",
+						"rect": [
+							67.0,
+							-134.0,
+							22.0,
+							116.0
+						],
+						"wall_height": 18.0,
+						"roof_rise": 10.0,
+						"door_edge": 3,
+						"door_width": 14.0,
+						"roof_style": "hip",
+						"roof_visible": true
+					}
+				],
+				"roof_visible": true,
+				"floor_color": "d9c79c",
+				"wall_color": "d1be97",
+				"roof_color": "6e7066",
+				"roof_material": "w5_gray_tile@v1",
+				"wall_material": ""
+			},
+			"locked": false
+		}
+	],
+	"surfaces": [
+		{
+			"surface_id": "ground",
+			"height": 0.0
+		},
+		{
+			"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+			"kind": "terrace",
+			"parent_surface_id": "ground",
+			"height": 60.0,
+			"outline": [
+				[
+					200.0,
+					180.0
+				],
+				[
+					640.0,
+					180.0
+				],
+				[
+					640.0,
+					630.0
+				],
+				[
+					200.0,
+					630.0
+				]
+			],
+			"edge_styles": [
+				"slope",
+				"slope",
+				"slope",
+				"slope"
+			],
+			"edge_widths": [
+				50.0,
+				50.0,
+				50.0,
+				50.0
+			],
+			"top_color": "c5bf89",
+			"edge_color": "b69d70",
+			"locked": false
+		},
+		{
+			"surface_id": "ramp_4b17de55746ca94adf025eeb",
+			"kind": "ramp",
+			"height": 0,
+			"from_surface_id": "ground",
+			"to_surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+			"start": [
+				500.0,
+				840.0
+			],
+			"end": [
+				500.0,
+				500.0
+			],
+			"width": 64.0,
+			"style": "dirt",
+			"locked": false
+		}
+	],
+	"prefab_instances": [
+		{
+			"instance_id": "group_adafb4d1c1adf4f5149bb1fd",
+			"template_id": "template_7f6be433f2813fa3047c56a0",
+			"template_version": "v1",
+			"label": "新组合",
+			"kind": "map_group",
+			"entity_ids": [
+				"manual_62299acff2ca5f6d333d63c8"
+			],
+			"surface_ids": [],
+			"recipe_ids": []
+		}
+	],
+	"asset_refs": {
+		"w5_gray_tile@v1": {
+			"asset_id": "w5_gray_tile",
+			"asset_version": "v1",
+			"style_id": "w5_ink_watercolor_surfaces",
+			"texture_ref": "assets/9885914c69ac5257b867fcf3c3e181bf089ed6f5e2921aebd1bd8f3241aafa48.png",
+			"texture_sha256": "9885914c69ac5257b867fcf3c3e181bf089ed6f5e2921aebd1bd8f3241aafa48",
+			"texture_size_px": [
+				1448.0,
+				1086.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1448.0,
+				1086.0
+			],
+			"anchor_px": [
+				724.0,
+				543.0
+			],
+			"nominal_size_units": [
+				128.0,
+				96.0
+			],
+			"ground_footprint": [
+				[
+					-64.0,
+					-64.0
+				],
+				[
+					64.0,
+					-64.0
+				],
+				[
+					64.0,
+					64.0
+				],
+				[
+					-64.0,
+					64.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1448.0,
+					0.0
+				],
+				[
+					1448.0,
+					1086.0
+				],
+				[
+					0.0,
+					1086.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "w5_gray_tile"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户授权W5内置imagegen；参考图1灰瓦风格；原PNG未改像素或alpha。二维平铺表面材质，用于独立屋顶几何；新素材待审。",
+			"label": "W5 手绘灰瓦材质",
+			"tags": [
+				"W5",
+				"屋顶材质",
+				"surface_material",
+				"待审"
+			],
+			"category": "ground"
+		},
+		"tree_unit_a_v3@v3": {
+			"asset_id": "tree_unit_a_v3",
+			"asset_version": "v3",
+			"style_id": "irregular_tree_units_ref3_v3",
+			"texture_ref": "assets/163c1658ff4af33a919cea57f6caa70247b69034980d1b5199a81377d377a327.png",
+			"texture_sha256": "163c1658ff4af33a919cea57f6caa70247b69034980d1b5199a81377d377a327",
+			"texture_size_px": [
+				1448.0,
+				1086.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1448.0,
+				1086.0
+			],
+			"anchor_px": [
+				754.0,
+				820.0
+			],
+			"nominal_size_units": [
+				86.8289241622575,
+				65.12169312169311
+			],
+			"ground_footprint": [
+				[
+					-4.0,
+					-3.0
+				],
+				[
+					4.0,
+					-3.0
+				],
+				[
+					4.0,
+					2.0
+				],
+				[
+					-4.0,
+					2.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1448.0,
+					0.0
+				],
+				[
+					1448.0,
+					1086.0
+				],
+				[
+					0.0,
+					1086.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "tree_unit_a_v3"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户明确允许内置imagegen制作W3素材；按最新反馈制作独立不规则简化树形，部分树干可见，由工具组合树林；原始PNG不改像素，视觉待审。",
+			"label": "不规则树形 A · 短树干",
+			"tags": [
+				"W3",
+				"独立树形",
+				"不规则",
+				"待审"
+			],
+			"category": "tree"
+		},
+		"tree_unit_b_v3@v3": {
+			"asset_id": "tree_unit_b_v3",
+			"asset_version": "v3",
+			"style_id": "irregular_tree_units_ref3_v3",
+			"texture_ref": "assets/22954953d8bc67ac7a56e3b95afa51df2b76b8637e1aa59e956f94f41ad53205.png",
+			"texture_sha256": "22954953d8bc67ac7a56e3b95afa51df2b76b8637e1aa59e956f94f41ad53205",
+			"texture_size_px": [
+				1448.0,
+				1086.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1448.0,
+				1086.0
+			],
+			"anchor_px": [
+				653.0,
+				819.0
+			],
+			"nominal_size_units": [
+				68.95238095238095,
+				51.71428571428571
+			],
+			"ground_footprint": [
+				[
+					-4.0,
+					-3.0
+				],
+				[
+					4.0,
+					-3.0
+				],
+				[
+					4.0,
+					2.0
+				],
+				[
+					-4.0,
+					2.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1448.0,
+					0.0
+				],
+				[
+					1448.0,
+					1086.0
+				],
+				[
+					0.0,
+					1086.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "tree_unit_b_v3"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户明确允许内置imagegen制作W3素材；按最新反馈制作独立不规则简化树形，部分树干可见，由工具组合树林；原始PNG不改像素，视觉待审。",
+			"label": "不规则树形 B · 矮宽",
+			"tags": [
+				"W3",
+				"独立树形",
+				"不规则",
+				"待审"
+			],
+			"category": "tree"
+		},
+		"w3_ink_field@v1": {
+			"asset_id": "w3_ink_field",
+			"asset_version": "v1",
+			"style_id": "ink_oblique_ref3_w3",
+			"texture_ref": "assets/2cdae24ef9e66674d8f1d53207f007b308a471cf96f816910b4c4fa5b0bd8394.png",
+			"texture_sha256": "2cdae24ef9e66674d8f1d53207f007b308a471cf96f816910b4c4fa5b0bd8394",
+			"texture_size_px": [
+				1536.0,
+				1024.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1536.0,
+				1024.0
+			],
+			"anchor_px": [
+				768.0,
+				512.0
+			],
+			"nominal_size_units": [
+				180.0,
+				120.0
+			],
+			"ground_footprint": [
+				[
+					-76.0,
+					13.0
+				],
+				[
+					-24.0,
+					-36.0
+				],
+				[
+					77.0,
+					-7.0
+				],
+				[
+					40.0,
+					47.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1536.0,
+					0.0
+				],
+				[
+					1536.0,
+					1024.0
+				],
+				[
+					0.0,
+					1024.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "w3_ink_field"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户2026-10-18明确授权内置imagegen；第三张手工原画为画风参考；新生成素材候选，尚未获用户视觉接受。",
+			"label": "参考作物田块",
+			"tags": [
+				"W3",
+				"参考候选",
+				"固定斜俯视"
+			],
+			"category": "ground"
+		},
+		"tree_unit_c_v4@v4": {
+			"asset_id": "tree_unit_c_v4",
+			"asset_version": "v4",
+			"style_id": "irregular_tree_units_ref3_v3",
+			"texture_ref": "assets/16ff81449161b46d33dc3ec7fbd3957832132834f59041bc67d4b76af1935cec.png",
+			"texture_sha256": "16ff81449161b46d33dc3ec7fbd3957832132834f59041bc67d4b76af1935cec",
+			"texture_size_px": [
+				1448.0,
+				1086.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1448.0,
+				1086.0
+			],
+			"anchor_px": [
+				751.0,
+				897.0
+			],
+			"nominal_size_units": [
+				80.22160664819944,
+				60.16620498614958
+			],
+			"ground_footprint": [
+				[
+					-4.0,
+					-3.0
+				],
+				[
+					4.0,
+					-3.0
+				],
+				[
+					4.0,
+					2.0
+				],
+				[
+					-4.0,
+					2.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1448.0,
+					0.0
+				],
+				[
+					1448.0,
+					1086.0
+				],
+				[
+					0.0,
+					1086.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "tree_unit_c_v4"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+			"label": "树形 C · 瘦高",
+			"tags": [
+				"W3",
+				"独立树形",
+				"新增变体",
+				"待审"
+			],
+			"category": "tree"
+		},
+		"tree_unit_d_v4@v4": {
+			"asset_id": "tree_unit_d_v4",
+			"asset_version": "v4",
+			"style_id": "irregular_tree_units_ref3_v3",
+			"texture_ref": "assets/45a9b54a30104587a061a030f96b9ca0bca619a96fa8c84e6451e71af73bcb1a.png",
+			"texture_sha256": "45a9b54a30104587a061a030f96b9ca0bca619a96fa8c84e6451e71af73bcb1a",
+			"texture_size_px": [
+				1448.0,
+				1086.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1448.0,
+				1086.0
+			],
+			"anchor_px": [
+				860.0,
+				750.0
+			],
+			"nominal_size_units": [
+				67.16507503410641,
+				50.3738062755798
+			],
+			"ground_footprint": [
+				[
+					-4.0,
+					-3.0
+				],
+				[
+					4.0,
+					-3.0
+				],
+				[
+					4.0,
+					2.0
+				],
+				[
+					-4.0,
+					2.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1448.0,
+					0.0
+				],
+				[
+					1448.0,
+					1086.0
+				],
+				[
+					0.0,
+					1086.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "tree_unit_d_v4"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+			"label": "树形 D · 偏冠",
+			"tags": [
+				"W3",
+				"独立树形",
+				"新增变体",
+				"待审"
+			],
+			"category": "tree"
+		},
+		"tree_unit_e_v4@v4": {
+			"asset_id": "tree_unit_e_v4",
+			"asset_version": "v4",
+			"style_id": "irregular_tree_units_ref3_v3",
+			"texture_ref": "assets/e3391d95177e6d13df12d7cb8962a10e0f17a6fcb813944e7c077f7652196632.png",
+			"texture_sha256": "e3391d95177e6d13df12d7cb8962a10e0f17a6fcb813944e7c077f7652196632",
+			"texture_size_px": [
+				1448.0,
+				1086.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1448.0,
+				1086.0
+			],
+			"anchor_px": [
+				779.0,
+				795.0
+			],
+			"nominal_size_units": [
+				71.33004926108374,
+				53.4975369458128
+			],
+			"ground_footprint": [
+				[
+					-4.0,
+					-3.0
+				],
+				[
+					4.0,
+					-3.0
+				],
+				[
+					4.0,
+					2.0
+				],
+				[
+					-4.0,
+					2.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1448.0,
+					0.0
+				],
+				[
+					1448.0,
+					1086.0
+				],
+				[
+					0.0,
+					1086.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "tree_unit_e_v4"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+			"label": "树形 E · 露叉枝",
+			"tags": [
+				"W3",
+				"独立树形",
+				"新增变体",
+				"待审"
+			],
+			"category": "tree"
+		},
+		"tree_unit_f_v4@v4": {
+			"asset_id": "tree_unit_f_v4",
+			"asset_version": "v4",
+			"style_id": "irregular_tree_units_ref3_v3",
+			"texture_ref": "assets/c0506fab22166135c4d1231b18a0931f39fc49b7fd29230085d31b7317530948.png",
+			"texture_sha256": "c0506fab22166135c4d1231b18a0931f39fc49b7fd29230085d31b7317530948",
+			"texture_size_px": [
+				1484.0,
+				1060.0
+			],
+			"region_px": [
+				0.0,
+				0.0,
+				1484.0,
+				1060.0
+			],
+			"anchor_px": [
+				969.0,
+				821.0
+			],
+			"nominal_size_units": [
+				60.57142857142857,
+				43.265306122448976
+			],
+			"ground_footprint": [
+				[
+					-4.0,
+					-3.0
+				],
+				[
+					4.0,
+					-3.0
+				],
+				[
+					4.0,
+					2.0
+				],
+				[
+					-4.0,
+					2.0
+				]
+			],
+			"paint_envelope": [
+				[
+					0.0,
+					0.0
+				],
+				[
+					1484.0,
+					0.0
+				],
+				[
+					1484.0,
+					1060.0
+				],
+				[
+					0.0,
+					1060.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "tree_unit_f_v4"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "用户已通过v3 A/B树形方向并要求增加几种混用；内置imagegen生成独立简形变体，原PNG/alpha不改；新增变体与组合待审。",
+			"label": "树形 F · 低矮",
+			"tags": [
+				"W3",
+				"独立树形",
+				"新增变体",
+				"待审"
+			],
+			"category": "tree"
+		},
+		"asset_48dea17c6bf554cec725a7ff@v1": {
+			"asset_id": "asset_48dea17c6bf554cec725a7ff",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/cdf008303802c1b36ee18ecb8b2cfcc79a0c5838d7c1437e8e139ec5dd536a32.png",
+			"texture_sha256": "cdf008303802c1b36ee18ecb8b2cfcc79a0c5838d7c1437e8e139ec5dd536a32",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-60,
+					-16
+				],
+				[
+					60,
+					-16
+				],
+				[
+					60,
+					8
+				],
+				[
+					-60,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [
+				{
+					"socket_id": "wall_a",
+					"position_px": [
+						12,
+						104
+					],
+					"direction_deg": 180.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "wall_b",
+					"position_px": [
+						148,
+						104
+					],
+					"direction_deg": 0.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "entrance",
+					"position_px": [
+						80,
+						104
+					],
+					"direction_deg": 90.0,
+					"role": "road"
+				}
+			],
+			"orientation_variants": {
+				"0": "asset_48dea17c6bf554cec725a7ff"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_关门",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "gate",
+			"passage_width_units": 32.0
+		},
+		"asset_650e0d4e7014cf76129cf632@v1": {
+			"asset_id": "asset_650e0d4e7014cf76129cf632",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/6bf04e4155837a78b2aeeb149b8e8eb745b035ea2939ac4522459a39b32ec251.png",
+			"texture_sha256": "6bf04e4155837a78b2aeeb149b8e8eb745b035ea2939ac4522459a39b32ec251",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-60,
+					-16
+				],
+				[
+					60,
+					-16
+				],
+				[
+					60,
+					8
+				],
+				[
+					-60,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [
+				{
+					"socket_id": "a",
+					"position_px": [
+						8,
+						104
+					],
+					"direction_deg": 180.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "b",
+					"position_px": [
+						152,
+						104
+					],
+					"direction_deg": 0.0,
+					"role": "wall"
+				}
+			],
+			"orientation_variants": {
+				"0": "asset_650e0d4e7014cf76129cf632",
+				"90": "asset_0414f33c81e9e2c21cb97e17",
+				"180": "asset_650e0d4e7014cf76129cf632",
+				"270": "asset_0414f33c81e9e2c21cb97e17"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_横墙",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "wall",
+			"default_orientation": 0.0
+		},
+		"asset_0414f33c81e9e2c21cb97e17@v1": {
+			"asset_id": "asset_0414f33c81e9e2c21cb97e17",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/4dd7a72029714dc3d62b29ca90cc1fcfb75c2eabce77b806f8e8f9573a4757ce.png",
+			"texture_sha256": "4dd7a72029714dc3d62b29ca90cc1fcfb75c2eabce77b806f8e8f9573a4757ce",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-20,
+					-30
+				],
+				[
+					20,
+					-30
+				],
+				[
+					20,
+					8
+				],
+				[
+					-20,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [
+				{
+					"socket_id": "a",
+					"position_px": [
+						80,
+						16
+					],
+					"direction_deg": 270.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "b",
+					"position_px": [
+						80,
+						112
+					],
+					"direction_deg": 90.0,
+					"role": "wall"
+				}
+			],
+			"orientation_variants": {
+				"0": "asset_650e0d4e7014cf76129cf632",
+				"90": "asset_0414f33c81e9e2c21cb97e17",
+				"180": "asset_650e0d4e7014cf76129cf632",
+				"270": "asset_0414f33c81e9e2c21cb97e17"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_纵墙",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "wall",
+			"default_orientation": 90.0
+		},
+		"asset_334f4945168feecb4f9102f3@v1": {
+			"asset_id": "asset_334f4945168feecb4f9102f3",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/e6b3b7d58cc5b6ade26a5b12cb126e7edc8467fa7a630b8b80b4c1a479008b88.png",
+			"texture_sha256": "e6b3b7d58cc5b6ade26a5b12cb126e7edc8467fa7a630b8b80b4c1a479008b88",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-20,
+					-30
+				],
+				[
+					20,
+					-30
+				],
+				[
+					20,
+					8
+				],
+				[
+					-20,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [
+				{
+					"socket_id": "west",
+					"position_px": [
+						48,
+						104
+					],
+					"direction_deg": 180.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "east",
+					"position_px": [
+						112,
+						104
+					],
+					"direction_deg": 0.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "north",
+					"position_px": [
+						80,
+						72
+					],
+					"direction_deg": 270.0,
+					"role": "wall"
+				},
+				{
+					"socket_id": "south",
+					"position_px": [
+						80,
+						104
+					],
+					"direction_deg": 90.0,
+					"role": "wall"
+				}
+			],
+			"orientation_variants": {
+				"0": "asset_334f4945168feecb4f9102f3"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_角楼",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "tower"
+		},
+		"asset_f41ef69f079a124679d98347@v1": {
+			"asset_id": "asset_f41ef69f079a124679d98347",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/ebb5f559d077c4fffe37fb804bc30adb008d8d162fd70ec1b39827a11bebcc3c.png",
+			"texture_sha256": "ebb5f559d077c4fffe37fb804bc30adb008d8d162fd70ec1b39827a11bebcc3c",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-60,
+					-16
+				],
+				[
+					60,
+					-16
+				],
+				[
+					60,
+					8
+				],
+				[
+					-60,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [
+				{
+					"socket_id": "entrance",
+					"position_px": [
+						80,
+						104
+					],
+					"direction_deg": 90.0,
+					"role": "road"
+				}
+			],
+			"orientation_variants": {
+				"0": "asset_f41ef69f079a124679d98347"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_仓储",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "building"
+		},
+		"asset_01bb9ef609d9b91ac87b5884@v1": {
+			"asset_id": "asset_01bb9ef609d9b91ac87b5884",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/90ee530c8bf6b55047bbcf5eaa333bf292ddac190fe93af00b0a88fd031347b2.png",
+			"texture_sha256": "90ee530c8bf6b55047bbcf5eaa333bf292ddac190fe93af00b0a88fd031347b2",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-60,
+					-16
+				],
+				[
+					60,
+					-16
+				],
+				[
+					60,
+					8
+				],
+				[
+					-60,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [
+				{
+					"socket_id": "entrance",
+					"position_px": [
+						80,
+						104
+					],
+					"direction_deg": 90.0,
+					"role": "road"
+				}
+			],
+			"orientation_variants": {
+				"0": "asset_01bb9ef609d9b91ac87b5884"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_院落",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "building"
+		},
+		"asset_da093858f6d92139cafba1e5@v1": {
+			"asset_id": "asset_da093858f6d92139cafba1e5",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/48306e7c73191b987d92d0783b89b8c2e3fb048da7bfc3af162d5c7d5034ee3c.png",
+			"texture_sha256": "48306e7c73191b987d92d0783b89b8c2e3fb048da7bfc3af162d5c7d5034ee3c",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-20,
+					-30
+				],
+				[
+					20,
+					-30
+				],
+				[
+					20,
+					8
+				],
+				[
+					-20,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "asset_da093858f6d92139cafba1e5"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_阔叶树",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "tree"
+		},
+		"asset_58d1d7145cfaf51b144faba9@v1": {
+			"asset_id": "asset_58d1d7145cfaf51b144faba9",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/eaf32e9775d14091a83317310d4217ca18d28fe2bef33696282f0ff8fcda8328.png",
+			"texture_sha256": "eaf32e9775d14091a83317310d4217ca18d28fe2bef33696282f0ff8fcda8328",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-20,
+					-30
+				],
+				[
+					20,
+					-30
+				],
+				[
+					20,
+					8
+				],
+				[
+					-20,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "asset_58d1d7145cfaf51b144faba9"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_针叶树",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "tree"
+		},
+		"asset_93a36037b326fb80161af789@v1": {
+			"asset_id": "asset_93a36037b326fb80161af789",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/76961e6c8030e53fe1ec6d43be9ef684a2380b8a781e075379539bab86a80224.png",
+			"texture_sha256": "76961e6c8030e53fe1ec6d43be9ef684a2380b8a781e075379539bab86a80224",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-60,
+					-16
+				],
+				[
+					60,
+					-16
+				],
+				[
+					60,
+					8
+				],
+				[
+					-60,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "asset_93a36037b326fb80161af789"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_地面",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "ground"
+		},
+		"asset_81a25dc2575aebc891f5951e@v1": {
+			"asset_id": "asset_81a25dc2575aebc891f5951e",
+			"asset_version": "v1",
+			"style_id": "engineering_graybox_pending",
+			"texture_ref": "assets/ac4c188d4df77c0c5ce1bcb95a9aaeaacd0780384fee6612313e5768b18d1d87.png",
+			"texture_sha256": "ac4c188d4df77c0c5ce1bcb95a9aaeaacd0780384fee6612313e5768b18d1d87",
+			"texture_size_px": [
+				160.0,
+				128.0
+			],
+			"region_px": [
+				0,
+				0,
+				160.0,
+				128.0
+			],
+			"anchor_px": [
+				80.0,
+				104.0
+			],
+			"nominal_size_units": [
+				160.0,
+				128.0
+			],
+			"ground_footprint": [
+				[
+					-60,
+					-16
+				],
+				[
+					60,
+					-16
+				],
+				[
+					60,
+					8
+				],
+				[
+					-60,
+					8
+				]
+			],
+			"paint_envelope": [
+				[
+					0,
+					0
+				],
+				[
+					160.0,
+					0
+				],
+				[
+					160.0,
+					128.0
+				],
+				[
+					0,
+					128.0
+				]
+			],
+			"sockets": [],
+			"orientation_variants": {
+				"0": "asset_81a25dc2575aebc891f5951e"
+			},
+			"shadow_mode": "none",
+			"render_parts": [],
+			"state_variants": {
+
+			},
+			"source_notice": "自有几何灰盒；源码 sample_assets.gd；非正式美术、非商业素材",
+			"label": "灰盒_坡岸",
+			"tags": [
+				"灰盒",
+				"技术小样",
+				"待画风审核"
+			],
+			"category": "ground"
+		}
+	},
+	"style_profile": {
+		"style_id": "reference_oblique_w5_pending",
+		"ground_matrix": [
+			1.0,
+			0.14,
+			-0.3,
+			0.72
+		],
+		"height_axis": [
+			0.0,
+			-1.0
+		],
+		"unit": "map_unit",
+		"light_direction": "upper_left",
+		"paper_enabled": true,
+		"paper_color": "eadbb5"
+	},
+	"export_profiles": [],
+	"provenance": {
+		"work_line": "workshop_s1",
+		"geography": "game_design",
+		"visual_review": "pending"
+	},
+	"materialized_snapshot": {
+		"entities": [
+			{
+				"entity_id": "compound_3330fc6afd777951fc4691b5",
+				"kind": "compound",
+				"label": "院落",
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"ground_xy": [
+					395.0,
+					440.0
+				],
+				"local_height": 0.0,
+				"scale": 1.0,
+				"orientation": 0.0,
+				"management": "manual",
+				"room_plan": {
+					"kind": "courtyard",
+					"function": "residential",
+					"outer": [
+						[
+							-95.0,
+							-180.0
+						],
+						[
+							95.0,
+							-180.0
+						],
+						[
+							95.0,
+							0.0
+						],
+						[
+							-95.0,
+							0.0
+						]
+					],
+					"holes": [
+						[
+							[
+								-55.0,
+								-136.0
+							],
+							[
+								55.0,
+								-136.0
+							],
+							[
+								55.0,
+								-30.0
+							],
+							[
+								-55.0,
+								-30.0
+							]
+						]
+					],
+					"walls": [
+						{
+							"edge_id": "edge_0",
+							"edge_index": 0,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_1",
+							"edge_index": 1,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_2",
+							"edge_index": 2,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": [
+								{
+									"opening_id": "entrance",
+									"at": 0.5,
+									"width": 24.0,
+									"height": 12.0
+								}
+							]
+						},
+						{
+							"edge_id": "edge_3",
+							"edge_index": 3,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						}
+					],
+					"rooms": [
+						{
+							"room_id": "rear",
+							"rect": [
+								-89.0,
+								-174.0,
+								178.0,
+								36.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 2,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "west",
+							"rect": [
+								-89.0,
+								-134.0,
+								22.0,
+								116.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 1,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "east",
+							"rect": [
+								67.0,
+								-134.0,
+								22.0,
+								116.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 3,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						}
+					],
+					"roof_visible": true,
+					"floor_color": "d9c79c",
+					"wall_color": "d1be97",
+					"roof_color": "6e7066",
+					"roof_material": "w5_gray_tile@v1",
+					"wall_material": ""
+				}
+			},
+			{
+				"entity_id": "compound_cf5c1f7d420ff50a5c85a7ec",
+				"kind": "compound",
+				"label": "院落",
+				"surface_id": "ground",
+				"ground_xy": [
+					1135.0,
+					480.0
+				],
+				"local_height": 0.0,
+				"scale": 1.0,
+				"orientation": 0.0,
+				"management": "manual",
+				"room_plan": {
+					"kind": "courtyard",
+					"function": "residential",
+					"outer": [
+						[
+							-95.0,
+							-180.0
+						],
+						[
+							95.0,
+							-180.0
+						],
+						[
+							95.0,
+							0.0
+						],
+						[
+							-95.0,
+							0.0
+						]
+					],
+					"holes": [
+						[
+							[
+								-55.0,
+								-136.0
+							],
+							[
+								55.0,
+								-136.0
+							],
+							[
+								55.0,
+								-30.0
+							],
+							[
+								-55.0,
+								-30.0
+							]
+						]
+					],
+					"walls": [
+						{
+							"edge_id": "edge_0",
+							"edge_index": 0,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_1",
+							"edge_index": 1,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_2",
+							"edge_index": 2,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": [
+								{
+									"opening_id": "entrance",
+									"at": 0.5,
+									"width": 24.0,
+									"height": 12.0
+								}
+							]
+						},
+						{
+							"edge_id": "edge_3",
+							"edge_index": 3,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						}
+					],
+					"rooms": [
+						{
+							"room_id": "rear",
+							"rect": [
+								-89.0,
+								-174.0,
+								178.0,
+								36.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 2,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "west",
+							"rect": [
+								-89.0,
+								-134.0,
+								22.0,
+								116.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 1,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "east",
+							"rect": [
+								67.0,
+								-134.0,
+								22.0,
+								116.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 3,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						}
+					],
+					"roof_visible": true,
+					"floor_color": "d9c79c",
+					"wall_color": "d1be97",
+					"roof_color": "6e7066",
+					"roof_material": "w5_gray_tile@v1",
+					"wall_material": ""
+				}
+			},
+			{
+				"entity_id": "manual_62299acff2ca5f6d333d63c8",
+				"kind": "compound",
+				"label": "院落",
+				"surface_id": "ground",
+				"ground_xy": [
+					1320.0,
+					720.0001220703125
+				],
+				"local_height": 0.0,
+				"scale": 1.0,
+				"orientation": 0.0,
+				"management": "manual",
+				"room_plan": {
+					"kind": "courtyard",
+					"function": "residential",
+					"outer": [
+						[
+							-95.0,
+							-180.0
+						],
+						[
+							95.0,
+							-180.0
+						],
+						[
+							95.0,
+							0.0
+						],
+						[
+							-95.0,
+							0.0
+						]
+					],
+					"holes": [
+						[
+							[
+								-55.0,
+								-136.0
+							],
+							[
+								55.0,
+								-136.0
+							],
+							[
+								55.0,
+								-30.0
+							],
+							[
+								-55.0,
+								-30.0
+							]
+						]
+					],
+					"walls": [
+						{
+							"edge_id": "edge_0",
+							"edge_index": 0,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_1",
+							"edge_index": 1,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_2",
+							"edge_index": 2,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": [
+								{
+									"opening_id": "entrance",
+									"at": 0.5,
+									"width": 24.0,
+									"height": 12.0
+								}
+							]
+						},
+						{
+							"edge_id": "edge_3",
+							"edge_index": 3,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						}
+					],
+					"rooms": [
+						{
+							"room_id": "rear",
+							"rect": [
+								-89.0,
+								-174.0,
+								178.0,
+								36.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 2,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "west",
+							"rect": [
+								-89.0,
+								-134.0,
+								22.0,
+								116.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 1,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "east",
+							"rect": [
+								67.0,
+								-134.0,
+								22.0,
+								116.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 3,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						}
+					],
+					"roof_visible": true,
+					"floor_color": "d9c79c",
+					"wall_color": "d1be97",
+					"roof_color": "6e7066",
+					"roof_material": "w5_gray_tile@v1",
+					"wall_material": ""
+				},
+				"locked": false
+			},
+			{
+				"entity_id": "entity_4ee6bd654a6afae7907e9c04b812b6ce",
+				"kind": "ribbon",
+				"ground_xy": [
+					900.0,
+					490.0
+				],
+				"surface_id": "ground",
+				"local_height": 0.0,
+				"label": "道路 · road",
+				"management": "generated",
+				"recipe_id": "path_3fddc0883868f76e2f79467a",
+				"candidate_id": "ribbon/segment_e68a427f88e3bbdc65d2448e",
+				"segment_id": "segment_e68a427f88e3bbdc65d2448e",
+				"role": "road",
+				"style": "dirt",
+				"max_width": 24.0,
+				"polygons": [
+					[
+						[
+							888.0,
+							80.0
+						],
+						[
+							888.0,
+							900.0
+						],
+						[
+							888.9130859375,
+							904.591796875
+						],
+						[
+							891.5146484375,
+							908.4853515625
+						],
+						[
+							895.408203125,
+							911.0869140625
+						],
+						[
+							900.0,
+							912.0
+						],
+						[
+							904.591796875,
+							911.0869140625
+						],
+						[
+							908.4853515625,
+							908.4853515625
+						],
+						[
+							911.0869140625,
+							904.591796875
+						],
+						[
+							912.0,
+							900.0
+						],
+						[
+							912.0,
+							80.0
+						],
+						[
+							911.0869140625,
+							75.408203125
+						],
+						[
+							908.4853515625,
+							71.5146484375
+						],
+						[
+							904.591796875,
+							68.9130859375
+						],
+						[
+							900.0,
+							68.0
+						],
+						[
+							895.408203125,
+							68.9130859375
+						],
+						[
+							891.5146484375,
+							71.5146484375
+						],
+						[
+							888.9130859375,
+							75.408203125
+						]
+					]
+				]
+			},
+			{
+				"entity_id": "entity_19d6337fa1713131c78692f77c0c7240",
+				"candidate_id": "access/lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+				"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+				"segment_id": "",
+				"kind": "ribbon",
+				"role": "district_street",
+				"style": "dirt",
+				"management": "generated",
+				"ground_xy": [
+					934.0,
+					680.0
+				],
+				"surface_id": "ground",
+				"local_height": 0.0,
+				"polygons": [
+					[
+						[
+							934.0,
+							673.0
+						],
+						[
+							900.0,
+							673.0
+						],
+						[
+							897.3212890625,
+							673.533203125
+						],
+						[
+							895.0498046875,
+							675.0498046875
+						],
+						[
+							893.533203125,
+							677.3212890625
+						],
+						[
+							893.0,
+							680.0
+						],
+						[
+							893.533203125,
+							682.6787109375
+						],
+						[
+							895.0498046875,
+							684.9501953125
+						],
+						[
+							897.3212890625,
+							686.466796875
+						],
+						[
+							900.0,
+							687.0
+						],
+						[
+							934.0,
+							687.0
+						],
+						[
+							936.6787109375,
+							686.466796875
+						],
+						[
+							938.9501953125,
+							684.9501953125
+						],
+						[
+							940.466796875,
+							682.6787109375
+						],
+						[
+							941.0,
+							680.0
+						],
+						[
+							940.466796875,
+							677.3212890625
+						],
+						[
+							938.9501953125,
+							675.0498046875
+						],
+						[
+							936.6787109375,
+							673.533203125
+						]
+					]
+				],
+				"label": "街区 · 支路"
+			},
+			{
+				"entity_id": "entity_91e027c3a8f6b6c47f5146f8ca5b31a2",
+				"kind": "compound",
+				"label": "街区 · residential",
+				"surface_id": "ground",
+				"ground_xy": [
+					934.0,
+					680.0
+				],
+				"local_height": 0.0,
+				"scale": 1.0,
+				"orientation": 90.00000500895632,
+				"management": "generated",
+				"room_plan": {
+					"kind": "courtyard",
+					"function": "residential",
+					"outer": [
+						[
+							-90.0,
+							-160.0
+						],
+						[
+							90.0,
+							-160.0
+						],
+						[
+							90.0,
+							0.0
+						],
+						[
+							-90.0,
+							0.0
+						]
+					],
+					"holes": [
+						[
+							[
+								-50.0,
+								-116.0
+							],
+							[
+								50.0,
+								-116.0
+							],
+							[
+								50.0,
+								-30.0
+							],
+							[
+								-50.0,
+								-30.0
+							]
+						]
+					],
+					"walls": [
+						{
+							"edge_id": "edge_0",
+							"edge_index": 0,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_1",
+							"edge_index": 1,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						},
+						{
+							"edge_id": "edge_2",
+							"edge_index": 2,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": [
+								{
+									"opening_id": "entrance",
+									"at": 0.5,
+									"width": 24.0,
+									"height": 12.0
+								}
+							]
+						},
+						{
+							"edge_id": "edge_3",
+							"edge_index": 3,
+							"height": 12.0,
+							"style": "plaster",
+							"openings": []
+						}
+					],
+					"rooms": [
+						{
+							"room_id": "rear",
+							"rect": [
+								-84.0,
+								-154.0,
+								168.0,
+								36.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 2,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "west",
+							"rect": [
+								-84.0,
+								-114.0,
+								22.0,
+								96.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 1,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						},
+						{
+							"room_id": "east",
+							"rect": [
+								62.0,
+								-114.0,
+								22.0,
+								96.0
+							],
+							"wall_height": 18.0,
+							"roof_rise": 10.0,
+							"door_edge": 3,
+							"door_width": 14.0,
+							"roof_style": "hip",
+							"roof_visible": true
+						}
+					],
+					"roof_visible": true,
+					"floor_color": "d9c79c",
+					"wall_color": "d1be97",
+					"roof_color": "6e7066",
+					"roof_material": "w5_gray_tile@v1",
+					"wall_material": ""
+				},
+				"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+				"candidate_id": "lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+				"segment_id": "",
+				"role": "district",
+				"lot_id": "district_b2ee6409dd02cd53bd289a82/lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2"
+			},
+			{
+				"entity_id": "entity_be268b03db53a637ffcca241ac4e8f8b",
+				"kind": "asset",
+				"ground_xy": [
+					220.115234375,
+					732.345703125
+				],
+				"surface_id": "ground",
+				"local_height": 0.0,
+				"label": "农田",
+				"management": "generated",
+				"recipe_id": "plot_82902efc2860e3e51c0ec23f",
+				"candidate_id": "grid/fd73dc77/1/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "farmland",
+				"asset_ref": "w3_ink_field@v1",
+				"orientation": 0.0,
+				"scale": 0.68359375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_01fa882d90b430bb968a9ade999740d7",
+				"kind": "asset",
+				"ground_xy": [
+					585.416015625,
+					232.1484375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.951171875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_021a0e6a331ae83245b58e65487c014b",
+				"kind": "asset",
+				"ground_xy": [
+					311.1123046875,
+					246.1240234375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8095703125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_0aa76e9a2e0c30b242b5e0efa43af0e6",
+				"kind": "asset",
+				"ground_xy": [
+					435.48828125,
+					230.8037109375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/13/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.876953125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_104943381f3613bf64c500f6e8b2c91b",
+				"kind": "asset",
+				"ground_xy": [
+					233.2021484375,
+					545.0078125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8818359375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_10db529c56ac739a1d9c58d38dd61965",
+				"kind": "asset",
+				"ground_xy": [
+					526.7822265625,
+					351.7314453125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/16/12",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_b_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9033203125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_117aa24a3d95e543528b169a6edbfa66",
+				"kind": "asset",
+				"ground_xy": [
+					462.0087890625,
+					482.892578125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/14/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9775390625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_12fab7c1ecd388f260e243725a91e773",
+				"kind": "asset",
+				"ground_xy": [
+					240.765625,
+					359.6259765625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/12",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.822265625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_169688a6e90b047148f46f35e775378b",
+				"kind": "asset",
+				"ground_xy": [
+					401.38671875,
+					511.5634765625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/12/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.912109375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_1b91c7e9dc76e91b051cb79fb5ee6ccd",
+				"kind": "asset",
+				"ground_xy": [
+					230.5478515625,
+					520.4814453125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9287109375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_1cce41c3f80f3b437ce2c8e317c593fc",
+				"kind": "asset",
+				"ground_xy": [
+					567.1943359375,
+					368.748046875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/13",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.908203125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_1d64455f18c7c26c4a71b498faca9045",
+				"kind": "asset",
+				"ground_xy": [
+					587.12890625,
+					376.7353515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/13",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8291015625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_222193986777b345932094c007868a33",
+				"kind": "asset",
+				"ground_xy": [
+					550.6806640625,
+					519.818359375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8896484375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_236a2a27ec727a726a817e9a32dde690",
+				"kind": "asset",
+				"ground_xy": [
+					296.939453125,
+					573.37109375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8564453125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_24fc00265dc680e0a516ad575f1a8816",
+				"kind": "asset",
+				"ground_xy": [
+					233.7763671875,
+					371.7734375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/13",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8203125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_257596deb996bbdd21603541c07ac9d8",
+				"kind": "asset",
+				"ground_xy": [
+					614.8876953125,
+					237.5888671875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/19/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.84375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_2775ee1c88666137117b22dbdc074d1f",
+				"kind": "asset",
+				"ground_xy": [
+					437.52734375,
+					551.9091796875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/13/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.833984375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_2bf41d937ea9fd3314feb52c714b1335",
+				"kind": "asset",
+				"ground_xy": [
+					280.37890625,
+					465.185546875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/16",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.7998046875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_2c2ab50fba0cdc81fb059b129ed2b989",
+				"kind": "asset",
+				"ground_xy": [
+					586.689453125,
+					304.25390625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/10",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.830078125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_2dbc2973f8bc659cbd4d07487d51c372",
+				"kind": "asset",
+				"ground_xy": [
+					552.068359375,
+					286.1650390625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/10",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9970703125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_31013e8931dcbd45bf572be3e21cf1e4",
+				"kind": "asset",
+				"ground_xy": [
+					244.474609375,
+					319.478515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/11",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.990234375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_326f9b137116bc0a116c9751cf6bc933",
+				"kind": "asset",
+				"ground_xy": [
+					404.5546875,
+					232.5908203125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/12/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8857421875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_36753ead99d0f198808b17eab5f1529a",
+				"kind": "asset",
+				"ground_xy": [
+					232.5986328125,
+					462.8994140625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/16",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9189453125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_37732673da4a17037bceef44ea947042",
+				"kind": "asset",
+				"ground_xy": [
+					337.287109375,
+					489.72265625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/10/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8955078125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_385f6640185211f931db172fd9385b50",
+				"kind": "asset",
+				"ground_xy": [
+					362.4072265625,
+					212.0478515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/11/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9111328125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_39bb6108c46a66ed4f1c17267028d87b",
+				"kind": "asset",
+				"ground_xy": [
+					586.474609375,
+					495.103515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.921875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_3afce87658a4e8c6a1cdd3a2865638da",
+				"kind": "asset",
+				"ground_xy": [
+					282.66015625,
+					217.9658203125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.841796875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_3e765e34cb1c3c24acbdbdbc38c9da5c",
+				"kind": "asset",
+				"ground_xy": [
+					279.685546875,
+					412.56640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/14",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.830078125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_3f02688b5ae41b42922bcce35468dd41",
+				"kind": "asset",
+				"ground_xy": [
+					570.501953125,
+					320.296875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/11",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.904296875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_3f2c57aad53bd5a29d00a77b9694ea9f",
+				"kind": "asset",
+				"ground_xy": [
+					497.3037109375,
+					298.6689453125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/15/10",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8642578125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_40a3cd3f0c4d038611fa448329e09405",
+				"kind": "asset",
+				"ground_xy": [
+					328.474609375,
+					256.6640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/10/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8779296875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_42de878857ad525fce920751b9bd5bf6",
+				"kind": "asset",
+				"ground_xy": [
+					588.44921875,
+					430.7041015625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/15",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.962890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_440e28b7f5d9f90f5a5711e3a94fb55e",
+				"kind": "asset",
+				"ground_xy": [
+					558.6962890625,
+					484.67578125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8701171875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_4707e1c0ef70f9bb917d26c6da06df9d",
+				"kind": "asset",
+				"ground_xy": [
+					457.4599609375,
+					511.00390625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/14/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9609375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_47f1197719c3557ac099f31e289698f8",
+				"kind": "asset",
+				"ground_xy": [
+					600.83203125,
+					549.91796875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9208984375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_512ebdddc31229fa6b99b29683a4897c",
+				"kind": "asset",
+				"ground_xy": [
+					434.9892578125,
+					218.8056640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/13/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9384765625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_54d1ec0a2551092132e6393347aa2d8f",
+				"kind": "asset",
+				"ground_xy": [
+					551.4951171875,
+					595.830078125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/21",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8828125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_575066c6301d73c2f896cd484d02cbab",
+				"kind": "asset",
+				"ground_xy": [
+					278.90234375,
+					343.31640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/12",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9580078125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_5dda8fc032eb1fba3eab6505633edcac",
+				"kind": "asset",
+				"ground_xy": [
+					267.3076171875,
+					541.091796875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.900390625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_5e6963921f141d62e706086c6cef95d5",
+				"kind": "asset",
+				"ground_xy": [
+					263.962890625,
+					596.0126953125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/21",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.87890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_62e0ae3d84d77f20082daade9bc41928",
+				"kind": "asset",
+				"ground_xy": [
+					597.9853515625,
+					572.6748046875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.966796875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_63fe2413bef0ff1c1203917f6fbe0344",
+				"kind": "asset",
+				"ground_xy": [
+					536.498046875,
+					270.2998046875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/16/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.896484375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_6a28d62b2156d7db49daff85a877edc8",
+				"kind": "asset",
+				"ground_xy": [
+					264.1806640625,
+					321.9775390625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/11",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.912109375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_70a833633b9a5154df46647fa13df6a1",
+				"kind": "asset",
+				"ground_xy": [
+					436.9091796875,
+					472.5556640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/13/16",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.826171875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_7720da59c545cdbb3686b3808b4cfb86",
+				"kind": "asset",
+				"ground_xy": [
+					471.2998046875,
+					461.3349609375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/14/16",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9384765625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_7a33697c98cec66d05bdf765c23c63a5",
+				"kind": "asset",
+				"ground_xy": [
+					377.6474609375,
+					547.255859375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/11/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.91796875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_7b1f9889983b691e134960ee95129e77",
+				"kind": "asset",
+				"ground_xy": [
+					534.333984375,
+					209.6904296875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/16/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.982421875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_80c81e24122b17e4b43e5a93fbddbaf4",
+				"kind": "asset",
+				"ground_xy": [
+					558.05859375,
+					470.4228515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/16",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8896484375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_82e315c14494b96c051a3c40f889d3ef",
+				"kind": "asset",
+				"ground_xy": [
+					428.4052734375,
+					576.5927734375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/13/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9287109375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_8338dcb49ebd0631fa0ecc7686b42b2f",
+				"kind": "asset",
+				"ground_xy": [
+					562.21875,
+					346.75390625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/12",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9814453125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_8417d1879aa95913110da8ea544b66c9",
+				"kind": "asset",
+				"ground_xy": [
+					332.2978515625,
+					212.080078125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/10/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9541015625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_89818d70e7e9eee3923d64c85a734926",
+				"kind": "asset",
+				"ground_xy": [
+					615.24609375,
+					565.8203125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/19/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9365234375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_90f4f0c490a5f08923b55709fc5f9504",
+				"kind": "asset",
+				"ground_xy": [
+					473.6015625,
+					237.869140625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/14/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8837890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_93477f1d066ddc2407d376953a780778",
+				"kind": "asset",
+				"ground_xy": [
+					370.7626953125,
+					579.8310546875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/11/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.966796875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_956542f45eca01306fff3e1192ae7d1a",
+				"kind": "asset",
+				"ground_xy": [
+					496.2548828125,
+					350.513671875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/15/12",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.865234375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_9f9c09e859bb4a8367e6d3dc06006e66",
+				"kind": "asset",
+				"ground_xy": [
+					271.701171875,
+					381.865234375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/13",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8408203125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_a1097dcefa7e317824ca2da07c7dd31f",
+				"kind": "asset",
+				"ground_xy": [
+					334.7841796875,
+					546.1767578125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/10/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.806640625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_a4944989b6cfa771a403b71cac32ca7d",
+				"kind": "asset",
+				"ground_xy": [
+					249.1259765625,
+					300.375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/10",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9111328125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_a54caf9957108b9ffcfe11c457a8d7e5",
+				"kind": "asset",
+				"ground_xy": [
+					503.7451171875,
+					388.150390625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/15/13",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.888671875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_a9e46c7e086439b198a199be8365ecce",
+				"kind": "asset",
+				"ground_xy": [
+					595.44140625,
+					508.642578125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.845703125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_a9e93e171c5f5c2ee5e228d4f0615e2c",
+				"kind": "asset",
+				"ground_xy": [
+					592.5224609375,
+					219.3193359375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.837890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_abfd1069fbc71eca28e9a4b9b42382e1",
+				"kind": "asset",
+				"ground_xy": [
+					440.98828125,
+					518.9580078125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/13/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.921875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_b2962518f33b310c68000d7147aa9115",
+				"kind": "asset",
+				"ground_xy": [
+					281.9033203125,
+					240.8642578125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/8",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.919921875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_b311829e9cbd95b4082fca19be26e343",
+				"kind": "asset",
+				"ground_xy": [
+					569.8662109375,
+					569.228515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8642578125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_b49559e71ec09da76a0888d29ffaa3ad",
+				"kind": "asset",
+				"ground_xy": [
+					314.1328125,
+					547.94921875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/19",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8994140625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_b5e200ea106a8e0cad47540240d39ab3",
+				"kind": "asset",
+				"ground_xy": [
+					330.0439453125,
+					526.1640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/10/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.876953125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_b76409501f0d5a6796ab2231d3a99d70",
+				"kind": "asset",
+				"ground_xy": [
+					363.8671875,
+					499.6806640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/11/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_b_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9638671875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_b89e7e5474d83ff05608820f92c81d51",
+				"kind": "asset",
+				"ground_xy": [
+					454.3291015625,
+					212.4033203125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/14/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.97265625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_bd6ec6bb7916070b8bc23d3333954a1c",
+				"kind": "asset",
+				"ground_xy": [
+					297.7978515625,
+					458.4169921875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/16",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8525390625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_c06d47de841f8b0d79fa32f04d9322d8",
+				"kind": "asset",
+				"ground_xy": [
+					569.40625,
+					263.2421875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/17/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8193359375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_c4c736c2ee8e0d4a9252e69b9ccb0de5",
+				"kind": "asset",
+				"ground_xy": [
+					615.25390625,
+					220.306640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/19/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.837890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_c7ef7b352a9dba1753005ea8de406b75",
+				"kind": "asset",
+				"ground_xy": [
+					407.49609375,
+					496.2099609375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/12/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9248046875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_d1bb7f07e6949f2d3946cb25d89833ce",
+				"kind": "asset",
+				"ground_xy": [
+					312.1669921875,
+					220.296875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_b_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9296875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_d45ba803c6c972792fd04e51cabfebd7",
+				"kind": "asset",
+				"ground_xy": [
+					595.1494140625,
+					398.556640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/14",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9462890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_d647e1ebff24b527cf3446adf5d41699",
+				"kind": "asset",
+				"ground_xy": [
+					338.0361328125,
+					575.3603515625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/10/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.87109375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_d82a642a5b255e7009a9cd54294e594e",
+				"kind": "asset",
+				"ground_xy": [
+					500.7099609375,
+					272.310546875
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/15/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8486328125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_d9651ff5ef9c167347c668b0fd01792c",
+				"kind": "asset",
+				"ground_xy": [
+					246.7841796875,
+					483.974609375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8955078125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_da31baa850240ca7d9d4dd022ff88cad",
+				"kind": "asset",
+				"ground_xy": [
+					596.3388671875,
+					264.640625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.869140625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_dd802b62d7c3a807c0ad8e0db21da6f7",
+				"kind": "asset",
+				"ground_xy": [
+					529.642578125,
+					319.7626953125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/16/11",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8837890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_def62a2a9edadda8926a63478c43d9a6",
+				"kind": "asset",
+				"ground_xy": [
+					312.8662109375,
+					509.2197265625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/18",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.9189453125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_df7f9cd5691f61fcaf1e45eff7e6b8ad",
+				"kind": "asset",
+				"ground_xy": [
+					246.5556640625,
+					567.259765625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/20",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9794921875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_e0975b76475cd109b89652f712b336ad",
+				"kind": "asset",
+				"ground_xy": [
+					235.7373046875,
+					440.486328125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/15",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.962890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_e5df9746e07c2d9e923c66805b433db8",
+				"kind": "asset",
+				"ground_xy": [
+					497.138671875,
+					208.751953125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/15/7",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9404296875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_e8827728b7ae5909e791ae717277a479",
+				"kind": "asset",
+				"ground_xy": [
+					597.9375,
+					356.765625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/18/12",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_a_v3@v3",
+				"orientation": 0.0,
+				"scale": 0.8564453125,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_eb7e3669d45f6ffb22d31d9d9416dbd8",
+				"kind": "asset",
+				"ground_xy": [
+					296.3525390625,
+					369.583984375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/9/13",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_d_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.837890625,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_ebb8c798f78371fdce449a63807d3e83",
+				"kind": "asset",
+				"ground_xy": [
+					264.3046875,
+					490.751953125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.9912109375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_f2c582b31b87a24416ec0c2bb1da119f",
+				"kind": "asset",
+				"ground_xy": [
+					236.38671875,
+					267.4619140625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/7/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.85546875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_f6d308b29342a052427d7b7acb87baf2",
+				"kind": "asset",
+				"ground_xy": [
+					538.0390625,
+					493.1318359375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/16/17",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_e_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.8740234375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_fa4ed65ba1e6a69e0e774dc0360d32a6",
+				"kind": "asset",
+				"ground_xy": [
+					532.79296875,
+					292.8994140625
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/16/10",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.93359375,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_fb5792dfe02b8b8bdf0d058167a717d5",
+				"kind": "asset",
+				"ground_xy": [
+					281.2021484375,
+					266.64453125
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/9",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_f_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.98046875,
+				"locked": false
+			},
+			{
+				"entity_id": "entity_ff6ff5bd0e6f4b2f051873c21e7dbcc4",
+				"kind": "asset",
+				"ground_xy": [
+					262.0146484375,
+					435.505859375
+				],
+				"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+				"local_height": 0.0,
+				"label": "林地",
+				"management": "generated",
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"candidate_id": "grid/a749b51c/8/15",
+				"segment_id": "",
+				"role": "plot",
+				"plot_type": "forest",
+				"asset_ref": "tree_unit_c_v4@v4",
+				"orientation": 0.0,
+				"scale": 0.923828125,
+				"locked": false
+			}
+		],
+		"diagnostics": [
+			{
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"segment_id": "",
+				"code": "boundary_or_hole",
+				"count": 31,
+				"message": "区域 林地：31 个候选未放置（boundary_or_hole）。"
+			},
+			{
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"segment_id": "",
+				"code": "unsupported_surface",
+				"count": 5,
+				"message": "区域 林地：5 个候选未放置（unsupported_surface）。"
+			},
+			{
+				"recipe_id": "plot_82902efc2860e3e51c0ec23f",
+				"segment_id": "",
+				"code": "boundary_or_hole",
+				"count": 3,
+				"message": "区域 农田：3 个候选未放置（boundary_or_hole）。"
+			},
+			{
+				"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+				"segment_id": "",
+				"code": "outside_boundary",
+				"count": 4,
+				"message": "4 处未生成：完整占地超出街区边界；可调整边界、退距或手工放置。"
+			},
+			{
+				"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+				"segment_id": "",
+				"code": "protected_or_occupied",
+				"count": 1,
+				"message": "1 处未生成：占地已有建筑或受保护对象；可调整边界、退距或手工放置。"
+			},
+			{
+				"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+				"segment_id": "",
+				"code": "protected_or_occupied",
+				"count": 33,
+				"message": "33 个区域候选避让：protected_or_occupied。"
+			}
+		],
+		"recipe_cache": {
+			"plot_0c7e7125fbafa45cd1a35d6e": {
+				"hash": "e0a1e560daca9d67b5148acc66b6ded2f27bb39c3c2f8a957b2ad7aed3ad0594",
+				"entities": [
+					{
+						"entity_id": "entity_3afce87658a4e8c6a1cdd3a2865638da",
+						"kind": "asset",
+						"ground_xy": [
+							282.66015625,
+							217.9658203125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.841796875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_d1bb7f07e6949f2d3946cb25d89833ce",
+						"kind": "asset",
+						"ground_xy": [
+							312.1669921875,
+							220.296875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_b_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9296875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_8417d1879aa95913110da8ea544b66c9",
+						"kind": "asset",
+						"ground_xy": [
+							332.2978515625,
+							212.080078125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9541015625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_385f6640185211f931db172fd9385b50",
+						"kind": "asset",
+						"ground_xy": [
+							362.4072265625,
+							212.0478515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9111328125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_512ebdddc31229fa6b99b29683a4897c",
+						"kind": "asset",
+						"ground_xy": [
+							434.9892578125,
+							218.8056640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9384765625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b89e7e5474d83ff05608820f92c81d51",
+						"kind": "asset",
+						"ground_xy": [
+							454.3291015625,
+							212.4033203125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.97265625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_e5df9746e07c2d9e923c66805b433db8",
+						"kind": "asset",
+						"ground_xy": [
+							497.138671875,
+							208.751953125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9404296875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_7b1f9889983b691e134960ee95129e77",
+						"kind": "asset",
+						"ground_xy": [
+							534.333984375,
+							209.6904296875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/16/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.982421875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a9e93e171c5f5c2ee5e228d4f0615e2c",
+						"kind": "asset",
+						"ground_xy": [
+							592.5224609375,
+							219.3193359375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.837890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_c4c736c2ee8e0d4a9252e69b9ccb0de5",
+						"kind": "asset",
+						"ground_xy": [
+							615.25390625,
+							220.306640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/19/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.837890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b2962518f33b310c68000d7147aa9115",
+						"kind": "asset",
+						"ground_xy": [
+							281.9033203125,
+							240.8642578125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.919921875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_021a0e6a331ae83245b58e65487c014b",
+						"kind": "asset",
+						"ground_xy": [
+							311.1123046875,
+							246.1240234375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8095703125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_326f9b137116bc0a116c9751cf6bc933",
+						"kind": "asset",
+						"ground_xy": [
+							404.5546875,
+							232.5908203125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8857421875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_0aa76e9a2e0c30b242b5e0efa43af0e6",
+						"kind": "asset",
+						"ground_xy": [
+							435.48828125,
+							230.8037109375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.876953125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_90f4f0c490a5f08923b55709fc5f9504",
+						"kind": "asset",
+						"ground_xy": [
+							473.6015625,
+							237.869140625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8837890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_01fa882d90b430bb968a9ade999740d7",
+						"kind": "asset",
+						"ground_xy": [
+							585.416015625,
+							232.1484375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.951171875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_257596deb996bbdd21603541c07ac9d8",
+						"kind": "asset",
+						"ground_xy": [
+							614.8876953125,
+							237.5888671875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/19/8",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.84375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_f2c582b31b87a24416ec0c2bb1da119f",
+						"kind": "asset",
+						"ground_xy": [
+							236.38671875,
+							267.4619140625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.85546875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_fb5792dfe02b8b8bdf0d058167a717d5",
+						"kind": "asset",
+						"ground_xy": [
+							281.2021484375,
+							266.64453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.98046875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_40a3cd3f0c4d038611fa448329e09405",
+						"kind": "asset",
+						"ground_xy": [
+							328.474609375,
+							256.6640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8779296875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_8c67e5ec9ef95b0dbb09d8e1983ed808",
+						"kind": "asset",
+						"ground_xy": [
+							369.2099609375,
+							266.1171875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.861328125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_ca0b6bf571ac2af0010a819f35aef2b1",
+						"kind": "asset",
+						"ground_xy": [
+							463.2060546875,
+							265.50390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8798828125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_d82a642a5b255e7009a9cd54294e594e",
+						"kind": "asset",
+						"ground_xy": [
+							500.7099609375,
+							272.310546875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8486328125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_63fe2413bef0ff1c1203917f6fbe0344",
+						"kind": "asset",
+						"ground_xy": [
+							536.498046875,
+							270.2998046875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/16/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.896484375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_c06d47de841f8b0d79fa32f04d9322d8",
+						"kind": "asset",
+						"ground_xy": [
+							569.40625,
+							263.2421875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8193359375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_da31baa850240ca7d9d4dd022ff88cad",
+						"kind": "asset",
+						"ground_xy": [
+							596.3388671875,
+							264.640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/9",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.869140625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a4944989b6cfa771a403b71cac32ca7d",
+						"kind": "asset",
+						"ground_xy": [
+							249.1259765625,
+							300.375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9111328125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_6d300c44564d8319d3ef8fefabf33b41",
+						"kind": "asset",
+						"ground_xy": [
+							310.5751953125,
+							289.4150390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9287109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a4046d59db1e78d1bbe47942469dc1d4",
+						"kind": "asset",
+						"ground_xy": [
+							375.767578125,
+							302.478515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8466796875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_08b98d43ac93c446cdecc6b70d9b7a4b",
+						"kind": "asset",
+						"ground_xy": [
+							404.7099609375,
+							298.6591796875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.873046875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_72b92459d78b1d51997c67985e2bed55",
+						"kind": "asset",
+						"ground_xy": [
+							438.5849609375,
+							292.01953125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.974609375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_8df43bfe9f9c42525d5d32d992dba816",
+						"kind": "asset",
+						"ground_xy": [
+							463.6796875,
+							292.5205078125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9150390625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_3f2c57aad53bd5a29d00a77b9694ea9f",
+						"kind": "asset",
+						"ground_xy": [
+							497.3037109375,
+							298.6689453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8642578125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_fa4ed65ba1e6a69e0e774dc0360d32a6",
+						"kind": "asset",
+						"ground_xy": [
+							532.79296875,
+							292.8994140625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/16/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.93359375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_2dbc2973f8bc659cbd4d07487d51c372",
+						"kind": "asset",
+						"ground_xy": [
+							552.068359375,
+							286.1650390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9970703125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_2c2ab50fba0cdc81fb059b129ed2b989",
+						"kind": "asset",
+						"ground_xy": [
+							586.689453125,
+							304.25390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/10",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.830078125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_31013e8931dcbd45bf572be3e21cf1e4",
+						"kind": "asset",
+						"ground_xy": [
+							244.474609375,
+							319.478515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.990234375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_6a28d62b2156d7db49daff85a877edc8",
+						"kind": "asset",
+						"ground_xy": [
+							264.1806640625,
+							321.9775390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.912109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_eb5c793fb73a299a653ceeaaee4d8de0",
+						"kind": "asset",
+						"ground_xy": [
+							314.544921875,
+							325.939453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8583984375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_dfef9bd60e6120f8a19459d39dae3106",
+						"kind": "asset",
+						"ground_xy": [
+							343.6904296875,
+							320.9794921875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.85546875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_5832d73a9e6439f89f3331181019fe7d",
+						"kind": "asset",
+						"ground_xy": [
+							409.1669921875,
+							320.7470703125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.837890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_6999449d2f93e7def00f7c3b7035abc7",
+						"kind": "asset",
+						"ground_xy": [
+							427.7373046875,
+							326.314453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9306640625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_e2149701fa47ba44263c766917fab093",
+						"kind": "asset",
+						"ground_xy": [
+							464.162109375,
+							328.1689453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.857421875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_25b0150ee2d9c24ad9ea5c53d07b9e84",
+						"kind": "asset",
+						"ground_xy": [
+							485.91796875,
+							316.037109375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9521484375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_dd802b62d7c3a807c0ad8e0db21da6f7",
+						"kind": "asset",
+						"ground_xy": [
+							529.642578125,
+							319.7626953125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/16/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8837890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_3f02688b5ae41b42922bcce35468dd41",
+						"kind": "asset",
+						"ground_xy": [
+							570.501953125,
+							320.296875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/11",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.904296875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_12fab7c1ecd388f260e243725a91e773",
+						"kind": "asset",
+						"ground_xy": [
+							240.765625,
+							359.6259765625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.822265625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_575066c6301d73c2f896cd484d02cbab",
+						"kind": "asset",
+						"ground_xy": [
+							278.90234375,
+							343.31640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9580078125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_ac107ce8080591bccbe8e7863ed25ba3",
+						"kind": "asset",
+						"ground_xy": [
+							304.216796875,
+							345.4091796875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.806640625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_53db395072d247efd0da237693cfb0a1",
+						"kind": "asset",
+						"ground_xy": [
+							326.994140625,
+							347.8837890625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.888671875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_8839bc5502fda1e79abce029c0b4a40c",
+						"kind": "asset",
+						"ground_xy": [
+							360.5283203125,
+							345.9052734375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.857421875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_f1e1d87d1b63739c867f013dc7209b4f",
+						"kind": "asset",
+						"ground_xy": [
+							426.32421875,
+							344.541015625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.853515625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_956542f45eca01306fff3e1192ae7d1a",
+						"kind": "asset",
+						"ground_xy": [
+							496.2548828125,
+							350.513671875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.865234375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_10db529c56ac739a1d9c58d38dd61965",
+						"kind": "asset",
+						"ground_xy": [
+							526.7822265625,
+							351.7314453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/16/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_b_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9033203125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_8338dcb49ebd0631fa0ecc7686b42b2f",
+						"kind": "asset",
+						"ground_xy": [
+							562.21875,
+							346.75390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9814453125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_e8827728b7ae5909e791ae717277a479",
+						"kind": "asset",
+						"ground_xy": [
+							597.9375,
+							356.765625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/12",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8564453125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_24fc00265dc680e0a516ad575f1a8816",
+						"kind": "asset",
+						"ground_xy": [
+							233.7763671875,
+							371.7734375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8203125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_9f9c09e859bb4a8367e6d3dc06006e66",
+						"kind": "asset",
+						"ground_xy": [
+							271.701171875,
+							381.865234375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8408203125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_eb7e3669d45f6ffb22d31d9d9416dbd8",
+						"kind": "asset",
+						"ground_xy": [
+							296.3525390625,
+							369.583984375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.837890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a085dc04cbe7995526f15b2a7a4fd1c3",
+						"kind": "asset",
+						"ground_xy": [
+							333.82421875,
+							372.8828125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.802734375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a895f22d9e9e349c186164a3798350bd",
+						"kind": "asset",
+						"ground_xy": [
+							364.0595703125,
+							381.46875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9990234375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_6f5205291c0526bc579eb608a035512b",
+						"kind": "asset",
+						"ground_xy": [
+							393.16796875,
+							382.693359375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.84375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_309dda7b5ebeace90102567e19976baa",
+						"kind": "asset",
+						"ground_xy": [
+							433.0439453125,
+							386.03125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9921875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_e78b0cc4ca6dd7590fe89b1d1ec79940",
+						"kind": "asset",
+						"ground_xy": [
+							464.9765625,
+							385.7392578125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8447265625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a54caf9957108b9ffcfe11c457a8d7e5",
+						"kind": "asset",
+						"ground_xy": [
+							503.7451171875,
+							388.150390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.888671875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_1cce41c3f80f3b437ce2c8e317c593fc",
+						"kind": "asset",
+						"ground_xy": [
+							567.1943359375,
+							368.748046875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.908203125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_1d64455f18c7c26c4a71b498faca9045",
+						"kind": "asset",
+						"ground_xy": [
+							587.12890625,
+							376.7353515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/13",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8291015625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_3e765e34cb1c3c24acbdbdbc38c9da5c",
+						"kind": "asset",
+						"ground_xy": [
+							279.685546875,
+							412.56640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.830078125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_493631ecc2ac7ac1a5a534a5062b884b",
+						"kind": "asset",
+						"ground_xy": [
+							303.2421875,
+							413.22265625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.994140625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_1dbdcfc92c077f0c7939a0161cd61111",
+						"kind": "asset",
+						"ground_xy": [
+							331.5849609375,
+							404.9697265625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.884765625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_45b560af347ad6f224abababc776f847",
+						"kind": "asset",
+						"ground_xy": [
+							358.0576171875,
+							401.9677734375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.853515625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_74902a2cdf23ab520f84b380c9806904",
+						"kind": "asset",
+						"ground_xy": [
+							402.12890625,
+							405.9248046875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9462890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_c45c020e2c6d6b1b2208ba1a55863d5b",
+						"kind": "asset",
+						"ground_xy": [
+							467.923828125,
+							414.716796875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8662109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_f952bd2aa30aaef38c298ab2323a1fe3",
+						"kind": "asset",
+						"ground_xy": [
+							488.802734375,
+							402.6201171875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/15/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.80859375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_d45ba803c6c972792fd04e51cabfebd7",
+						"kind": "asset",
+						"ground_xy": [
+							595.1494140625,
+							398.556640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/14",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9462890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_e0975b76475cd109b89652f712b336ad",
+						"kind": "asset",
+						"ground_xy": [
+							235.7373046875,
+							440.486328125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.962890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_ff6ff5bd0e6f4b2f051873c21e7dbcc4",
+						"kind": "asset",
+						"ground_xy": [
+							262.0146484375,
+							435.505859375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.923828125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b8836612fe2fe78644d5a23b104bf11b",
+						"kind": "asset",
+						"ground_xy": [
+							303.19921875,
+							425.6064453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8212890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_73c076f3f32a0426e9356eb9a5c86b50",
+						"kind": "asset",
+						"ground_xy": [
+							363.2177734375,
+							440.169921875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9296875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_01bbd538f4b96f781298c64d2e9c2a93",
+						"kind": "asset",
+						"ground_xy": [
+							405.388671875,
+							430.7685546875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9482421875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_04a94b3ea19e9ad9e4acff993d57efdb",
+						"kind": "asset",
+						"ground_xy": [
+							431.2998046875,
+							442.0927734375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8486328125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_515ffdf6669fba5cd80ddbca19bf9079",
+						"kind": "asset",
+						"ground_xy": [
+							456.87890625,
+							438.02734375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_b_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9521484375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_42de878857ad525fce920751b9bd5bf6",
+						"kind": "asset",
+						"ground_xy": [
+							588.44921875,
+							430.7041015625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/15",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.962890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_36753ead99d0f198808b17eab5f1529a",
+						"kind": "asset",
+						"ground_xy": [
+							232.5986328125,
+							462.8994140625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/16",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9189453125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_2bf41d937ea9fd3314feb52c714b1335",
+						"kind": "asset",
+						"ground_xy": [
+							280.37890625,
+							465.185546875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/16",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.7998046875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_bd6ec6bb7916070b8bc23d3333954a1c",
+						"kind": "asset",
+						"ground_xy": [
+							297.7978515625,
+							458.4169921875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/16",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8525390625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_70a833633b9a5154df46647fa13df6a1",
+						"kind": "asset",
+						"ground_xy": [
+							436.9091796875,
+							472.5556640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/16",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.826171875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_7720da59c545cdbb3686b3808b4cfb86",
+						"kind": "asset",
+						"ground_xy": [
+							471.2998046875,
+							461.3349609375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/16",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9384765625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_80c81e24122b17e4b43e5a93fbddbaf4",
+						"kind": "asset",
+						"ground_xy": [
+							558.05859375,
+							470.4228515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/16",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8896484375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_d9651ff5ef9c167347c668b0fd01792c",
+						"kind": "asset",
+						"ground_xy": [
+							246.7841796875,
+							483.974609375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8955078125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_ebb8c798f78371fdce449a63807d3e83",
+						"kind": "asset",
+						"ground_xy": [
+							264.3046875,
+							490.751953125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9912109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_37732673da4a17037bceef44ea947042",
+						"kind": "asset",
+						"ground_xy": [
+							337.287109375,
+							489.72265625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8955078125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b76409501f0d5a6796ab2231d3a99d70",
+						"kind": "asset",
+						"ground_xy": [
+							363.8671875,
+							499.6806640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_b_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9638671875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_c7ef7b352a9dba1753005ea8de406b75",
+						"kind": "asset",
+						"ground_xy": [
+							407.49609375,
+							496.2099609375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9248046875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_117aa24a3d95e543528b169a6edbfa66",
+						"kind": "asset",
+						"ground_xy": [
+							462.0087890625,
+							482.892578125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9775390625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_f6d308b29342a052427d7b7acb87baf2",
+						"kind": "asset",
+						"ground_xy": [
+							538.0390625,
+							493.1318359375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/16/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8740234375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_440e28b7f5d9f90f5a5711e3a94fb55e",
+						"kind": "asset",
+						"ground_xy": [
+							558.6962890625,
+							484.67578125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8701171875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_39bb6108c46a66ed4f1c17267028d87b",
+						"kind": "asset",
+						"ground_xy": [
+							586.474609375,
+							495.103515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/17",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.921875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_1b91c7e9dc76e91b051cb79fb5ee6ccd",
+						"kind": "asset",
+						"ground_xy": [
+							230.5478515625,
+							520.4814453125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9287109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_def62a2a9edadda8926a63478c43d9a6",
+						"kind": "asset",
+						"ground_xy": [
+							312.8662109375,
+							509.2197265625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9189453125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b5e200ea106a8e0cad47540240d39ab3",
+						"kind": "asset",
+						"ground_xy": [
+							330.0439453125,
+							526.1640625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.876953125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_169688a6e90b047148f46f35e775378b",
+						"kind": "asset",
+						"ground_xy": [
+							401.38671875,
+							511.5634765625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/12/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.912109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_abfd1069fbc71eca28e9a4b9b42382e1",
+						"kind": "asset",
+						"ground_xy": [
+							440.98828125,
+							518.9580078125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.921875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_4707e1c0ef70f9bb917d26c6da06df9d",
+						"kind": "asset",
+						"ground_xy": [
+							457.4599609375,
+							511.00390625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/14/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9609375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_222193986777b345932094c007868a33",
+						"kind": "asset",
+						"ground_xy": [
+							550.6806640625,
+							519.818359375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8896484375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a9e46c7e086439b198a199be8365ecce",
+						"kind": "asset",
+						"ground_xy": [
+							595.44140625,
+							508.642578125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/18",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.845703125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_104943381f3613bf64c500f6e8b2c91b",
+						"kind": "asset",
+						"ground_xy": [
+							233.2021484375,
+							545.0078125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8818359375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_5dda8fc032eb1fba3eab6505633edcac",
+						"kind": "asset",
+						"ground_xy": [
+							267.3076171875,
+							541.091796875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.900390625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b49559e71ec09da76a0888d29ffaa3ad",
+						"kind": "asset",
+						"ground_xy": [
+							314.1328125,
+							547.94921875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_e_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8994140625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_a1097dcefa7e317824ca2da07c7dd31f",
+						"kind": "asset",
+						"ground_xy": [
+							334.7841796875,
+							546.1767578125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.806640625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_7a33697c98cec66d05bdf765c23c63a5",
+						"kind": "asset",
+						"ground_xy": [
+							377.6474609375,
+							547.255859375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.91796875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_2775ee1c88666137117b22dbdc074d1f",
+						"kind": "asset",
+						"ground_xy": [
+							437.52734375,
+							551.9091796875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.833984375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_47f1197719c3557ac099f31e289698f8",
+						"kind": "asset",
+						"ground_xy": [
+							600.83203125,
+							549.91796875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/19",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9208984375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_df7f9cd5691f61fcaf1e45eff7e6b8ad",
+						"kind": "asset",
+						"ground_xy": [
+							246.5556640625,
+							567.259765625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/7/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9794921875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_236a2a27ec727a726a817e9a32dde690",
+						"kind": "asset",
+						"ground_xy": [
+							296.939453125,
+							573.37109375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/9/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8564453125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_d647e1ebff24b527cf3446adf5d41699",
+						"kind": "asset",
+						"ground_xy": [
+							338.0361328125,
+							575.3603515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/10/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.87109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_93477f1d066ddc2407d376953a780778",
+						"kind": "asset",
+						"ground_xy": [
+							370.7626953125,
+							579.8310546875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/11/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_c_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.966796875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_82e315c14494b96c051a3c40f889d3ef",
+						"kind": "asset",
+						"ground_xy": [
+							428.4052734375,
+							576.5927734375
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/13/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.9287109375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_b311829e9cbd95b4082fca19be26e343",
+						"kind": "asset",
+						"ground_xy": [
+							569.8662109375,
+							569.228515625
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.8642578125,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_62e0ae3d84d77f20082daade9bc41928",
+						"kind": "asset",
+						"ground_xy": [
+							597.9853515625,
+							572.6748046875
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/18/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_f_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.966796875,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_89818d70e7e9eee3923d64c85a734926",
+						"kind": "asset",
+						"ground_xy": [
+							615.24609375,
+							565.8203125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/19/20",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_d_v4@v4",
+						"orientation": 0.0,
+						"scale": 0.9365234375,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_5e6963921f141d62e706086c6cef95d5",
+						"kind": "asset",
+						"ground_xy": [
+							263.962890625,
+							596.0126953125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/8/21",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.87890625,
+						"locked": false
+					},
+					{
+						"entity_id": "entity_54d1ec0a2551092132e6393347aa2d8f",
+						"kind": "asset",
+						"ground_xy": [
+							551.4951171875,
+							595.830078125
+						],
+						"surface_id": "terrace_0ffe003fc5fb29a6ced2d80e",
+						"local_height": 0.0,
+						"label": "林地",
+						"management": "generated",
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"candidate_id": "grid/a749b51c/17/21",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "forest",
+						"asset_ref": "tree_unit_a_v3@v3",
+						"orientation": 0.0,
+						"scale": 0.8828125,
+						"locked": false
+					}
+				],
+				"diagnostics": [
+					{
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"segment_id": "",
+						"code": "boundary_or_hole",
+						"count": 31,
+						"message": "区域 林地：31 个候选未放置（boundary_or_hole）。"
+					},
+					{
+						"recipe_id": "plot_0c7e7125fbafa45cd1a35d6e",
+						"segment_id": "",
+						"code": "unsupported_surface",
+						"count": 5,
+						"message": "区域 林地：5 个候选未放置（unsupported_surface）。"
+					}
+				]
+			},
+			"path_3fddc0883868f76e2f79467a": {
+				"segment_e68a427f88e3bbdc65d2448e": {
+					"ok": true,
+					"entities": [
+						{
+							"entity_id": "entity_4ee6bd654a6afae7907e9c04b812b6ce",
+							"kind": "ribbon",
+							"ground_xy": [
+								900.0,
+								490.0
+							],
+							"surface_id": "ground",
+							"local_height": 0.0,
+							"label": "道路 · road",
+							"management": "generated",
+							"recipe_id": "path_3fddc0883868f76e2f79467a",
+							"candidate_id": "ribbon/segment_e68a427f88e3bbdc65d2448e",
+							"segment_id": "segment_e68a427f88e3bbdc65d2448e",
+							"role": "road",
+							"style": "dirt",
+							"max_width": 24.0,
+							"polygons": [
+								[
+									[
+										888.0,
+										80.0
+									],
+									[
+										888.0,
+										900.0
+									],
+									[
+										888.9130859375,
+										904.591796875
+									],
+									[
+										891.5146484375,
+										908.4853515625
+									],
+									[
+										895.408203125,
+										911.0869140625
+									],
+									[
+										900.0,
+										912.0
+									],
+									[
+										904.591796875,
+										911.0869140625
+									],
+									[
+										908.4853515625,
+										908.4853515625
+									],
+									[
+										911.0869140625,
+										904.591796875
+									],
+									[
+										912.0,
+										900.0
+									],
+									[
+										912.0,
+										80.0
+									],
+									[
+										911.0869140625,
+										75.408203125
+									],
+									[
+										908.4853515625,
+										71.5146484375
+									],
+									[
+										904.591796875,
+										68.9130859375
+									],
+									[
+										900.0,
+										68.0
+									],
+									[
+										895.408203125,
+										68.9130859375
+									],
+									[
+										891.5146484375,
+										71.5146484375
+									],
+									[
+										888.9130859375,
+										75.408203125
+									]
+								]
+							]
+						}
+					],
+					"diagnostics": [],
+					"hash": "368e82a9d29623d3032f67d1323cd7154779a5fc541c47a1da2fe7349524c0ec"
+				}
+			},
+			"plot_82902efc2860e3e51c0ec23f": {
+				"hash": "397c5f62add64c32ea03b226758e19fd5055d3031e49cfd66ac1127a1d44b3fc",
+				"entities": [
+					{
+						"entity_id": "entity_be268b03db53a637ffcca241ac4e8f8b",
+						"kind": "asset",
+						"ground_xy": [
+							220.115234375,
+							732.345703125
+						],
+						"surface_id": "ground",
+						"local_height": 0.0,
+						"label": "农田",
+						"management": "generated",
+						"recipe_id": "plot_82902efc2860e3e51c0ec23f",
+						"candidate_id": "grid/fd73dc77/1/7",
+						"segment_id": "",
+						"role": "plot",
+						"plot_type": "farmland",
+						"asset_ref": "w3_ink_field@v1",
+						"orientation": 0.0,
+						"scale": 0.68359375,
+						"locked": false
+					}
+				],
+				"diagnostics": [
+					{
+						"recipe_id": "plot_82902efc2860e3e51c0ec23f",
+						"segment_id": "",
+						"code": "boundary_or_hole",
+						"count": 3,
+						"message": "区域 农田：3 个候选未放置（boundary_or_hole）。"
+					}
+				]
+			},
+			"district_b2ee6409dd02cd53bd289a82": {
+				"signature": "cace0425decd4f299d1d757e8bc539ebfbb73ab3a365ed999cec2073a3894c85",
+				"entities": [
+					{
+						"entity_id": "entity_19d6337fa1713131c78692f77c0c7240",
+						"candidate_id": "access/lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+						"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+						"segment_id": "",
+						"kind": "ribbon",
+						"role": "district_street",
+						"style": "dirt",
+						"management": "generated",
+						"ground_xy": [
+							934.0,
+							680.0
+						],
+						"surface_id": "ground",
+						"local_height": 0.0,
+						"polygons": [
+							[
+								[
+									934.0,
+									673.0
+								],
+								[
+									900.0,
+									673.0
+								],
+								[
+									897.3212890625,
+									673.533203125
+								],
+								[
+									895.0498046875,
+									675.0498046875
+								],
+								[
+									893.533203125,
+									677.3212890625
+								],
+								[
+									893.0,
+									680.0
+								],
+								[
+									893.533203125,
+									682.6787109375
+								],
+								[
+									895.0498046875,
+									684.9501953125
+								],
+								[
+									897.3212890625,
+									686.466796875
+								],
+								[
+									900.0,
+									687.0
+								],
+								[
+									934.0,
+									687.0
+								],
+								[
+									936.6787109375,
+									686.466796875
+								],
+								[
+									938.9501953125,
+									684.9501953125
+								],
+								[
+									940.466796875,
+									682.6787109375
+								],
+								[
+									941.0,
+									680.0
+								],
+								[
+									940.466796875,
+									677.3212890625
+								],
+								[
+									938.9501953125,
+									675.0498046875
+								],
+								[
+									936.6787109375,
+									673.533203125
+								]
+							]
+						],
+						"label": "街区 · 支路"
+					},
+					{
+						"entity_id": "entity_91e027c3a8f6b6c47f5146f8ca5b31a2",
+						"kind": "compound",
+						"label": "街区 · residential",
+						"surface_id": "ground",
+						"ground_xy": [
+							934.0,
+							680.0
+						],
+						"local_height": 0.0,
+						"scale": 1.0,
+						"orientation": 90.00000500895632,
+						"management": "generated",
+						"room_plan": {
+							"kind": "courtyard",
+							"function": "residential",
+							"outer": [
+								[
+									-90.0,
+									-160.0
+								],
+								[
+									90.0,
+									-160.0
+								],
+								[
+									90.0,
+									0.0
+								],
+								[
+									-90.0,
+									0.0
+								]
+							],
+							"holes": [
+								[
+									[
+										-50.0,
+										-116.0
+									],
+									[
+										50.0,
+										-116.0
+									],
+									[
+										50.0,
+										-30.0
+									],
+									[
+										-50.0,
+										-30.0
+									]
+								]
+							],
+							"walls": [
+								{
+									"edge_id": "edge_0",
+									"edge_index": 0,
+									"height": 12.0,
+									"style": "plaster",
+									"openings": []
+								},
+								{
+									"edge_id": "edge_1",
+									"edge_index": 1,
+									"height": 12.0,
+									"style": "plaster",
+									"openings": []
+								},
+								{
+									"edge_id": "edge_2",
+									"edge_index": 2,
+									"height": 12.0,
+									"style": "plaster",
+									"openings": [
+										{
+											"opening_id": "entrance",
+											"at": 0.5,
+											"width": 24.0,
+											"height": 12.0
+										}
+									]
+								},
+								{
+									"edge_id": "edge_3",
+									"edge_index": 3,
+									"height": 12.0,
+									"style": "plaster",
+									"openings": []
+								}
+							],
+							"rooms": [
+								{
+									"room_id": "rear",
+									"rect": [
+										-84.0,
+										-154.0,
+										168.0,
+										36.0
+									],
+									"wall_height": 18.0,
+									"roof_rise": 10.0,
+									"door_edge": 2,
+									"door_width": 14.0,
+									"roof_style": "hip",
+									"roof_visible": true
+								},
+								{
+									"room_id": "west",
+									"rect": [
+										-84.0,
+										-114.0,
+										22.0,
+										96.0
+									],
+									"wall_height": 18.0,
+									"roof_rise": 10.0,
+									"door_edge": 1,
+									"door_width": 14.0,
+									"roof_style": "hip",
+									"roof_visible": true
+								},
+								{
+									"room_id": "east",
+									"rect": [
+										62.0,
+										-114.0,
+										22.0,
+										96.0
+									],
+									"wall_height": 18.0,
+									"roof_rise": 10.0,
+									"door_edge": 3,
+									"door_width": 14.0,
+									"roof_style": "hip",
+									"roof_visible": true
+								}
+							],
+							"roof_visible": true,
+							"floor_color": "d9c79c",
+							"wall_color": "d1be97",
+							"roof_color": "6e7066",
+							"roof_material": "w5_gray_tile@v1",
+							"wall_material": ""
+						},
+						"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+						"candidate_id": "lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+						"segment_id": "",
+						"role": "district",
+						"lot_id": "district_b2ee6409dd02cd53bd289a82/lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2"
+					}
+				],
+				"lots": [
+					{
+						"lot_id": "district_b2ee6409dd02cd53bd289a82/lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+						"candidate_id": "lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+						"entity_id": "entity_91e027c3a8f6b6c47f5146f8ca5b31a2",
+						"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+						"surface_id": "ground",
+						"ground_xy": [
+							934.0,
+							680.0
+						],
+						"orientation": 90.00000500895632,
+						"polygon": [
+							[
+								1094.0,
+								590.0
+							],
+							[
+								1094.0,
+								770.0
+							],
+							[
+								934.0,
+								770.0
+							],
+							[
+								934.0,
+								590.0
+							]
+						],
+						"lot_role": "buildable",
+						"entrance": {
+							"socket_id": "entrance",
+							"role": "road",
+							"ground_xy": [
+								934.0,
+								680.0
+							],
+							"direction_deg": 180.000008651422,
+							"width": 24.0
+						},
+						"status": "built"
+					}
+				],
+				"diagnostics": [
+					{
+						"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+						"segment_id": "",
+						"code": "outside_boundary",
+						"count": 4,
+						"message": "4 处未生成：完整占地超出街区边界；可调整边界、退距或手工放置。"
+					},
+					{
+						"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+						"segment_id": "",
+						"code": "protected_or_occupied",
+						"count": 1,
+						"message": "1 处未生成：占地已有建筑或受保护对象；可调整边界、退距或手工放置。"
+					}
+				]
+			}
+		},
+		"stats": {
+			"rebuilt_segments": 1,
+			"reused_segments": 3,
+			"candidate_count": 126,
+			"district_attempts": 1
+		},
+		"lots": [
+			{
+				"lot_id": "district_b2ee6409dd02cd53bd289a82/lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+				"candidate_id": "lot/road/path_3fddc0883868f76e2f79467a/segment_e68a427f88e3bbdc65d2448e/-1/2",
+				"entity_id": "entity_91e027c3a8f6b6c47f5146f8ca5b31a2",
+				"recipe_id": "district_b2ee6409dd02cd53bd289a82",
+				"surface_id": "ground",
+				"ground_xy": [
+					934.0,
+					680.0
+				],
+				"orientation": 90.00000500895632,
+				"polygon": [
+					[
+						1094.0,
+						590.0
+					],
+					[
+						1094.0,
+						770.0
+					],
+					[
+						934.0,
+						770.0
+					],
+					[
+						934.0,
+						590.0
+					]
+				],
+				"lot_role": "buildable",
+				"entrance": {
+					"socket_id": "entrance",
+					"role": "road",
+					"ground_xy": [
+						934.0,
+						680.0
+					],
+					"direction_deg": 180.000008651422,
+					"width": 24.0
+				},
+				"status": "built"
+			}
+		],
+		"input_hash": "36cbcacd4ace3cbb9a88df8ad0d244c99f9482e9b6c723eeec3972c22e9a3706",
+		"generator_version": "workshop_s1.w6.1"
+	}
+}
