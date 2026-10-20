@@ -30,7 +30,7 @@ static func validate(draft: Dictionary,p: Dictionary) -> String:
 			if key in ["selected_id","pending_id","recipe_id","lot_id","material","compound_target_id","preview_owner"] and (not group[key] is String or group[key].length()>512):return "恢复 W5 身份无效。"
 			if key in ["dirty","wall_dirty","roof","room_roof","show_lots"] and not group[key] is bool:return "恢复 W5 开关无效。"
 	if not r.get("material","").is_empty() and not p.asset_refs.has(r.material):return "恢复院落材质缺失。"
-	if c.get("preview_owner","plot") not in ["plot","district"]:return "恢复计算归属无效。"
+	if c.get("preview_owner","plot") not in ["plot","district","terrain","room","direct_edit","recovery"]:return "恢复计算归属无效。"
 	for key in ["compound_points","district_points"]:
 		if not c.get(key,[]) is Array or c.get(key,[]).size()>(2 if key=="compound_points" else 128):return "恢复 W5 轮廓过长。"
 		for point in c.get(key,[]):

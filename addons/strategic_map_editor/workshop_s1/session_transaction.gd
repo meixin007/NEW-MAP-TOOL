@@ -6,6 +6,7 @@ signal history_trimmed(message: String)
 const Model = preload("project_model.gd")
 const Bridge = preload("legacy_bridge.gd")
 const Commands = preload("project_commands.gd")
+const Pending=preload("pending_edit.gd")
 const HISTORY_LIMIT := 20
 const HISTORY_BYTES := 64 * 1024 * 1024 # Estimated serialized bytes, not RSS.
 var _project: Dictionary = Model.blank()
@@ -35,11 +36,16 @@ var _worker_token: int=-1
 var _job_revision: int=-1
 var _job_started_ms:=0
 var _job_command: Dictionary={}
+var _pending_base: Dictionary={}
+var _restored_pending: Dictionary={}
 var last_timing: Dictionary={}
 var job_purpose: String="preview"
 var _prepared_plan: Array=[]
 var _prepared_signature: String=""
 var _prepared_json_bytes:=0
+var _io_worker: Thread
+var _io_context: Dictionary={}
+var last_io_timing: Dictionary={}
 
 static func _plan_key(project: Dictionary) -> String:
 	return project.materialized_snapshot.input_hash+"|"+project.materialized_snapshot.generator_version
@@ -103,12 +109,35 @@ func _trim_history() -> void:
 
 func job_in_progress() -> bool:
 	return _worker!=null and _worker_token==_job_token
+func pending_edit() -> Dictionary:
+	if not _restored_pending.is_empty():return _restored_pending.duplicate(true)
+	if _job_command.is_empty() or _job_revision!=revision:return {}
+	var intent:=_pending_base.duplicate(true)
+	intent.command=_job_command.duplicate(true);intent.stage="ready" if has_preview() else "validating"
+	return intent
+func has_pending_intent() -> bool:
+	return not _restored_pending.is_empty()
+func restore_pending_edit(intent: Dictionary) -> Dictionary:
+	var issue:=Pending.validate(intent,view())
+	if not issue.is_empty():return _error(issue)
+	cancel_preview()
+	_restored_pending=intent.duplicate(true)
+	return {"ok":true}
+func resume_pending_edit() -> Dictionary:
+	if _restored_pending.is_empty():return _error("没有待恢复的修改。")
+	var intent:=_restored_pending.duplicate(true)
+	var issue:=Pending.validate(intent,view())
+	if not issue.is_empty():return _error(issue)
+	# Restored intent always becomes a preview, even if the old job auto-applied.
+	return start_preview_job(intent.command)
 func start_preview_job(command: Dictionary) -> Dictionary:
+	if has_pending_intent() and Model.Canonical.digest(command)!=Model.Canonical.digest(_restored_pending.command):return _error("请先验证或取消恢复的修改。")
 	if read_only or has_preview():return _error("请先取消或应用预览，且项目必须可编辑。")
 	if _worker!=null:
 		if _worker.is_alive():return _error("上一项计算正在收尾；可先继续编辑，稍后再预览。")
 		_worker.wait_to_finish();_worker=null
 	_job_token+=1;_worker_token=_job_token;_job_revision=revision;_job_started_ms=Time.get_ticks_msec();_job_command=command.duplicate(true)
+	_pending_base=Pending.create(view(),command,"validating",authority_signature());_restored_pending={}
 	job_purpose="preview"
 	var source:=view();var frozen:=command.duplicate(true)
 	_worker=Thread.new()
@@ -119,10 +148,13 @@ func poll_preview_job() -> Dictionary:
 	if _worker==null:return {"status":"idle"}
 	if _worker.is_alive():return {"status":"working","stage":"1/2 验证与构建候选","elapsed_ms":Time.get_ticks_msec()-_job_started_ms,"cancelled":_worker_token!=_job_token}
 	var value: Variant=_worker.wait_to_finish();_worker=null
-	if not value is Dictionary or not value.get("ok") is bool:return {"status":"failed","error":"计算没有返回合法候选；正式项目未修改。"}
+	if not value is Dictionary or not value.get("ok") is bool:
+		_job_command={};return {"status":"failed","error":"计算没有返回合法候选；正式项目未修改。"}
 	var result: Dictionary=value
-	if _worker_token!=_job_token or revision!=_job_revision or has_preview() or read_only:return {"status":"discarded","message":"过期／已取消的候选已丢弃。"}
-	if not result.ok:return {"status":"failed","error":result.error}
+	if _worker_token!=_job_token or revision!=_job_revision or has_preview() or read_only:
+		_job_command={};return {"status":"discarded","message":"过期／已取消的候选已丢弃。"}
+	if not result.ok:
+		_job_command={};return {"status":"failed","error":result.error}
 	_prepared_plan=result.render_plan;_prepared_signature=_plan_key(result.project);_prepared_json_bytes=result.current_json_bytes
 	_current_json_bytes=result.previous_json_bytes
 	if job_purpose=="edit":
@@ -133,9 +165,41 @@ func poll_preview_job() -> Dictionary:
 	return {"status":"ready","stage":"2/2 候选完成，待明确应用","candidate_count":_draft.materialized_snapshot.get("stats",{}).get("candidate_count",0),"elapsed_ms":Time.get_ticks_msec()-_job_started_ms}
 func cancel_preview_job() -> void:
 	_job_token+=1
+	_job_command={};_pending_base={};_restored_pending={}
 func shutdown_jobs() -> void:
 	cancel_preview_job()
 	if _worker!=null:_worker.wait_to_finish();_worker=null
+	if _io_worker!=null:_io_worker.wait_to_finish();_io_worker=null
+
+func io_in_progress() -> bool:
+	return _io_worker!=null
+func start_io_job(path: String,kind: String="project",draft: Dictionary={}) -> Dictionary:
+	if io_in_progress():return _error("已有保存正在进行，请等待完成。")
+	if kind not in ["project","recovery"] or not _safe_target(path):return _error("保存类型或路径无效。")
+	if kind=="project" and (not path.ends_with(".shwork.json") or has_preview() or job_in_progress() or has_pending_intent()):return _error("请先应用或取消修改，项目须保存为 .shwork.json。")
+	var frozen_draft:=draft.duplicate(true);freeze(frozen_draft)
+	_io_context={"kind":kind,"project_id":_project.project_id,"revision":revision,"draft":frozen_draft,"path":path}
+	_io_worker=Thread.new()
+	var err:=_io_worker.start(_save_on_worker.bind(view(),path,kind,frozen_draft,current_path,asset_blobs.duplicate(false),_replace_file))
+	if err!=OK:_io_worker=null;return _error("不能启动保存："+error_string(err))
+	return {"ok":true,"queued":true}
+func _save_on_worker(source: Dictionary,path: String,kind: String,draft: Dictionary,source_path: String,blobs: Dictionary,replace_file: Callable) -> Dictionary:
+	var began:=Time.get_ticks_usec()
+	# This private writer shares only immutable input and byte arrays, no UI nodes.
+	var writer=get_script().new()
+	writer._project=source;writer.current_path=source_path;writer.asset_blobs=blobs;writer._replace_file=replace_file
+	var result: Dictionary=writer.save_file(path) if kind=="project" else writer.save_recovery(path,draft)
+	result.saved_signature=Model.input_hash(source);result.worker_ms=(Time.get_ticks_usec()-began)/1000.0
+	return result
+func poll_io_job() -> Dictionary:
+	if _io_worker==null:return {"status":"idle"}
+	if _io_worker.is_alive():return {"status":"working"}
+	var result: Variant=_io_worker.wait_to_finish();_io_worker=null
+	if not result is Dictionary or not result.get("ok",false):return {"status":"failed","error":str(result.get("error","保存没有返回合法结果。")) if result is Dictionary else "保存没有返回合法结果。"}
+	last_io_timing={"worker_ms":result.worker_ms,"kind":_io_context.kind}
+	if _io_context.kind=="project" and _io_context.project_id==_project.project_id:
+		current_path=_io_context.path;_saved_signature=result.saved_signature
+	return {"status":"saved","context":_io_context,"timing":last_io_timing}
 
 func snapshot() -> Dictionary:
 	return _project.duplicate(true)
@@ -260,6 +324,7 @@ func _candidate(source: Dictionary, command: Dictionary) -> Dictionary:
 
 func dispatch(command: Dictionary) -> Dictionary:
 	if read_only: return _error("此项目处于只读状态。")
+	if has_pending_intent():return _error("请先验证或取消恢复的修改。")
 	if has_preview(): return _error("请先提交或取消画布预览。")
 	var candidate := _candidate(_project,command)
 	if not candidate.ok: return candidate
@@ -268,7 +333,8 @@ func dispatch(command: Dictionary) -> Dictionary:
 
 func _commit(next: Dictionary, force_cache: bool=false,verified_signature: String="") -> Dictionary:
 	var next_signature: String=verified_signature if not verified_signature.is_empty() else Model.input_hash(next)
-	if not force_cache and next_signature == authority_signature(): return {"ok":true,"changed":false}
+	if not force_cache and next_signature == authority_signature():
+		cancel_preview_job();return {"ok":true,"changed":false}
 	cancel_preview_job()
 	undo_stack.append(view())
 	_undo_meta.append(_history_meta())
@@ -324,7 +390,7 @@ func restore_preview(candidate: Dictionary) -> Dictionary:
 	return {"ok":true}
 
 func undo() -> bool:
-	if has_preview() or undo_stack.is_empty(): return false
+	if has_preview() or has_pending_intent() or undo_stack.is_empty(): return false
 	redo_stack.append(view())
 	_redo_meta.append(_history_meta())
 	_project = undo_stack.pop_back()
@@ -335,7 +401,7 @@ func undo() -> bool:
 	return true
 
 func redo() -> bool:
-	if has_preview() or redo_stack.is_empty(): return false
+	if has_preview() or has_pending_intent() or redo_stack.is_empty(): return false
 	undo_stack.append(view())
 	_undo_meta.append(_history_meta())
 	_project = redo_stack.pop_back()
@@ -522,6 +588,7 @@ static func _atomic_write(path: String, value: Dictionary, replace_file: Callabl
 	return {"ok":true,"path":path}
 
 func save_file(path: String) -> Dictionary:
+	if io_in_progress():return _error("请等待后台保存完成。")
 	if not path.ends_with(".shwork.json"): return _error("工坊项目须另存为 .shwork.json，不能覆盖旧 v4 .map.json。")
 	if has_preview(): return _error("请先提交或取消预览；未覆盖保存文件。")
 	if not _safe_target(path): return _error("保存路径含有非法相对跳转。")
@@ -537,19 +604,24 @@ func save_file(path: String) -> Dictionary:
 	return result
 
 func save_recovery(path: String, draft: Dictionary) -> Dictionary:
+	if io_in_progress():return _error("请等待后台保存完成。")
 	var issue:=_validate_recovery_draft(draft,_project)
 	if not issue.is_empty():return _error(issue)
 	var assets := _save_assets(path,preload("editor_draft.gd").resources(draft))
 	if not assets.ok: return assets
-	return _atomic_write(path,{"document_type":"shanhe.workshop_recovery","schema_version":1,"project":snapshot(),"draft":draft.duplicate(true),"saved_path":current_path})
+	var schema:=2 if not draft.get("pending_edit",{}).is_empty() else 1
+	return _atomic_write(path,{"document_type":"shanhe.workshop_recovery","schema_version":schema,"project":snapshot(),"draft":draft.duplicate(true),"saved_path":current_path})
 
 func load_recovery(path: String) -> Dictionary:
 	var json := JSON.new()
 	if json.parse(FileAccess.get_file_as_string(path)) != OK or not json.data is Dictionary: return _error("恢复文件无法读取。")
 	var value: Dictionary = json.data
-	if value.get("document_type") != "shanhe.workshop_recovery" or value.get("schema_version") != 1 or not value.get("project") is Dictionary or not value.get("draft") is Dictionary: return _error("未知恢复协议。")
+	if value.get("document_type") != "shanhe.workshop_recovery" or (value.get("schema_version") != 1 and value.get("schema_version") != 2) or not value.get("project") is Dictionary or not value.get("draft") is Dictionary: return _error("未知恢复协议。")
+	var project_issue:=Model.validate(value.project)
+	if not project_issue.is_empty():return _error(project_issue)
 	var draft_issue:=_validate_recovery_draft(value.draft,value.project)
 	if not draft_issue.is_empty(): return _error(draft_issue)
+	if (value.schema_version==2)!=not value.draft.get("pending_edit",{}).is_empty():return _error("恢复协议与修改意图不一致。")
 	var result := replace_project(value.project)
 	if result.ok:
 		recovered_draft = value.draft.duplicate(true)
@@ -564,6 +636,8 @@ func load_recovery(path: String) -> Dictionary:
 	return result
 
 static func _validate_recovery_draft(draft: Dictionary, project: Dictionary) -> String:
+	var pending_issue:=Pending.validate(draft.get("pending_edit",{}),project)
+	if not pending_issue.is_empty():return pending_issue
 	var editor_issue: String=preload("editor_draft.gd").validate(draft)
 	if not editor_issue.is_empty():return editor_issue
 	var w5_issue: String=preload("w5_draft.gd").validate(draft,project)

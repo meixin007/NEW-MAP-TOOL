@@ -25,6 +25,12 @@ with tempfile.TemporaryDirectory(prefix='newmap-regression-') as temp:
         (core/'core.shwork.json').write_bytes(gzip.decompress(fixture.read_bytes()));shutil.copytree(copy/'samples/assets',core/'assets')
     editing_fixture=copy/'tests/fixtures/editing_core.shwork.json.gz'
     if editing_fixture.exists():(core/'editing_core.shwork.json').write_bytes(gzip.decompress(editing_fixture.read_bytes()))
+    pack=copy/'samples/reference_assets.assetpack.json'
+    if pack.exists():
+        reference=json.loads(pack.read_text(encoding='utf-8'))
+        for name,tree in [('materials',False),('trees',True)]:
+            subset={**reference,'assets':[item for item in reference['assets'] if (item['category']=='tree')==tree]}
+            (core/(name+'.assetpack.json')).write_text(json.dumps(subset,ensure_ascii=False),encoding='utf-8')
     cases=json.loads((root/'tests/suites.json').read_text(encoding='utf-8'))[a.suite] if a.suite else [dict(script=s) for s in (a.script or ['tests/review_c7e0/test_review_contracts.gd'])]
     for i,case in enumerate(cases):
         script=case['script'];graphical=case.get('graphical',a.graphical)
@@ -32,7 +38,7 @@ with tempfile.TemporaryDirectory(prefix='newmap-regression-') as temp:
         if case.get('kind')=='editor':cmd=[a.godot,'--headless','--editor','--quit','--path',str(copy),'--log-file',str(a.output.resolve()/(str(i)+'.native.log'))]
         artifacts=a.output.resolve()/(str(i)+'-artifacts');artifacts.mkdir()
         args=case.get('args',a.args);args=args[1:] if args and args[0]=='--' else args
-        args=[arg.replace('{source}',str(copy).replace('\\','/')).replace('{artifacts}',str(artifacts).replace('\\','/')).replace('{core_fixture}',str(core/'core.shwork.json').replace('\\','/')).replace('{editing_fixture}',str(core/'editing_core.shwork.json').replace('\\','/')) for arg in args]
+        args=[arg.replace('{source}',str(copy).replace('\\','/')).replace('{artifacts}',str(artifacts).replace('\\','/')).replace('{core_fixture}',str(core/'core.shwork.json').replace('\\','/')).replace('{editing_fixture}',str(core/'editing_core.shwork.json').replace('\\','/')).replace('{material_fixture}',str(core/'materials.assetpack.json').replace('\\','/')).replace('{tree_fixture}',str(core/'trees.assetpack.json').replace('\\','/')) for arg in args]
         if args:cmd+=['--',*args]
         start=time.perf_counter()
         try:
@@ -47,7 +53,7 @@ with tempfile.TemporaryDirectory(prefix='newmap-regression-') as temp:
             stdout=raw_out.decode('utf-8','replace');stderr=raw_err.decode('utf-8','replace')
         except OSError as exc:stdout='';stderr=str(exc);code=127
         (a.output/(str(i)+'.stdout.txt')).write_text(stdout,encoding='utf-8');(a.output/(str(i)+'.stderr.txt')).write_text(stderr,encoding='utf-8')
-        row=dict(script=script,command=cmd,exit_code=code,seconds=time.perf_counter()-start,passed=code==0 and 'SCRIPT ERROR:' not in stderr and 'ERROR:' not in stderr);rows.append(row);print(json.dumps(row),flush=True);print(stdout[-4500:],stderr[-3500:],flush=True)
+        row=dict(script=script,command=cmd,exit_code=code,seconds=time.perf_counter()-start,passed=code==0 and 'SCRIPT ERROR:' not in stderr and 'ERROR:' not in stderr and 'destroyed without its completion' not in stderr and 'Unicode parsing error' not in stderr);rows.append(row);print(json.dumps(row),flush=True);print(stdout[-4500:],stderr[-3500:],flush=True)
     isolated_changed=[name for name,digest in isolated_hashes.items() if not (copy/name).is_file() or hashlib.sha256((copy/name).read_bytes()).hexdigest()!=digest]
 changed=[name for name,digest in files.items() if not (root/name).is_file() or hashlib.sha256((root/name).read_bytes()).hexdigest()!=digest]
 record=dict(passed=all(r['passed'] for r in rows) and not isolated_changed,scope='isolated Godot project and private user directory',baseline_revision=a.baseline,source_sha256=files,isolated_source_sha256=isolated_hashes,source_changed_during_run=changed,isolated_source_changed=isolated_changed,tests=rows)

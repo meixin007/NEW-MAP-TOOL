@@ -1,6 +1,12 @@
 {
   "unit": [
     {
+      "script": "tests/review_pr1/test_pending_recovery.gd"
+    },
+    {
+      "script": "tests/review_pr1/test_save_jobs.gd"
+    },
+    {
       "script": "tests/review_c7e0/test_review_contracts.gd"
     },
     {
@@ -139,6 +145,100 @@
       "script": "<editor-import>",
       "kind": "editor",
       "timeout": 60
+    }
+  ],
+  "operations": [
+    {
+      "script": "tests/review_pr1/test_operation_frames.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{editing_fixture}"
+      ],
+      "timeout": 90
+    }
+  ],
+  "review_ui": [
+    {
+      "script": "tests/workshop_s1/test_rendered_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/reference_assets.assetpack.json"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/reference_assets.assetpack.json"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/workshop_s1/test_district_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{material_fixture}",
+        "{tree_fixture}"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/workshop_s1/test_templates_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/reference_assets.assetpack.json"
+      ],
+      "timeout": 180
+    }
+  ],
+  "soak_async": [
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "300"
+      ],
+      "timeout": 410
+    }
+  ],
+  "profile_async60": [
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "60"
+      ],
+      "timeout": 110
+    },
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "60"
+      ],
+      "timeout": 110
+    },
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "60"
+      ],
+      "timeout": 110
     }
   ]
 }

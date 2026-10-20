@@ -1,0 +1,10 @@
+{
+  "base_commit": "c7e0a4b94c3904921442b6746d737364d7024556",
+  "files": {
+    "addons/strategic_map_editor/workbench.gd": {
+      "base_sha256": "548c4f63b67ea784c3b7507b8adf0a1bd4ff5ce013e2fd6aa0b5bfdfcb9efa0f",
+      "current_sha256": "8af24fc62af2f5e5b3aa4c53e406a770fd23bbb992f5f680802815d2d35f1445",
+      "reason": "Only normal workshop autosave uses the new background writer; forced teardown retains the synchronous recovery boundary to join safely."
+    }
+  }
+}

@@ -3,12 +3,24 @@ var editor
 var wall_id: String=""
 
 func select_list(list: ItemList, index: int) -> void:
+	while "_list_cursor" in editor and editor._list_cursor>=0:await process_frame
 	await reveal_control(list)
-	await click_at(list.get_global_rect().position+Vector2(30,15))
-	for attempt in range(100):
-		var selected: PackedInt32Array=list.get_selected_items()
-		if not selected.is_empty() and selected[0]==index: return
-		await key(KEY_DOWN if selected.is_empty() or selected[0]<index else KEY_UP)
+	await process_frame
+	# Read hit-test geometry, then send real pointer/wheel input. Multi-select
+	# cursor navigation is not the same as choosing an item.
+	for attempt in range(180):
+		for y in range(8,int(list.size.y)-8,3):
+			var local:=Vector2(30,y)
+			if list.get_item_at_position(local,true)==index:
+				await click_at(list.global_position+local)
+				var selected:=list.get_selected_items()
+				if selected.size()==1 and selected[0]==index:return
+		var middle: int=list.get_item_at_position(list.size*0.5)
+		for pressed in [true,false]:
+			var wheel:=InputEventMouseButton.new();wheel.position=root.get_final_transform()*(list.global_position+list.size*0.5);wheel.button_index=MOUSE_BUTTON_WHEEL_DOWN if middle<index else MOUSE_BUTTON_WHEEL_UP;wheel.pressed=pressed;Input.parse_input_event(wheel)
+		await settle(2)
+	print("LIST_DIAGNOSTIC ",JSON.stringify({"target":index,"selected":Array(list.get_selected_items()),"count":list.item_count,"status":editor.status.text,"canvas_pending":editor.canvas.has_pending_input()}))
+	await capture("list_selection_failure_"+str(index))
 	check(false,"list selection did not reach "+str(index))
 func choose_option(picker: OptionButton, index: int) -> void:
 	await reveal_control(picker)

@@ -2018,7 +2018,8 @@ func _finish_autosave(wait: bool=false) -> void:
 func _autosave(force: bool = false) -> void:
 	if is_instance_valid(workshop_s1_panel):
 		if force or Time.get_ticks_msec()-last_author_input_ms >= 2000:
-			var result: Dictionary = workshop_s1_panel.save_recovery()
+			# Teardown cannot leave a new worker running after child _exit_tree.
+			var result: Dictionary = workshop_s1_panel.save_recovery() if force else workshop_s1_panel.queue_recovery()
 			if not result.ok: _status(str(result.error))
 		if is_instance_valid(autosave_timer) and autosave_timer.is_inside_tree(): autosave_timer.start(30.0)
 		return

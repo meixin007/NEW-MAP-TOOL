@@ -8,6 +8,10 @@ Godot 4.6.1 地图制作插件，包含 W6—W7 核心版候选和三个最终�
 
 [修复报告](docs/review_c7e0/FIX_REPORT.md) · [复验命令](tests/README.md) · [51 项映射](docs/review_c7e0/acceptance_51.json) · [执行结果](docs/review_c7e0/RESULTS.json)
 
+PR #1 复审后续：统一保存拖动与后台修改意图，恢复后重新验证并等待明确应用；项目保存与正常自动恢复备份改为后台写入；导出冻结校验、绘制计划、素材解码与清单编码移到后台，对象列表分帧刷新。强制退出的同步恢复边界保留。
+
+[本次修复与限制](docs/review_pr1/FIX_REPORT.md) · [逐项裁定](docs/review_pr1/ACCEPTANCE.md) · [可下载证据与画面](docs/review_pr1/EVIDENCE.md)
+
 ## 打开
 
 1. 用 Godot 4.6.1 导入仓库根目录的 `project.godot`。

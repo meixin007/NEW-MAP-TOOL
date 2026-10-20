@@ -76,6 +76,8 @@ func run() -> void:
 	await text_in(editor.plot_panel.seed.get_line_edit(),"999");await click_button("预览所选区域参数");await apply_plot()
 	check(not editor.session.snapshot().materialized_snapshot.entities.any(func(e):return e.entity_id==deleted_tree),"normal regeneration preserves deleted tree")
 	check(editor.session.snapshot().materialized_snapshot.entities.any(func(e):return e.entity_id==gate_id and e.management=="fixed"),"normal regeneration preserves fixed gate")
+	check(not editor.session.view().manual_entities.is_empty(),"manual courtyard still exists after regeneration")
+	if editor.session.view().manual_entities.is_empty():wb.queue_free();await settle();quit(1);return
 	check(editor.session.snapshot().manual_entities[0].ground_xy[0]==300,"normal regeneration preserves moved courtyard")
 	await capture("w5_ui_moved_courtyard_deleted_tree_fixed_gate_regenerated")
 	await project_file_dialog("save",output.path_join("w5_ui.shwork.json"));check(not editor.session.is_dirty(),"normal W5 save")

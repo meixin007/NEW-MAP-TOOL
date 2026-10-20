@@ -164,9 +164,9 @@ func _draw() -> void:
 		for hash in _textures.keys():
 			if not used.has(hash):_textures.erase(hash);_hit_masks.erase(hash)
 		var dependencies: String=Model.Paths.digest([next.asset_refs,next.surfaces,next.style_profile.ground_matrix,next.style_profile.height_axis,next.legacy_document.features])
-		if _view_project.is_empty() or _view_project.materialized_snapshot.entities!=next.materialized_snapshot.entities or dependencies!=_render_dependencies:
+		var prepared: Dictionary=session.prepared_render_plan(next)
+		if prepared.ok or _view_project.is_empty() or _view_project.materialized_snapshot.entities!=next.materialized_snapshot.entities or dependencies!=_render_dependencies:
 			var began:=Time.get_ticks_usec()
-			var prepared: Dictionary=session.prepared_render_plan(next)
 			entries=prepared.entries if prepared.ok else Plan.build(next);plan_rebuilds+=1;last_plan_build_ms=(Time.get_ticks_usec()-began)/1000.0
 		_view_project=next;_render_dependencies=dependencies
 		_last_revision=session.revision;_preview_serial=serial
@@ -261,6 +261,7 @@ func paint_world(drawer: CanvasItem) -> void:
 	drawer.draw_set_transform(Vector2.ZERO)
 
 func cancel() -> void:
+	edit_pending=false
 	_dragging = false
 	_point_dragging = false
 	_last_drag_error = ""
@@ -516,7 +517,12 @@ func paths_recipe() -> Dictionary:
 	return {}
 
 func has_pending_input() -> bool:
-	return edit_pending or _dragging or _point_dragging or session.has_preview() or session.job_in_progress() or not compound_points.is_empty() or not district_points.is_empty() or not terrain_points.is_empty() or not path_points.is_empty() or not plot_points.is_empty() or not brush_points.is_empty() or _brush_drawing
+	return edit_pending or _dragging or _point_dragging or not _transient_command.is_empty() or session.has_pending_intent() or session.has_preview() or session.job_in_progress() or not compound_points.is_empty() or not district_points.is_empty() or not terrain_points.is_empty() or not path_points.is_empty() or not plot_points.is_empty() or not brush_points.is_empty() or _brush_drawing
+
+func pending_edit() -> Dictionary:
+	if not _transient_command.is_empty():
+		return preload("../pending_edit.gd").create(session.view(),_transient_command,"validating" if edit_pending else "dragging",session.authority_signature())
+	return session.pending_edit()
 
 func _compound_target(p: Dictionary) -> Dictionary:
 	for e in p.materialized_snapshot.entities:

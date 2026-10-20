@@ -16,6 +16,8 @@ var _canvas
 var _codec: Thread
 var _image_job
 var _frozen
+var _preflight: Thread
+var last_timing: Dictionary={}
 static func error(message: String) -> Dictionary:return {"ok":false,"error":message}
 static func digest(bytes: PackedByteArray) -> String:
 	var context:=HashingContext.new();context.start(HashingContext.HASH_SHA256);context.update(bytes);return context.finish().hex_encode()
@@ -83,6 +85,7 @@ func thumbnail(session,selected: Array) -> Image:
 	var result: Image=await _image(bounds,scale,[],selected,false,false)
 	_viewport.queue_free();return result
 func _cleanup() -> void:
+	if is_instance_valid(_canvas) and _canvas.get_parent()==null:_canvas.queue_free()
 	if is_instance_valid(_viewport):_viewport.queue_free()
 	var reverse: Array=_created.duplicate();reverse.reverse()
 	for path in reverse:
@@ -92,6 +95,7 @@ func _cleanup() -> void:
 	_frozen=null;_canvas=null
 func _exit_tree() -> void:
 	cancel()
+	if _preflight!=null:_preflight.wait_to_finish();_preflight=null
 	if _codec!=null:_codec.wait_to_finish();_codec=null
 	if busy:_cleanup()
 func _write(relative: String,bytes: PackedByteArray) -> String:
@@ -115,6 +119,43 @@ func _image(rect: Rect2,scale: float,indices: Array=[],selected: Array=[],ground
 	RenderingServer.force_draw(false)
 	var raw:=_viewport.get_texture().get_image()
 	return straight_alpha(raw) if correct_alpha else raw
+
+func _prepare_snapshot(project: Dictionary,source_path: String,blobs: Dictionary,options: Dictionary,requested: Rect2,scale: float) -> Dictionary:
+	var frozen=Session.new()
+	var adopted: Dictionary=frozen.replace_project(project)
+	if not adopted.ok or frozen.read_only:return error("项目快照不可编辑或派生结果不一致。")
+	frozen.current_path=source_path;frozen.asset_blobs=blobs
+	var images: Dictionary={}
+	for asset in project.asset_refs.values():
+		var bytes: PackedByteArray=frozen.asset_bytes(asset)
+		if bytes.is_empty() or digest(bytes)!=asset.texture_sha256:return error("导出缺少正确素材："+asset.label)
+		frozen.asset_blobs[asset.texture_sha256]=bytes
+		if not images.has(asset.texture_sha256):
+			var image:=Image.new()
+			if image.load_png_from_buffer(bytes)!=OK:return error("导出素材不能解码："+asset.label)
+			images[asset.texture_sha256]=image
+	var entries:=Plan.build(frozen.view());Session.freeze(entries)
+	var stack: Array=[]
+	for i in range(entries.size()):stack.append({"index":i,"entity_id":entries[i].entity_id,"kind":entries[i].entity.kind,"part_order":entries[i].get("part_order",0),"entry":serial(entries[i])})
+	Session.freeze(stack)
+	frozen._prepared_plan=entries;frozen._prepared_signature=Session._plan_key(frozen.view())
+	var bounds:=requested if options.has("bounds") else default_bounds(project)
+	var pixels:=Vector2i(ceili(bounds.size.x*scale),ceili(bounds.size.y*scale));bounds.size=Vector2(pixels)/scale
+	if pixels.x>8192 or pixels.y>8192:return error("单图限8192像素，分页限64—2048像素。")
+	var estimate:=estimate_output(pixels,entries.size(),options)
+	if not estimate.ok:return error(estimate.error)
+	return {"ok":true,"frozen":frozen,"images":images,"entries":entries,"stack":stack,"bounds":bounds,"pixels":pixels,"estimate":estimate}
+
+func _json_on_worker(value: Dictionary) -> PackedByteArray:
+	return JSON.stringify(value,"\t",false,true).to_utf8_buffer()
+func _json_async(relative: String,value: Dictionary) -> String:
+	_preflight=Thread.new()
+	var started:=_preflight.start(_json_on_worker.bind(value))
+	if started!=OK:_preflight=null;return "不能启动清单编码。"
+	while _preflight.is_alive():await get_tree().process_frame
+	var bytes: PackedByteArray=_preflight.wait_to_finish();_preflight=null
+	return _write(relative,bytes)
+
 func export_project(session,destination: String,options: Dictionary) -> Dictionary:
 	for key in options:
 		if key not in ["bounds","scale","tile_size","selected_ids","transparent_ground","layers","include_grid","include_legend"]:return error("未知导出选项。")
@@ -124,46 +165,63 @@ func export_project(session,destination: String,options: Dictionary) -> Dictiona
 	if session.has_preview():return error("先应用或取消预览，再冻结导出。")
 	var target: String=ProjectSettings.globalize_path(destination).replace("\\","/").trim_suffix("/")
 	if not Session._safe_target(target) or DirAccess.dir_exists_absolute(target) or FileAccess.file_exists(target):return error("导出须使用新的目录；已有交付不会覆盖。")
-	var project: Dictionary=session.snapshot();var scale: Variant=options.get("scale",1.0);var bounds:=default_bounds(project)
+	var project: Dictionary=session.view();var scale: Variant=options.get("scale",1.0);var bounds:=Rect2()
 	if options.has("bounds"):
 		var b: Variant=options.bounds
 		if not b is Array or b.size()!=4 or not b.all(func(n):return Session.Model.numeric(n)):return error("固定导出范围无效。")
 		bounds=Rect2(b[0],b[1],b[2],b[3])
-	if not Session.Model.numeric(scale) or scale<=0 or scale>4 or bounds.size.x<=0 or bounds.size.y<=0:return error("导出比例／范围无效。")
-	var pixels:=Vector2i(ceili(bounds.size.x*float(scale)),ceili(bounds.size.y*float(scale)));bounds.size=Vector2(pixels)/float(scale)
+	if not Session.Model.numeric(scale) or scale<=0 or scale>4 or (options.has("bounds") and (bounds.size.x<=0 or bounds.size.y<=0)):return error("导出比例／范围无效。")
 	var tile: Variant=options.get("tile_size",2048)
-	if not Session.Model.numeric(tile) or float(tile)!=floorf(float(tile)) or tile<64 or tile>2048 or pixels.x>8192 or pixels.y>8192:return error("单图限8192像素，分页限64—2048像素。")
+	if not Session.Model.numeric(tile) or float(tile)!=floorf(float(tile)) or tile<64 or tile>2048:return error("单图限8192像素，分页限64—2048像素。")
 	var selected: Variant=options.get("selected_ids",[])
 	if not selected is Array or not selected.all(func(id):return id is String):return error("导出选择列表无效。")
-	var entries:=Plan.build(project)
-	var estimate:=estimate_output(pixels,entries.size(),options)
-	if not estimate.ok:return error(estimate.error)
+	busy=true;cancelled=false;_created=[];_stage="";last_timing={}
+	progress.emit("正在验证冻结项目…",0,1)
+	var began:=Time.get_ticks_usec()
+	_preflight=Thread.new()
+	var started:=_preflight.start(_prepare_snapshot.bind(project,session.current_path,session.asset_blobs.duplicate(false),options.duplicate(true),bounds,float(scale)))
+	if started!=OK:_preflight=null;busy=false;return error("不能启动导出校验。")
+	while _preflight.is_alive():await get_tree().process_frame
+	var prepared: Dictionary=_preflight.wait_to_finish();_preflight=null
+	last_timing.preflight_ms=(Time.get_ticks_usec()-began)/1000.0
+	if cancelled:_cleanup();return error("导出已取消，原交付保留。")
+	if not prepared.ok:_cleanup();return prepared
+	var entries: Array=prepared.entries;var estimate: Dictionary=prepared.estimate;var pixels: Vector2i=prepared.pixels
+	bounds=prepared.bounds
+	var frozen=prepared.frozen
 	progress.emit("预计 %d 张 PNG，工作像素 %.1f百万，原始输出上界 %.1fMiB，图像峰值估算 %.1fMiB"%[estimate.images,estimate.work_pixels/1000000.0,estimate.raw_output_bytes/1048576.0,estimate.estimated_image_peak_bytes/1048576.0],0,estimate.images)
-	var frozen=Session.new();var adopted: Dictionary=frozen.replace_project(project)
-	if not adopted.ok or frozen.read_only:return error("项目快照不可编辑或派生结果不一致。")
-	for a in project.asset_refs.values():
-		var bytes: PackedByteArray=session.asset_bytes(a)
-		if bytes.is_empty() or digest(bytes)!=a.texture_sha256:return error("导出缺少正确素材："+a.label)
-		frozen.asset_blobs[a.texture_sha256]=bytes
-	busy=true;cancelled=false;_created=[];_stage=target+".tmp_"+Session.Model.new_id("export")
+	_stage=target+".tmp_"+Session.Model.new_id("export")
 	if DirAccess.make_dir_recursive_absolute(_stage)!=OK:busy=false;return error("不能建立临时导出目录。")
 	if DirAccess.make_dir_absolute(_stage.path_join("assets"))!=OK:_cleanup();return error("不能建立资产目录。")
 	_created.append(_stage.path_join("assets"));_frozen=frozen
-	var frozen_saved: Dictionary=frozen.save_file(_stage.path_join("project.shwork.json"))
+	began=Time.get_ticks_usec()
+	var frozen_saved: Dictionary=frozen.start_io_job(_stage.path_join("project.shwork.json"))
+	if frozen_saved.ok:
+		while frozen.io_in_progress():
+			await get_tree().process_frame
+			var saved: Dictionary=frozen.poll_io_job()
+			if saved.status=="failed":frozen_saved=error(saved.error)
 	# save_file wrote content-addressed assets; inventory only this fresh stage for exact cleanup.
 	var dir:=DirAccess.open(_stage.path_join("assets"))
 	if dir!=null:
 		for file in dir.get_files():_created.append(_stage.path_join("assets").path_join(file))
 	_created.append(_stage.path_join("project.shwork.json"))
 	if not frozen_saved.ok:_cleanup();return frozen_saved
+	last_timing.frozen_save_ms=(Time.get_ticks_usec()-began)/1000.0
+	if cancelled:_cleanup();return error("导出已取消，原交付保留。")
 	_viewport=SubViewport.new();_viewport.transparent_bg=true;_viewport.disable_3d=true;add_child(_viewport)
-	_canvas=Canvas.new();_canvas.session=frozen;_canvas.render_only=true;_canvas.render_background=false;_canvas.show_envelopes=false;_canvas.show_plot_boundaries=false;_canvas.show_district_lots=false;_canvas.export_include_grid=bool(options.get("include_grid",false));_canvas.export_include_legend=bool(options.get("include_legend",false));_viewport.add_child(_canvas)
+	_canvas=Canvas.new();_canvas.session=frozen;_canvas.render_only=true;_canvas.render_background=false;_canvas.show_envelopes=false;_canvas.show_plot_boundaries=false;_canvas.show_district_lots=false;_canvas.export_include_grid=bool(options.get("include_grid",false));_canvas.export_include_legend=bool(options.get("include_legend",false))
+	# Decode in preflight; spread GPU uploads across frames before drawing.
+	for hash in prepared.images:
+		if cancelled:_cleanup();return error("导出已取消，原交付保留。")
+		_canvas._textures[hash]=ImageTexture.create_from_image(prepared.images[hash])
+		await get_tree().process_frame
+	_viewport.add_child(_canvas)
 	await get_tree().process_frame
 	var jobs: Array=[{"path":"composite.png","bounds":bounds,"paper":true,"indices":[],"selected":[],"ground":false,"overlays":true}]
 	if options.get("transparent_ground",true):jobs.append({"path":"ground.png","bounds":bounds,"paper":false,"indices":[],"selected":[],"ground":true})
 	if not selected.is_empty():jobs.append({"path":"selection.png","bounds":bounds,"paper":false,"indices":[],"selected":selected,"ground":false})
-	var stack: Array=[];var layers: Array=[];var tiles: Array=[]
-	for i in range(entries.size()):stack.append({"index":i,"entity_id":entries[i].entity_id,"kind":entries[i].entity.kind,"part_order":entries[i].get("part_order",0),"entry":serial(entries[i])})
+	var stack: Array=prepared.stack;var layers: Array=[];var tiles: Array=[]
 	if options.get("layers",true):
 		layers.append({"path":"background.png","indices":[],"kind":"background","origin":[bounds.position.x,bounds.position.y],"size":[pixels.x,pixels.y]});jobs.append({"path":"background.png","bounds":bounds,"paper":true,"indices":[-1],"selected":[],"ground":false})
 		for start in range(0,entries.size(),64):
@@ -194,8 +252,10 @@ func export_project(session,destination: String,options: Dictionary) -> Dictiona
 		files[job.path]=FileAccess.get_sha256(_stage.path_join(job.path))
 	files["project.shwork.json"]=FileAccess.get_sha256(_stage.path_join("project.shwork.json"))
 	for a in project.asset_refs.values():files[a.texture_ref]=a.texture_sha256
-	var manifest: Dictionary={"document_type":"shanhe.workshop_export","schema_version":1,"project_ref":"project.shwork.json","frozen_input_hash":Session.Model.input_hash(project),"generator_version":project.materialized_snapshot.generator_version,"bounds":[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y],"scale":scale,"pixel_size":[pixels.x,pixels.y],"environment":"static S1; no weather or game time binding","render_stack":stack,"layers":layers,"tiles":tiles,"files":files,"options":serial(options),"estimate":estimate,"logical_bindings":"presentation only; no navigation or GameState changes"}
-	var issue:=_json("manifest.json",manifest)
+	var manifest: Dictionary={"document_type":"shanhe.workshop_export","schema_version":1,"project_ref":"project.shwork.json","frozen_input_hash":project.materialized_snapshot.input_hash,"generator_version":project.materialized_snapshot.generator_version,"bounds":[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y],"scale":scale,"pixel_size":[pixels.x,pixels.y],"environment":"static S1; no weather or game time binding","render_stack":stack,"layers":layers,"tiles":tiles,"files":files,"options":serial(options),"estimate":estimate,"logical_bindings":"presentation only; no navigation or GameState changes"}
+	began=Time.get_ticks_usec()
+	var issue: String=await _json_async("manifest.json",manifest)
+	last_timing.manifest_ms=(Time.get_ticks_usec()-began)/1000.0
 	if cancelled or not issue.is_empty():_cleanup();return error("导出取消或清单写入失败；原交付保留。")
 	if DirAccess.dir_exists_absolute(target) or DirAccess.rename_absolute(_stage,target)!=OK:_cleanup();return error("不能原子采用新目录；原交付保留。")
 	_created.clear();_stage="";busy=false;_viewport.queue_free();progress.emit("导出完成",jobs.size(),jobs.size())

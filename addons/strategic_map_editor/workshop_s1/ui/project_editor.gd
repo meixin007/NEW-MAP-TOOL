@@ -46,6 +46,10 @@ var export_panel
 var selection_ids: Array=[]
 var _refresh_snapshot: Dictionary={}
 var _object_rows: Array=[]
+var _list_project: Dictionary={}
+var _list_cursor: int=-1
+var _asset_rows: Dictionary={}
+var _asset_query: String="__initial_query__"
 var last_refresh_ms:=0.0
 var _queued_owner: String=""
 var _preview_owner: String="plot"
@@ -95,8 +99,9 @@ func _ready() -> void:
 	button(actions,"撤销",func(): history(false))
 	button(actions,"重做",func(): history(true))
 	button(actions,"适合窗口",func(): canvas.fit_map())
-	button(actions,"保存恢复副本",func(): report(save_recovery()))
+	button(actions,"保存恢复副本",func(): queue_recovery())
 	button(actions,"恢复项目",func(): guard_leave(restore_recovery))
+	button(actions,"重新验证恢复的修改",resume_pending_edit)
 	button(actions,"应用恢复的画布预览",func(): report(session.commit_preview()))
 	button(actions,"取消画布预览",func(): canvas.cancel())
 	button(actions,"应用区域预览（一次撤销）",func():
@@ -221,7 +226,8 @@ func _ready() -> void:
 			var json:=JSON.new()
 			if json.parse(FileAccess.get_file_as_string(path))!=OK or not json.data is Dictionary: report({"ok":false,"error":"旧 v4 JSON 无法读取。"});return
 			result=session.dispatch({"op":"import_legacy_rivers","legacy_document":json.data})
-		else: result=session.load_file(path) if _action=="open" else session.save_file(path)
+		elif _action=="save":queue_save(path);return
+		else: result=session.load_file(path)
 		report(result)
 		if result.ok and _action in ["open","legacy_rivers"]: reset_context();refresh();canvas.fit_map())
 	add_child(file_dialog)
@@ -245,8 +251,16 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(_delta: float) -> void:
+	_pump_object_list()
+	var saved: Dictionary=session.poll_io_job()
+	if saved.status=="failed":status.text=str(saved.error)
+	elif saved.status=="saved":
+		if saved.context.kind=="recovery" and saved.context.project_id==session.view().project_id:
+			_recovery_revision=saved.context.revision;_recovery_draft=saved.context.draft
+		status.text="恢复副本已保存。" if saved.context.kind=="recovery" else "项目已保存。"
+		path_label.text=("● 未保存 · " if session.is_dirty() else "已保存 · ")+session.current_path
 	if canvas.edit_pending:return # Canvas owns its release transaction polling.
-	if _preview_owner in ["terrain","room","direct_edit"]:
+	if _preview_owner in ["terrain","room","direct_edit","recovery"]:
 		var result: Dictionary=session.poll_preview_job()
 		match result.status:
 			"working":status.text="正在验证和准备绘制 · %dms · 可取消"%result.elapsed_ms
@@ -293,27 +307,9 @@ func refresh() -> void:
 	_refreshing = true
 	path_label.text = ("● 未保存 · " if session.is_dirty() else "已保存 · ") + (session.current_path if not session.current_path.is_empty() else "新项目") + (" · 版本不匹配，只读旧快照" if session.read_only else "")
 	if not _title_dirty: title_field.text = p.title
-	if _object_rows!=p.materialized_snapshot.entities:
-		var reuse: bool=_object_rows.size()==p.materialized_snapshot.entities.size()
-		if reuse:
-			for i in range(_object_rows.size()):
-				if _object_rows[i].entity_id!=p.materialized_snapshot.entities[i].entity_id:reuse=false;break
-		if not reuse:object_list.clear()
-		for i in range(p.materialized_snapshot.entities.size()):
-			var e: Dictionary=p.materialized_snapshot.entities[i]
-			if reuse and e==_object_rows[i]:continue
-			var object_label: String=str(e.get("label",e.entity_id))
-			if e.kind=="asset" and p.asset_refs.has(e.asset_ref): object_label=p.asset_refs[e.asset_ref].label+" · "+str(e.get("role","手工"))
-			object_label=("[固定] " if e.get("management")=="fixed" else ("[自动] " if e.get("management")=="generated" else ""))+object_label
-			if e.get("hidden",false):object_label="[隐藏] "+object_label
-			if e.get("locked",false):object_label="[锁定] "+object_label
-			if reuse:object_list.set_item_text(i,object_label)
-			else:object_list.add_item(object_label);object_list.set_item_metadata(i,e.entity_id)
-			if e.entity_id in selection_ids:object_list.select(i,false)
-		_object_rows=p.materialized_snapshot.entities
-	for i in range(object_list.item_count):
-		if object_list.get_item_metadata(i) in selection_ids:object_list.select(i,false)
-		else:object_list.deselect(i)
+	_list_project=p;_list_cursor=0
+	object_list.mouse_filter=Control.MOUSE_FILTER_IGNORE;object_list.focus_mode=Control.FOCUS_NONE
+	_pump_object_list()
 	refresh_assets()
 	var active_surface: String=canvas.active_surface_id
 	surface_picker.clear()
@@ -331,6 +327,32 @@ func refresh() -> void:
 	if is_instance_valid(library_panel):library_panel.refresh()
 	_refreshing = false
 	last_refresh_ms=(Time.get_ticks_usec()-began)/1000.0
+
+func _pump_object_list() -> void:
+	if _list_cursor<0 or not is_instance_valid(object_list):return
+	var began:=Time.get_ticks_usec();var budget_end:=mini(_list_cursor+400,_list_project.materialized_snapshot.entities.size())
+	while object_list.item_count>_list_project.materialized_snapshot.entities.size():
+		object_list.remove_item(object_list.item_count-1)
+		if Time.get_ticks_usec()-began>4000:return
+	while _list_cursor<budget_end:
+		var i:=_list_cursor;var e: Dictionary=_list_project.materialized_snapshot.entities[i]
+		var label: String=str(e.get("label",e.entity_id))
+		if e.kind=="asset" and _list_project.asset_refs.has(e.asset_ref):label=_list_project.asset_refs[e.asset_ref].label+" · "+str(e.get("role","手工"))
+		label=("[固定] " if e.get("management")=="fixed" else ("[自动] " if e.get("management")=="generated" else ""))+label
+		if e.get("hidden",false):label="[隐藏] "+label
+		if e.get("locked",false):label="[锁定] "+label
+		if i<object_list.item_count:
+			if object_list.get_item_text(i)!=label:object_list.set_item_text(i,label)
+			if object_list.get_item_metadata(i)!=e.entity_id:object_list.set_item_metadata(i,e.entity_id)
+		else:object_list.add_item(label);object_list.set_item_metadata(i,e.entity_id)
+		if e.entity_id in selection_ids:
+			if not object_list.is_selected(i):object_list.select(i,false)
+		elif object_list.is_selected(i):object_list.deselect(i)
+		_list_cursor+=1
+		if Time.get_ticks_usec()-began>4000:break
+	if _list_cursor>=_list_project.materialized_snapshot.entities.size():
+		_object_rows=_list_project.materialized_snapshot.entities;_list_cursor=-1;_list_project={}
+		object_list.mouse_filter=Control.MOUSE_FILTER_STOP;object_list.focus_mode=Control.FOCUS_ALL
 
 func select_entity(id: String) -> void:
 	if canvas.has_pending_input() and id!=selected_id:
@@ -395,7 +417,18 @@ func choose_file(action: String) -> void:
 func save_current() -> void:
 	if has_pending_fields() or canvas.has_pending_input(): status.text="请先应用或取消属性／画布输入；恢复副本可以保留。";return
 	if session.current_path.is_empty(): choose_file("save")
-	else: report(session.save_file(session.current_path))
+	else: queue_save(session.current_path)
+
+func queue_save(path: String) -> Dictionary:
+	var result: Dictionary=session.start_io_job(path)
+	status.text="正在保存项目…" if result.ok else str(result.error)
+	return result
+
+func queue_recovery() -> Dictionary:
+	if session.io_in_progress():return {"ok":true,"queued":false}
+	var result: Dictionary=session.start_io_job(RECOVERY,"recovery",capture_draft())
+	status.text="正在保存恢复副本…" if result.ok else str(result.error)
+	return result
 
 func history(redo_action: bool) -> void:
 	if canvas.has_pending_input(): status.text="请先完成或取消画布输入。";return
@@ -404,6 +437,7 @@ func history(redo_action: bool) -> void:
 	if not ok: status.text = "没有可恢复的历史。"
 
 func guard_leave(action: Callable) -> void:
+	if session.io_in_progress():status.text="请等待保存完成，再离开当前项目。";return
 	if is_instance_valid(export_panel) and export_panel.adapter.busy:status.text="请先取消导出并等待收尾，再离开当前项目。";return
 	if not has_unsaved_authoring(): action.call(); return
 	confirmation.title = "当前工坊项目尚未保存"
@@ -436,7 +470,7 @@ func request_canvas_mode(mode: String, prepare: Callable=Callable()) -> void:
 	confirmation.confirmed.connect(action,CONNECT_ONE_SHOT);confirmation.popup_centered()
 
 func has_unsaved_editor_session() -> bool:
-	return has_unsaved_authoring() and (_recovery_revision != session.revision or _recovery_draft != capture_draft())
+	return session.io_in_progress() or (has_unsaved_authoring() and (_recovery_revision != session.revision or _recovery_draft != capture_draft()))
 
 func save_recovery() -> Dictionary:
 	var draft := capture_draft()
@@ -446,7 +480,8 @@ func save_recovery() -> Dictionary:
 
 func capture_draft() -> Dictionary:
 	var metadata=active_asset_editor()
-	var result: Dictionary={"tool":canvas.mode,"selection":selected_id,"preview":session.preview_view() if session.has_preview() else {},"pan":[canvas.pan.x,canvas.pan.y],"zoom":canvas.zoom,"fields":{"title":title_field.text,"name":name_field.text,"x":x_field.value,"y":y_field.value,"scale":scale_field.value,"orientation":orientation_field.value,"surface_id":surface_picker.get_selected_metadata(),"asset_ref":canvas.active_asset_ref},"title_dirty":_title_dirty,"property_dirty":_property_dirty,"path_draft":{"points":canvas.path_points.duplicate(true),"type":canvas.path_type,"width":canvas.path_width,"style":canvas.path_style,"seed":canvas.path_seed,"wall_asset_ref":canvas.path_wall_ref,"recipe_id":canvas.selected_recipe_id,"point_id":canvas.selected_point_id},"path_fields":path_panel.capture_draft(),"asset_editor":metadata.capture_draft() if metadata!=null else {}}
+	var intent: Dictionary=canvas.pending_edit()
+	var result: Dictionary={"tool":canvas.mode,"selection":selected_id,"preview":session.preview_view() if session.has_preview() and intent.is_empty() else {},"pan":[canvas.pan.x,canvas.pan.y],"zoom":canvas.zoom,"fields":{"title":title_field.text,"name":name_field.text,"x":x_field.value,"y":y_field.value,"scale":scale_field.value,"orientation":orientation_field.value,"surface_id":surface_picker.get_selected_metadata(),"asset_ref":canvas.active_asset_ref},"title_dirty":_title_dirty,"property_dirty":_property_dirty,"path_draft":{"points":canvas.path_points.duplicate(true),"type":canvas.path_type,"width":canvas.path_width,"style":canvas.path_style,"seed":canvas.path_seed,"wall_asset_ref":canvas.path_wall_ref,"recipe_id":canvas.selected_recipe_id,"point_id":canvas.selected_point_id},"path_fields":path_panel.capture_draft(),"asset_editor":metadata.capture_draft() if metadata!=null else {}}
 	result.plot_draft={"points":canvas.plot_points.duplicate(true),"shape":canvas.plot_shape,"recipe_id":canvas.selected_plot_id,"brush_points":canvas.brush_points.duplicate(true),"brush_template":canvas.brush_template.duplicate(true)}
 	result.plot_fields=plot_panel.capture_draft()
 	result.terrain_draft={"points":canvas.terrain_points.duplicate(true),"parent":canvas.terrain_parent,"from":canvas.terrain_from,"to":canvas.terrain_to,"selected_id":canvas.selected_terrain_id,"automatic_surface":canvas.automatic_surface}
@@ -454,6 +489,7 @@ func capture_draft() -> Dictionary:
 	result.room_fields=room_panel.capture_draft();result.district_fields=district_panel.capture_draft()
 	result.library_fields=library_panel.capture_draft();result.export_fields=export_panel.capture_draft();result.selection_ids=selected_entity_ids()
 	result.w5_canvas={"compound_points":canvas.compound_points.duplicate(true),"district_points":canvas.district_points.duplicate(true),"compound_target_id":canvas.compound_target_id,"show_lots":canvas.show_district_lots,"preview_owner":_preview_owner}
+	result.pending_edit=intent
 	return result
 
 func restore_recovery() -> void:
@@ -496,10 +532,31 @@ func restore_recovery() -> void:
 	if not metadata_draft.is_empty():
 		var metadata:=AssetEditor.new();metadata.session=session;metadata.asset_ref=metadata_draft.asset_ref;metadata.selected_entity_id=str(metadata_draft.get("selected_entity_id",""));add_child(metadata);metadata.restore_draft(metadata_draft);metadata.popup_centered(Vector2i(1050,700))
 	# Keep a validated preview separate from authority, ready for explicit apply/cancel.
+	if not draft.get("pending_edit",{}).is_empty():
+		var pending: Dictionary=session.restore_pending_edit(draft.pending_edit)
+		if not pending.ok:status.text="恢复项目完成；修改意图未恢复："+str(pending.error);return
+		var command: Dictionary=draft.pending_edit.command
+		if command.op in ["update_entity","update_path_point"] and Model.pair(command.get("patch",{}).get("ground_xy")):
+			if command.op=="update_entity":
+				for entity in session.view().materialized_snapshot.entities:
+					if entity.entity_id==command.entity_id:canvas._drag_entity=entity;canvas._transient_command=command.duplicate(true);break
+			else:
+				canvas.selected_recipe_id=command.recipe_id;canvas.selected_point_id=command.point_id
+				if not canvas.paths_recipe().is_empty():canvas._transient_command=command.duplicate(true)
+			canvas._transient_layer.queue_redraw()
+		status.text="已恢复目标输入；请点击“重新验证恢复的修改”，再明确应用或取消。"
+		return
 	if draft.get("preview") is Dictionary and not draft.preview.is_empty():
 		var restored_preview: Dictionary=session.restore_preview(draft.preview)
 		if not restored_preview.ok:status.text="恢复项目完成；预览未采用："+str(restored_preview.error);return
 	status.text = "恢复项目及未应用输入完成；请明确应用或取消后另存。"
+
+func resume_pending_edit() -> void:
+	var result: Dictionary=session.resume_pending_edit()
+	if result.ok:
+		canvas._transient_command={};canvas._transient_layer.queue_redraw();_preview_owner="recovery"
+		status.text="正在重新验证恢复目标；完成后等待应用。"
+	else:report(result)
 
 func object_patch() -> Dictionary:
 	var patch := {"label":name_field.text,"ground_xy":[x_field.value,y_field.value],"surface_id":str(surface_picker.get_selected_metadata())}
@@ -546,10 +603,12 @@ func _build_asset_tab(tabs: TabContainer) -> void:
 
 func refresh_assets() -> void:
 	if not is_instance_valid(asset_list): return
-	var chosen: Variant=asset_list.get_item_metadata(asset_list.get_selected_items()[0]) if not asset_list.get_selected_items().is_empty() else ""
-	asset_list.clear()
 	var p: Dictionary=session.view()
 	var query:=asset_query.text.strip_edges().to_lower()
+	if _asset_rows==p.asset_refs and _asset_query==query:return
+	_asset_rows=p.asset_refs;_asset_query=query
+	var chosen: Variant=asset_list.get_item_metadata(asset_list.get_selected_items()[0]) if not asset_list.get_selected_items().is_empty() else ""
+	asset_list.clear()
 	for key in p.asset_refs:
 		var a: Dictionary=p.asset_refs[key]
 		if not query.is_empty() and not (a.label+" "+key+" "+" ".join(a.tags)).to_lower().contains(query): continue
