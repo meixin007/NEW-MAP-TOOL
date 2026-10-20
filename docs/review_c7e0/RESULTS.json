@@ -1201,13 +1201,13 @@
     "baseline_failures": 4,
     "current_checks": 7,
     "current_failures": 0,
-    "baseline_result_sha256": "6a72ddc35c3e93892e86c237cbaa24a69574740f0d702e13509d6b48b9325668",
-    "current_result_sha256": "53df04dbbe9ebf7f4e4624a00f96c88f5a55337c3f297dea78b5fe815d04309a"
+    "baseline_result_sha256": "6d35e2940ce2428a2c7e9eebe2a160233130bd7ff5b59605cc21ffad7f8b5178",
+    "current_result_sha256": "84913e79dfb54db11d5782719c2a46e2fd561d9e9490e43fcf716fd978cfdc87"
   },
   "evidence_archive": {
-    "local_path": "H:/NEW-MAP-TOOL_review_support_20261019/NEW-MAP-TOOL_review_evidence_20261019.zip",
-    "sha256": "b730ec373b4dd6d5ab7080bfbc02de08d5c3752b5648bc2e232230cedb230d45",
-    "bytes": 6076197,
+    "local_path": "H:/NEW-MAP-TOOL_review_support_20261019/NEW-MAP-TOOL_review_evidence_20261019_r2.zip",
+    "sha256": "85bd0099e03b2c58c39f1bce74657f7ab5a286506e7ea07d599c96c45268a7bd",
+    "bytes": 6076611,
     "files": 204,
     "scope": "Logs, trajectories, hashes, UI captures, export pixels, art views and negative evidence. PNG asset dependencies reuse the source package. No stable release published."
   }

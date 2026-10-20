@@ -3,6 +3,11 @@
   "branch": "codex/review-fixes-20261019",
   "files": [
     {
+      "path": ".gitattributes",
+      "bytes": 165,
+      "sha256": "c8c6ac156a50015c54ebcee8bc0cdf40474d8e4c295cbdb11250602d5893d33b"
+    },
+    {
       "path": ".gitignore",
       "bytes": 64,
       "sha256": "12f57021191be2096ff15deecabaca6dd4899a03df8ee97cf517b04475ed5035"
@@ -919,8 +924,8 @@
     },
     {
       "path": "docs/review_c7e0/RESULTS.json",
-      "bytes": 35192,
-      "sha256": "6be603193b38d4a56ffbfc8ccb6d6e2e953a352cfdc22072ee76d5af77c28399"
+      "bytes": 35195,
+      "sha256": "ab4e41ca30334599877161797c0a7db4ea81b044ef3b0ca4ccf60ee49ea96865"
     },
     {
       "path": "examples/blank.map.json",
@@ -1149,8 +1154,8 @@
     },
     {
       "path": "tests/run.py",
-      "bytes": 5890,
-      "sha256": "278f34e459178bc02b5718bf284089074954fcab790382756ce9fbdb9d94f74d"
+      "bytes": 5917,
+      "sha256": "cdacd7237e896a98530868d63e3e6e96f842eefd40f0f72faf95bebc67596104"
     },
     {
       "path": "tests/suites.json",

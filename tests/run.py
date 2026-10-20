@@ -11,7 +11,7 @@ isolated_changed=[]
 with tempfile.TemporaryDirectory(prefix='newmap-regression-') as temp:
     copy=Path(temp)/'project';shutil.copytree(root,copy,ignore=shutil.ignore_patterns('.git','.godot','.test-runs','__pycache__','*.import'))
     if a.baseline:
-        archive=subprocess.check_output(['git','archive','--format=zip',a.baseline,'addons'],cwd=root)
+        archive=subprocess.check_output(['git','-c','core.autocrlf=false','archive','--format=zip',a.baseline,'addons'],cwd=root)
         with zipfile.ZipFile(io.BytesIO(archive)) as z:
             for item in z.infolist():
                 target=(copy/item.filename).resolve()
