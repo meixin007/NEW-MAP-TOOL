@@ -63,10 +63,11 @@ static func inspect(project: Dictionary) -> Dictionary:
 		return a.entity_id<b.entity_id if a.entity_id!=b.entity_id else a.get("part_order",0)<b.get("part_order",0))
 	return TerrainRender.arrange(project,entries) if Terrain.enabled(project) else {"ok":true,"entries":entries}
 
-static func pick(entries: Array, point: Vector2) -> String:
+static func pick(entries: Array, point: Vector2,asset_hit: Callable=Callable()) -> String:
 	for i in range(entries.size()-1,-1,-1):
 		if entries[i].entity.get("locked",false):continue
 		if not entries[i].paint_bounds.has_point(point): continue
+		if entries[i].entity.kind=="asset" and asset_hit.is_valid() and not asset_hit.call(entries[i],point):continue
 		if entries[i].entity.kind=="terrain":
 			for mesh in entries[i].parts:
 				if Geometry2D.is_point_in_polygon(point,mesh.polygon):return entries[i].entity_id

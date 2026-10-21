@@ -77,6 +77,7 @@ func _ready() -> void:
 func mark_dirty() -> void:
 	if _refreshing:return
 	dirty=true
+	if host.session.job_in_progress():host.session.cancel_preview_job()
 	if host.session.has_preview():host.session.cancel_preview();host.canvas._last_revision=-1;host.canvas.queue_redraw();host.status.text="地形输入已改变，旧预览取消；请重新预览。"
 func current() -> Dictionary:
 	return T.surface(host.snapshot_for_ui(),selected_id)
@@ -136,9 +137,8 @@ func drawn(points: Array,mode: String) -> void:
 func preview(c: Dictionary) -> void:
 	if host.session.job_in_progress():host.status.text="请先取消区域计算。";return
 	if host.session.has_preview():host.status.text="请先应用或取消现有预览。";return
-	host.session.begin_preview();var result: Dictionary=host.session.preview(c)
-	if not result.ok:host.session.cancel_preview();host.report(result)
-	else:dirty=false;point_dirty=false;host.status.text="地形预览就绪，正式项目未改变；请应用或取消。"
+	var result: Dictionary=host.queue_candidate(c,"terrain")
+	if result.ok:dirty=false;point_dirty=false
 	host.canvas._last_revision=-1;host.canvas.queue_redraw()
 func preview_selected() -> void:
 	var s:=current()

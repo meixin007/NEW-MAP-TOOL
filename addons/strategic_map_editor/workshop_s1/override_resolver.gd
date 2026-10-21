@@ -35,8 +35,8 @@ static func _gate_opening(project: Dictionary, ribbon: Dictionary, gate: Diction
 		var p:=Vector2(socket.ground_xy[0],socket.ground_xy[1])
 		var radius:=1.0
 		for point in footprint: radius=maxf(radius,point.distance_to(p)+1)
-		var along:=Vector2.RIGHT.rotated(deg_to_rad(float(socket.direction_deg)))
-		var across:=Vector2(-along.y,along.x)*float(info.descriptor.passage_width_units)*0.5
+		var along:=Vector2.from_angle(deg_to_rad(float(socket.direction_ground)))
+		var across:=Vector2(-along.y,along.x)*float(info.descriptor.passage_width_units)*float(gate.get("scale",1.0))*0.5
 		var opening:=PackedVector2Array([p-along*radius+across,p+along*radius+across,p+along*radius-across,p-along*radius-across])
 		var valid:=true
 		var touches:=false

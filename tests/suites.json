@@ -1,0 +1,277 @@
+{
+  "unit": [
+    {
+      "script": "tests/review_pr1/test_pending_recovery.gd"
+    },
+    {
+      "script": "tests/review_pr1/test_save_jobs.gd"
+    },
+    {
+      "script": "tests/review_c7e0/test_review_contracts.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_session.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_assets.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_paths.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_path_failures.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plots.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_failures.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_weights.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_jobs.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_plot_recovery.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain_failures.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain_lifecycle.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_compounds.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_districts.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_district_protection.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_templates.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_template_dependencies.gd"
+    },
+    {
+      "script": "tests/workshop_s1/test_editor_contract.gd"
+    }
+  ],
+  "ui": [
+    {
+      "script": "tests/workshop_s1/test_integrated_ui.gd",
+      "graphical": true
+    },
+    {
+      "script": "tests/review_c7e0/test_samples_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/review_c7e0/test_heavy_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{editing_fixture}"
+      ],
+      "timeout": 90
+    }
+  ],
+  "pixels": [
+    {
+      "script": "tests/workshop_s1/test_export_pixels.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/w67_riverside_city.shwork.json"
+      ],
+      "timeout": 180
+    }
+  ],
+  "profile": [
+    {
+      "script": "tests/review_c7e0/test_edit_profile.gd",
+      "graphical": true,
+      "args": [
+        "{core_fixture}"
+      ],
+      "timeout": 240
+    }
+  ],
+  "soak": [
+    {
+      "script": "tests/review_c7e0/test_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "300"
+      ],
+      "timeout": 390
+    }
+  ],
+  "background": [
+    {
+      "script": "tests/review_c7e0/test_export_background.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 30
+    }
+  ],
+  "art": [
+    {
+      "script": "tests/review_c7e0/render_art_review.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 60
+    }
+  ],
+  "editor": [
+    {
+      "script": "<editor-import>",
+      "kind": "editor",
+      "timeout": 60
+    }
+  ],
+  "operations": [
+    {
+      "script": "tests/review_pr1/test_operation_frames.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{editing_fixture}"
+      ],
+      "timeout": 90
+    }
+  ],
+  "review_ui": [
+    {
+      "script": "tests/workshop_s1/test_rendered_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/reference_assets.assetpack.json"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/workshop_s1/test_terrain_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/reference_assets.assetpack.json"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/workshop_s1/test_district_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{material_fixture}",
+        "{tree_fixture}"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/workshop_s1/test_templates_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/reference_assets.assetpack.json"
+      ],
+      "timeout": 180
+    }
+  ],
+  "soak_async": [
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "300"
+      ],
+      "timeout": 410
+    }
+  ],
+  "profile_async60": [
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "60"
+      ],
+      "timeout": 110
+    },
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "60"
+      ],
+      "timeout": 110
+    },
+    {
+      "script": "tests/review_pr1/test_async_edit_soak.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{core_fixture}",
+        "60"
+      ],
+      "timeout": 110
+    }
+  ],
+  "visual2": [
+    {
+      "script": "tests/review_visual2/test_ink_contract.gd",
+      "args": [
+        "{artifacts}"
+      ]
+    },
+    {
+      "script": "tests/review_visual2/render_candidate.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 60
+    },
+    {
+      "script": "tests/review_visual2/test_candidate_ui.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}"
+      ],
+      "timeout": 180
+    },
+    {
+      "script": "tests/review_visual2/test_export_pixels.gd",
+      "graphical": true,
+      "args": [
+        "{artifacts}",
+        "{source}/samples/fortification_candidate2.shwork.json"
+      ],
+      "timeout": 180
+    }
+  ]
+}

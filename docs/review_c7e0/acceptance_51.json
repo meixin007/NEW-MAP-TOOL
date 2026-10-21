@@ -1,0 +1,1562 @@
+{
+  "document_type": "repair_regression_mapping_not_user_acceptance",
+  "repository": "meixin007/NEW-MAP-TOOL",
+  "original_matrix_sha256": "b98dbaff3192e9a59e31c494e59dfcb150ab1eb0dd15c3ffb0450cccc23e6649",
+  "case_count": 51,
+  "unique_ids": 51,
+  "no_native_results_fabricated": true,
+  "review_scope": "source audit, native synthetic regression, automated UI replay and bounded local performance; required evidence and human acceptance remain separate",
+  "cases": [
+    {
+      "id": "BASE-01",
+      "stage": "W0",
+      "name": "集成主入口",
+      "pass_condition": "从原plugin.gd进入workbench并使用新工具；独立工坊也可用",
+      "required_evidence": "插件与独立工坊的正常操作录像",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_integrated_ui",
+          "test_session"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "BASE-02",
+      "stage": "W0",
+      "name": "旧数据回归",
+      "pass_condition": "既有v4、原素材注册表、通道及历史产物不隐式变化",
+      "required_evidence": "旧回归与关键文件hash",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_integrated_ui",
+          "test_session"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "DATA-01",
+      "stage": "W0",
+      "name": "协议隔离",
+      "pass_condition": "新项目协议与v4分开；未知schema明确拒绝；不偷加旧字段",
+      "required_evidence": "正反例和另存说明",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_session",
+          "test_plot_recovery",
+          "test_template_dependencies"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "DATA-02",
+      "stage": "W0",
+      "name": "统一事务",
+      "pass_condition": "一个操作跨recipe、覆盖和旧文档桥接仅一条历史；取消无正式修改",
+      "required_evidence": "混合编辑/撤销/重做对照",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_session",
+          "test_plot_recovery",
+          "test_template_dependencies"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-03"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "DATA-03",
+      "stage": "W0",
+      "name": "保存恢复",
+      "pass_condition": "保存中断及恢复包含新对象与草稿；原项目仍可打开",
+      "required_evidence": "故障注入与重开",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_session",
+          "test_plot_recovery",
+          "test_template_dependencies"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "AST-01",
+      "stage": "W1",
+      "name": "批量导入",
+      "pass_condition": "逐项验证、显示失败、用户确认合格子集；不覆盖同名旧资产",
+      "required_evidence": "坏图/缺alpha/合法图混合批次",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_assets",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "AST-02",
+      "stage": "W1",
+      "name": "资产锚点",
+      "pass_condition": "锚点、裁切、socket、ground与paint共享正确坐标",
+      "required_evidence": "带标尺的资产编辑和重开",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_assets",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-01",
+          "NMT-02",
+          "NMT-08"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "AST-03",
+      "stage": "W1",
+      "name": "方向约束",
+      "pass_condition": "缺方向变体时不旋转立面PNG冒充；地表纹理旋转独立",
+      "required_evidence": "不支持角度的负例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_assets",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-02"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "AST-04",
+      "stage": "W1",
+      "name": "实际绘制范围",
+      "pass_condition": "树冠可见而根离屏时不提前剔除；完整阴影计入范围",
+      "required_evidence": "四边缓慢进出对照",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_assets",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "AST-05",
+      "stage": "W1",
+      "name": "前后层序",
+      "pass_condition": "前墙、院落、树冠与高面附着原型层序正确；大对象可拆片",
+      "required_evidence": "固定机位与选择列表",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_assets",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-05"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PATH-01",
+      "stage": "W2",
+      "name": "参数路径",
+      "pass_condition": "控制点、端点宽度、样式修改后可重开继续编辑",
+      "required_evidence": "画路/拖点/保存/重开",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-03"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PATH-02",
+      "stage": "W2",
+      "name": "墙门接点",
+      "pass_condition": "门位不漂移，墙端与塔楼正确连接；急转缺材给诊断",
+      "required_evidence": "直线/短段/急转/缺材场景",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-02",
+          "NMT-09"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PATH-03",
+      "stage": "W2",
+      "name": "道路带与连接",
+      "pass_condition": "弯道与交叉处无断路/重复边；道路视觉不自动开游戏通道",
+      "required_evidence": "曲线和十字路口对照",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PATH-04",
+      "stage": "W2",
+      "name": "道旁布置",
+      "pass_condition": "使用合法朝向和footprint；入口不堵；无合法候选明确报告",
+      "required_evidence": "狭路/水边/密集对象反例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-02"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PATH-05",
+      "stage": "W2",
+      "name": "控制点拓扑",
+      "pass_condition": "拆段合段保留可映射身份；固定子对象无法映射时报冲突",
+      "required_evidence": "固定角楼后插入/删除控制点",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PATH-06",
+      "stage": "W2",
+      "name": "旧河流复用",
+      "pass_condition": "新选择与宽度UI不改变旧水域/通道语义或损坏旧文件",
+      "required_evidence": "旧河流文件回读及逻辑摘要",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLOT-01",
+      "stage": "W3",
+      "name": "区域几何",
+      "pass_condition": "矩形/圆/六边形/凹多边形与洞可创建；自交被拒绝或修正预览",
+      "required_evidence": "几何正反例与UI",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_plots",
+          "test_plot_failures",
+          "test_plot_weights"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLOT-02",
+      "stage": "W3",
+      "name": "密度稳定",
+      "pass_condition": "相同输入同版本可复建；密度变化不重编号已有候选",
+      "required_evidence": "对象集合/候选ID/hash",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_plots",
+          "test_plot_failures",
+          "test_plot_weights"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLOT-03",
+      "stage": "W3",
+      "name": "完整占地避让",
+      "pass_condition": "道路从占地中央穿过也能检出；不只测中心或角点",
+      "required_evidence": "几何见证反例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_plots",
+          "test_plot_failures",
+          "test_plot_weights"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-02"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLOT-04",
+      "stage": "W3",
+      "name": "农田与留白",
+      "pass_condition": "主路/水域/永久留白不生成田块；未生成说明原因",
+      "required_evidence": "农田边界和拒绝码",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_plots",
+          "test_plot_failures",
+          "test_plot_weights"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "BRUSH-01",
+      "stage": "W3",
+      "name": "画刷事件稳定",
+      "pass_condition": "相同冻结笔迹在不同输入频率下密度可控，不按事件堆叠",
+      "required_evidence": "低/高采样率回放",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_plots",
+          "test_plot_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "BRUSH-02",
+      "stage": "W3",
+      "name": "擦除与锁定",
+      "pass_condition": "一笔放置/擦除一次撤销；锁定不动；删除意图保存",
+      "required_evidence": "笔迹、撤销、再生与重开",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_plots",
+          "test_plot_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLAT-01",
+      "stage": "W4",
+      "name": "顶面与边带",
+      "pass_condition": "台地高度/坡宽/边类型修改后几何连续无明显贴纸拼缝",
+      "required_evidence": "单层/三层台地画面",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_terrain",
+          "test_terrain_failures",
+          "test_terrain_lifecycle"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-05"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLAT-02",
+      "stage": "W4",
+      "name": "支持面跟随",
+      "pass_condition": "改高度时房屋/树/socket/拾取同步；多个面时不误吸附",
+      "required_evidence": "山顶和坡脚各一物的操作",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_terrain",
+          "test_terrain_failures",
+          "test_terrain_lifecycle"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-02",
+          "NMT-09"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLAT-03",
+      "stage": "W4",
+      "name": "坡道与穿崖",
+      "pass_condition": "明确上下端点与开口；无坡道时道路穿崖被诊断",
+      "required_evidence": "带坡道正例/穿崖负例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_terrain",
+          "test_terrain_failures",
+          "test_terrain_lifecycle"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PLAT-04",
+      "stage": "W4",
+      "name": "合法支撑",
+      "pass_condition": "房屋完整地面占地受顶面支撑；无关联台地交叠不静默选面",
+      "required_evidence": "悬空半屋和重叠台地反例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_terrain",
+          "test_terrain_failures",
+          "test_terrain_lifecycle"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "ROOM-01",
+      "stage": "W5",
+      "name": "房间院落",
+      "pass_condition": "地板/墙/门洞/屋顶开关可编辑且重开保持；空院不被填满",
+      "required_evidence": "正常UI建院及切屋顶",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_compounds"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "DIST-01",
+      "stage": "W5",
+      "name": "两类街区",
+      "pass_condition": "正交/沿路模式均能生成合法街区；输入主路优先",
+      "required_evidence": "相同区域两模式",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_districts",
+          "test_district_protection"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "DIST-02",
+      "stage": "W5",
+      "name": "地块身份",
+      "pass_condition": "建设地/未来扩建/永久留白有不同角色；地块ID稳定",
+      "required_evidence": "生成与参数调整前后",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_districts",
+          "test_district_protection"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "DIST-03",
+      "stage": "W5",
+      "name": "有限求解",
+      "pass_condition": "无空间时有限结束、给原因且可手工回退；不无限重试",
+      "required_evidence": "极窄地块与全排除区",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_districts",
+          "test_district_protection"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EDIT-01",
+      "stage": "W2-W7",
+      "name": "生成子对象脱离",
+      "pass_condition": "保留实体ID变为手工，原候选被抑制，再生不复活",
+      "required_evidence": "脱离移动后换种子",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_district_protection",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EDIT-02",
+      "stage": "W2-W7",
+      "name": "局部保护",
+      "pass_condition": "50轮受控参数变化保留固定/移动/删除/禁入意图",
+      "required_evidence": "数据摘要与固定镜头",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_district_protection",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-01",
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EDIT-03",
+      "stage": "W2-W7",
+      "name": "过期预览",
+      "pass_condition": "后台旧结果不覆盖新输入；不同recipe依赖闭环或拒绝",
+      "required_evidence": "快速拖动和取消旧任务",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_district_protection",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-03"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EDIT-04",
+      "stage": "W2-W7",
+      "name": "旧豁免范围",
+      "pass_condition": "新素材变大或规则变更须重新检查；冲突不静默删除",
+      "required_evidence": "素材范围升级负例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_paths",
+          "test_district_protection",
+          "test_review_contracts"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-01",
+          "NMT-08"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "TPL-01",
+      "stage": "W6",
+      "name": "模板复用",
+      "pass_condition": "跨地图实例化内部引用完整，外部游戏绑定默认清空",
+      "required_evidence": "两地图模板放置",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_templates",
+          "test_template_dependencies"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "TPL-02",
+      "stage": "W6",
+      "name": "复制身份",
+      "pass_condition": "整组/附件/配方复制产生独立ID，互不更新对方",
+      "required_evidence": "复制后分别修改和删除",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_templates",
+          "test_template_dependencies"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "TPL-03",
+      "stage": "W6",
+      "name": "版本与解组",
+      "pass_condition": "母模板不自动改旧实例；解组可编辑且一次撤销",
+      "required_evidence": "升级模板/解组回退",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_templates",
+          "test_template_dependencies"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "UI-01",
+      "stage": "W6",
+      "name": "选择与吸附",
+      "pass_condition": "被遮挡对象可列选；锁定/隐藏规则一致；缩放下吸附容差稳定",
+      "required_evidence": "连续插件操作录像",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_samples_ui",
+          "test_integrated_ui",
+          "test_heavy_ui"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-01",
+          "NMT-03",
+          "NMT-09"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "UI-02",
+      "stage": "W6",
+      "name": "标签网格",
+      "pass_condition": "方格/六角网格显示与吸附独立；标签图例可编辑并随导出设置",
+      "required_evidence": "标签与网格开关",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_samples_ui",
+          "test_integrated_ui",
+          "test_heavy_ui"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EXP-01",
+      "stage": "W7",
+      "name": "输出种类",
+      "pass_condition": "合成PNG/透明地面/选择组/分层/分块均有入口与正确内容",
+      "required_evidence": "导出文件与manifest",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_export_pixels",
+          "test_export_background"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-07"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EXP-02",
+      "stage": "W7",
+      "name": "原点与遮挡",
+      "pass_condition": "各层同范围原点；交错前景保留；数据包预览与合成一致",
+      "required_evidence": "前墙/树冠遮挡负例",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_export_pixels",
+          "test_export_background"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-06"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EXP-03",
+      "stage": "W7",
+      "name": "跨页一致",
+      "pass_condition": "合成与分块重组在冻结机器/渲染器下达到事先固定像素阈值",
+      "required_evidence": "跨页道路/崖边/半透明图",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_export_pixels",
+          "test_export_background"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-06"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EXP-04",
+      "stage": "W7",
+      "name": "不可变快照",
+      "pass_condition": "导出中修改项目不混入本次结果；取消/写失败保留旧交付",
+      "required_evidence": "版本摘要与故障注入",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_export_pixels",
+          "test_export_background"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-07"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "EXP-05",
+      "stage": "W7",
+      "name": "数据可编辑",
+      "pass_condition": "不是只交PNG；配方/覆盖/资产版本/状态变体及坐标可恢复",
+      "required_evidence": "干净目录加载项目与只读预览",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_export_pixels",
+          "test_export_background"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "LOGIC-01",
+      "stage": "W0-W7",
+      "name": "制作不改玩法",
+      "pass_condition": "画墙/台地/水不会自动新增战役规则；显式绑定经原校验",
+      "required_evidence": "编辑前后逻辑摘要",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_integrated_ui",
+          "test_path_failures"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PERF-01",
+      "stage": "W7",
+      "name": "编辑性能",
+      "pass_condition": "在冻结UI-Core profile上3x60秒与300秒，报告帧时/响应/长帧/内存",
+      "required_evidence": "原始采样与环境",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_edit_profile",
+          "test_edit_soak",
+          "test_heavy_ui"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-03",
+          "NMT-04"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "PERF-02",
+      "stage": "W3-W7",
+      "name": "异步交互",
+      "pass_condition": "大候选任务进度可见、取消及时；普通帧不再生全图",
+      "required_evidence": "阶段计数与负载录像",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "bounded_native_coverage",
+        "related_scripts": [
+          "test_edit_profile",
+          "test_edit_soak",
+          "test_heavy_ui"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-03",
+          "NMT-07"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "VIS-01",
+      "stage": "W2",
+      "name": "审核A",
+      "pass_condition": "用户明确认可资产视角与路径小样或列修改意见，不由AI自签",
+      "required_evidence": "绑定构建/素材hash的用户意见",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "pending_user_visual_review",
+        "related_scripts": [
+          "render_art_review"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-05"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "VIS-02",
+      "stage": "W5",
+      "name": "审核B",
+      "pass_condition": "用户认可山口/河岸组合；无漂浮接地、错误方向或明显拼缝",
+      "required_evidence": "固定镜头与连续UI录像",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "pending_user_visual_review",
+        "related_scripts": [
+          "render_art_review"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-05"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "REL-01",
+      "stage": "W7",
+      "name": "三个样板",
+      "pass_condition": "正常UI完成山口关隘/河岸小城/坡地村落；不依赖地名特判",
+      "required_evidence": "可编辑项目及制作录像",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "pending_full_acceptance",
+        "related_scripts": [
+          "verify_sources"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04",
+          "NMT-05"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    },
+    {
+      "id": "REL-02",
+      "stage": "W7",
+      "name": "最终交付与范围",
+      "pass_condition": "旧入口回退、产物hash、许可来源、扩展未实现项清楚；用户审核C",
+      "required_evidence": "安装说明/清单/接受记录",
+      "status": "not_run",
+      "evidence": [],
+      "notes": null,
+      "repair_verification": {
+        "status": "pending_full_acceptance",
+        "related_scripts": [
+          "verify_sources"
+        ],
+        "evidence": [
+          "RESULTS.json"
+        ],
+        "note": "仅相应脚本的边界检查有原生结果；原验收条件与录像/人工认可要求保留，不能自动判定整项通过。"
+      },
+      "original_independent_review": {
+        "independent_native_status": "not_run",
+        "original_pass_condition_preserved": true,
+        "related_findings": [
+          "NMT-04",
+          "NMT-05"
+        ],
+        "acceptance_result": "not_adjudicated",
+        "note": "有源码不等于原生通过；当前仓库未提供本项可复跑测试与完整证据，不推断开发者从未测试。"
+      }
+    }
+  ],
+  "repair_base_commit": "c7e0a4b94c3904921442b6746d737364d7024556"
+}

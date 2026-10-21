@@ -1,0 +1,3 @@
+# Preserve the audited byte hashes on Windows and other platforms. Automatic
+# diff detection remains enabled; only check-in/checkout EOL conversion is off.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

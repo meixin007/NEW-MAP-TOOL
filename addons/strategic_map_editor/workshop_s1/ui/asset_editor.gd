@@ -20,6 +20,7 @@ var socket_angle: SpinBox
 var variant_angle: SpinBox
 var variant_asset: OptionButton
 var crop_fields: Array = []
+var crop_mode: OptionButton
 var raw: TextEdit
 var confirmed_paint: CheckBox
 var adopt_selected: CheckBox
@@ -38,7 +39,7 @@ func _ready() -> void:
 	title="资产描述 · 新版本与接点"
 	ok_button_text="预览差异后保存新版本"
 	super._ready()
-	_original=session.snapshot().asset_refs[asset_ref].duplicate(true)
+	_original=session.view().asset_refs[asset_ref].duplicate(true)
 	var row:=HSplitContainer.new();row.custom_minimum_size=Vector2(850,460);content.add_child(row)
 	var left:=VBoxContainer.new();left.size_flags_horizontal=Control.SIZE_EXPAND_FILL;row.add_child(left)
 	preview=Preview.new();preview.descriptor=_original.duplicate(true)
@@ -62,14 +63,15 @@ func _ready() -> void:
 	shadow=OptionButton.new()
 	for text in ["baked","separate","none"]: shadow.add_item(text)
 	shadow.select(["baked","separate","none"].find(_original.shadow_mode));form.add_child(shadow)
-	nominal_width=_spin(form,"标称宽度（等比）",_original.nominal_size_units[0],1,4096)
+	nominal_width=_spin(form,"标称显示宽度（占地独立，采用时重验）",_original.nominal_size_units[0],1,4096)
+	crop_mode=OptionButton.new();crop_mode.add_item("裁切保持像素比例");crop_mode.add_item("裁后重新缩放到旧宽度");form.add_child(crop_mode)
 	var crop:=HFlowContainer.new();form.add_child(crop)
 	for i in range(4): crop_fields.append(_spin(crop,["裁切 X","裁切 Y","宽","高"][i],_original.region_px[i],0,4096))
 	_button(form,"应用裁切并同步锚点 / 接点",func():
 		var values: Array=[]
 		for field in crop_fields: values.append(int(field.value))
-		var result:=Asset.with_region(preview.descriptor,values)
-		if result.ok: preview.descriptor=result.descriptor;preview.queue_redraw();_refresh_raw()
+		var result:=Asset.with_region(preview.descriptor,values,"preserve_pixels" if crop_mode.selected==0 else "rescale")
+		if result.ok: preview.descriptor=result.descriptor;nominal_width.value=result.descriptor.nominal_size_units[0];preview.queue_redraw();_refresh_raw()
 		feedback.text="裁切已进入临时预览。" if result.ok else result.error)
 	socket_picker=OptionButton.new();form.add_child(socket_picker)
 	socket_picker.item_selected.connect(func(i): preview.socket_index=i;_refresh_socket())
@@ -87,14 +89,19 @@ func _ready() -> void:
 		preview.queue_redraw();_refresh_raw())
 	variant_angle=_spin(form,"允许方向（度）",0,0,359)
 	variant_asset=OptionButton.new();form.add_child(variant_asset)
-	for key in session.snapshot().asset_refs:
-		variant_asset.add_item(session.snapshot().asset_refs[key].label)
+	for key in session.view().asset_refs:
+		variant_asset.add_item(session.view().asset_refs[key].label)
 		variant_asset.set_item_metadata(variant_asset.item_count-1,key)
 	_button(form,"登记已制作方向变体",func():
 		if variant_asset.selected>=0: preview.descriptor.orientation_variants[str(int(variant_angle.value))]=variant_asset.get_selected_metadata();_refresh_raw())
 	_button(form,"移除此方向",func(): preview.descriptor.orientation_variants.erase(str(int(variant_angle.value)));_refresh_raw())
 	confirmed_paint=CheckBox.new();confirmed_paint.text="确认黄色 paint 包含完整阴影";confirmed_paint.clip_text=true;content.add_child(confirmed_paint)
 	adopt_selected=CheckBox.new();adopt_selected.text="仅更新当前选中对象";adopt_selected.clip_text=true;adopt_selected.disabled=selected_entity_id.is_empty();content.add_child(adopt_selected)
+	var eligible:=false
+	for entity in session.view().manual_entities:
+		if entity.entity_id==selected_entity_id and entity.kind=="asset" and not entity.get("locked",false):eligible=true
+	adopt_selected.disabled=not eligible
+	adopt_selected.tooltip_text="仅未锁定的手工素材对象可采用；生成对象请先脱离生成器。"
 	raw=TextEdit.new();raw.custom_minimum_size.y=160;form.add_child(raw)
 	_button(form,"从高级描述更新预览",func():
 		var parsed: Variant=JSON.parse_string(raw.text)
@@ -102,7 +109,7 @@ func _ready() -> void:
 		var issue:=Asset.validate(parsed)
 		if not issue.is_empty(): feedback.text=issue;return
 		if parsed.asset_id!=_original.asset_id or parsed.texture_sha256!=_original.texture_sha256: feedback.text="修改图像请重新导入，不能在元数据里替换文件身份。";return
-		preview.descriptor=parsed;preview.queue_redraw();_refresh_sockets())
+		preview.descriptor=parsed;nominal_width.value=parsed.nominal_size_units[0];preview.queue_redraw();_refresh_sockets())
 	feedback=Label.new();feedback.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;content.add_child(feedback)
 	preview.edited.connect(_refresh_raw)
 	_refresh_sockets();_refresh_raw()
@@ -150,12 +157,13 @@ func has_pending_changes() -> bool:
 func capture_draft() -> Dictionary:
 	var crop: Array=[]
 	for field in crop_fields: crop.append(field.value)
-	return {"asset_ref":asset_ref,"selected_entity_id":selected_entity_id,"descriptor":preview.descriptor.duplicate(true),"label":label_field.text,"tags":tags_field.text,"source":source_field.text,"category":category.selected,"shadow":shadow.selected,"width":nominal_width.value,"crop":crop,"raw":raw.text,"paint_confirmed":confirmed_paint.button_pressed,"adopt_selected":adopt_selected.button_pressed}
+	return {"asset_ref":asset_ref,"selected_entity_id":selected_entity_id,"descriptor":preview.descriptor.duplicate(true),"label":label_field.text,"tags":tags_field.text,"source":source_field.text,"category":category.selected,"shadow":shadow.selected,"width":nominal_width.value,"crop":crop,"crop_mode":crop_mode.selected,"raw":raw.text,"paint_confirmed":confirmed_paint.button_pressed,"adopt_selected":adopt_selected.button_pressed}
 
 func restore_draft(draft: Dictionary) -> void:
 	preview.descriptor=draft.descriptor.duplicate(true)
 	label_field.text=draft.label;tags_field.text=draft.tags;source_field.text=draft.source
 	category.select(clampi(int(draft.category),0,6));shadow.select(clampi(int(draft.shadow),0,2));nominal_width.value=float(draft.width)
 	for i in range(4): crop_fields[i].value=float(draft.crop[i])
-	confirmed_paint.button_pressed=bool(draft.get("paint_confirmed",false));adopt_selected.button_pressed=bool(draft.get("adopt_selected",false))
+	crop_mode.select(int(draft.get("crop_mode",0)))
+	confirmed_paint.button_pressed=bool(draft.get("paint_confirmed",false));adopt_selected.button_pressed=bool(draft.get("adopt_selected",false)) and not adopt_selected.disabled
 	_refresh_sockets();_refresh_raw();raw.text=draft.raw;preview.queue_redraw()

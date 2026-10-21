@@ -49,6 +49,7 @@ var entries: Array = []
 var _last_revision := -1
 var _view_project: Dictionary = {}
 var _textures: Dictionary = {}
+var _hit_masks: Dictionary = {}
 var show_envelopes := true
 var active_asset_ref := ""
 var active_surface_id := "ground"
@@ -62,6 +63,9 @@ var path_seed := 42
 var path_wall_ref := ""
 var path_points: Array = []
 var _point_dragging := false
+var _transient_command: Dictionary={}
+var _transient_layer: Node2D
+var edit_pending:=false
 var snap_source_socket := ""
 var snap_source_entity_id := ""
 var snap_target_entity_id := ""
@@ -90,6 +94,7 @@ var _paint_revision: int=-1
 var _preview_serial: int=-1
 var draw_rebuilds: int=0
 var plan_rebuilds: int=0
+var last_plan_build_ms:=0.0
 var _render_dependencies: String=""
 var _paint_bounds:=Rect2()
 
@@ -99,25 +104,47 @@ func texture_for(a: Dictionary) -> Texture2D:
 	if bytes.is_empty(): return null
 	var image := Image.new()
 	if image.load_png_from_buffer(bytes)!=OK: return null
+	var mask:=BitMap.new();mask.create_from_image_alpha(image,0.1);_hit_masks[a.texture_sha256]=mask
 	var texture := ImageTexture.create_from_image(image)
 	_textures[a.texture_sha256] = texture
 	return texture
 
+func asset_hit(entry: Dictionary,point: Vector2) -> bool:
+	var a: Dictionary=entry.descriptor
+	if not _hit_masks.has(a.texture_sha256):texture_for(a)
+	if not _hit_masks.has(a.texture_sha256):return true # Missing asset remains selectable.
+	var local: Vector2=(point-entry.position).rotated(-float(entry.rotation))
+	if not entry.local_rect.has_point(local):return false
+	var uv: Vector2=entry.source_rect.position+(local-entry.local_rect.position)/float(entry.unit)
+	var mask: BitMap=_hit_masks[a.texture_sha256];var pixel:=Vector2i(uv.floor())
+	return pixel.x>=0 and pixel.y>=0 and pixel.x<mask.get_size().x and pixel.y<mask.get_size().y and mask.get_bitv(pixel)
+
 func _ready() -> void:
 	_world_layer=preload("world_painter.gd").new();_world_layer.host=self;add_child(_world_layer)
+	_transient_layer=preload("transient_painter.gd").new();_transient_layer.host=self;add_child(_transient_layer)
 	focus_mode = Control.FOCUS_ALL
 	clip_contents = true
 	texture_repeat=CanvasItem.TEXTURE_REPEAT_ENABLED
 	custom_minimum_size = Vector2(350,300)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
+	set_process(true)
+
+func _process(_delta: float) -> void:
+	if not edit_pending:return
+	var result: Dictionary=session.poll_preview_job()
+	if result.status=="working":return
+	edit_pending=false;_transient_command={};_transient_layer.queue_redraw();queue_redraw()
+	if result.status=="committed":reported.emit("拖动已完整验证并提交；可撤销。")
+	elif result.status=="failed":reported.emit(str(result.error))
+	elif result.status=="discarded":reported.emit(str(result.message))
 
 func world_at(screen: Vector2) -> Vector2:
 	return (screen-pan)/zoom
 
 func fit_map() -> void:
 	if session == null: return
-	var p: Dictionary = session.snapshot()
+	var p: Dictionary = session.view()
 	var extent := Vector2(p.legacy_document.canvas_size[0],p.legacy_document.canvas_size[1])
 	var projected:=PackedVector2Array()
 	for q in [Vector2.ZERO,Vector2(extent.x,0),extent,Vector2(0,extent.y)]:projected.append(SurfaceProject.project_point(p,q))
@@ -131,10 +158,16 @@ func _draw() -> void:
 	if session==null or not is_instance_valid(_world_layer):return
 	var serial: int=session.view_revision
 	if _last_revision!=session.revision or _preview_serial!=serial:
-		var next: Dictionary=session.preview_snapshot()
+		var next: Dictionary=session.preview_view()
+		var used: Dictionary={}
+		for a in next.asset_refs.values():used[a.texture_sha256]=true
+		for hash in _textures.keys():
+			if not used.has(hash):_textures.erase(hash);_hit_masks.erase(hash)
 		var dependencies: String=Model.Paths.digest([next.asset_refs,next.surfaces,next.style_profile.ground_matrix,next.style_profile.height_axis,next.legacy_document.features])
-		if _view_project.is_empty() or _view_project.materialized_snapshot.entities!=next.materialized_snapshot.entities or dependencies!=_render_dependencies:
-			entries=Plan.build(next);plan_rebuilds+=1
+		var prepared: Dictionary=session.prepared_render_plan(next)
+		if prepared.ok or _view_project.is_empty() or _view_project.materialized_snapshot.entities!=next.materialized_snapshot.entities or dependencies!=_render_dependencies:
+			var began:=Time.get_ticks_usec()
+			entries=prepared.entries if prepared.ok else Plan.build(next);plan_rebuilds+=1;last_plan_build_ms=(Time.get_ticks_usec()-began)/1000.0
 		_view_project=next;_render_dependencies=dependencies
 		_last_revision=session.revision;_preview_serial=serial
 	_world_layer.position=pan;_world_layer.scale=Vector2.ONE*zoom
@@ -177,8 +210,11 @@ func paint_world(drawer: CanvasItem) -> void:
 			if e.outline:
 				var ink:=polygon.duplicate();ink.append(ink[0]);drawer.draw_polyline(ink,Color("504734"),0.9,true)
 		elif e.entity.kind == "ribbon":
-			var tint:=Color("b7a57d") if e.entity.style=="dirt" else (Color("9eaaa2") if e.entity.style=="stone" else Color("97c0bf"))
-			for polygon in e.polygons: drawer.draw_colored_polygon(polygon,tint)
+			if p.style_profile.get("ink_mode","classic")=="sparse" and e.entity.style=="dirt":
+				preload("../ink_presentation.gd").road(e,drawer)
+			else:
+				var tint:=Color("b7a57d") if e.entity.style=="dirt" else (Color("9eaaa2") if e.entity.style=="stone" else Color("97c0bf"))
+				for polygon in e.polygons: drawer.draw_colored_polygon(polygon,tint)
 		elif e.entity.kind == "asset":
 			var texture := texture_for(e.descriptor)
 			if texture != null:
@@ -228,10 +264,12 @@ func paint_world(drawer: CanvasItem) -> void:
 	drawer.draw_set_transform(Vector2.ZERO)
 
 func cancel() -> void:
+	edit_pending=false
 	_dragging = false
 	_point_dragging = false
 	_last_drag_error = ""
-	_drag_entity.clear()
+	_drag_entity={};_transient_command={};
+	if is_instance_valid(_transient_layer):_transient_layer.queue_redraw()
 	terrain_points.clear()
 	compound_points.clear();district_points.clear()
 	path_points.clear()
@@ -244,6 +282,8 @@ func cancel() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if session == null: return
 	if render_only:return
+	if edit_pending and ((event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT) or (event is InputEventKey and event.keycode==KEY_DELETE)):
+		reported.emit("正在验证拖动；请等待结果，或按Esc取消。");accept_event();return
 	if event is InputEventMouseButton:
 		grab_focus()
 		if event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN] and event.pressed:
@@ -268,19 +308,19 @@ func _gui_input(event: InputEvent) -> void:
 			var world := world_at(event.position)
 			if event.pressed and mode in ["template_place","label_place"]:
 				if session.has_preview() or session.job_in_progress():reported.emit("先应用或取消预览。");return
-				var point:=SurfaceProject.ground_point(session.snapshot(),world,"ground")
-				var style: Dictionary=session.snapshot().style_profile
+				var point:=SurfaceProject.ground_point(session.view(),world,"ground")
+				var style: Dictionary=session.view().style_profile
 				if style.get("grid_snap",false):point=preload("../snap_resolver.gd").hex_round(point,style.get("grid_size",32)) if style.get("grid_kind")=="hex" else point.snapped(Vector2.ONE*float(style.get("grid_size",32)))
 				if mode=="template_place":template_placed.emit([point.x,point.y])
 				else:label_placed.emit([point.x,point.y])
 				queue_redraw();accept_event();return
 			if event.pressed and (mode.begins_with("compound_") or mode in ["district_rectangle","district_polygon","district_hole"]):
 				if session.has_preview() or session.job_in_progress():reported.emit("请先应用或取消预览。");return
-				var q:=SurfaceProject.ground_point(session.snapshot(),world,active_surface_id)
+				var q:=SurfaceProject.ground_point(session.view(),world,active_surface_id)
 				if mode in ["compound_room","compound_hole"]:
-					var target:=_compound_target(session.snapshot())
+					var target:=_compound_target(session.view())
 					if target.is_empty():reported.emit("待编辑的院落不存在。");return
-					q=(SurfaceProject.ground_point(session.snapshot(),world,target.surface_id)-Terrain.vec(target.ground_xy)).rotated(-deg_to_rad(float(target.orientation)))/float(target.scale)
+					q=(SurfaceProject.ground_point(session.view(),world,target.surface_id)-Terrain.vec(target.ground_xy)).rotated(-deg_to_rad(float(target.orientation)))/float(target.scale)
 				if mode.begins_with("compound_"):
 					compound_points.append([snappedf(q.x,1),snappedf(q.y,1)])
 					if compound_points.size()==2:finish_w5()
@@ -290,15 +330,15 @@ func _gui_input(event: InputEvent) -> void:
 					if mode=="district_rectangle" and district_points.size()==2:finish_w5()
 				queue_redraw();accept_event();return
 			if event.pressed and mode=="district_lot":
-				for lot in session.snapshot().materialized_snapshot.get("lots",[]):
-					var q:=SurfaceProject.ground_point(session.snapshot(),world,lot.surface_id)
+				for lot in session.view().materialized_snapshot.get("lots",[]):
+					var q:=SurfaceProject.ground_point(session.view(),world,lot.surface_id)
 					if Geometry2D.is_point_in_polygon(q,Model.Asset.packed(lot.polygon)):district_lot_selected.emit(lot.recipe_id,lot.candidate_id);queue_redraw();accept_event();return
 				reported.emit("此处没有完整合法地块。");accept_event();return
 			if event.pressed and mode in ["terrain_rectangle","terrain_polygon","terrain_ramp"]:
 				if session.has_preview() or session.job_in_progress():reported.emit("请先应用或取消预览。");return
 				if terrain_points.size()>=128:reported.emit("台地最多128个点。");return
 				var id: String=terrain_parent if mode!="terrain_ramp" else (terrain_from if terrain_points.is_empty() else terrain_to)
-				var q:=SurfaceProject.ground_point(session.snapshot(),world,id)
+				var q:=SurfaceProject.ground_point(session.view(),world,id)
 				terrain_points.append([snappedf(q.x,1),snappedf(q.y,1)])
 				if mode!="terrain_polygon" and terrain_points.size()==2:finish_terrain()
 				queue_redraw();accept_event();return
@@ -306,11 +346,11 @@ func _gui_input(event: InputEvent) -> void:
 				if event.pressed:
 					if session.job_in_progress() or session.has_preview():reported.emit("请先应用或取消现有候选。");return
 					brush_started.emit()
-					if automatic_surface and Terrain.enabled(session.snapshot()):
+					if automatic_surface and Terrain.enabled(session.view()):
 						var weights: Array=brush_template.get("asset_weights",[])
 						var template: Dictionary={"kind":"marker","local_height":0}
-						if not weights.is_empty():template={"kind":"asset","asset_ref":weights[0].asset_ref,"scale":float(brush_template.get("scale_range",[1,1])[1]),"orientation":float(session.snapshot().asset_refs[weights[0].asset_ref].get("default_orientation",0)),"local_height":0}
-						var choices:=Support.candidates(session.snapshot(),world,template)
+						if not weights.is_empty():template={"kind":"asset","asset_ref":weights[0].asset_ref,"scale":float(brush_template.get("scale_range",[1,1])[1]),"orientation":float(session.view().asset_refs[weights[0].asset_ref].get("default_orientation",0)),"local_height":0}
+						var choices:=Support.candidates(session.view(),world,template)
 						if not _brush_next_surface.is_empty():choices=choices.filter(func(c):return c.surface_id==_brush_next_surface);_brush_next_surface=""
 						if choices.size()>1:support_ambiguous.emit(choices,{"brush_choice":true});accept_event();return
 						if choices.is_empty():reported.emit("落笔点没有完整支撑素材的可用面，整笔未开始。");return
@@ -325,22 +365,22 @@ func _gui_input(event: InputEvent) -> void:
 				queue_redraw();accept_event();return
 			if event.pressed and mode in ["plot_draw","plot_hole"]:
 				if session.job_in_progress() or session.has_preview():reported.emit("请先应用或取消现有候选。");return
-				var point:=SurfaceProject.ground_point(session.snapshot(),world,active_surface_id)
-				if point.x<0 or point.y<0 or point.x>session.snapshot().legacy_document.canvas_size[0] or point.y>session.snapshot().legacy_document.canvas_size[1]:reported.emit("区域点超出画布。");return
+				var point:=SurfaceProject.ground_point(session.view(),world,active_surface_id)
+				if point.x<0 or point.y<0 or point.x>session.view().legacy_document.canvas_size[0] or point.y>session.view().legacy_document.canvas_size[1]:reported.emit("区域点超出画布。");return
 				if plot_points.size()>=128:reported.emit("区域最多128个点。");return
 				plot_points.append([snappedf(point.x,1),snappedf(point.y,1)])
 				if mode=="plot_draw" and plot_shape!="polygon" and plot_points.size()==2:finish_plot()
 				queue_redraw();accept_event();return
 			if event.pressed and mode=="path_draw":
-				var point:=SurfaceProject.ground_point(session.snapshot(),world,active_surface_id)
-				var extent: Array=session.snapshot().legacy_document.canvas_size
+				var point:=SurfaceProject.ground_point(session.view(),world,active_surface_id)
+				var extent: Array=session.view().legacy_document.canvas_size
 				if point.x<0 or point.y<0 or point.x>extent[0] or point.y>extent[1] or path_points.size()>=256: reported.emit("控制点超出画布或已达到 256 点上限。 ");return
 				path_points.append([snappedf(point.x,1),snappedf(point.y,1)])
 				queue_redraw();accept_event();return
 			if event.pressed and mode=="path_insert":
 				var recipe:=paths_recipe()
 				if recipe.is_empty(): reported.emit("先选择一条路径。 ");return
-				var p:=SurfaceProject.ground_point(session.snapshot(),world,recipe.surface_id)
+				var p:=SurfaceProject.ground_point(session.view(),world,recipe.surface_id)
 				var closest:=INF
 				var chosen: Dictionary={}
 				for i in range(recipe.segments.size()):
@@ -355,20 +395,20 @@ func _gui_input(event: InputEvent) -> void:
 			if event.pressed and mode=="socket_snap":
 				var source: Dictionary={}
 				var target: Dictionary={}
-				for e in session.snapshot().materialized_snapshot.entities:
+				for e in session.view().materialized_snapshot.entities:
 					if e.entity_id==snap_source_entity_id: source=e
 				if source.is_empty(): reported.emit("来源对象不存在。 ");return
 				var source_socket: Dictionary={}
-				for socket in EntityGeometry.sockets(session.snapshot(),source):
+				for socket in EntityGeometry.sockets(session.view(),source):
 					if socket.socket_id==snap_source_socket: source_socket=socket
 				if source_socket.is_empty(): reported.emit("来源接点不存在。 ");return
 				var best:=16.0/zoom
 				var target_socket: String=""
-				for e in session.snapshot().materialized_snapshot.entities:
+				for e in session.view().materialized_snapshot.entities:
 					if e.entity_id==source.entity_id or e.surface_id!=source.surface_id or (not snap_target_entity_id.is_empty() and e.entity_id!=snap_target_entity_id): continue
-					for socket in EntityGeometry.sockets(session.snapshot(),e):
+					for socket in EntityGeometry.sockets(session.view(),e):
 						if socket.role!=source_socket.role or absf(wrapf(float(source_socket.direction_deg)-float(socket.direction_deg)-180,-180,180))>3.0: continue
-						var point:=SurfaceProject.project_point(session.snapshot(),Vector2(socket.ground_xy[0],socket.ground_xy[1]),e.surface_id,float(e.local_height))
+						var point:=SurfaceProject.project_point(session.view(),Vector2(socket.ground_xy[0],socket.ground_xy[1]),e.surface_id,float(e.local_height))
 						if point.distance_to(world)<best: best=point.distance_to(world);target=e;target_socket=socket.socket_id
 				if target.is_empty(): reported.emit("16 屏幕像素内没有相容接点；可先在对象列表指定目标。 ");return
 				var result: Dictionary=session.dispatch({"op":"snap_entity","entity_id":source.entity_id,"source_socket":snap_source_socket,"target_entity_id":target.entity_id,"target_socket":target_socket})
@@ -378,49 +418,49 @@ func _gui_input(event: InputEvent) -> void:
 			if event.pressed and mode=="path_edit":
 				var recipe:=paths_recipe()
 				for point in recipe.get("control_points",[]):
-					var projected:=SurfaceProject.project_point(session.snapshot(),Vector2(point.ground_xy[0],point.ground_xy[1]),recipe.surface_id)
+					var projected:=SurfaceProject.project_point(session.view(),Vector2(point.ground_xy[0],point.ground_xy[1]),recipe.surface_id)
 					if projected.distance_to(world)*zoom<=10:
-						selected_point_id=point.point_id;_point_dragging=true;_last_drag_error="";session.begin_preview();recipe_selected.emit(selected_recipe_id,selected_point_id);queue_redraw();accept_event();return
+						selected_point_id=point.point_id;_point_dragging=true;_last_drag_error="";_transient_command={};recipe_selected.emit(selected_recipe_id,selected_point_id);queue_redraw();accept_event();return
 			if event.pressed and mode in ["marker","asset"]:
-				var point := SurfaceProject.ground_point(session.snapshot(),world,active_surface_id)
+				var point := SurfaceProject.ground_point(session.view(),world,active_surface_id)
 				var id := Model.new_id("manual")
 				var entity := {"entity_id":id,"kind":"marker","ground_xy":[point.x,point.y],"surface_id":active_surface_id,"local_height":0.0,"label":"手工对象"}
 				if mode == "asset":
-					if not session.snapshot().asset_refs.has(active_asset_ref): reported.emit("请选择已导入资产。 ");return
-					entity.merge({"kind":"asset","asset_ref":active_asset_ref,"orientation":active_orientation,"scale":1.0,"label":session.snapshot().asset_refs[active_asset_ref].label,"management":"manual"},true)
-				if automatic_surface and Terrain.enabled(session.snapshot()):
-					var choices:=Support.candidates(session.snapshot(),world,entity)
+					if not session.view().asset_refs.has(active_asset_ref): reported.emit("请选择已导入资产。 ");return
+					entity.merge({"kind":"asset","asset_ref":active_asset_ref,"orientation":active_orientation,"scale":1.0,"label":session.view().asset_refs[active_asset_ref].label,"management":"manual"},true)
+				if automatic_surface and Terrain.enabled(session.view()):
+					var choices:=Support.candidates(session.view(),world,entity)
 					if choices.size()>1:support_ambiguous.emit(choices,entity);accept_event();return
 					if choices.is_empty():reported.emit("没有完整支撑该占地的可用面，未放置。");return
 					entity.surface_id=choices[0].surface_id;entity.ground_xy=choices[0].ground_xy
 				place_entity(entity)
 			elif event.pressed:
-				selected_id = Plan.pick(entries,world)
+				selected_id = Plan.pick(entries,world,asset_hit)
 				if selected_id.begins_with("surface:"):
 					selected_terrain_id=selected_id.trim_prefix("surface:");terrain_selected.emit(selected_terrain_id);queue_redraw();accept_event();return
 				selected.emit(selected_id)
-				for entity in session.snapshot().materialized_snapshot.entities:
+				for entity in session.view().materialized_snapshot.entities:
 					if entity.entity_id == selected_id:
 						if entity.kind=="ribbon":
 							if entity.get("role")!="district_street":selected_recipe_id=entity.recipe_id;recipe_selected.emit(selected_recipe_id,"")
 							break
 						_drag_entity = entity
-						_drag_offset = SurfaceProject.ground_point(session.snapshot(),world,entity.surface_id,float(entity.local_height))-Vector2(entity.ground_xy[0],entity.ground_xy[1])
+						_drag_offset = SurfaceProject.ground_point(session.view(),world,entity.surface_id,float(entity.local_height))-Vector2(entity.ground_xy[0],entity.ground_xy[1])
 						_dragging = true
 						_last_drag_error = ""
-						session.begin_preview()
+						_transient_command={}
 			elif _point_dragging:
 				_point_dragging=false
-				if not _last_drag_error.is_empty(): session.cancel_preview();reported.emit(_last_drag_error)
+				if not _last_drag_error.is_empty(): _transient_command={};reported.emit(_last_drag_error)
 				else:
-					var result: Dictionary=session.commit_preview()
+					var result: Dictionary=_commit_drag()
 					if not result.ok: reported.emit(result.error)
 				_last_revision=-1
 			elif _dragging:
 				_dragging = false
-				if not _last_drag_error.is_empty(): session.cancel_preview();reported.emit(_last_drag_error)
+				if not _last_drag_error.is_empty(): _transient_command={};reported.emit(_last_drag_error)
 				else:
-					var result: Dictionary = session.commit_preview()
+					var result: Dictionary = _commit_drag()
 					if not result.ok: reported.emit(result.error)
 				_last_revision=-1
 			queue_redraw()
@@ -433,15 +473,19 @@ func _gui_input(event: InputEvent) -> void:
 			queue_redraw()
 		elif _point_dragging:
 			var recipe:=paths_recipe()
-			var point:=SurfaceProject.ground_point(session.snapshot(),world_at(event.position),recipe.surface_id)
-			var result: Dictionary=session.preview({"op":"update_path_point","recipe_id":selected_recipe_id,"point_id":selected_point_id,"patch":{"ground_xy":[snappedf(point.x,1),snappedf(point.y,1)]}})
+			var point:=SurfaceProject.ground_point(session.view(),world_at(event.position),recipe.surface_id)
+			var result: Dictionary=_preview_drag({"op":"update_path_point","recipe_id":selected_recipe_id,"point_id":selected_point_id,"patch":{"ground_xy":[snappedf(point.x,1),snappedf(point.y,1)]}})
 			_last_drag_error="" if result.ok else str(result.error)
 			if not result.ok: reported.emit(result.error)
 			queue_redraw()
 		elif _dragging:
-			var point := SurfaceProject.ground_point(session.snapshot(),world_at(event.position),_drag_entity.surface_id,float(_drag_entity.local_height))-_drag_offset
-			var snapped: Dictionary=preload("../snap_resolver.gd").drag(session.snapshot(),_drag_entity,point,zoom)
-			var result: Dictionary = session.preview({"op":"update_entity","entity_id":selected_id,"patch":{"ground_xy":snapped.ground_xy}})
+			var point := SurfaceProject.ground_point(session.view(),world_at(event.position),_drag_entity.surface_id,float(_drag_entity.local_height))-_drag_offset
+			var snapped: Dictionary={"ground_xy":[point.x,point.y]} # Socket solve runs once on release.
+			if session.view().style_profile.get("grid_snap",false):
+				var grid: float=session.view().style_profile.get("grid_size",32)
+				var q: Vector2=preload("../snap_resolver.gd").hex_round(point,grid) if session.view().style_profile.get("grid_kind")=="hex" else point.snapped(Vector2.ONE*grid)
+				snapped.ground_xy=[q.x,q.y]
+			var result: Dictionary = _preview_drag({"op":"update_entity","entity_id":selected_id,"patch":{"ground_xy":snapped.ground_xy}})
 			_last_drag_error="" if result.ok else str(result.error)
 			if not result.ok: reported.emit(result.error)
 			queue_redraw()
@@ -471,12 +515,17 @@ func _gui_input(event: InputEvent) -> void:
 			accept_event()
 
 func paths_recipe() -> Dictionary:
-	for recipe in session.snapshot().recipes:
+	for recipe in session.view().recipes:
 		if recipe.kind=="path" and recipe.recipe_id==selected_recipe_id: return recipe
 	return {}
 
 func has_pending_input() -> bool:
-	return session.has_preview() or session.job_in_progress() or not compound_points.is_empty() or not district_points.is_empty() or not terrain_points.is_empty() or not path_points.is_empty() or not plot_points.is_empty() or not brush_points.is_empty() or _brush_drawing
+	return edit_pending or _dragging or _point_dragging or not _transient_command.is_empty() or session.has_pending_intent() or session.has_preview() or session.job_in_progress() or not compound_points.is_empty() or not district_points.is_empty() or not terrain_points.is_empty() or not path_points.is_empty() or not plot_points.is_empty() or not brush_points.is_empty() or _brush_drawing
+
+func pending_edit() -> Dictionary:
+	if not _transient_command.is_empty():
+		return preload("../pending_edit.gd").create(session.view(),_transient_command,"validating" if edit_pending else "dragging",session.authority_signature())
+	return session.pending_edit()
 
 func _compound_target(p: Dictionary) -> Dictionary:
 	for e in p.materialized_snapshot.entities:
@@ -520,8 +569,8 @@ func _draw_w5(p: Dictionary,drawer: CanvasItem) -> void:
 		if line.size()>1:drawer.draw_polyline(line,Color("dca441"),2/zoom)
 
 func _append_brush_point(world: Vector2) -> void:
-	var point:=SurfaceProject.ground_point(session.snapshot(),world,_brush_surface_id)
-	var extent: Array=session.snapshot().legacy_document.canvas_size
+	var point:=SurfaceProject.ground_point(session.view(),world,_brush_surface_id)
+	var extent: Array=session.view().legacy_document.canvas_size
 	point=point.clamp(Vector2.ZERO,Vector2(extent[0],extent[1]))
 	brush_points=Brush.normalize(brush_points+[[point.x,point.y]])
 	if brush_points.size()>256:_brush_overflow=true;brush_points.pop_back();reported.emit("笔迹超过256个转折点，松开后整笔取消。")
@@ -568,6 +617,8 @@ func finish_path() -> void:
 	path_points.clear();selected_recipe_id=id;selected_point_id=points[0].point_id;mode="path_edit";recipe_selected.emit(id,selected_point_id);queue_redraw()
 
 func _draw_terrain(entry: Dictionary,drawer: CanvasItem) -> void:
+	if _view_project.style_profile.get("ink_mode","classic")=="sparse":
+		preload("../ink_presentation.gd").terrain(entry,drawer);return
 	var ink:=Color("574e38")
 	for mesh in entry.parts:
 		var polygon: PackedVector2Array=mesh.polygon
@@ -609,3 +660,44 @@ func finish_terrain() -> void:
 func _draw_editor_overlays(p: Dictionary,drawer: CanvasItem) -> void:
 	if render_only and not export_overlay:return
 	preload("editor_overlays.gd").draw(p,drawer,zoom,not render_only or export_include_grid,not render_only or export_include_legend)
+
+## Transient input owns only a small command; authority/revision/history stay put.
+func _preview_drag(command: Dictionary) -> Dictionary:
+	_transient_command=command
+	_transient_layer.queue_redraw()
+	return {"ok":true}
+func _commit_drag() -> Dictionary:
+	var command:=_transient_command
+	_transient_command={};_transient_layer.queue_redraw()
+	if command.is_empty():return {"ok":true,"changed":false}
+	if command.op=="update_entity":
+		var xy: Array=command.patch.ground_xy
+		var snapped: Dictionary=preload("../snap_resolver.gd").drag(session.view(),_drag_entity,Vector2(xy[0],xy[1]),zoom)
+		command.patch.ground_xy=snapped.ground_xy
+	var result: Dictionary=session.start_edit_job(command)
+	if result.ok:edit_pending=true;_transient_command=command;reported.emit("正在完整验证拖动，可按Esc取消。")
+	return result # Same full transaction runs off the input thread, guarded by revision.
+func paint_transient(drawer: CanvasItem) -> void:
+	if _transient_command.is_empty():return
+	drawer.draw_set_transform(pan,0,Vector2.ONE*zoom)
+	var p: Dictionary=session.view()
+	if _transient_command.op=="update_entity":
+		var e:=_drag_entity.duplicate(true);e.ground_xy=_transient_command.patch.ground_xy
+		var line:=PackedVector2Array()
+		for q in EntityGeometry.footprint(p,e):line.append(SurfaceProject.project_point(p,q,e.surface_id,e.local_height))
+		if line.size()>2:line.append(line[0]);drawer.draw_polyline(line,Color("f4bf59"),2/zoom)
+		var info:=EntityGeometry.resolved(p,e)
+		if not info.is_empty():
+			var a: Dictionary=info.descriptor;var tex:=texture_for(a)
+			var unit: float=a.nominal_size_units[0]/float(a.region_px[2])*e.scale
+			var pos:=SurfaceProject.project_point(p,Vector2(e.ground_xy[0],e.ground_xy[1]),e.surface_id,e.local_height)
+			drawer.draw_set_transform(pan+pos*zoom,info.rotation,Vector2.ONE*zoom)
+			if tex!=null:drawer.draw_texture_rect_region(tex,Rect2(-Vector2(a.anchor_px[0],a.anchor_px[1])*unit,Vector2(a.region_px[2],a.region_px[3])*unit),Rect2(a.region_px[0],a.region_px[1],a.region_px[2],a.region_px[3]),Color(1,1,1,0.65))
+	else:
+		var recipe:=paths_recipe();var line:=PackedVector2Array()
+		for point in recipe.control_points:
+			var xy: Array=_transient_command.patch.ground_xy if point.point_id==selected_point_id else point.ground_xy
+			line.append(SurfaceProject.project_point(p,Vector2(xy[0],xy[1]),recipe.surface_id))
+		if line.size()>1:drawer.draw_polyline(line,Color("f4bf59"),3/zoom)
+	drawer.draw_set_transform(Vector2.ZERO)
+	drawer.draw_string(ThemeDB.fallback_font,Vector2(12,26),"临时位置 · 松开后完整验证",HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("f4bf59"))

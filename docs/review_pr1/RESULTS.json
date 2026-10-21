@@ -1,0 +1,872 @@
+{
+  "document_type": "pr1_followup_native_evidence_not_user_acceptance",
+  "reviewed_head": "24c55c11b332895287ee12caddde704ffabaaadb",
+  "environment": {
+    "godot": "4.6.1 stable 14d19694e",
+    "renderer": "OpenGL Compatibility",
+    "gpu": "NVIDIA GeForce RTX 4060",
+    "os": "Windows"
+  },
+  "all_final_runtime_and_test_hashes_match": true,
+  "source_code_sha256": {
+    "addons/strategic_map_editor/art/tongguan_v1/catalog.json": "c202347436c66bdd4e7d851fbcc331ca689d280f70c61125ef57769422ee0278",
+    "addons/strategic_map_editor/art/tongguan_v1/manifest.json": "fc57911105cb641c5e6d438e4858800a426fcc8b107b8741c1de7455fb775993",
+    "addons/strategic_map_editor/art_catalog.gd": "cad78166dceef4718cceefc0ac5218a6f937a8f347a3ca42247b4e653d30b5d2",
+    "addons/strategic_map_editor/art_catalog.gd.uid": "417adcf1c3a0fa5efd702933989d0dc74ddf40dfbb34b98fcce48e95b75d4835",
+    "addons/strategic_map_editor/art_image_loader.gd": "04ee2a9e20aae85c847fd98745a7918a7897d7a31ad4559d1a5ed5b43290f6f4",
+    "addons/strategic_map_editor/art_image_loader.gd.uid": "cc5c66a976792ced953cc6d0e28a92d6004774f7276aa5e79cea0833c77ea70f",
+    "addons/strategic_map_editor/art_importer.gd": "e1f69217749f96ea618112be80a81d667b689709dd778d6855b9e4cb86c519a4",
+    "addons/strategic_map_editor/art_importer.gd.uid": "7ec71924bbcf5d19089a2f7d6e870883be6ef973735294e0897f4dad34fc6727",
+    "addons/strategic_map_editor/art_library.gd": "c8c4105b19210f993a059d1fa741846eeb9ed729228f2de4a9bb6c5ebb9a2003",
+    "addons/strategic_map_editor/art_library.gd.uid": "0ceed837fa5a20013de86df1cc75ec9b6652d3eff291790ba7d747077d5f8934",
+    "addons/strategic_map_editor/art_ribbon.gd": "2bbe5035578e91ec6297e86cd40d85cc6bfa2491f7a9c17959af50d957bd048e",
+    "addons/strategic_map_editor/art_ribbon.gd.uid": "1b4fd8e3566d28f5d760e19ba598e1538edcbac1e4a10e8a1d95595711bce31c",
+    "addons/strategic_map_editor/art_samples.json": "fef3d3c9f180ecccfab676db073616faebc50a93c7a5d3969da426e9d66164af",
+    "addons/strategic_map_editor/art_spatial.gd": "c46becde077350796111f643a963d684f65577951200a954bf799e06df8518d3",
+    "addons/strategic_map_editor/art_spatial.gd.uid": "27f0edb01d6a839c2bc2e76d37f1dc0b7218d365f2f43b2a2a0d564ade70b481",
+    "addons/strategic_map_editor/art_thumbnail_grid.gd": "03796548ff0518da16f7ea3cf8f7e7e0e08f4007257c48f219336130a3af2a10",
+    "addons/strategic_map_editor/art_thumbnail_grid.gd.uid": "e3fd0e25d04524ad6ba3d8aa4a9061dbf8726679fdafbb78a7b4f2e16d754f1e",
+    "addons/strategic_map_editor/art_visual_audit.gd": "6b6fbfb4408b09676fd7e735c22bca0d6e78297c1cea1260efb0a25f11723a20",
+    "addons/strategic_map_editor/art_visual_audit.gd.uid": "937931af99740f12036364b4fae553d3188a848ec679e0e54a197917889eaee9",
+    "addons/strategic_map_editor/asset_browser.gd": "1783edcc205d84d864b12363911206ca1b05391f1bdd13bfdecaf1e5ba39d513",
+    "addons/strategic_map_editor/asset_browser.gd.uid": "431d6006ff64d62f1a91bb3007ff70953611da9ac53ed69ab198aa3f69ceeccd",
+    "addons/strategic_map_editor/audit_review_panel.gd": "008a4069e8aeb411fe1d17025bcf35be90d7a0bd00d4e948ef4e9fe9bf38b3d9",
+    "addons/strategic_map_editor/audit_review_panel.gd.uid": "7ce50887cef9e27b50272b585c6b43868c23a446a1d9115a4005709b05201d4d",
+    "addons/strategic_map_editor/authoring_session.gd": "29c6842e4dc91e5d8c551be280dd8bec1df1d02414c4c8c99d678b7e35f0b9ca",
+    "addons/strategic_map_editor/authoring_session.gd.uid": "8348c9c183b68e4dd61ef48bbd25117b02e1d11fcf51c0774ee43ecf2e559da7",
+    "addons/strategic_map_editor/dialog_shell.gd": "fa8f70d50798a8d9f0a0215688d65e88c489b5409e900127c6eb09e3d8a698ca",
+    "addons/strategic_map_editor/dialog_shell.gd.uid": "8d925fba798f388b1123dac566f4e97d3cfde3aa399763d88766ce09df409568",
+    "addons/strategic_map_editor/document.gd": "f1655b24e6018736687dfefa4e06f3aa4cb9e4c37db298a5c4ec362a0698bdb8",
+    "addons/strategic_map_editor/document.gd.uid": "dec589159296485151f398b9a5177594c4bbfff848730345f86bdf707493c191",
+    "addons/strategic_map_editor/earth_path.gd": "d9ebb56bf8918bc541be2f525103ed8c8dfb5e48483a4eea7e6b719ad49ffdaa",
+    "addons/strategic_map_editor/earth_path.gd.uid": "d5a9be1a79e730745d9505f2d41e9f064ec6065e76b9c08261d3aadc16e6aec0",
+    "addons/strategic_map_editor/game_map_cache_worker.gd": "710e8d8603437295fc3dbe566efdc275f9e4210caf68ec4d8a86af5bd126ea9f",
+    "addons/strategic_map_editor/game_map_cache_worker.gd.uid": "5c9c0a5710fc7bc6194989c42762fe6379f64d7f2f1b50d34c8eafbe257beec9",
+    "addons/strategic_map_editor/game_map_publisher.gd": "8e932f8c0cdb57c86bec6682943d3f452512204cac8097556fd7a2b1b6d35a1f",
+    "addons/strategic_map_editor/game_map_publisher.gd.uid": "ae7ebaeefbba33f6834cab8d4a0ae5526c1b130411fdf470908d636e4ee0461e",
+    "addons/strategic_map_editor/game_preview_adapter.gd": "a54666e1e22154746044d5dd1d2666e8e7c968ca06438c9f078c797fb47f3fc8",
+    "addons/strategic_map_editor/game_preview_adapter.gd.uid": "be73756b4748a8b614470bdde2d4329fa2b32213536a87c875607383903f7409",
+    "addons/strategic_map_editor/geometry_ops.gd": "8301b517d1bcdf00ad8880784df482f5a4dfa41fc6f3476076706b39ed034511",
+    "addons/strategic_map_editor/geometry_ops.gd.uid": "710fc99b080f36f913efe56089da332ec15bc2215127657d24dcfdd4afd55b49",
+    "addons/strategic_map_editor/interaction_overlay.gd": "6d9936f9a08e648aab589606dcae76e2179af77e499a6270da87da96f8861486",
+    "addons/strategic_map_editor/interaction_overlay.gd.uid": "0082d93215e7bb465b355f391710197311c9c1a3ebac0d34cad4971ed632de89",
+    "addons/strategic_map_editor/map_audit.gd": "a1e60c92d017252a189a201f1519f0f4837658a64369a3a5dfb3695b47081a45",
+    "addons/strategic_map_editor/map_audit.gd.uid": "2ac70817a8b723837a30e609ff1241161ddbf08e9e764e3a44e74b1898acbc6b",
+    "addons/strategic_map_editor/map_canvas.gd": "61c9cb56fd6246a4022d4ae407889ebfd7c80f0fa889c86854e81cb504dfa47d",
+    "addons/strategic_map_editor/map_canvas.gd.uid": "e000e6f7d37a06fd3d93b8fafcacb26ebf2a048fe8c37fc19a81415968cb133d",
+    "addons/strategic_map_editor/map_exporter.gd": "387ca925e0d7774fdbd647be518ac7f1f85ca48a83d56f65079a082ea238a136",
+    "addons/strategic_map_editor/map_exporter.gd.uid": "02c78b4e98e11c08f39261385bb02f54be5ad8ae19d22475d985da25ca6b06a3",
+    "addons/strategic_map_editor/minimap.gd": "93dac4fee4ad4f3e264bf8cde14dcb6dff3de93601b283fbfc6502e010385edb",
+    "addons/strategic_map_editor/minimap.gd.uid": "c3fe18f9603b62be98f9f7796f4e42abae9e6fee23fd0f12ed6d4b89f0de8a94",
+    "addons/strategic_map_editor/natural_water.gd": "1441bd8309f46d750d409988ced536cc1584a8fab5ed604006b8f4624061c171",
+    "addons/strategic_map_editor/natural_water.gd.uid": "76379796ef8b6a923f24713347525202c6ba5e8339c7c1505288299ae9ff5db8",
+    "addons/strategic_map_editor/plugin.cfg": "606b1bec4494d3fefa5bf24ad7a7a0fa4c47607fcce019ab8685853339e96295",
+    "addons/strategic_map_editor/plugin.gd": "835136f7f97c5808497cc2ff18b9ad88d0e82d91482cb1f972c94209db5eac31",
+    "addons/strategic_map_editor/plugin.gd.uid": "d12e17bf716e76b7188da811b91fc6ee203155f2d4c0d97565f1b1ad622a9bbe",
+    "addons/strategic_map_editor/polygon_boolean.gd": "257dd77f4bf9ff8ceafa6bbf9edf12a0621e5b32108d619f73ebda3709f311b7",
+    "addons/strategic_map_editor/polygon_boolean.gd.uid": "2e90839360d339173f3fda5dae316234d64e767cb9c0970146dc5f2acb05ef0f",
+    "addons/strategic_map_editor/polygon_math.gd": "c37955df059468cbe6bb5d6f4d64f5b85f39c8236b32dea601f48eba22b55e56",
+    "addons/strategic_map_editor/polygon_math.gd.uid": "e37b48419794e5a64806e9a81fae40632ed15a12568fcadd7dd62270016fa2ba",
+    "addons/strategic_map_editor/polygon_query.gd": "347314c8c8180ffb709d16627a8989d0c1f38431ca273a13328752e763610b5e",
+    "addons/strategic_map_editor/polygon_query.gd.uid": "4650e86613907bfe74ba93bd2fd0c335c9658607974edf2caaf2a833de3f28c6",
+    "addons/strategic_map_editor/production_contract.gd": "40f8af513f31a3950a3786f535edf14c9c41b2eada8615dc6311998a08c75772",
+    "addons/strategic_map_editor/production_contract.gd.uid": "0634af1384cf0f14745bb07e4938b495fd311878992caff97b804afb4ba058f3",
+    "addons/strategic_map_editor/production_panel.gd": "52d11477aba367d6bfc82cc8dee84d5747e83b8f1eb118493e0788b1e2ba99e1",
+    "addons/strategic_map_editor/production_panel.gd.uid": "44520b13b22650a6aa0e2ef0d814ca0e3dbdcf6232a3023f6f0df5e3a5f45a6b",
+    "addons/strategic_map_editor/production_samples.gd": "697dd262494623f60a15a5c200f2dcca4346d2f5628d0546254f65deb5742830",
+    "addons/strategic_map_editor/production_samples.gd.uid": "46ac08d77b40b8f23dfada10398530403afd31a8b15af6ca5afd6f06310ce45e",
+    "addons/strategic_map_editor/recovery_store.gd": "5dc3c07a42945ab8ea2babdaa31338d4ce570f6f90bc0feb6ff6e6ba8add623c",
+    "addons/strategic_map_editor/recovery_store.gd.uid": "b522c9f38adcebab8b88d661345594e80dec90d88aad286221cc67636570da59",
+    "addons/strategic_map_editor/reference_registration.gd": "b2485ec3071c284c2425381e31904c8760e3aa155edf6697a594c6ce28d8907f",
+    "addons/strategic_map_editor/reference_registration.gd.uid": "d40aad68d0faf77d6f1681ed732c19e98e289d86a33d5abb9513747165177432",
+    "addons/strategic_map_editor/regional_preview.gdshader": "01d778133923a59b40bdf53f6460e84499a932893f28a8358d5498e95d0a2667",
+    "addons/strategic_map_editor/regional_preview.gdshader.uid": "832181c44c7e4ea49077d9691d77bd53161f1817dc498051c1fc077e8012e460",
+    "addons/strategic_map_editor/route_preview.gd": "68b9d4b12dc800597a8d11297eff38a0980e2c6ae3386c10f13048c796d10d0c",
+    "addons/strategic_map_editor/route_preview.gd.uid": "ffe27b11a909f100caf1e4c57bb4be88d3bed3e992ad4675b5d4fc48d8f151f7",
+    "addons/strategic_map_editor/runtime_geometry_cache.gd": "5c06e4efe0385b59df764282e16c87f8c87779aa8407fed4ce4ff43bacc716f6",
+    "addons/strategic_map_editor/runtime_geometry_cache.gd.uid": "e663e48d2a5c4c328a66eda443e89cc743443f589d40ca325aef0d951aaf608c",
+    "addons/strategic_map_editor/runtime_label_policy.gd": "1eac83007cff02e5aaa8f0fe19a2ecb05f7d300abe131fa46c860095306c041b",
+    "addons/strategic_map_editor/runtime_label_policy.gd.uid": "c4836ef4ce9753be0d92a8abd3b218f5d78ea32f25c91d21d19473368f5a52a6",
+    "addons/strategic_map_editor/sample_geography_review.gd": "3ae966e3a80f6f15f8c0d95f865587f243f93255f27d7625bea8237bad4cf8a3",
+    "addons/strategic_map_editor/sample_geography_review.gd.uid": "e43e3168952195b781b20f77b6b59df15403e95224340a11d4b39e116f11d2e8",
+    "addons/strategic_map_editor/selection_overlay.gd": "68ce59d1120669e792f25ce14c285ae8e2de5248779f810c285fee7f341ce28c",
+    "addons/strategic_map_editor/selection_overlay.gd.uid": "da0a9500ea1bf53353def5c090cdba3a430c8509d48fb9205c5824bb314889d5",
+    "addons/strategic_map_editor/settings_panel.gd": "be8dad902016f51da75b1e3b9d72295a2dbf5de32b46e893c8386878bb8604a3",
+    "addons/strategic_map_editor/settings_panel.gd.uid": "8653205e5d2756855e697b3a551e78d0a559950f6cd0095c47734730d0c92925",
+    "addons/strategic_map_editor/shared_boundaries.gd": "b2e3aad61d17614f9a6d769877c8760f86f37129294a9d8145d43f8b281ad333",
+    "addons/strategic_map_editor/shared_boundaries.gd.uid": "2cb28e0c792f268426b40cf1637bd5c27e41e057dad0d3053c3eb90efe28e2b1",
+    "addons/strategic_map_editor/spatial_index.gd": "bf25d8ee1bd477f9712483bf1f0b14f7c8223f226e1ace1f462a4062ddf85cd0",
+    "addons/strategic_map_editor/spatial_index.gd.uid": "52274e7e7f1e58eefcddf215f9d8d68223fcdeb1c36979f0d216df45f345e2b3",
+    "addons/strategic_map_editor/water_brush.gd": "d0e483eb2e20b9e17e61a85f30ad0f5541e0b098073695f79e5d61fa514729ce",
+    "addons/strategic_map_editor/water_brush.gd.uid": "abcb6f7e311dad48d14dd2f720d03ae334bb4ac89eee0e33ba0b46ea4ae95491",
+    "addons/strategic_map_editor/water_brush_input.gd": "ad5b7e5bff8a51a6545bd6c4cf169559219b31dce11c48a39502fe5a33179682",
+    "addons/strategic_map_editor/water_brush_input.gd.uid": "e15318e9109e9893b9ca18b198992ff1e1089adec28bdf80b49dcc25a112c025",
+    "addons/strategic_map_editor/water_join.gd": "5d61c30db5a23d55fe4d0fb0ddb24aee3e35eb92c5aa5810931533b2f1516a74",
+    "addons/strategic_map_editor/water_join.gd.uid": "aab6158ae6204fc1fc08d81930d81d5c479a2ebd8ed32c20df2b8d9989e3e1a7",
+    "addons/strategic_map_editor/workbench.gd": "8af24fc62af2f5e5b3aa4c53e406a770fd23bbb992f5f680802815d2d35f1445",
+    "addons/strategic_map_editor/workbench.gd.uid": "dfe5527496c4ec1861d42ff78d8f44e1121160fa841071fa1fa3ce5187bc5f25",
+    "addons/strategic_map_editor/workshop_map_preferences.gd": "0b311dcc1508a88bd6fb9c3c924799d294a0ddc93b3149efb9ea7e4b40a3b6a3",
+    "addons/strategic_map_editor/workshop_map_preferences.gd.uid": "efc8c9137b742084449c3fa5f087d637fca7c79bc4179a9317152061493761a8",
+    "addons/strategic_map_editor/workshop_place_layer.gd": "00443c74dce4e2f8c66c675ab3ac3cd961510501388254202adee895c1dbb812",
+    "addons/strategic_map_editor/workshop_place_layer.gd.uid": "b442b91eeb6a0e8c513a733eb1abca63d4f9e6efd8620869ae928a5b73260e04",
+    "addons/strategic_map_editor/workshop_s1/asset_descriptor.gd": "f6cbdff949fccdddd3aeec1893922a958dfe4f54268f44a5719f12dbe200be2d",
+    "addons/strategic_map_editor/workshop_s1/asset_descriptor.gd.uid": "04dcbc5aef242c56db8f281528edc928b4e930f0f8b58cfebbc1fa335f5cd975",
+    "addons/strategic_map_editor/workshop_s1/asset_importer.gd": "6c8e61e232cee7ec36fa3c6bf27745ecf47e78bb90c88589f3c948f7d73d9343",
+    "addons/strategic_map_editor/workshop_s1/asset_importer.gd.uid": "ba681608cfe2f9d64280fc080773782df0f655fc8c79e2207467893766499143",
+    "addons/strategic_map_editor/workshop_s1/brush_sampler.gd": "b455b87c5388cf14f411d1e7507f13b886601401d1623fe89b1b7c4720fbdd4f",
+    "addons/strategic_map_editor/workshop_s1/brush_sampler.gd.uid": "7880b7210dd7ec81c68a29dfc8834efad642c5f73f987684bbf729d614e52a58",
+    "addons/strategic_map_editor/workshop_s1/canonical.gd": "91ae43248a8667c9032db2108f4e7e3b6c89b5a4b5b9d2ea392ff0d3d1d55f78",
+    "addons/strategic_map_editor/workshop_s1/canonical.gd.uid": "df29415c0ff9a9b2c7053df4c635b860d011a59f4ad523b6e5e38ef30f671398",
+    "addons/strategic_map_editor/workshop_s1/compound_model.gd": "20469626db2fb0dcebf2923736da6b4feb15dcbd9f574a1a1f2cce4fddf091fb",
+    "addons/strategic_map_editor/workshop_s1/compound_render.gd": "bdcd8b5d8d246eca88c8367949f6b55dbd61f93f2bd10eb4651048e44318d8ad",
+    "addons/strategic_map_editor/workshop_s1/district_generator.gd": "2c403eea38186fecff081cf54f3e57dc9884ab39d28f13e00daa980958bb78e2",
+    "addons/strategic_map_editor/workshop_s1/editor_contract.gd": "30c3b76649a43ddcd9a7e6d7994b5b80a3bc327d0a07f3e5d39964514acf11cd",
+    "addons/strategic_map_editor/workshop_s1/editor_draft.gd": "c2f978c0f1118937c8bd45dbd25eda0ccae8310ce940fe3b522f910f38c6b2fe",
+    "addons/strategic_map_editor/workshop_s1/entity_geometry.gd": "4100686635b5225d4bf18bb95c8fa5f27f08fb2e95f8efeb4eaa4bfe1f46a22c",
+    "addons/strategic_map_editor/workshop_s1/entity_geometry.gd.uid": "7c5a5450a380472c19ec9dbe030d48ff48158baec5843b4726c637bd0a54db4e",
+    "addons/strategic_map_editor/workshop_s1/export_adapter.gd": "891d928d08e466f0c4349f116b2a6e3166461f51a2da8fddea3645d68ee0ee8c",
+    "addons/strategic_map_editor/workshop_s1/export_image_job.gd": "38de2fa70175a82da033d3eb91680204fdd9a97977731e2223d245147e0d7ef7",
+    "addons/strategic_map_editor/workshop_s1/group_transform.gd": "e53427142995df26120ae416e41ea893a789607853a09d2a48b337d4d4c5165c",
+    "addons/strategic_map_editor/workshop_s1/legacy_bridge.gd": "134b4e7d8e2cee18372889a39103c405686d73b35939587028f7888a0b68f561",
+    "addons/strategic_map_editor/workshop_s1/legacy_bridge.gd.uid": "57cecc877fd747e3d42b3fe521670d97a82b6a580016342055add90c0c36f633",
+    "addons/strategic_map_editor/workshop_s1/override_resolver.gd": "3d3d28dba11212a46106eec61bde584b0d23ad2722a694a389de0f45f96c4493",
+    "addons/strategic_map_editor/workshop_s1/override_resolver.gd.uid": "0b0512cd26009d699ca291de8f85ab6a5a62064df9e935cc70088a16a751456f",
+    "addons/strategic_map_editor/workshop_s1/path_generator.gd": "83513c7eab5a945cf6153c0f4c17a63ad1ae8b50ffedde1662b9d484c3985c49",
+    "addons/strategic_map_editor/workshop_s1/path_generator.gd.uid": "e91ef23ceb6c8f5758632a64a9190e61a6fbe50b51954f81149806e559ce19e9",
+    "addons/strategic_map_editor/workshop_s1/pending_edit.gd": "8ea8adaa1f3bbf426414d710eb9b92636ac46a1f6ade151b5fd15b503e82614d",
+    "addons/strategic_map_editor/workshop_s1/plot_generator.gd": "94b03ba020bc10593e94edf45bc12458c8b1584526595fab2efbd80f2ed98f6d",
+    "addons/strategic_map_editor/workshop_s1/plot_generator.gd.uid": "33f1232a7facb1c94e9007c5c5ff23658dc0f33b1f92166fe89375513895b34a",
+    "addons/strategic_map_editor/workshop_s1/plot_geometry.gd": "fdf609e8649455136fcd25679090822a716c7ad7598e0007bad11b2255bf93d3",
+    "addons/strategic_map_editor/workshop_s1/plot_geometry.gd.uid": "78a60b68281e94a1242b70298d06bce37bbcdd41ce1c29494be6a7aa71583727",
+    "addons/strategic_map_editor/workshop_s1/plot_spatial.gd": "92193e9c8ed7ab6a93287da1af70ae8e76aaece88279159aa99abdda0bb6cd7b",
+    "addons/strategic_map_editor/workshop_s1/plot_spatial.gd.uid": "c6c5f2b88a3cc618f8c14ce23601e421fc9b8da17462333027d79276740101fe",
+    "addons/strategic_map_editor/workshop_s1/project_commands.gd": "71c2daef0e2edca3fcfced64eeed43532be75ce2e22283858c8126b43e505a06",
+    "addons/strategic_map_editor/workshop_s1/project_commands.gd.uid": "f4489705bd216363a4efc63debb0c45884d26a428fb0d8bc4b825353ade31907",
+    "addons/strategic_map_editor/workshop_s1/project_model.gd": "9be03e1a16c920e4cd4233f97c5b7d77fc288403d5231515d277bba9b4deda9a",
+    "addons/strategic_map_editor/workshop_s1/project_model.gd.uid": "f9ddf3e044bc21435352743ffbfa3c67cad6b41b6b8f17009449a7d7899645bf",
+    "addons/strategic_map_editor/workshop_s1/readonly_preview.tscn": "724877f936e93187d9ff1e0b5bf5f3bcfaec7521690a671fc64ef9514083e4d0",
+    "addons/strategic_map_editor/workshop_s1/recipe_scheduler.gd": "d162c566bf76a509fb4a18a9b248eab7557d6bedbfeaa06a2b3adabfd79ec63f",
+    "addons/strategic_map_editor/workshop_s1/recipe_scheduler.gd.uid": "71914e8bb74b659efe0195fce90efc03158e6ba75018df180b3a54485bcdcdd1",
+    "addons/strategic_map_editor/workshop_s1/render_plan.gd": "fb881576152547e3a22da52c2106000646a52dfb01824df6b1de5ea9f43a2f4c",
+    "addons/strategic_map_editor/workshop_s1/render_plan.gd.uid": "22389c44bfa94776829ae1ca38dcf9ac8148b8a1416937759924b3484d21b24d",
+    "addons/strategic_map_editor/workshop_s1/sample_assets.gd": "e0f5a398b06009d5ea5f8f2625d6386d2f00c709ff090628e8553f82d04a5e43",
+    "addons/strategic_map_editor/workshop_s1/sample_assets.gd.uid": "f89f61eaff37269a77738f377f35b5f431dd4cb4200220c233d14f5973429df5",
+    "addons/strategic_map_editor/workshop_s1/session_transaction.gd": "1873b4f45a8d303ac89e6d5bd906c9a33591ae504575ca685b9f1ec1b62ad7e0",
+    "addons/strategic_map_editor/workshop_s1/session_transaction.gd.uid": "f67b3f6de4095eb8caf5b741559549718ea7774fc3dee6b22672321f16075ffa",
+    "addons/strategic_map_editor/workshop_s1/snap_resolver.gd": "063c2971b8e6784955b778c61720d3dce1eaffac3f4de14d0398363b85ade307",
+    "addons/strategic_map_editor/workshop_s1/support_query.gd": "c6e03decf7d2328aa0c3220984c20613581e75ccc4ce4542e6bccfa9c5b8879f",
+    "addons/strategic_map_editor/workshop_s1/support_query.gd.uid": "976f9316287471f97e8e424fe3c0facabc6c3bf947c93af561e4eff5052a0bdb",
+    "addons/strategic_map_editor/workshop_s1/surface_projection.gd": "34d58295675e5286cf8b26b73fb476a17a80d69e1bddf77a28b7055d327a91e8",
+    "addons/strategic_map_editor/workshop_s1/surface_projection.gd.uid": "a6fe8471a897a4c8d7ec8a8df9a95555123caedfbc26453ebf00088362b96f69",
+    "addons/strategic_map_editor/workshop_s1/template_library.gd": "cd73f80355a5e4d6bd91cf76abfa4d11ffb1b5c2631ef7f3e917c27189c4d265",
+    "addons/strategic_map_editor/workshop_s1/terrain_geometry.gd": "7138882a7c5470cac7268cd3f2c5072f4bcc579a1a690f2286b42da60d2ee885",
+    "addons/strategic_map_editor/workshop_s1/terrain_geometry.gd.uid": "83766fd670e600a6086bab275084ca0580c4891d3ef10ef4d271ada82fc2ca42",
+    "addons/strategic_map_editor/workshop_s1/terrain_render.gd": "39792f65e6c44cb16f6d773b01201313f19eda5af1c99ba1dc3301b8985c7d1e",
+    "addons/strategic_map_editor/workshop_s1/terrain_render.gd.uid": "adac05d3d04e921d2fddf352135f7afdfe86fc0bf0e04b193a6825aad1d5d71a",
+    "addons/strategic_map_editor/workshop_s1/ui/asset_editor.gd": "fad70ee18d98c0675addc8fa72774e357797003bd84abf204eccc47297165f88",
+    "addons/strategic_map_editor/workshop_s1/ui/asset_editor.gd.uid": "3ba5209486f5f7078c56c5f703b6a0d0508f9f006a8fd20b9c7944e3da81f293",
+    "addons/strategic_map_editor/workshop_s1/ui/asset_preview.gd": "298c48564f536f8212eae417ae698153ff5bf7c9cc86242c3fd997e494dd3d64",
+    "addons/strategic_map_editor/workshop_s1/ui/asset_preview.gd.uid": "b194d35c9a7cb043a7f37cc3a2425fee508f0f845f57603f62fcca42b49a8550",
+    "addons/strategic_map_editor/workshop_s1/ui/district_panel.gd": "475f6ba9e032dad0ae3243f3ee5afceb7466d3579f35595c04e6ebca55032394",
+    "addons/strategic_map_editor/workshop_s1/ui/editor_overlays.gd": "d67392f17391950aae4901784baba138102619e7da842e6113e8231ec8ef1712",
+    "addons/strategic_map_editor/workshop_s1/ui/export_panel.gd": "6139ae62d286381cf07dc481933e4d1f23331fe830206481232d78add44e0a27",
+    "addons/strategic_map_editor/workshop_s1/ui/library_panel.gd": "28c470f3a28a2fba70296583809a398a627cfdcfa9570811f2d891e745ca2d62",
+    "addons/strategic_map_editor/workshop_s1/ui/path_panel.gd": "4486a94686b3d34e86603923f23fd5069721ce6903d6029b3b190518fd80ba6b",
+    "addons/strategic_map_editor/workshop_s1/ui/path_panel.gd.uid": "e0fc0029828c5a7beb0543f5494b3d8d22830adc0a66da8c23e5a543c12105e2",
+    "addons/strategic_map_editor/workshop_s1/ui/plot_panel.gd": "d2c6667f8283f9232cc2f9c28b62317132af9a45ca541382c9d73036967d6857",
+    "addons/strategic_map_editor/workshop_s1/ui/plot_panel.gd.uid": "e56071e24441b8f95f02494403768a81fd55685100bafcd2681470d05a64cbb6",
+    "addons/strategic_map_editor/workshop_s1/ui/preview_entry.gd": "ce5ac7061140d43f3a742d420bd4de7eb2ae639b6f4fad76954499ba98160503",
+    "addons/strategic_map_editor/workshop_s1/ui/project_canvas.gd": "ff8b3e74fb6ad7ec6eab08ffa8056bd6d7a7bb2d4643a5f95eae14ddb85cceff",
+    "addons/strategic_map_editor/workshop_s1/ui/project_canvas.gd.uid": "dfde343004705c4b634749f6e5476f99ed5f1d9b57f2a8d42bf7c454e75d418e",
+    "addons/strategic_map_editor/workshop_s1/ui/project_editor.gd": "d9426c66765e28e9053268d60af53e8333484f5587a073df66d01b4dea6490e8",
+    "addons/strategic_map_editor/workshop_s1/ui/project_editor.gd.uid": "f18453e25fa3aa86c187805f464ca8931e2799d6b0ef516328e5d9abe4da7624",
+    "addons/strategic_map_editor/workshop_s1/ui/readonly_preview.gd": "ff0a7b18c79d8af8c29f795e5201ed408b62afc86d6d0da22b0c87e36e12de81",
+    "addons/strategic_map_editor/workshop_s1/ui/room_panel.gd": "06fcfd97714badfb18a9b63d1ab66d1b02fa129e1d63be3f4901fa188fdfe549",
+    "addons/strategic_map_editor/workshop_s1/ui/terrain_panel.gd": "58554749113e0a00d84072d5dbc3bc0d09460d7f7dee908b5b494402b6d2268a",
+    "addons/strategic_map_editor/workshop_s1/ui/terrain_panel.gd.uid": "cc8b43dd28f0dea53985cb9e9ef4333c8d979e90b27043ca957c37635ba34f80",
+    "addons/strategic_map_editor/workshop_s1/ui/transient_painter.gd": "bc8d52e4b0076a139e0bc78c118fe95077f3bb46500e9449a182d4d0eefab925",
+    "addons/strategic_map_editor/workshop_s1/ui/world_painter.gd": "28a3abd525abf3cac825baac85dee86dc211b8d989a474f2379ab1b8bb855e75",
+    "addons/strategic_map_editor/workshop_s1/w5_draft.gd": "aa8dab51eec81d8543d7c1a264bffc80beb7e3a5f3e2ee2c4c1ded09a098acd7",
+    "addons/strategic_map_editor/workspace_panel.gd": "5470edcdfb5b42f439523f0024cf64df36f106db94bef6bc8cf5172a1c372b6a",
+    "addons/strategic_map_editor/workspace_panel.gd.uid": "10a8193b63a6738d4d8539d92b39c0e26d9072f9983c95a5dc461e438866bad9",
+    "tests/fixtures/core.shwork.json.gz": "d2e30bc0767f982e8cffc28c3684c27fb86e92399aac061fdc4129abc59b2844",
+    "tests/fixtures/editing_core.shwork.json.gz": "506406c65d87bde8ba9ea0316448d12ba70c101c5042b6c12263579089e7ac3d",
+    "tests/review_c7e0/build_art_candidate.gd": "9b8f6dae6d6aa9186423b9ca765daea6e66ef7aceda9307334f3b48ed39304e9",
+    "tests/review_c7e0/render_art_review.gd": "f9c933652d4006a6da2eb1f387e7c05257e06f3359e40b3329ac18ab971ee1e3",
+    "tests/review_c7e0/test_edit_profile.gd": "90d3d326eaa77fe7bc95ff61e6e2db7937bfc085503958b0f02551c1468a3052",
+    "tests/review_c7e0/test_edit_soak.gd": "5e8921776ffea1e59594dd483dcd154258c559947e2c29c46c8a7665a5dbd772",
+    "tests/review_c7e0/test_export_background.gd": "efb272f3dd2b3887b984685dec78b59b568a32b6add0ce92904fe9d4cb6e4440",
+    "tests/review_c7e0/test_heavy_ui.gd": "55b29a728cfc54fcce6d9916a685b5690e0d824a9832cea61ed7758abd6c0069",
+    "tests/review_c7e0/test_original_counterexamples.gd": "2d7acaf29b75dff5d7e4043810b02804046fb203483b70b2294a87f9f5b30f1d",
+    "tests/review_c7e0/test_review_contracts.gd": "b0ea5f891f27f17a1b7ef0bff98367df56f7990f4e175ffc5e54b873b08a625a",
+    "tests/review_c7e0/test_samples_ui.gd": "fd81974fc0e38f07cf10a7aaf34b9e46bdffe075c4667cd32bb8a0d87125b9b0",
+    "tests/review_pr1/delayed_session.gd": "410bd79b11c894caefe4c48c77268c9c177779e41edb8c5ce70d2ae75641db41",
+    "tests/review_pr1/test_async_edit_soak.gd": "83ba1e9ef3e791a3f3cfddda42ae3ce0c065699024d5b1e25ef915af57e891cf",
+    "tests/review_pr1/test_operation_frames.gd": "0e9ad0846634d60cd6a8b6eb9cdc40b22e65a098a388164b87e8855ddfbb2a28",
+    "tests/review_pr1/test_pending_receipt_counterexample.gd": "36d9c941a2ba6465881b9aa7cb15d7f465c48c669a4ede8c1a2b9d40d49805b7",
+    "tests/review_pr1/test_pending_recovery.gd": "55fd1a082334e97af5e2cef14627f76de1a84a421cf9dc49d43e5e3b41c4a5aa",
+    "tests/review_pr1/test_save_jobs.gd": "4e04e38e416ae3ac6308238896ae442f271a5aede2d8c660fb513c36acc4789a",
+    "tests/review_pr1/verify_packet.py": "dafa51088a953fdb710715218831b5afd625c44ada2e87ce6197020568064bd7",
+    "tests/run.py": "41612f061eb3b234ab212c08784624150a9ce5fabd7ccc12cd16b7adb4bfe265",
+    "tests/suites.json": "ad7c3d83cf03d7279033ab5b0ade89c98e144a7d0d7ff83b2edd53f45257db82",
+    "tests/verify_sources.py": "64115b2793df9dfd30d936acd76b87f6c32cdd3f665349de4e9f68c12919ab63",
+    "tests/workshop_s1/frame_probe.gd": "d407888583a1461d3fc4f01d6dac4543395e29eb9e94acea5c37d8a04113de62",
+    "tests/workshop_s1/test_assets.gd": "cc1be67cfaa0ded89eb8eeae34ae91a667c6ca2cb1e9c05d35edfe5bca51a024",
+    "tests/workshop_s1/test_assets_ui.gd": "b7f36e98e7ac6d7765eeb09cb5a19981a283392d5d7295984851de982f5c62e1",
+    "tests/workshop_s1/test_compounds.gd": "05b6efd7aa37cd87a94892a9a82fa3ca9194b03a7a4cbda8cef9858c9db5e1b1",
+    "tests/workshop_s1/test_district_protection.gd": "7011bc9d9edd6b4164100aaceb66183d562d2875eadc87d7a44f3f334c6e1ebb",
+    "tests/workshop_s1/test_district_ui.gd": "43727b4b7b80d63321d9dc2b71b3cff1d6d8708e889b71d2386881767b1690fa",
+    "tests/workshop_s1/test_districts.gd": "08d1d395cc27b4f9c2fdcfd12dc2eec3c71db8a4425957022a99bca834fd5386",
+    "tests/workshop_s1/test_editor_contract.gd": "7901f40dd1c2fa52e639360a653ad15ce892205d965886454e0089c2570b85e2",
+    "tests/workshop_s1/test_export_bundle.gd": "25ea5bf4815dec271be1fff53d014ead591a30b8846501eab337cf2dce2c88f6",
+    "tests/workshop_s1/test_export_pixels.gd": "09d0263ca01b9f7ee7d0c172c0030328522d019e3b993f1451d7bfbef0996321",
+    "tests/workshop_s1/test_integrated_ui.gd": "172e11c3ffa2105b7aa3c60fc3cee9fe954fcf8bac01bb4bbd7a1b8dfea54455",
+    "tests/workshop_s1/test_path_failures.gd": "895962446c05c499a20369a53f8215bdbe75a5916f00a259dd52342b4908ad5c",
+    "tests/workshop_s1/test_paths.gd": "70068904b4f529bbe5f4da3334505bfcc929d47106584ee99943ca21601a80f0",
+    "tests/workshop_s1/test_paths_ui.gd": "591f0909bc223a74bff97a186dc2fb79e18d3a2b5d6c92bfbb853a2086b8e428",
+    "tests/workshop_s1/test_plot_failures.gd": "3bf773c9b599b24d284362fd2946e1ccc9dd7d49ff7e7ead9076b483e4ba47ea",
+    "tests/workshop_s1/test_plot_jobs.gd": "f4f2d24c5aedae314afea9d66168f6ac307108ba9340134d6b8f1b6147a894b0",
+    "tests/workshop_s1/test_plot_recovery.gd": "a06b40e19eec7023ea64b31f82c5193fc10113099c2e946890d78a2d1351c698",
+    "tests/workshop_s1/test_plot_weights.gd": "ce15b976dd3bc2b841d3797f176396515978c984c7e883006b73ba61ae50cb01",
+    "tests/workshop_s1/test_plots.gd": "bfbbe57a518674c2aedfbd9f9fab0bc6643d2881245df5be1f002182c19ce869",
+    "tests/workshop_s1/test_plots_ui.gd": "34f97a718b00ac3325bf18f59a328c54809feef5e3dd2801dfe7848a3c0a823f",
+    "tests/workshop_s1/test_rendered_ui.gd": "d42d85392d11bf63c9fe89e3e438d3e71145a08835dd574720036447e3730dfe",
+    "tests/workshop_s1/test_session.gd": "481444bb23a78305b6137c55d7cd68d7229f34d2a2f39fca07304d362bbf5043",
+    "tests/workshop_s1/test_template_dependencies.gd": "569178baf976821eb9269d3fdb68a3a4f3d78dbe4c63edec497e470ff11848db",
+    "tests/workshop_s1/test_templates.gd": "eea5b31527b986e168d4cb8223d2f7ba41385a2190d9e34c0c49e97640630ac7",
+    "tests/workshop_s1/test_templates_ui.gd": "6b81ec65a5670bfd3c998e7a693f7862ee43a98be5b9628460b197b46efc4b47",
+    "tests/workshop_s1/test_terrain.gd": "383c4298b4f8fbfb6f62a1c4d060a3af8a7d603691fee06e8d2eeec7600595eb",
+    "tests/workshop_s1/test_terrain_failures.gd": "122cc932b9fa7057a2534451a56ca8df2ff65683d732871ccd38e156fa13f8d3",
+    "tests/workshop_s1/test_terrain_lifecycle.gd": "0d00fa16ebbef3f028f32ae1e95f8c34f3170bc46f30d7fcfcadfee6b957f9d0",
+    "tests/workshop_s1/test_terrain_ui.gd": "414e57a3357f2a467e923c215c66e32c909c6aeaa08090941863f4b5422f209d"
+  },
+  "suites": [
+    {
+      "name": "FINAL_UNIT",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/review_pr1/test_pending_recovery.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.5336659000022337
+        },
+        {
+          "script": "tests/review_pr1/test_save_jobs.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.7671027000178583
+        },
+        {
+          "script": "tests/review_c7e0/test_review_contracts.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.857714899990242
+        },
+        {
+          "script": "tests/workshop_s1/test_session.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.6691159000038169
+        },
+        {
+          "script": "tests/workshop_s1/test_assets.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.7657676999806426
+        },
+        {
+          "script": "tests/workshop_s1/test_paths.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.1332487000036053
+        },
+        {
+          "script": "tests/workshop_s1/test_path_failures.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.8524903999641538
+        },
+        {
+          "script": "tests/workshop_s1/test_plots.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.5059568000142463
+        },
+        {
+          "script": "tests/workshop_s1/test_plot_failures.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.0371464000199921
+        },
+        {
+          "script": "tests/workshop_s1/test_plot_weights.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.9714394999900833
+        },
+        {
+          "script": "tests/workshop_s1/test_plot_jobs.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.7606194000109099
+        },
+        {
+          "script": "tests/workshop_s1/test_plot_recovery.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.87427500000922
+        },
+        {
+          "script": "tests/workshop_s1/test_terrain.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.667288800003007
+        },
+        {
+          "script": "tests/workshop_s1/test_terrain_failures.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.666263599996455
+        },
+        {
+          "script": "tests/workshop_s1/test_terrain_lifecycle.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.8577640000148676
+        },
+        {
+          "script": "tests/workshop_s1/test_compounds.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.6649425000068732
+        },
+        {
+          "script": "tests/workshop_s1/test_districts.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.7613685000105761
+        },
+        {
+          "script": "tests/workshop_s1/test_district_protection.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.4082267999765463
+        },
+        {
+          "script": "tests/workshop_s1/test_templates.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.6681804999825545
+        },
+        {
+          "script": "tests/workshop_s1/test_template_dependencies.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.8504299999913201
+        },
+        {
+          "script": "tests/workshop_s1/test_editor_contract.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 0.667450100008864
+        }
+      ]
+    },
+    {
+      "name": "FINAL_UI",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/workshop_s1/test_integrated_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 2.60349429998314
+        },
+        {
+          "script": "tests/review_c7e0/test_samples_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 50.435050799977034
+        },
+        {
+          "script": "tests/review_c7e0/test_heavy_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 14.36166510003386
+        }
+      ]
+    },
+    {
+      "name": "FINAL_REVIEW_UI",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/workshop_s1/test_rendered_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 3.67663599998923
+        },
+        {
+          "script": "tests/workshop_s1/test_terrain_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 10.407659099961165
+        },
+        {
+          "script": "tests/workshop_s1/test_district_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 25.17291419999674
+        },
+        {
+          "script": "tests/workshop_s1/test_templates_ui.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 17.41150909999851
+        }
+      ]
+    },
+    {
+      "name": "FINAL_PIXELS",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/workshop_s1/test_export_pixels.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 6.716592599987052
+        }
+      ]
+    },
+    {
+      "name": "FINAL_BACKGROUND",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/review_c7e0/test_export_background.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 1.6723928999854252
+        }
+      ]
+    },
+    {
+      "name": "FINAL_ART",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/review_c7e0/render_art_review.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 5.5496893000090495
+        }
+      ]
+    },
+    {
+      "name": "FINAL_OPERATIONS",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/review_pr1/test_operation_frames.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 12.576358399994206
+        }
+      ]
+    },
+    {
+      "name": "FINAL_PROFILE_ASYNC60",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/review_pr1/test_async_edit_soak.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 77.99623160000192
+        },
+        {
+          "script": "tests/review_pr1/test_async_edit_soak.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 78.50916600000346
+        },
+        {
+          "script": "tests/review_pr1/test_async_edit_soak.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 77.9832052999991
+        }
+      ]
+    },
+    {
+      "name": "FINAL_SOAK_ASYNC",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "tests/review_pr1/test_async_edit_soak.gd",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 320.26481919997605
+        }
+      ]
+    },
+    {
+      "name": "FINAL_EDITOR",
+      "passed": true,
+      "scripts": [
+        {
+          "script": "<editor-import>",
+          "passed": true,
+          "exit_code": 0,
+          "seconds": 6.6456329000066034
+        }
+      ]
+    }
+  ],
+  "explicit_checks": {
+    "pending_recovery": 52,
+    "background_save": 18,
+    "previous_review_contracts": 53
+  },
+  "operations": {
+    "baseline": [
+      {
+        "action": "project_save_0",
+        "input_ms": 537.03,
+        "max_frame_ms": 557.081,
+        "over_100ms": 1,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "total_ms": 571.318
+      },
+      {
+        "action": "recovery_save_0",
+        "input_ms": 185.332,
+        "max_frame_ms": 200.427,
+        "over_100ms": 1,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "total_ms": 214.613
+      },
+      {
+        "action": "project_save_1",
+        "input_ms": 473.315,
+        "max_frame_ms": 492.752,
+        "over_100ms": 1,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "total_ms": 507.784
+      },
+      {
+        "action": "recovery_save_1",
+        "input_ms": 152.43,
+        "max_frame_ms": 167.593,
+        "over_100ms": 1,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "total_ms": 182.074
+      },
+      {
+        "action": "project_save_2",
+        "input_ms": 476.114,
+        "max_frame_ms": 495.176,
+        "over_100ms": 1,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "total_ms": 509.701
+      },
+      {
+        "action": "recovery_save_2",
+        "input_ms": 152.336,
+        "max_frame_ms": 167.908,
+        "over_100ms": 1,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "total_ms": 183.279
+      },
+      {
+        "action": "export_512",
+        "max_frame_ms": 2720.035,
+        "over_100ms": 3,
+        "over_33ms": 4,
+        "over_50ms": 3,
+        "stages": {},
+        "total_ms": 3667.776
+      }
+    ],
+    "current": [
+      {
+        "action": "project_save_0",
+        "input_ms": 0.099,
+        "max_frame_ms": 16.263,
+        "over_100ms": 0,
+        "over_33ms": 0,
+        "over_50ms": 0,
+        "total_ms": 717.362
+      },
+      {
+        "action": "recovery_save_0",
+        "input_ms": 5.693,
+        "max_frame_ms": 22.666,
+        "over_100ms": 0,
+        "over_33ms": 0,
+        "over_50ms": 0,
+        "total_ms": 401.928
+      },
+      {
+        "action": "project_save_1",
+        "input_ms": 0.111,
+        "max_frame_ms": 19.421,
+        "over_100ms": 0,
+        "over_33ms": 0,
+        "over_50ms": 0,
+        "total_ms": 687.588
+      },
+      {
+        "action": "recovery_save_1",
+        "input_ms": 6.001,
+        "max_frame_ms": 22.33,
+        "over_100ms": 0,
+        "over_33ms": 0,
+        "over_50ms": 0,
+        "total_ms": 358.404
+      },
+      {
+        "action": "project_save_2",
+        "input_ms": 0.091,
+        "max_frame_ms": 15.686,
+        "over_100ms": 0,
+        "over_33ms": 0,
+        "over_50ms": 0,
+        "total_ms": 658.57
+      },
+      {
+        "action": "recovery_save_2",
+        "input_ms": 5.927,
+        "max_frame_ms": 21.226,
+        "over_100ms": 0,
+        "over_33ms": 0,
+        "over_50ms": 0,
+        "total_ms": 344.914
+      },
+      {
+        "action": "export_512",
+        "max_frame_ms": 62.228,
+        "over_100ms": 0,
+        "over_33ms": 1,
+        "over_50ms": 1,
+        "stages": {
+          "frozen_save_ms": 657.597,
+          "manifest_ms": 390.177,
+          "preflight_ms": 2482.47
+        },
+        "total_ms": 3859.665
+      }
+    ],
+    "fixture_input_hash": "d61150e36e0f93e8612b27a669ce10df69e596b68683daf4ea861d24926794de",
+    "comparison": "identical fixed fixture and script; event dispatch, frames and total completion are distinct"
+  },
+  "heavy_ui": [
+    {
+      "action": "预览地形属性／顶点／所选边",
+      "click_macro_ms_includes_settle": 467.789,
+      "max_frame_ms": 50.065,
+      "refresh_ms": 9.665,
+      "stages": {
+        "copy_ms": 37.702,
+        "generate_ms": 745.965,
+        "render_plan_ms": 182.984,
+        "total_ms": 1347.143,
+        "validate_after_ms": 266.142,
+        "validate_before_ms": 297.334
+      },
+      "total_ms": 2694.601,
+      "over_33ms": 2,
+      "over_50ms": 1,
+      "over_100ms": 0
+    },
+    {
+      "action": "预览所选区域参数",
+      "click_macro_ms_includes_settle": 286.475,
+      "max_frame_ms": 53.218,
+      "refresh_ms": 10.492,
+      "stages": {
+        "copy_ms": 35.542,
+        "generate_ms": 757.709,
+        "render_plan_ms": 164.085,
+        "total_ms": 1325.63,
+        "validate_after_ms": 272.93,
+        "validate_before_ms": 259.449
+      },
+      "total_ms": 2341.86,
+      "over_33ms": 2,
+      "over_50ms": 1,
+      "over_100ms": 0
+    }
+  ],
+  "profile60": [
+    {
+      "after_clear_bytes": 121217824,
+      "before_clear_bytes": 384611972,
+      "cycles": 10,
+      "duration_seconds": 60.0,
+      "failures": [],
+      "fixture_input_hash": "d61150e36e0f93e8612b27a669ce10df69e596b68683daf4ea861d24926794de",
+      "initial_static_bytes": 94657302,
+      "max_frame_ms": 41.274,
+      "original_input_hash": "4cb36ac4befeb8066358391710aa181be9574be5ec06c1631ac05de907f10534",
+      "over_100ms": 0,
+      "over_33ms": 1,
+      "over_50ms": 0,
+      "p95_ms": 4.304,
+      "p99_ms": 4.328,
+      "renderer": "NVIDIA GeForce RTX 4060",
+      "scope": "automated native canvas events plus transaction-level density/terrain/history/save/export; not human acceptance",
+      "switch_static_bytes": [
+        121038808.0,
+        127258444.0,
+        127258444.0
+      ]
+    },
+    {
+      "after_clear_bytes": 121258256,
+      "before_clear_bytes": 384652404,
+      "cycles": 10,
+      "duration_seconds": 60.0,
+      "failures": [],
+      "fixture_input_hash": "d61150e36e0f93e8612b27a669ce10df69e596b68683daf4ea861d24926794de",
+      "initial_static_bytes": 94657302,
+      "max_frame_ms": 39.066,
+      "original_input_hash": "4cb36ac4befeb8066358391710aa181be9574be5ec06c1631ac05de907f10534",
+      "over_100ms": 0,
+      "over_33ms": 1,
+      "over_50ms": 0,
+      "p95_ms": 4.305,
+      "p99_ms": 4.325,
+      "renderer": "NVIDIA GeForce RTX 4060",
+      "scope": "automated native canvas events plus transaction-level density/terrain/history/save/export; not human acceptance",
+      "switch_static_bytes": [
+        121079240.0,
+        127298876.0,
+        127298876.0
+      ]
+    },
+    {
+      "after_clear_bytes": 121219420,
+      "before_clear_bytes": 384613568,
+      "cycles": 10,
+      "duration_seconds": 60.0,
+      "failures": [],
+      "fixture_input_hash": "d61150e36e0f93e8612b27a669ce10df69e596b68683daf4ea861d24926794de",
+      "initial_static_bytes": 94657302,
+      "max_frame_ms": 38.644,
+      "original_input_hash": "4cb36ac4befeb8066358391710aa181be9574be5ec06c1631ac05de907f10534",
+      "over_100ms": 0,
+      "over_33ms": 1,
+      "over_50ms": 0,
+      "p95_ms": 4.304,
+      "p99_ms": 4.33,
+      "renderer": "NVIDIA GeForce RTX 4060",
+      "scope": "automated native canvas events plus transaction-level density/terrain/history/save/export; not human acceptance",
+      "switch_static_bytes": [
+        121040404.0,
+        127260040.0,
+        127260040.0
+      ]
+    }
+  ],
+  "soak300": {
+    "after_clear_bytes": 155555320,
+    "before_clear_bytes": 418985200,
+    "cycles": 51,
+    "duration_seconds": 300.0,
+    "failures": [],
+    "fixture_input_hash": "d61150e36e0f93e8612b27a669ce10df69e596b68683daf4ea861d24926794de",
+    "initial_static_bytes": 94657218,
+    "max_frame_ms": 43.055,
+    "original_input_hash": "4cb36ac4befeb8066358391710aa181be9574be5ec06c1631ac05de907f10534",
+    "over_100ms": 0,
+    "over_33ms": 83,
+    "over_50ms": 0,
+    "p95_ms": 4.304,
+    "p99_ms": 4.327,
+    "renderer": "NVIDIA GeForce RTX 4060",
+    "scope": "automated native canvas events plus transaction-level density/terrain/history/save/export; not human acceptance",
+    "switch_static_bytes": [
+      155394568.0,
+      161614204.0,
+      161614204.0
+    ]
+  },
+  "pixels": {
+    "cancellation": {
+      "latency_ms": 6,
+      "requested_ms": 5570
+    },
+    "comparisons": [
+      {
+        "fraction_above_one": 0.0,
+        "kind": "tiles",
+        "max_channel_error": 0,
+        "passed": true
+      },
+      {
+        "fraction_above_one": 3.51832696516153e-06,
+        "kind": "layers",
+        "max_channel_error": 2,
+        "passed": true
+      }
+    ],
+    "failures": [],
+    "threshold": {
+      "fraction_above_one": 0.0001,
+      "max_channel_error": 2
+    }
+  },
+  "soak_frames_by_operation": [
+    {
+      "action": "idle",
+      "frames": 31040,
+      "max_frame_ms": 20.696,
+      "over_33ms": 0,
+      "over_50ms": 0,
+      "over_100ms": 0
+    },
+    {
+      "action": "save",
+      "frames": 1679,
+      "max_frame_ms": 5.456,
+      "over_33ms": 0,
+      "over_50ms": 0,
+      "over_100ms": 0
+    },
+    {
+      "action": "update_recipe",
+      "frames": 19643,
+      "max_frame_ms": 43.055,
+      "over_33ms": 41,
+      "over_50ms": 0,
+      "over_100ms": 0
+    },
+    {
+      "action": "update_terrain",
+      "frames": 19484,
+      "max_frame_ms": 41.055,
+      "over_33ms": 42,
+      "over_50ms": 0,
+      "over_100ms": 0
+    }
+  ],
+  "remaining_peak_attribution": "operation/phase association only; no claim of full CPU/GPU stack attribution",
+  "manual_visual_acceptance": "pending_user",
+  "full_s1_acceptance": false,
+  "scope_limits": [
+    "forced teardown and synchronous APIs still block until safe file completion",
+    "GPU upload/readback and some UI frames exceed 33/50ms",
+    "history bytes are JSON estimates, not RSS limits",
+    "trace arrays remain resident in static-memory samples",
+    "native PNG encoding and whole validator calls are only cancellable at boundaries",
+    "no continuous human-acceptance recording or S2/S3 certification"
+  ]
+}

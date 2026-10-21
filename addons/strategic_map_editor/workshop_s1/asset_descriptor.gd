@@ -77,9 +77,15 @@ static func orientation(a: Dictionary, angle: float) -> Dictionary:
 		if absf(wrapf(normalized-float(allowed),-180.0,180.0))<0.01: return {"ok":true,"asset_id":a.orientation_variants[allowed],"rotation":0.0}
 	return {"ok":false,"error":"缺少 %.1f° 方向变体；不会旋转立面 PNG。"%normalized}
 
-static func with_region(a: Dictionary, region: Array) -> Dictionary:
+static func with_region(a: Dictionary, region: Array, mode: String="preserve_pixels") -> Dictionary:
 	if region.size()!=4: return {"ok":false,"error":"裁切区域须四个像素值。"}
+	if mode not in ["preserve_pixels","rescale"]:return {"ok":false,"error":"未知裁切比例模式。"}
 	var next := a.duplicate(true)
+	if mode=="preserve_pixels":
+		var unit: float=float(a.nominal_size_units[0])/float(a.region_px[2])
+		next.nominal_size_units=[float(region[2])*unit,float(region[3])*unit]
+	# Ground footprint is an independent authored support contract in both modes.
+	# Adopting any new version still runs the full protection/support transaction.
 	var delta := Vector2(float(region[0])-float(a.region_px[0]),float(region[1])-float(a.region_px[1]))
 	next.region_px = region.duplicate()
 	next.anchor_px = [float(a.anchor_px[0])-delta.x,float(a.anchor_px[1])-delta.y]

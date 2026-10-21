@@ -31,6 +31,7 @@ func _ready() -> void:
 	ground=toggle("输出透明地面",true);layers=toggle("输出连续层序片",true);grid=toggle("导出网格",false);legend=toggle("导出图例",true)
 	destination=LineEdit.new();destination.placeholder_text="新导出目录的完整地址";add_child(destination)
 	host.button(self,"选择导出父目录",func():dialog.popup_centered_ratio(0.7))
+	host.button(self,"估算导出规模",estimate)
 	host.button(self,"开始导出冻结快照",start)
 	host.button(self,"取消当前导出",func():adapter.cancel();progress_label.text="正在取消，等待当前文件完成。")
 	progress_label=Label.new();progress_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;add_child(progress_label)
@@ -44,6 +45,10 @@ func fit_bounds() -> void:
 	for i in range(4):bounds_fields[i].value=[rect.position.x,rect.position.y,rect.size.x,rect.size.y][i]
 func options() -> Dictionary:
 	return {"bounds":bounds_fields.map(func(f):return f.value),"scale":scale_field.value,"tile_size":tile_size.value,"transparent_ground":ground.button_pressed,"layers":layers.button_pressed,"selected_ids":host.selected_entity_ids(),"include_grid":grid.button_pressed,"include_legend":legend.button_pressed}
+func estimate() -> void:
+	var pixels:=Vector2i(ceili(bounds_fields[2].value*scale_field.value),ceili(bounds_fields[3].value*scale_field.value))
+	var result:=Adapter.estimate_output(pixels,Adapter.Plan.build(host.session.view()).size(),options())
+	progress_label.text=("%d×%d · %d张PNG · 工作像素 %.1f百万 · 原始输出估算 %.1fMiB · 图像缓冲估算 %.1fMiB（不含引擎、GPU、素材）"%[pixels.x,pixels.y,result.images,result.work_pixels/1000000.0,result.raw_output_bytes/1048576.0,result.estimated_image_peak_bytes/1048576.0]) if result.ok else result.error
 func start() -> void:
 	if host.canvas.has_pending_input() or host.has_pending_fields():host.status.text="先应用或取消属性／画布输入。";return
 	if destination.text.is_empty():host.status.text="选择父目录或填写新的导出目录。";return

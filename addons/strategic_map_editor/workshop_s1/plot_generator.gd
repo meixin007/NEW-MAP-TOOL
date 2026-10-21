@@ -96,18 +96,31 @@ static func resolve(p: Dictionary, base: Array, candidates: Array, lots: Array=[
 	var ids: Dictionary={}
 	for e in result:ids[e.entity_id]=true
 	var occupied:=Spatial.new()
+	var manual_ground: Array=[]
 	for other in result:
+		if other.kind=="asset" and p.asset_refs[other.asset_ref].category=="ground" and other.get("plot_type")!="farmland" and other.get("management") in ["manual","fixed"]:
+			var polygon:=Entities.footprint(p,other)
+			manual_ground.append({"entity":other,"bounds":Geometry.bounds(polygon)})
 		if other.kind=="ribbon":
 			for polygon in other.polygons:occupied.insert({"type":"road_or_water","surface_id":other.surface_id},Geometry.packed(polygon))
 		elif other.kind=="compound":occupied.insert({"type":"protected_or_occupied","surface_id":other.surface_id},Entities.footprint(p,other))
-		elif other.kind=="asset" and (p.asset_refs[other.asset_ref].category!="ground" or other.get("plot_type")=="farmland"):occupied.insert({"type":"protected_or_occupied","surface_id":other.surface_id},Entities.footprint(p,other))
+		elif other.kind=="asset" and (p.asset_refs[other.asset_ref].category!="ground" or other.get("plot_type")=="farmland"):occupied.insert({"type":"protected_or_occupied","surface_id":other.surface_id,"entity":other},Entities.footprint(p,other))
 	for lot in lots:occupied.insert({"type":"district_lot","surface_id":lot.surface_id},Geometry.packed(lot.polygon))
 	for r in p.recipes:
 		if r.get("plot_type")=="clearance":
 			occupied.insert({"type":"permanent_clearance","surface_id":r.surface_id,"region":r},Geometry.packed(r.outer))
 			var protected_count:=0
-			for e in base:
-				if e.kind=="asset" and e.get("management") in ["manual","fixed"] and Geometry.overlaps_region(p,e,r):protected_count+=1
+			# Query conservative spatial bounds first, then run the same exact polygon
+			# predicate. Avoid all manual objects x all clearance regions per edit.
+			for item in occupied.query(Geometry.packed(r.outer)):
+				if not item.has("entity"):continue
+				var e: Dictionary=item.entity
+				if e.get("management") in ["manual","fixed"] and Geometry.overlaps_region(p,e,r):protected_count+=1
+			# Nonblocking ground sprites were also counted by the old diagnostic;
+			# preserve that behavior without making them collision obstacles.
+			var region_bounds:=Geometry.bounds(Geometry.packed(r.outer))
+			for item in manual_ground:
+				if region_bounds.intersects(item.bounds) and Geometry.overlaps_region(p,item.entity,r):protected_count+=1
 			if protected_count>0:diagnostics.append({"recipe_id":r.recipe_id,"segment_id":"","code":"protected_in_clearance","count":protected_count,"message":"留白内已有 "+str(protected_count)+" 个手工／固定对象，已保留；请明确移动或删除后清空。"})
 		elif r.get("brush_mode")=="erase":
 			for mask in Geometry.stroke_polygons(r.stroke_points,float(r.radius)):occupied.insert({"type":"erase_intent","surface_id":r.surface_id},Geometry.packed(mask))

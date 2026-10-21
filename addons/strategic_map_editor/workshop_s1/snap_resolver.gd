@@ -18,7 +18,9 @@ static func drag(p: Dictionary,e: Dictionary,point: Vector2,zoom: float) -> Dict
 			for socket in E.sockets(p,target):
 				if socket.role!=source.role or absf(wrapf(float(socket.direction_deg)-float(source.direction_deg)-180,-180,180))>3:continue
 				var end:=P.project_point(p,Vector2(socket.ground_xy[0],socket.ground_xy[1]),target.surface_id,target.local_height);var distance:=end.distance_to(source_point)*zoom
-				if distance<best:best=distance;chosen=point+Vector2(socket.ground_xy[0]-source.ground_xy[0],socket.ground_xy[1]-source.ground_xy[1]);reason="socket"
+				if distance<best:
+					var checked:=E.snap(p,moved,source.socket_id,target,socket.socket_id)
+					if checked.ok:best=distance;chosen=Vector2(checked.ground_xy[0],checked.ground_xy[1]);reason="socket"
 	if reason=="socket":return {"ground_xy":[chosen.x,chosen.y],"reason":reason}
 	if p.style_profile.get("grid_snap",false):
 		var size: float=p.style_profile.get("grid_size",32)
